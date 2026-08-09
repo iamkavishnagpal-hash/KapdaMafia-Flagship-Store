@@ -1,0 +1,4 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{color-scheme:dark} body{margin:0;background:#070707;color:#f4f0e8} *{box-sizing:border-box} a{color:inherit;text-decoration:none} .grain:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.22) 1px,transparent 0);background-size:18px 18px;mix-blend-mode:overlay}.focus-ring:focus-visible{outline:2px solid #d9252e;outline-offset:3px}

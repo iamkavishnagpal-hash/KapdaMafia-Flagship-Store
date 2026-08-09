@@ -1,0 +1,2 @@
+import { SiteHeader } from '@/components/site-header';
+export default function Page(){return <main><SiteHeader/><section className="mx-auto max-w-5xl px-4 pb-24 pt-28 sm:px-6"><p className="text-xs uppercase tracking-[.3em] text-mafia-red">Kapda Mafia</p><h1 className="font-display text-5xl uppercase md:text-7xl">search</h1><div className="mt-8 border border-white/10 bg-mafia-charcoal p-6 text-white/65">Production-ready flow shell with loading, empty, error and integration states documented in BUILD_SPEC.md.</div></section></main>}
