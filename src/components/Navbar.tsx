@@ -22,7 +22,7 @@ export default function Navbar() {
               <Link href="/shop" className="transition-colors hover:text-[#EEEAE1]">NEW DROP</Link>
               <Link href="/shop" className="flex items-center gap-1 transition-colors hover:text-[#EEEAE1]">SHOP <ChevronDown size={12} /></Link>
               <Link href="/shop?category=tees" className="transition-colors hover:text-[#EEEAE1]">COLLECTIONS</Link>
-              <Link href="/shop?view=lookbook" className="transition-colors hover:text-[#EEEAE1]">LOOKBOOK</Link>
+              <Link href="/lookbook" className="transition-colors hover:text-[#EEEAE1]">LOOKBOOK</Link>
             </nav>
           </div>
 
