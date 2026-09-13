@@ -513,6 +513,7 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 41,
     isFeatured: true,
+    storeWorld: 'clothing',
     variants: [
       {
         id: 'var-pl-012',
@@ -526,6 +527,297 @@ export const MOCK_PRODUCTS: Product[] = [
         ],
         images: [
           { id: 'pl-img-12', url: 'https://www.powerlook.in/cdn/shop/files/2_cc639dba-8956-40b0-a26a-95b5099aff1b.jpg?v=1786427043', type: 'image', alt: 'Dark Grey Straight Fit Denim Jeans', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  // ==========================================
+  // SHOES MAFIA CATALOG (Kapda Mafia Footwear Collection)
+  // ==========================================
+  {
+    id: 'bb-114',
+    slug: 'km-shoes-1239',
+    name: '1239',
+    tagline: 'KAPDA MAFIA SHOES / Cushion Foam High-Street Sneaker',
+    category: 'sport-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'SPORT SHOES',
+    price: 499,
+    originalPrice: 1299,
+    badge: 'NEW',
+    dropName: 'DROP 01 — RUNNERS',
+    description: 'Ultra-cushioned sporty silhouette with responsive sole engineering and dynamic breathable mesh upper. Designed for high agility and daily streetwear wearability.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Breathable Engineered Mesh', 'Anti-slip rubber outsole', 'Cushion shock-absorber mid-layer'],
+    careInstructions: ['Wipe clean with a damp cloth', 'Do not machine wash', 'Air dry only'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-114',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 4.8,
+    reviewCount: 38,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-114',
+        colorName: 'Slate White',
+        colorHex: '#e5e7eb',
+        sizes: [
+          { size: '7', stock: 27 },
+          { size: '8', stock: 30 },
+          { size: '9', stock: 28 },
+          { size: '10', stock: 27 }
+        ],
+        images: [
+          { id: 'bb-img-114', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg', type: 'image', alt: '1239 Kapda Mafia Shoes', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'bb-113',
+    slug: 'km-shoes-1238',
+    name: '1238',
+    tagline: 'KAPDA MAFIA SHOES / Performance Street Sneaker',
+    category: 'sneaker-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'Sneaker Shoes',
+    price: 499,
+    originalPrice: 1399,
+    badge: 'NEW',
+    dropName: 'DROP 01 — STREET SILHOUETTES',
+    description: 'Modern streamlined sneaker featuring structured heel counters, reinforced lace eyelets, and all-day comfort memory bed.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Synthetic Nubuck & Mesh', 'Molded EVA Outsole', 'Ergonomic insole'],
+    careInstructions: ['Spot clean with sneaker brush', 'Do not soak in water'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-113',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 4.9,
+    reviewCount: 42,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-113',
+        colorName: 'Core Black / Ice Grey',
+        colorHex: '#1f2937',
+        sizes: [
+          { size: '7', stock: 24 },
+          { size: '8', stock: 26 },
+          { size: '9', stock: 29 },
+          { size: '10', stock: 30 }
+        ],
+        images: [
+          { id: 'bb-img-113', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875803_1634_img-6.jpeg', type: 'image', alt: '1238 Kapda Mafia Shoes', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'bb-112',
+    slug: 'km-shoes-1237',
+    name: '1237',
+    tagline: 'KAPDA MAFIA SHOES / Urban Low-Profile Athletic Shoe',
+    category: 'sport-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'SPORT SHOES',
+    price: 499,
+    originalPrice: 1199,
+    badge: 'BEST SELLER',
+    dropName: 'DROP 01 — RUNNERS',
+    description: 'Minimalist low-profile sneaker with responsive shock absorption. Fits seamlessly with baggy cargos and selvedge denim.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Breathable Woven Knit', 'Lightweight Phylon Sole', 'Textured grip traction'],
+    careInstructions: ['Gentle surface wipe', 'Keep away from direct heat'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-112',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 4.7,
+    reviewCount: 29,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-112',
+        colorName: 'Charcoal Grey',
+        colorHex: '#374151',
+        sizes: [
+          { size: '6', stock: 5 },
+          { size: '7', stock: 4 },
+          { size: '9', stock: 4 },
+          { size: '10', stock: 5 }
+        ],
+        images: [
+          { id: 'bb-img-112', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875655_5795_img-5.jpeg', type: 'image', alt: '1237 Kapda Mafia Shoes', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'bb-110',
+    slug: 'km-shoes-1235',
+    name: '1235',
+    tagline: 'KAPDA MAFIA SHOES / High-Grip Speed Runner',
+    category: 'sport-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'SPORT SHOES',
+    price: 499,
+    originalPrice: 1299,
+    badge: 'NEW',
+    dropName: 'DROP 01 — RUNNERS',
+    description: 'Built for speed and bold aesthetic lines. Features geometric sole blocks and reinforced lateral stability.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Honeycomb Air-Mesh', 'Flexible TPU cage', 'High-wear rubber patches'],
+    careInstructions: ['Dry brush dirt', 'Wipe with damp sponge'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-110',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 4.8,
+    reviewCount: 31,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-110',
+        colorName: 'Phantom Black',
+        colorHex: '#111827',
+        sizes: [
+          { size: '7', stock: 27 },
+          { size: '8', stock: 24 },
+          { size: '9', stock: 30 },
+          { size: '10', stock: 27 }
+        ],
+        images: [
+          { id: 'bb-img-110', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875334_7713_img-3.jpeg', type: 'image', alt: '1235 Kapda Mafia Shoes', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'bb-109',
+    slug: 'km-shoes-1234',
+    name: '1234',
+    tagline: 'KAPDA MAFIA SHOES / Chunky Sole Streetwear Sneaker',
+    category: 'sneaker-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'Sneaker Shoes',
+    price: 499,
+    originalPrice: 1499,
+    badge: 'HOT',
+    dropName: 'DROP 01 — STREET SILHOUETTES',
+    description: 'Sculpted chunky sole sneaker crafted for oversized styling. Offers incredible height and proportional balance to wide-leg trousers.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Multi-panel synthetic leather', 'Deep-tread chunky rubber sole', 'Padded tongue & collar'],
+    careInstructions: ['Clean with shoe shampoo', 'Store in dry place'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-109',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 4.9,
+    reviewCount: 54,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-109',
+        colorName: 'Triple White / Cream',
+        colorHex: '#f3f4f6',
+        sizes: [
+          { size: '7', stock: 10 },
+          { size: '8', stock: 27 },
+          { size: '9', stock: 27 },
+          { size: '10', stock: 28 }
+        ],
+        images: [
+          { id: 'bb-img-109', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875152_img-2.jpeg', type: 'image', alt: '1234 Kapda Mafia Shoes', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'bb-108',
+    slug: 'km-shoes-10021',
+    name: '10021',
+    tagline: 'KAPDA MAFIA SHOES / Lightweight Everyday Trainer',
+    category: 'sport-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'SPORT SHOES',
+    price: 499,
+    originalPrice: 1249,
+    badge: 'BEST SELLER',
+    dropName: 'DROP 01 — RUNNERS',
+    description: 'Featherlight construction crafted for effortless everyday strides. Soft lining prevents friction and blistering.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Ultra-flex knit', 'Shock-absorbing foam footbed', 'Non-marking tread'],
+    careInstructions: ['Wipe with microfiber cloth', 'Air dry'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-108',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 4.8,
+    reviewCount: 46,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-108',
+        colorName: 'Cobalt Grey',
+        colorHex: '#4b5563',
+        sizes: [
+          { size: '6', stock: 26 },
+          { size: '7', stock: 19 },
+          { size: '8', stock: 8 },
+          { size: '9', stock: 16 }
+        ],
+        images: [
+          { id: 'bb-img-108', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788874622_1415_img-1.jpeg', type: 'image', alt: '10021 Kapda Mafia Shoes', view: 'hero' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'bb-107',
+    slug: 'km-shoes-24',
+    name: '24',
+    tagline: 'KAPDA MAFIA SHOES / Luxury Court High-Top Sneaker',
+    category: 'sneaker-shoes',
+    storeWorld: 'shoes',
+    shoeCategory: 'Sneaker Shoes',
+    price: 799,
+    originalPrice: 1999,
+    badge: 'LIMITED',
+    dropName: 'DROP 01 — COURT EDITION',
+    description: 'Premium statement court sneaker with contrast overlays and iconic vintage basketball heritage lines.',
+    fit: 'STANDARD FIT',
+    fabricDetails: ['Full-grain micro synthetic leather', 'Reinforced stitched cupsole', 'Vintage rubber outersole'],
+    careInstructions: ['Leather lotion or sneaker foam wipe', 'Store with shoe trees'],
+    myBillBookMeta: {
+      itemId: 'KM-SHOE-107',
+      hsnCode: '64041190',
+      taxRatePercentage: 12
+    },
+    rating: 5.0,
+    reviewCount: 61,
+    isFeatured: true,
+    variants: [
+      {
+        id: 'var-bb-107',
+        colorName: 'Royal Black / Varsity White',
+        colorHex: '#0f172a',
+        sizes: [
+          { size: '6', stock: 5 },
+          { size: '7', stock: 5 },
+          { size: '8', stock: 4 },
+          { size: '9', stock: 5 },
+          { size: '10', stock: 4 }
+        ],
+        images: [
+          { id: 'bb-img-107', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788695961_IMG_2627.PNG', type: 'image', alt: '24 Kapda Mafia Shoes', view: 'hero' }
         ]
       }
     ]

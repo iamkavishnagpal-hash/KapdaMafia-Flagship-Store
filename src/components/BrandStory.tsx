@@ -6,14 +6,14 @@ export default function BrandStory() {
     <section className="border-b border-white/10 bg-[#090909] py-24 text-[#EEEAE1] sm:py-32">
       <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:px-16">
         <div className="lg:col-span-7">
-          <div className="mb-4 text-[10px] tracking-[0.3em] text-[#8F1118] uppercase font-mono">
+          <div className="mb-3 text-[10px] tracking-[0.3em] text-[#8F1118] uppercase font-mono">
             THE CULTURE / MANIFESTO
           </div>
-          <h2 className="font-[var(--font-display)] text-5xl font-bold leading-[0.86] tracking-[-0.06em] uppercase sm:text-7xl">
+          <h2 className="font-[var(--font-display)] text-3xl sm:text-6xl lg:text-7xl font-bold leading-[0.9] tracking-[-0.05em] uppercase">
             NOT MADE<br />
             <span className="text-[#C8C3B8]">FOR EVERYONE.</span>
           </h2>
-          <p className="mt-7 max-w-xl text-base leading-relaxed text-[#C8C3B8]">
+          <p className="mt-4 sm:mt-7 max-w-xl text-sm sm:text-base leading-relaxed text-[#C8C3B8]">
             Kapda Mafia is a streetwear uniform for people who move with intention. Dense cotton, practical silhouettes, and small-batch drops made for the ones shaping culture after dark.
           </p>
           <div className="mt-10 grid max-w-md grid-cols-2 gap-6 border-t border-white/15 pt-5 text-[9px] tracking-[0.14em] text-[#77746E] uppercase font-mono">

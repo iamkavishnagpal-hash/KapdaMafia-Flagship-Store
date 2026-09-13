@@ -6,9 +6,6 @@ export default function LimitedDropBanner() {
     <section className="bg-[#0D0C0B] py-16 text-[#EEEAE1] sm:py-24">
       <div className="mx-auto grid max-w-[1440px] items-center gap-8 px-5 sm:px-8 lg:grid-cols-2 lg:px-16">
         <div>
-          <div className="mb-4 text-[10px] tracking-[0.28em] text-[#8F1118] uppercase font-mono">
-            DROP 09 / CONTROLLED ARCHIVE
-          </div>
           <h2 className="font-[var(--font-display)] text-5xl font-bold leading-[0.86] tracking-[-0.06em] uppercase sm:text-7xl">
             LIMITED STOCK.<br />
             <span className="text-[#C8C3B8]">NO RESTOCK.</span>

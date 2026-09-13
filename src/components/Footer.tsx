@@ -15,10 +15,30 @@ export default function Footer() {
             <span className="block text-[10px] tracking-[0.4em] uppercase text-[#8C8C86] font-mono mt-1">CULTURE & UNIFORM</span>
           </Link>
           <p className="text-xs text-[#8C8C86] leading-relaxed max-w-sm">
-            Not another clothing store. A digital fashion world engineered for Gen-Z rebels, architects of culture, and individuals who refuse to blend in.
+            A digital fashion world engineered for Gen-Z rebels, architects of culture, and individuals who refuse to blend in.
           </p>
           <div className="pt-2 text-[11px] font-mono text-[#8F1118] font-semibold tracking-wider">
-            FLAGSHIP RETENTION • PAN-INDIA EXPRESS SHIPPING
+            FLAGSHIP STORE: NIT-5, FARIDABAD · TEL: 083750 00819
+          </div>
+          
+          {/* Social Instagram Pills in Footer */}
+          <div className="flex flex-wrap gap-2 pt-2">
+            <a
+              href="https://www.instagram.com/kapdamafia.store?stkn=eGZxam1lbjJ6dHly"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white text-[10px] font-mono font-bold tracking-wider hover:opacity-90 transition-all shadow-md shadow-rose-950/30"
+            >
+              <span>@kapdamafia.store</span>
+            </a>
+            <a
+              href="https://www.instagram.com/shoesmafia.store?stkn=MTBpN3B4MmF6NHpxNA=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#009688] hover:bg-[#00796b] text-white text-[10px] font-mono font-bold tracking-wider transition-all shadow-md shadow-teal-950/30"
+            >
+              <span>@shoesmafia.store</span>
+            </a>
           </div>
         </div>
 

@@ -4,14 +4,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Product } from '@/types/ecommerce';
 import { MOCK_PRODUCTS } from '@/data/products';
-import { Eye } from 'lucide-react';
+import { Eye, ShoppingBag } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function ShopPage() {
+  const { addToCart, openCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedFit, setSelectedFit] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<string>('featured');
 
-  let filtered = [...MOCK_PRODUCTS];
+  let filtered = MOCK_PRODUCTS.filter(p => p.storeWorld !== 'shoes' && p.category !== 'sneakers' && p.category !== 'sport-shoes' && p.category !== 'sneaker-shoes' && p.category !== 'formal-shoes');
   if (selectedCategory !== 'ALL') {
     filtered = filtered.filter(p => p.category.toUpperCase() === selectedCategory);
   }
@@ -100,13 +102,30 @@ export default function ShopPage() {
                   {product.badge}
                 </div>
 
-                <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
                   <Link 
                     href={`/product/${product.slug}`}
-                    className="w-full py-2.5 bg-[#F3F0E8] text-[#080808] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#B8B4AA] transition-colors"
+                    className="flex-1 py-2.5 bg-[#F3F0E8] text-[#080808] text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 hover:bg-[#B8B4AA] transition-colors"
                   >
-                    <Eye size={14} /> VIEW DETAILS
+                    <Eye size={13} /> DETAILS
                   </Link>
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        productId: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.variants[0]?.images[0]?.url || '',
+                        size: product.variants[0]?.sizes[0]?.size || 'L',
+                        category: product.category,
+                        storeWorld: 'clothing'
+                      });
+                      openCart();
+                    }}
+                    className="flex-1 py-2.5 bg-[#8F1118] text-white text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 hover:bg-[#A8151D] transition-colors cursor-pointer"
+                  >
+                    <ShoppingBag size={13} /> + BAG
+                  </button>
                 </div>
               </div>
 

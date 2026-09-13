@@ -12,7 +12,7 @@ export default function StorePage() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <div className="text-[10px] text-[#8F1118] uppercase tracking-[0.3em] font-bold">
-            PHYSICAL RETAIL FLAGSHIP • MUMBAI
+            PHYSICAL RETAIL FLAGSHIP • FARIDABAD
           </div>
           <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight">
             VISIT THE <span className="text-[#8F1118]">STORE</span>
@@ -36,13 +36,20 @@ export default function StorePage() {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="text-sm font-black text-[#F3F0E8] uppercase tracking-wide">
-                BANDRA FLAGSHIP STORE #01
+                KAPDA MAFIA FLAGSHIP STORE #01
               </div>
 
               <div className="space-y-3 text-xs text-[#B8B4AA]">
                 <div className="flex items-start gap-2.5">
                   <MapPin size={16} className="text-[#8F1118] flex-shrink-0 mt-0.5" />
-                  <span>Ground Floor, 42 Linking Road, Opposite Platinum Tower, Bandra West, Mumbai, Maharashtra 400050</span>
+                  <a
+                    href="https://maps.google.com/maps?vet=10CAAQoqAOahcKEwigr4D5oOyWAxUAAAAAHQAAAAAQBQ..i&rlz=1C1PNFE_enIN1090IN1091&fvr=1&pvq=Cg0vZy8xMXl6ZDFuOW04IhEKC2thcGRhIG1hZmlhEAIYAw&lqi=CgtrYXBkYSBtYWZpYUjozOjA-b2AgAhaHRAAEAEYABgBIgtrYXBkYSBtYWZpYSoGCAIQABABkgEOY2xvdGhpbmdfc3RvcmU&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x390cdd1ee5a5bafd:0xc177aa65e376a724"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Ground Floor, 5G-38, Block G, New Industrial Twp 5, New Industrial Township, Faridabad, Haryana 121001
+                  </a>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Clock size={16} className="text-[#8F1118] flex-shrink-0" />
@@ -50,14 +57,18 @@ export default function StorePage() {
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Phone size={16} className="text-[#8F1118] flex-shrink-0" />
-                  <span>+91 98765 43210</span>
+                  <a href="tel:08375000819" className="hover:text-white font-bold transition-colors">
+                    083750 00819
+                  </a>
                 </div>
               </div>
             </div>
 
             <div className="pt-4 border-t border-[#181818] space-y-3">
               <a 
-                href="https://maps.google.com" target="_blank" rel="noopener noreferrer"
+                href="https://maps.google.com/maps?vet=10CAAQoqAOahcKEwigr4D5oOyWAxUAAAAAHQAAAAAQBQ..i&rlz=1C1PNFE_enIN1090IN1091&fvr=1&pvq=Cg0vZy8xMXl6ZDFuOW04IhEKC2thcGRhIG1hZmlhEAIYAw&lqi=CgtrYXBkYSBtYWZpYUjozOjA-b2AgAhaHRAAEAEYABgBIgtrYXBkYSBtYWZpYSoGCAIQABABkgEOY2xvdGhpbmdfc3RvcmU&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x390cdd1ee5a5bafd:0xc177aa65e376a724" 
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="w-full py-3.5 bg-[#8F1118] hover:bg-[#B91C1C] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
               >
                 <Navigation size={16} /> GET GOOGLE MAP DIRECTIONS

@@ -17,7 +17,13 @@ export default function StoreStory() {
             <p className="mt-6 max-w-md text-sm leading-relaxed text-[#77746E]">Try the drop in person. Inspect the stitching, build a complete fit, and leave with the pieces that belong in your rotation.</p>
           </div>
           <div className="mt-10 border-t border-white/10 pt-5">
-            <div className="mb-5 flex items-start gap-3 font-mono text-[10px] tracking-[0.12em] text-[#C8C3B8] uppercase"><MapPin size={16} className="mt-0.5 shrink-0 text-[#8F1118]" /><span>Bandra West, Mumbai<br /><span className="text-[#77746E]">11:00 AM — 09:30 PM / MON — SUN</span></span></div>
+            <div className="mb-5 flex items-start gap-3 font-mono text-[10px] tracking-[0.12em] text-[#C8C3B8] uppercase">
+              <MapPin size={16} className="mt-0.5 shrink-0 text-[#8F1118]" />
+              <span>
+                NIT-5, Faridabad, Haryana<br />
+                <span className="text-[#77746E]">11:00 AM — 09:30 PM / TEL: 083750 00819</span>
+              </span>
+            </div>
             <Link href="/store" className="inline-flex items-center gap-3 border border-white/20 px-5 py-3 font-mono text-[10px] font-bold tracking-[0.18em] uppercase transition hover:border-[#EEEAE1]">VISIT THE STORE <ArrowUpRight size={14} /></Link>
           </div>
         </div>

@@ -6,11 +6,14 @@ export type CategorySlug =
   | 'jackets'
   | 'sneakers'
   | 'caps'
-  | 'accessories';
+  | 'accessories'
+  | 'sport-shoes'
+  | 'sneaker-shoes'
+  | 'formal-shoes';
 
 export type ProductBadge = 'NEW' | 'LIMITED' | 'LOW STOCK' | 'BEST SELLER' | 'RESTOCK' | 'GEN-Z TREND' | 'HOT';
 
-export type FitType = 'OVERSIZED' | 'BAGGY' | 'RELAXED' | 'REGULAR' | 'BOXY';
+export type FitType = 'OVERSIZED' | 'BAGGY' | 'RELAXED' | 'REGULAR' | 'BOXY' | 'STANDARD FIT';
 
 export interface ProductMedia {
   id: string;
@@ -21,7 +24,7 @@ export interface ProductMedia {
 }
 
 export interface SizeStock {
-  size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'UK7' | 'UK8' | 'UK9' | 'UK10' | 'ONE SIZE';
+  size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'UK7' | 'UK8' | 'UK9' | 'UK10' | 'ONE SIZE' | '6' | '7' | '8' | '9' | '10';
   stock: number;
 }
 
@@ -39,6 +42,8 @@ export interface Product {
   name: string;
   tagline: string;
   category: CategorySlug;
+  storeWorld?: 'clothing' | 'shoes';
+  shoeCategory?: 'SPORT SHOES' | 'Sneaker Shoes' | 'FORMAL SHOES';
   price: number;
   originalPrice?: number;
   badge?: ProductBadge;

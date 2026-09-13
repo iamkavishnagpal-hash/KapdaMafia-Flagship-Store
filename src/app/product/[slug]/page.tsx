@@ -2,11 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { MOCK_PRODUCTS, MOCK_REVIEWS } from '@/data/products';
 import { ShieldCheck, Truck, RotateCcw, Sparkles, Star, CheckCircle } from 'lucide-react';
 import SmartSizeModal from '@/components/SmartSizeModal';
+import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const router = useRouter();
+  const { addToCart, openCart } = useCart();
   const resolvedParams = React.use(params);
   const product = MOCK_PRODUCTS.find(p => p.slug === resolvedParams.slug) || MOCK_PRODUCTS[0];
   const [selectedSize, setSelectedSize] = useState(product.variants[0]?.sizes[0]?.size || 'M');
@@ -116,18 +120,42 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             {/* CTAs */}
             <div className="space-y-3 pt-2">
               <button 
-                onClick={() => setAddedToBag(true)}
-                className="w-full py-4 bg-[#F3F0E8] hover:bg-[#B8B4AA] text-[#080808] font-bold text-xs tracking-[0.25em] uppercase transition-colors"
+                onClick={() => {
+                  addToCart({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: activeVariant.images[0]?.url || '',
+                    size: selectedSize,
+                    category: product.category,
+                    storeWorld: 'clothing'
+                  });
+                  setAddedToBag(true);
+                  setTimeout(() => setAddedToBag(false), 2000);
+                  openCart();
+                }}
+                className="w-full py-4 bg-[#F3F0E8] hover:bg-[#B8B4AA] text-[#080808] font-bold text-xs tracking-[0.25em] uppercase transition-colors cursor-pointer"
               >
-                {addedToBag ? '✓ ADDED TO BAG' : 'ADD TO BAG →'}
+                {addedToBag ? '✓ ADDED TO KAPDA BAG' : 'ADD TO BAG →'}
               </button>
 
-              <Link 
-                href="/checkout"
-                className="block w-full py-4 bg-[#111111] border border-[#222222] text-[#F3F0E8] font-bold text-xs tracking-[0.25em] uppercase text-center hover:border-[#F3F0E8] transition-colors"
+              <button 
+                onClick={() => {
+                  addToCart({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: activeVariant.images[0]?.url || '',
+                    size: selectedSize,
+                    category: product.category,
+                    storeWorld: 'clothing'
+                  });
+                  router.push('/checkout?store=clothing');
+                }}
+                className="block w-full py-4 bg-[#8F1118] hover:bg-[#A8151D] border border-[#8F1118] text-white font-bold text-xs tracking-[0.25em] uppercase text-center transition-colors cursor-pointer shadow-lg shadow-[#8F1118]/20"
               >
                 BUY NOW WITH 1-CLICK
-              </Link>
+              </button>
             </div>
 
             {/* Trust Signals */}

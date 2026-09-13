@@ -22,16 +22,16 @@ export default function Hero() {
       </div>
 
       {/* Hero Composition */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center flex flex-col items-center">
         
         {/* Subtle Brand Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#121212]/90 border border-white/15 text-[#C8C3B8] text-[10px] font-mono tracking-[0.3em] uppercase rounded-full mb-8 backdrop-blur-md">
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 bg-[#121212]/90 border border-white/15 text-[#C8C3B8] text-[9px] sm:text-[10px] font-mono tracking-[0.22em] sm:tracking-[0.3em] uppercase rounded-full mb-6 sm:mb-8 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-[#8F1118] shadow-[0_0_8px_#8F1118]"></span>
-          DIGITAL FLAGSHIP • MEN&apos;S STREETWEAR
+          <span>DIGITAL FLAGSHIP • MEN&apos;S STREETWEAR</span>
         </div>
 
         {/* Display Typography matching Luxury Agencies */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.04em] text-[#F3F0E8] uppercase max-w-5xl leading-[0.92] mb-6 font-[var(--font-display)]">
+        <h1 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.04em] text-[#F3F0E8] uppercase max-w-5xl leading-[0.95] sm:leading-[0.92] mb-4 sm:mb-6 font-[var(--font-display)]">
           CLOTHES TELL <br />
           <span className="text-[#8F1118] drop-shadow-[0_0_25px_rgba(143,17,24,0.4)]">
             BETTER STORIES.
@@ -39,7 +39,7 @@ export default function Hero() {
         </h1>
 
         {/* Subtext */}
-        <p className="text-xs sm:text-sm md:text-base text-[#8C8C86] font-mono max-w-xl leading-relaxed mb-10">
+        <p className="text-xs sm:text-sm md:text-base text-[#8C8C86] font-mono max-w-xl leading-relaxed mb-8 sm:mb-10 px-2">
           Curated Gen-Z silhouettes, heavy-density cottons, and unapologetic attitude crafted for the ones who lead culture.
         </p>
 
