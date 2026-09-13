@@ -12,5 +12,28 @@ export function VideoProductCard({ title, subtitle, poster, videoSrc, href = '/s
 const cards = [['THE FIT', '400 GSM / HEAVYWEIGHT DRAPE', '/media/campaign-after-dark.png'], ['THE SILHOUETTE', 'BAGGY CARGO / CITY MOVEMENT', '/media/product-cargo.png'], ['AFTER DARK', '500 GSM / FLEECE PROTOCOL', '/media/product-hoodie.png'], ['THE LOOK', 'OVERSIZED / NIGHT SHIFT', '/media/product-jacket.png']] as const;
 
 export default function SeenInMotion() {
-  return <section className="bg-[#EEEAE1] py-20 text-[#090909] sm:py-24"><div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16"><div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><div className="mb-2 text-[10px] tracking-[0.28em] text-[#77746E] uppercase font-mono">SHORT-FORM EDITORIAL / VIDEO SLOT ARCHITECTURE</div><h2 className="font-[var(--font-display)] text-4xl font-bold tracking-[-0.05em] uppercase sm:text-6xl">SEEN IN MOTION</h2></div><span className="max-w-xs text-[10px] leading-relaxed text-[#77746E] font-mono">Add a licensed 9:16 product or UGC loop through the reusable video card when the media library is ready.</span></div><div className="grid grid-cols-2 gap-2 md:grid-cols-4">{cards.map(([title, subtitle, poster]) => <VideoProductCard key={title} title={title} subtitle={subtitle} poster={poster} />)}</div></div></section>;
+  return (
+    <section className="bg-[#EEEAE1] py-20 text-[#090909] sm:py-24">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">
+        <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <div className="mb-2 text-[10px] tracking-[0.28em] text-[#77746E] uppercase font-mono">
+              CURATED SILHOUETTES / EDITORIAL MOVEMENT
+            </div>
+            <h2 className="font-[var(--font-display)] text-4xl font-bold tracking-[-0.05em] uppercase sm:text-6xl">
+              SEEN IN MOTION
+            </h2>
+          </div>
+          <span className="max-w-xs text-[10px] leading-relaxed text-[#77746E] font-mono">
+            Heavyweight drape in real urban environments. Engineered for volume and high contrast.
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+          {cards.map(([title, subtitle, poster]) => (
+            <VideoProductCard key={title} title={title} subtitle={subtitle} poster={poster} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

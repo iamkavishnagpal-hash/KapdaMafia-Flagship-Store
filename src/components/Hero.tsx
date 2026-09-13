@@ -2,86 +2,89 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-[90vh] bg-[#080808] overflow-hidden flex items-center justify-center border-b border-[#181818]">
+    <section className="relative w-full min-h-[92vh] bg-[#050505] overflow-hidden flex items-center justify-center border-b border-white/10">
       
-      {/* Editorial Menswear Campaign Background */}
+      {/* High-End Architectural Storefront Background */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/media/campaign-after-dark.png" 
-          alt="Kapda Mafia Menswear Campaign" 
-          className="w-full h-full object-cover object-top opacity-30 scale-100 transition-transform duration-1000"
+          src="/media/kapda-mafia-storefront-hero.jpg" 
+          alt="Kapda Mafia Digital Flagship Storefront" 
+          className="w-full h-full object-cover object-center opacity-45 scale-100 transition-transform duration-1000"
         />
-        {/* Editorial Lighting Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/70 to-[#080808]/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-transparent to-[#080808]"></div>
-        <div className="absolute inset-0 grain-overlay pointer-events-none"></div>
+        {/* Editorial Gradients & Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-transparent to-[#050505]/90"></div>
+        <div className="absolute inset-0 grain-overlay pointer-events-none opacity-25"></div>
       </div>
 
       {/* Hero Composition */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center flex flex-col items-center">
         
-        {/* Subtle Eyebrow Metadata */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#111111] border border-[#222222] text-[#B8B4AA] text-[10px] font-mono tracking-[0.3em] uppercase rounded-full mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#8B0000]"></span>
-          DROP 09 • AFTER DARK PROTOCOL
+        {/* Subtle Brand Tag */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#121212]/90 border border-white/15 text-[#C8C3B8] text-[10px] font-mono tracking-[0.3em] uppercase rounded-full mb-8 backdrop-blur-md">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#8F1118] shadow-[0_0_8px_#8F1118]"></span>
+          DIGITAL FLAGSHIP • MEN&apos;S STREETWEAR
         </div>
 
-        {/* Editorial Display Typography */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-[#F3F0E8] uppercase max-w-5xl leading-[0.95] mb-6">
-          BUILT FOR THE ONES WHO <span className="text-[#8C8C86]">DON’T BLEND IN.</span>
+        {/* Display Typography matching Luxury Agencies */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.04em] text-[#F3F0E8] uppercase max-w-5xl leading-[0.92] mb-6 font-[var(--font-display)]">
+          CLOTHES TELL <br />
+          <span className="text-[#8F1118] drop-shadow-[0_0_25px_rgba(143,17,24,0.4)]">
+            BETTER STORIES.
+          </span>
         </h1>
 
-        {/* Brand Manifesto Subheading */}
-        <p className="text-xs sm:text-sm md:text-base text-[#B8B4AA] font-mono max-w-xl leading-relaxed mb-10">
-          400–500 GSM custom French Terry, tactical cargo silhouettes, and uncompromised streetwear craftsmanship.
+        {/* Subtext */}
+        <p className="text-xs sm:text-sm md:text-base text-[#8C8C86] font-mono max-w-xl leading-relaxed mb-10">
+          Curated Gen-Z silhouettes, heavy-density cottons, and unapologetic attitude crafted for the ones who lead culture.
         </p>
 
-        {/* Max 3 Restrained CTAs */}
+        {/* Agency-Level Refined CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto font-mono text-xs">
           <Link 
             href="/shop" 
-            className="w-full sm:w-auto px-8 py-4 bg-[#F3F0E8] hover:bg-[#B8B4AA] text-[#080808] font-bold tracking-[0.25em] uppercase transition-colors flex items-center justify-center gap-3"
+            className="w-full sm:w-auto px-8 py-4 bg-[#F3F0E8] hover:bg-[#C8C3B8] text-[#050505] font-bold tracking-[0.22em] uppercase transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:scale-[1.02]"
           >
-            SHOP NEW DROP
+            EXPLORE COLLECTION
             <ArrowRight size={14} />
           </Link>
 
           <Link 
             href="/ai-fit" 
-            className="w-full sm:w-auto px-8 py-4 bg-[#111111] border border-[#222222] hover:border-[#8C8C86] text-[#F3F0E8] font-bold tracking-[0.25em] uppercase transition-colors flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-4 bg-[#111111]/80 backdrop-blur-md border border-white/15 hover:border-white/40 text-[#F3F0E8] font-bold tracking-[0.22em] uppercase transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
           >
-            <Sparkles size={14} className="text-[#B8B4AA]" />
-            TRY YOUR FIT (AI)
+            <Sparkles size={14} className="text-[#8F1118]" />
+            FIND YOUR SIZE (AI)
           </Link>
 
           <Link 
-            href="/shop?category=tees" 
-            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#222222] hover:border-[#F3F0E8] text-[#B8B4AA] hover:text-[#F3F0E8] font-bold tracking-[0.25em] uppercase transition-colors flex items-center justify-center"
+            href="/lookbook" 
+            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/10 hover:border-white/30 text-[#C8C3B8] hover:text-[#F3F0E8] font-bold tracking-[0.22em] uppercase transition-all duration-300 flex items-center justify-center"
           >
-            EXPLORE LOOKBOOK
+            LOOKBOOK
           </Link>
         </div>
 
-        {/* Technical Specification Bar */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#181818] text-left w-full max-w-4xl text-[10px] font-mono text-[#8C8C86]">
+        {/* Clean Spec Strip */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/10 text-left w-full max-w-4xl text-[10px] font-mono text-[#8C8C86]">
           <div>
-            <span className="block text-[#F3F0E8] font-bold">400–500 GSM</span>
-            Custom French Cotton
+            <span className="block text-[#F3F0E8] font-bold text-xs">280–440 GSM</span>
+            Dense Structure Knit
           </div>
           <div>
-            <span className="block text-[#F3F0E8] font-bold">LIMITED DROPS</span>
-            No Mass Re-prints
+            <span className="block text-[#F3F0E8] font-bold text-xs">GEN-Z SILHOUETTES</span>
+            Barrel &amp; Baggy Fits
           </div>
           <div>
-            <span className="block text-[#F3F0E8] font-bold">SMART FIT ENGINE</span>
-            AI Size Recommendation
+            <span className="block text-[#F3F0E8] font-bold text-xs">AI SMART SIZING</span>
+            Precision Recommendation
           </div>
           <div>
-            <span className="block text-[#F3F0E8] font-bold">EXPRESS SHIPPING</span>
+            <span className="block text-[#F3F0E8] font-bold text-xs">EXPRESS SHIPPING</span>
             Pan-India Delivery
           </div>
         </div>
