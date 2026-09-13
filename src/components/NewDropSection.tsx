@@ -33,7 +33,7 @@ export default function NewDropSection({ products }: NewDropProps) {
             href="/shop" 
             className="mt-4 md:mt-0 text-[11px] font-mono tracking-widest text-[#B8B4AA] hover:text-[#F3F0E8] transition-colors flex items-center gap-2"
           >
-            VIEW ALL PRODUCTS (04) →
+            VIEW ALL PRODUCTS ({products.length.toString().padStart(2, '0')}) →
           </Link>
         </div>
 

@@ -8,7 +8,7 @@ export type CategorySlug =
   | 'caps'
   | 'accessories';
 
-export type ProductBadge = 'NEW' | 'LIMITED' | 'LOW STOCK' | 'BEST SELLER' | 'RESTOCK';
+export type ProductBadge = 'NEW' | 'LIMITED' | 'LOW STOCK' | 'BEST SELLER' | 'RESTOCK' | 'GEN-Z TREND' | 'HOT';
 
 export type FitType = 'OVERSIZED' | 'BAGGY' | 'RELAXED' | 'REGULAR' | 'BOXY';
 

@@ -6,9 +6,10 @@ import { MOCK_PRODUCTS, MOCK_REVIEWS } from '@/data/products';
 import { ShieldCheck, Truck, RotateCcw, Sparkles, Star, CheckCircle } from 'lucide-react';
 import SmartSizeModal from '@/components/SmartSizeModal';
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = MOCK_PRODUCTS[0];
-  const [selectedSize, setSelectedSize] = useState('L');
+export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = React.use(params);
+  const product = MOCK_PRODUCTS.find(p => p.slug === resolvedParams.slug) || MOCK_PRODUCTS[0];
+  const [selectedSize, setSelectedSize] = useState(product.variants[0]?.sizes[0]?.size || 'M');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isSizeModalOpen, setIsSizeModalOpen] = useState(false);
   const [addedToBag, setAddedToBag] = useState(false);
