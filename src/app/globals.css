@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #050505;
+  --warm-black: #0d0c0b;
+  --graphite: #121212;
+  --ivory: #eeeae1;
+  --stone: #c8c3b8;
+  --smoke: #77746e;
+  --oxblood: #8f1118;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--ivory);
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 1px solid var(--ivory);
+  outline-offset: 4px;
+}
+
+::selection { background: var(--oxblood); color: var(--ivory); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: #2b2925; }
+::-webkit-scrollbar-thumb:hover { background: var(--oxblood); }
+
+.grain-overlay {
+  opacity: .14;
+  background-image: url('/media/campaign-after-dark.png');
+  background-size: 180px;
+  mix-blend-mode: soft-light;
+}
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); transition-delay: var(--reveal-delay, 0ms); }
+.reveal-visible { opacity: 1; transform: translateY(0); }
+
+.infinite-marquee { overflow: hidden; border-block: 1px solid rgba(238,234,225,.12); background: var(--ink); color: var(--stone); font: 700 10px/1.2 var(--font-mono, monospace); letter-spacing: .2em; text-transform: uppercase; }
+.infinite-marquee-light { background: var(--ivory); color: var(--ink); border-color: rgba(9,9,9,.14); }
+.infinite-marquee-track { display: flex; width: max-content; animation: mafia-marquee 28s linear infinite; }
+.infinite-marquee:hover .infinite-marquee-track { animation-play-state: paused; }
+.infinite-marquee-item { display: inline-flex; align-items: center; gap: 2.2rem; padding: 1rem 1.1rem; white-space: nowrap; }
+.infinite-marquee-item i { color: var(--oxblood); font-style: normal; }
+
+@keyframes mafia-marquee { to { transform: translateX(-50%); } }
+@keyframes mafia-hero-drift { 0%, 100% { transform: scale(1.03) translate3d(0, 0, 0); } 50% { transform: scale(1.08) translate3d(-.8%, -.4%, 0); } }
+@keyframes mafia-scan { from { transform: translateY(-100%); } to { transform: translateY(100vh); } }
+
+.hero-media-drift { animation: mafia-hero-drift 18s ease-in-out infinite; }
+.campaign-scanline { animation: mafia-scan 8s linear infinite; opacity: .08; }
+.announcement-track { animation: mafia-announcement 28s linear infinite; }
+.product-tilt { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.22,1,.36,1); will-change: transform; }
+
+.editorial-rule { border-color: rgba(238, 234, 225, .13); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+  .announcement-track { animation: none; }
+}
+
+@keyframes mafia-announcement { from { transform: translateX(0); } to { transform: translateX(-25%); } }
