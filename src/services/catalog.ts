@@ -82,14 +82,14 @@ export const OrderTrackingService = {
       phone: '+91 98765 43210',
       items: [
         {
-          productId: 'km-001',
-          variantId: 'var-001-black',
+          productId: 'pl-001',
+          variantId: 'var-pl-001',
           size: 'L',
           quantity: 1,
-          unitPrice: 2499,
-          productName: 'MAFIA CREST OVERSIZED TEE',
-          productImage: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop',
-          colorName: 'Washed Charcoal Black'
+          unitPrice: 1899,
+          productName: 'DARK BLUE BARREL FIT JEANS',
+          productImage: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
+          colorName: 'Dark Indigo Blue'
         }
       ],
       subtotal: 2499,

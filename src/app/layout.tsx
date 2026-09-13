@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     siteName: "KAPDA MAFIA",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1200&auto=format&fit=crop",
+        url: "/media/campaign-after-dark.png",
         width: 1200,
         height: 630,
-        alt: "KAPDA MAFIA Campaign"
+        alt: "KAPDA MAFIA Menswear Campaign"
       }
     ],
     locale: "en_IN",

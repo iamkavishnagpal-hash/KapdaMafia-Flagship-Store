@@ -11,9 +11,9 @@ export default function Hero() {
       {/* Editorial Menswear Campaign Background */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1920&auto=format&fit=crop" 
+          src="/media/campaign-after-dark.png" 
           alt="Kapda Mafia Menswear Campaign" 
-          className="w-full h-full object-cover object-center opacity-35 scale-100 transition-transform duration-1000"
+          className="w-full h-full object-cover object-top opacity-30 scale-100 transition-transform duration-1000"
         />
         {/* Editorial Lighting Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/70 to-[#080808]/40"></div>
