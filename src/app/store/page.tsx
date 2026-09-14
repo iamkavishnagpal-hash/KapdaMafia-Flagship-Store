@@ -21,43 +21,57 @@ export default function StorePage() {
           </p>
         </div>
 
-        {/* Flagship Store Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-[#111111] border border-[#181818] rounded-sm overflow-hidden p-6 sm:p-8">
+        {/* Concrete Vault Monolithic Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-px bg-[#1a1a1a] border border-[#1a1a1a] overflow-hidden">
           
-          <div className="lg:col-span-7 aspect-[4/3] bg-[#181818] overflow-hidden rounded-sm">
+          <div className="lg:col-span-7 aspect-[4/3] bg-[#0a0a0a] overflow-hidden relative">
             <img 
               src="/media/campaign-after-dark.png" 
-              alt="Kapda Mafia Flagship Store Interior"
-              className="w-full h-full object-cover"
+              alt="Kapda Mafia Concrete Vault"
+              className="w-full h-full object-cover grayscale contrast-125"
             />
+            <div className="absolute top-3 left-3 bg-[#080808]/90 border border-[#222] px-2.5 py-1 text-[9px] font-mono text-[#EEEAE1]">
+              [FACILITY CODE: NIT-5-FARIDABAD]
+            </div>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+          <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 bg-[#080808] space-y-6">
             <div className="space-y-4">
-              <div className="text-sm font-black text-[#F3F0E8] uppercase tracking-wide">
-                KAPDA MAFIA FLAGSHIP STORE #01
+              <div className="text-[10px] font-mono text-[#8F1118] uppercase tracking-widest flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8F1118] animate-ping" />
+                <span>OPERATIONAL CONCRETE VAULT</span>
               </div>
 
-              <div className="space-y-3 text-xs text-[#B8B4AA]">
+              <div className="text-xl sm:text-2xl font-black text-[#F3F0E8] uppercase tracking-tight font-editorial">
+                NIT 5 CONCRETE VAULT
+              </div>
+
+              {/* Raw Industrial Coordinate Anchor */}
+              <div className="p-3 bg-[#0f0f0f] border border-[#1c1c1c] font-mono text-[10px] text-[#A39E93] leading-relaxed">
+                <div className="text-[#8F1118] font-bold mb-1">[LAT: 28.3846° N, LONG: 77.3086° E]</div>
+                <div>ELEVATION: 209M MSL // REFINERY RUNWAY SECTOR</div>
+              </div>
+
+              <div className="space-y-3 text-xs font-mono text-[#B8B4AA]">
                 <div className="flex items-start gap-2.5">
                   <MapPin size={16} className="text-[#8F1118] flex-shrink-0 mt-0.5" />
                   <a
                     href="https://maps.google.com/maps?vet=10CAAQoqAOahcKEwigr4D5oOyWAxUAAAAAHQAAAAAQBQ..i&rlz=1C1PNFE_enIN1090IN1091&fvr=1&pvq=Cg0vZy8xMXl6ZDFuOW04IhEKC2thcGRhIG1hZmlhEAIYAw&lqi=CgtrYXBkYSBtYWZpYUjozOjA-b2AgAhaHRAAEAEYABgBIgtrYXBkYSBtYWZpYSoGCAIQABABkgEOY2xvdGhpbmdfc3RvcmU&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x390cdd1ee5a5bafd:0xc177aa65e376a724"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-white transition-colors leading-relaxed"
                   >
-                    Ground Floor, 5G-38, Block G, New Industrial Twp 5, New Industrial Township, Faridabad, Haryana 121001
+                    Ground Floor, 5G-38, Block G, New Industrial Twp 5, Faridabad, Haryana 121001
                   </a>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Clock size={16} className="text-[#8F1118] flex-shrink-0" />
-                  <span>MON – SUN: 11:00 AM – 09:30 PM</span>
+                  <span>VAULT DOORS: 11:00 HRS – 21:30 HRS [MON–SUN]</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Phone size={16} className="text-[#8F1118] flex-shrink-0" />
                   <a href="tel:08375000819" className="hover:text-white font-bold transition-colors">
-                    083750 00819
+                    SECURE LINE: +91 83750 00819
                   </a>
                 </div>
               </div>

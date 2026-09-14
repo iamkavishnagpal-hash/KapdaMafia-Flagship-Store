@@ -105,49 +105,61 @@ export default function ProductCard360({ product, priority = false }: ProductCar
 
   return (
     <>
-      <article className="group bg-[#090909] border border-[#1c1c1c] hover:border-[#333] transition-colors rounded-none flex flex-col justify-between font-mono">
+      <article className="group bg-[#080808] border border-[#1a1a1a] hover:border-[#444] transition-all rounded-none flex flex-col justify-between font-mono relative overflow-hidden">
         
-        {/* 360 Scrubbing Container with touch-action: pan-y (Zero Mobile Scroll Freezing) */}
+        {/* Top Architectural Spec Ticker Bar */}
+        <div className="flex items-center justify-between border-b border-[#181818] px-2.5 py-1.5 bg-[#050505] text-[8px] text-[#77746E] uppercase tracking-widest">
+          <div className="flex items-center gap-1.5 truncate">
+            <span className="h-1 w-1 rounded-full bg-[#8F1118]" />
+            <span className="font-bold text-[#A5A096]">[{product.id.toUpperCase()}]</span>
+            <span className="truncate">DROP 09 // 100% COTTON</span>
+          </div>
+          <span className="text-[#8F1118] font-bold shrink-0">
+            {availableStock > 0 && availableStock <= 3 ? `[STOCK: 0${availableStock}]` : '[VAULT: ALLOCATED]'}
+          </span>
+        </div>
+
+        {/* 360 Edge-to-Edge Scrubbing Viewport with touch-action: pan-y (Zero Mobile Scroll Freezing) */}
         <div 
           ref={containerRef}
           onPointerEnter={preloadFrames}
           onPointerMove={handlePointerMove}
           onMouseEnter={() => setIsScrubbing(true)}
           onMouseLeave={() => { setIsScrubbing(false); setCurrentFrame(0); }}
-          className="relative aspect-[3/4] bg-[#0f0f0f] overflow-hidden select-none touch-pan-y"
+          className="relative aspect-[3/4] bg-[#0c0c0c] overflow-hidden select-none touch-pan-y"
         >
           <Link href={`/product/${product.slug}`} className="block w-full h-full">
             <img 
               src={frames[currentFrame]} 
               alt={`${product.name} angle ${currentFrame + 1}`}
               loading={priority ? 'eager' : 'lazy'}
-              className="w-full h-full object-cover object-center transition-transform duration-200 group-hover:scale-[1.02]"
+              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03] contrast-[1.05]"
             />
           </Link>
 
-          {/* Desktop 360 Badge */}
-          <div className="hidden sm:flex absolute top-2.5 right-2.5 bg-black/85 border border-[#262626] px-2 py-0.5 items-center gap-1 text-[8px] tracking-widest text-[#EEEAE1] uppercase">
+          {/* High-Contrast Flash Badge */}
+          <div className="absolute top-2 left-2 bg-black/90 border border-white/20 px-2 py-0.5 text-[7px] sm:text-[8px] font-bold tracking-[0.2em] text-[#EEEAE1] uppercase backdrop-blur-md">
+            {product.badge || 'KAPDA'}
+          </div>
+
+          {/* Desktop 360 Angle Badge */}
+          <div className="hidden sm:flex absolute top-2 right-2 bg-black/90 border border-[#262626] px-2 py-0.5 items-center gap-1.5 text-[8px] tracking-widest text-[#EEEAE1] uppercase">
             <Rotate3D size={11} className={isScrubbing ? 'text-[#8F1118] animate-spin' : 'text-[#77746E]'} />
             <span>{isScrubbing ? `ANGLE ${currentFrame + 1}/${totalFrames}` : '360° SCRUB'}</span>
           </div>
 
-          {/* Mobile Tap-to-Spin Pill (Eliminates Touch Scroll Interception) */}
+          {/* Mobile Tap-to-Spin Pill */}
           <button
             type="button"
             onClick={handleMobileTapSpin}
-            className="sm:hidden absolute top-2 right-2 bg-black/90 border border-white/20 px-2 py-1 flex items-center gap-1 text-[8px] font-bold tracking-wider text-white uppercase active:scale-90 transition-transform"
+            className="sm:hidden absolute top-2 right-2 bg-black/95 border border-white/30 px-2 py-1 flex items-center gap-1 text-[8px] font-bold tracking-wider text-white uppercase active:scale-95 transition-transform"
           >
             <Rotate3D size={10} className="text-[#8F1118]" />
             <span>{currentFrame === 0 ? 'SPIN' : `${currentFrame + 1}/${totalFrames}`}</span>
           </button>
 
-          {/* Quiet Drop Badge */}
-          <div className="absolute top-2 left-2 bg-black/85 border border-[#262626] px-1.5 sm:px-2 py-0.5 text-[7px] sm:text-[8px] font-bold tracking-widest text-[#C8C3B8] uppercase">
-            {product.badge || 'KAPDA'}
-          </div>
-
           {/* Scrubber Progress Track Indicator */}
-          <div className="absolute inset-x-0 bottom-0 h-1 bg-black/50 flex">
+          <div className="absolute inset-x-0 bottom-0 h-1 bg-black/60 flex">
             {frames.map((_, idx) => (
               <div 
                 key={idx}
@@ -160,44 +172,58 @@ export default function ProductCard360({ product, priority = false }: ProductCar
           <div className="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
             <Link 
               href={`/product/${product.slug}`}
-              className="w-full bg-[#EEEAE1] hover:bg-white text-black text-[10px] font-bold tracking-[0.2em] uppercase py-2 flex items-center justify-center gap-2 shadow-lg"
+              className="w-full bg-[#EEEAE1] hover:bg-white text-black text-[9px] font-bold tracking-[0.25em] uppercase py-2.5 flex items-center justify-center gap-2 shadow-2xl"
             >
-              <Eye size={12} /> VIEW SPEC
+              <Eye size={12} /> VIEW SPECIFICATION SHEET
             </Link>
           </div>
         </div>
 
-        {/* Compact Brutalist Monospace Metadata */}
-        <div className="p-2.5 sm:p-4 bg-[#0a0a0a] flex flex-col justify-between flex-1 space-y-2">
+        {/* Technical Military Spec Sheet Metadata Block */}
+        <div className="p-3 sm:p-4 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#181818] space-y-2.5">
           
           <div>
-            <div className="flex justify-between items-baseline gap-1">
-              <span className="text-[8px] sm:text-[9px] text-[#77746E] tracking-widest uppercase truncate">
-                {product.category} {product.gsm ? `• ${product.gsm}G` : ''}
+            {/* Monospace Spec Line: GSM // SILHOUETTE */}
+            <div className="flex justify-between items-baseline text-[8px] sm:text-[9px] text-[#77746E] tracking-[0.2em] uppercase font-mono pb-1 border-b border-[#141414]">
+              <span className="truncate">
+                {product.gsm ? `${product.gsm} GSM // ` : ''}{product.fit || 'OVERSIZED'}
               </span>
-              <span className="text-[11px] sm:text-xs font-bold text-[#EEEAE1] shrink-0">
-                ₹{product.price.toLocaleString('en-IN')}
+              <span className="text-[#8F1118] font-bold shrink-0">
+                FARIDABAD REF.
               </span>
             </div>
 
+            {/* Product Name in High-Fashion Display Style */}
             <Link href={`/product/${product.slug}`}>
-              <h3 className="text-[11px] sm:text-xs font-bold text-[#F3F0E8] uppercase tracking-wide line-clamp-1 mt-0.5 hover:text-[#8F1118] transition-colors">
+              <h3 className="text-xs sm:text-sm font-bold text-[#F3F0E8] uppercase tracking-wide line-clamp-1 mt-1.5 hover:text-[#8F1118] transition-colors">
                 {product.name}
               </h3>
             </Link>
+
+            {/* Price Tag */}
+            <div className="flex items-baseline justify-between pt-1">
+              <span className="text-xs sm:text-sm font-black text-[#EEEAE1] tracking-tight">
+                ₹{product.price.toLocaleString('en-IN')}
+              </span>
+              {product.originalPrice && (
+                <span className="text-[10px] text-[#555] line-through">
+                  ₹{product.originalPrice.toLocaleString('en-IN')}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Desktop Size Selector & Add To Bag */}
           <div className="hidden sm:block pt-2 border-t border-[#181818] space-y-2">
-            <div className="flex items-center justify-between text-[9px] text-[#77746E]">
-              <span>SIZE:</span>
+            <div className="flex items-center justify-between text-[8px] text-[#77746E]">
+              <span>SELECT PROPORTION:</span>
               {availableStock > 0 && availableStock <= 3 && (
                 <span className="text-[#8F1118] font-bold flex items-center gap-1">
-                  <ShieldAlert size={10} /> ONLY {availableStock} LEFT
+                  <ShieldAlert size={9} /> ONLY {availableStock} REMAINING
                 </span>
               )}
               {availableStock === 0 && (
-                <span className="text-red-500 font-bold">SOLD OUT</span>
+                <span className="text-red-500 font-bold">BATCH SOLD OUT</span>
               )}
             </div>
 
@@ -207,7 +233,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
                   key={s.size}
                   type="button"
                   onClick={() => setSelectedSize(s.size)}
-                  className={`px-1.5 py-0.5 text-[9px] font-bold uppercase transition-all rounded-none border ${
+                  className={`px-2 py-1 text-[8px] font-bold uppercase transition-all rounded-none border ${
                     selectedSize === s.size 
                       ? 'border-[#8F1118] bg-[#8F1118] text-white' 
                       : 'border-[#222] bg-[#111] text-[#C8C3B8] hover:border-[#444]'
@@ -221,16 +247,16 @@ export default function ProductCard360({ product, priority = false }: ProductCar
             <button
               onClick={handleQuickAdd}
               disabled={availableStock === 0}
-              className={`w-full py-2 text-[9px] font-bold tracking-[0.16em] uppercase flex items-center justify-center gap-1.5 transition-all rounded-none ${
+              className={`w-full py-2 text-[9px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-1.5 transition-all rounded-none ${
                 availableStock === 0
-                  ? 'bg-[#181818] text-[#555] cursor-not-allowed border border-[#222]'
+                  ? 'bg-[#141414] text-[#444] cursor-not-allowed border border-[#1a1a1a]'
                   : isAdded
                   ? 'bg-emerald-600 text-white'
-                  : 'bg-[#141414] hover:bg-[#8F1118] text-[#EEEAE1] hover:text-white border border-[#262626] hover:border-[#8F1118]'
+                  : 'bg-[#121212] hover:bg-[#8F1118] text-[#EEEAE1] hover:text-white border border-[#222] hover:border-[#8F1118]'
               }`}
             >
               {isAdded ? <Check size={11} /> : <ShoppingBag size={11} />}
-              {isAdded ? 'ADDED' : `ADD TO BAG (${selectedSize})`}
+              {isAdded ? 'COMMITTED TO BAG' : `ACQUIRE PIECE (${selectedSize})`}
             </button>
           </div>
 
@@ -238,10 +264,10 @@ export default function ProductCard360({ product, priority = false }: ProductCar
           <button
             type="button"
             onClick={() => setMobileDrawerOpen(true)}
-            className="sm:hidden w-full py-2 bg-[#141414] active:bg-[#8F1118] text-[#EEEAE1] text-[10px] font-bold tracking-wider uppercase border border-[#262626] flex items-center justify-center gap-1.5"
+            className="sm:hidden w-full py-2 bg-[#121212] active:bg-[#8F1118] text-[#EEEAE1] text-[9px] font-bold tracking-[0.2em] uppercase border border-[#222] flex items-center justify-center gap-1.5"
           >
-            <ShoppingBag size={11} />
-            <span>QUICK ADD</span>
+            <ShoppingBag size={10} />
+            <span>SELECT & ACQUIRE</span>
           </button>
 
         </div>

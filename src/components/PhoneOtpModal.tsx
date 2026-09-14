@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Phone, KeyRound, Sparkles, ArrowRight, Lock, CheckCircle2, RotateCcw } from 'lucide-react';
+import { ShieldCheck, Phone, KeyRound, Sparkles, ArrowRight, Lock, CheckCircle2, RotateCcw, X } from 'lucide-react';
 import { useWorld } from '@/context/WorldContext';
 
 export default function PhoneOtpModal() {
@@ -14,6 +14,7 @@ export default function PhoneOtpModal() {
   const [error, setError] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -26,8 +27,8 @@ export default function PhoneOtpModal() {
     return () => clearInterval(interval);
   }, [otpSent, timer]);
 
-  // If already authenticated, do not show OTP gate
-  if (isAuthenticated) return null;
+  // If already authenticated or user dismissed the prompt, do not show OTP gate
+  if (isAuthenticated || isDismissed) return null;
 
   const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,6 +124,15 @@ export default function PhoneOtpModal() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-fade-in font-mono">
       <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-white/15 bg-[#0e0e0e] p-7 shadow-2xl shadow-red-950/20 text-[#EEEAE1]">
+        {/* Close / Dismiss button for free exploration */}
+        <button 
+          onClick={() => setIsDismissed(true)}
+          className="absolute top-4 right-4 p-1 text-[#77746E] hover:text-white transition-colors cursor-pointer z-10"
+          title="Explore without logging in"
+        >
+          <X size={18} />
+        </button>
+
         {/* Glow ambient accent */}
         <div className="absolute -top-24 -left-24 h-48 w-48 rounded-full bg-[#8F1118]/25 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -right-24 h-48 w-48 rounded-full bg-[#37475a]/25 blur-3xl pointer-events-none" />

@@ -11,30 +11,50 @@ export default function MafiaDropTransition() {
   // 5. completed: fades out into the flagship storefront
   const [phase, setPhase] = useState<
     'shutter-closed' | 'shutter-opening' | 'glass-opening' | 'welcome-bouncing' | 'completed'
-  >('shutter-closed');
-  const [removed, setRemoved] = useState(false);
+  >(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('km_shutter_seen')) {
+      return 'completed';
+    }
+    return 'shutter-closed';
+  });
+  const [removed, setRemoved] = useState(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('km_shutter_seen')) {
+      return true;
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // Step 1: Initial view of the authentic graffiti storefront shutter (1.2s)
+    if (sessionStorage.getItem('km_shutter_seen')) {
+      setRemoved(true);
+      return;
+    }
+
+    // Step 1: Initial view of the authentic graffiti storefront shutter (1.0s)
     const t1 = window.setTimeout(() => {
       setPhase('shutter-opening');
-    }, 1200);
+    }, 1000);
 
-    // Step 2: Shutter completes roll-up, double glass doors start sliding open (2.6s)
+    // Step 2: Shutter completes roll-up, double glass doors start sliding open (2.0s)
     const t2 = window.setTimeout(() => {
       setPhase('glass-opening');
-    }, 2600);
+    }, 2000);
 
-    // Step 3: Glass doors fully apart, quote + Welcome Bouncing screen pops in (3.8s)
+    // Step 3: Glass doors fully apart, quote + Welcome Bouncing screen pops in (3.0s)
     const t3 = window.setTimeout(() => {
       setPhase('welcome-bouncing');
-    }, 3800);
+    }, 3000);
 
-    // Step 4: Fluidly hand over to the luxury flagship experience (5.6s)
+    // Step 4: Fluidly hand over to the luxury flagship experience (4.2s)
     const t4 = window.setTimeout(() => {
       setPhase('completed');
       setRemoved(true);
-    }, 5600);
+      try {
+        sessionStorage.setItem('km_shutter_seen', 'true');
+      } catch {
+        // ignore
+      }
+    }, 4200);
 
     return () => {
       window.clearTimeout(t1);

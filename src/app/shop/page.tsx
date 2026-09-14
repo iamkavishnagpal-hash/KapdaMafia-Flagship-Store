@@ -118,29 +118,36 @@ function ShopContent() {
 
         </div>
 
-        {/* Dynamic Product Grid with 360 Scrubbers */}
+        {/* Monolithic Edge-to-Edge Grid with 1px Hairline Dividers */}
         {loading ? (
           <div className="py-24 text-center space-y-4">
             <RefreshCw size={24} className="mx-auto text-[#8F1118] animate-spin" />
-            <div className="text-xs text-[#77746E] tracking-widest uppercase">
-              QUERYING POSTGRESQL PRODUCT REPOSITORY...
+            <div className="text-xs font-mono text-[#77746E] tracking-widest uppercase">
+              QUERYING VAULT INVENTORY ARCHIVE // POSTGRESQL LIVE...
             </div>
           </div>
         ) : products.length === 0 ? (
           <div className="py-24 text-center space-y-3">
-            <div className="text-sm font-bold text-[#EEEAE1] uppercase">NO PIECES MATCH THIS FILTER</div>
+            <div className="text-sm font-bold text-[#EEEAE1] uppercase font-mono">NO PIECES MATCH THIS FILTER SPECIFICATION</div>
             <button 
               onClick={() => { setCategoryOverride('ALL'); setSelectedFit('ALL'); }}
-              className="px-4 py-2 bg-[#1c1c1c] text-xs font-bold uppercase tracking-wider text-[#EEEAE1]"
+              className="px-6 py-2.5 bg-[#121212] border border-[#262626] text-xs font-mono font-bold uppercase tracking-wider text-[#EEEAE1] hover:bg-[#8F1118] hover:border-[#8F1118] transition-colors"
             >
-              RESET FILTERS
+              RESET CATALOG FILTERS
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 py-8">
-            {products.map(product => (
-              <ProductCard360 key={product.id} product={product} />
-            ))}
+          <div className="my-8">
+            {/* Spec ticker bar above grid */}
+            <div className="bg-[#0f0f0f] border border-[#1a1a1a] px-3 py-2 text-[10px] font-mono text-[#77746E] flex items-center justify-between uppercase tracking-wider mb-[-1px] z-10 relative">
+              <span className="text-[#EEEAE1] font-bold">[CATALOG: FULL_DISPATCH] // NIT 5 CONCRETE VAULT</span>
+              <span>GRID VIEW: CONTINUOUS HAIRLINE // 100% MENSWEAR EDITIONS</span>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#1a1a1a] border border-[#1a1a1a] overflow-hidden">
+              {products.map(product => (
+                <ProductCard360 key={product.id} product={product} />
+              ))}
+            </div>
           </div>
         )}
 
