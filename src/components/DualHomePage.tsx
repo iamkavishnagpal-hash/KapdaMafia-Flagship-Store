@@ -11,6 +11,7 @@ import LookbookSection from '@/components/LookbookSection';
 import LimitedDropBanner from '@/components/LimitedDropBanner';
 import CategoryGrid from '@/components/CategoryGrid';
 import SeenInMotion from '@/components/SeenInMotion';
+import ProductWall from '@/components/ProductWall';
 import ShoesMafiaView from '@/components/ShoesMafiaView';
 import InstagramLiveFeed from '@/components/InstagramLiveFeed';
 import { useWorld } from '@/context/WorldContext';
@@ -42,6 +43,7 @@ export default function DualHomePage({
       <SeenInMotion />
       <LimitedDropBanner />
       <CategoryGrid />
+      <ProductWall />
       <BrandStory />
       <LookbookSection lookbooks={lookbooks} />
       <FabricStory />
