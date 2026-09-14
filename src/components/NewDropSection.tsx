@@ -40,8 +40,8 @@ export default function NewDropSection({ products }: NewDropProps) {
           </Link>
         </div>
 
-        {/* 4-Column Brutalist Product Grid with 360 Scrubbers */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* 2-Column Mobile & 4-Column Desktop Brutalist Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
           {menswearDrops.map((product, idx) => (
             <ProductCard360 key={product.id} product={product} priority={idx === 0} />
           ))}

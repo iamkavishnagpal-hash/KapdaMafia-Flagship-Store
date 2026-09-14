@@ -12,6 +12,12 @@ export default function MobileBottomBar() {
   const { openCart, activeCount } = useCart();
   const { world, toggleWorld } = useWorld();
 
+  // STICKY ACTION HIERARCHY: Hide bottom bar on Product Detail Pages
+  // so the full-width Add to Bag bar has 100% clean thumb-zone priority
+  if (pathname.startsWith('/product/')) {
+    return null;
+  }
+
   const isShoes = world === 'shoes';
 
   return (

@@ -203,8 +203,8 @@ export default function AiFitPage() {
   };
 
   return (
-    <div className="py-12 bg-[#050505] min-h-screen text-[#EEEAE1] font-mono selection:bg-[#8F1118]">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
+    <div className="py-8 sm:py-12 bg-[#050505] min-h-[100dvh] text-[#EEEAE1] font-mono selection:bg-[#8F1118]">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-12">
         
         {/* Header */}
         <div className="mb-10 pb-6 border-b border-[#1c1c1c] text-center max-w-3xl mx-auto space-y-3">
