@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { Eye, ShoppingBag, Rotate3D, Check, ShieldAlert, X } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
@@ -15,14 +15,16 @@ export default function ProductCard360({ product, priority = false }: ProductCar
   const { addToCart, openCart } = useCart();
   const activeVariant = product.variants[0];
 
-  const frames = (activeVariant?.images && activeVariant.images.length > 1)
-    ? activeVariant.images.map(img => img.url)
-    : [
-        activeVariant?.images[0]?.url || '/media/product-tee.png',
-        activeVariant?.images[1]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
-        activeVariant?.images[2]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
-        activeVariant?.images[0]?.url || '/media/product-tee.png'
-      ];
+  const frames = useMemo(() => {
+    return (activeVariant?.images && activeVariant.images.length > 1)
+      ? activeVariant.images.map(img => img.url)
+      : [
+          activeVariant?.images[0]?.url || '/media/product-tee.png',
+          activeVariant?.images[1]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
+          activeVariant?.images[2]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
+          activeVariant?.images[0]?.url || '/media/product-tee.png'
+        ];
+  }, [activeVariant]);
 
   const totalFrames = frames.length;
   const [currentFrame, setCurrentFrame] = useState(0);
@@ -75,7 +77,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
   };
 
   // Mobile Tap-to-Spin / Dual-frame flip (Never freezes page vertical scroll)
-  const handleMobileTapSpin = (e: React.MouseEvent) => {
+  const handleMobileTapSpin = () => {
     preloadFrames();
     setCurrentFrame(prev => (prev + 1) % totalFrames);
   };

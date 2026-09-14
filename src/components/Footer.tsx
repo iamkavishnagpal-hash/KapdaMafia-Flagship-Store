@@ -50,7 +50,7 @@ export default function Footer() {
             <li><Link href="/shop?category=hoodies" className="hover:text-[#F3F0E8] transition-colors">HEAVYWEIGHT HOODIES</Link></li>
             <li><Link href="/shop?category=cargos" className="hover:text-[#F3F0E8] transition-colors">TACTICAL CARGOS</Link></li>
             <li><Link href="/shop?category=denim" className="hover:text-[#F3F0E8] transition-colors">DESTROYED DENIM</Link></li>
-            <li><Link href="/shop?category=sneakers" className="hover:text-[#F3F0E8] transition-colors">CHUNKY SNEAKERS</Link></li>
+            <li><Link href="/shoes" className="hover:text-[#80cbc4] text-[#80cbc4] transition-colors">SHOES MAFIA VAULT →</Link></li>
           </ul>
         </div>
 
@@ -59,9 +59,9 @@ export default function Footer() {
           <h4 className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F3F0E8]">CLIENT CARE</h4>
           <ul className="space-y-2 text-xs font-mono">
             <li><Link href="/track-order" className="hover:text-[#F3F0E8] transition-colors">TRACK YOUR ORDER</Link></li>
-            <li><Link href="/store" className="hover:text-[#F3F0E8] transition-colors">VISIT STORE</Link></li>
-            <li><Link href="/ai-fit" className="hover:text-[#F3F0E8] transition-colors">AI FIT STUDIO</Link></li>
-            <li><span className="text-[#8C8C86]">EASY 7-DAY RETURNS & EXCHANGES</span></li>
+            <li><Link href="/store" className="hover:text-[#F3F0E8] transition-colors">VISIT FLAGSHIP STORE</Link></li>
+            <li><Link href="/ai-fit" className="hover:text-[#F3F0E8] transition-colors">AI FIT & TRY-ON STUDIO</Link></li>
+            <li><Link href="/track-order" className="hover:text-[#F3F0E8] text-[#8C8C86] transition-colors">EASY 7-DAY RETURNS & EXCHANGES</Link></li>
           </ul>
         </div>
 

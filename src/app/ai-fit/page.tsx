@@ -4,16 +4,11 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { 
   Camera, 
   Sparkles, 
-  AlertTriangle, 
-  Rotate3D, 
   Upload, 
-  Layers, 
-  QrCode, 
-  Check, 
-  Maximize2, 
-  Sliders, 
+  Check,
+  Eye,
   RefreshCw,
-  Eye
+  QrCode
 } from 'lucide-react';
 import { MOCK_PRODUCTS } from '@/data/products';
 import { Product } from '@/types/ecommerce';

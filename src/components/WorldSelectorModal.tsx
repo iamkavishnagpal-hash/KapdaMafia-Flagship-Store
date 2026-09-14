@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Sparkles, Shirt, Footprints, Layers, Zap } from 'lucide-react';
+import { ArrowRight, Shirt, Footprints, Zap, X } from 'lucide-react';
 import { useWorld, StoreWorld } from '@/context/WorldContext';
 
 export default function WorldSelectorModal() {
@@ -18,6 +18,15 @@ export default function WorldSelectorModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/92 backdrop-blur-2xl animate-fade-in font-mono text-[#EEEAE1]">
       <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-white/20 bg-[#0d0d0d] p-6 sm:p-10 shadow-2xl shadow-black/80">
         
+        {/* Close Button */}
+        <button
+          onClick={() => setShowWorldSelector(false)}
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 text-gray-400 hover:text-white rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer z-20"
+          aria-label="Close Portal Switcher"
+        >
+          <X size={18} />
+        </button>
+
         {/* Background glow */}
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-[#8F1118]/20 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-[#009688]/20 blur-[100px] pointer-events-none" />

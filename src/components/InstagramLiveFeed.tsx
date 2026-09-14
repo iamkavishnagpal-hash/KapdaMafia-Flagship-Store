@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Play, Eye, Heart, MessageCircle, ExternalLink, Sparkles, CheckCircle2, ShieldCheck, MapPin, Phone } from 'lucide-react';
+import { Play, Eye, Heart, ExternalLink, CheckCircle2, MapPin, Phone } from 'lucide-react';
 import { useWorld } from '@/context/WorldContext';
 import { InstagramIcon } from './InstagramIcon';
 

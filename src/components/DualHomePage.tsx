@@ -68,18 +68,18 @@ export default function DualHomePage({
               CALCULATE YOUR FIT <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="grid grid-cols-3 gap-2 border-l border-white/10 pl-5 text-center font-mono lg:col-span-5">
-            <div className="bg-[#171717] px-3 py-7">
-              <div className="text-4xl font-bold text-[#EEEAE1]">L</div>
-              <div className="mt-2 text-[9px] tracking-[0.16em] text-[#77746E]">RECOMMENDED</div>
+          <div className="grid grid-cols-3 gap-2 border-t sm:border-t-0 sm:border-l border-white/10 pt-6 sm:pt-0 sm:pl-5 text-center font-mono lg:col-span-5">
+            <div className="bg-[#171717] px-2 sm:px-3 py-5 sm:py-7">
+              <div className="text-3xl sm:text-4xl font-bold text-[#EEEAE1]">L</div>
+              <div className="mt-2 text-[8px] sm:text-[9px] tracking-[0.16em] text-[#77746E]">RECOMMENDED</div>
             </div>
-            <div className="bg-[#171717] px-3 py-7">
-              <div className="text-4xl font-bold text-[#EEEAE1]">92%</div>
-              <div className="mt-2 text-[9px] tracking-[0.16em] text-[#77746E]">CONFIDENCE</div>
+            <div className="bg-[#171717] px-2 sm:px-3 py-5 sm:py-7">
+              <div className="text-3xl sm:text-4xl font-bold text-[#EEEAE1]">92%</div>
+              <div className="mt-2 text-[8px] sm:text-[9px] tracking-[0.16em] text-[#77746E]">CONFIDENCE</div>
             </div>
-            <div className="bg-[#171717] px-3 py-7">
-              <div className="text-4xl font-bold text-[#EEEAE1]">RELAXED</div>
-              <div className="mt-2 text-[9px] tracking-[0.16em] text-[#77746E]">INTENDED FIT</div>
+            <div className="bg-[#171717] px-2 sm:px-3 py-5 sm:py-7">
+              <div className="text-3xl sm:text-4xl font-bold text-[#EEEAE1]">RELAXED</div>
+              <div className="mt-2 text-[8px] sm:text-[9px] tracking-[0.16em] text-[#77746E]">INTENDED FIT</div>
             </div>
           </div>
         </div>

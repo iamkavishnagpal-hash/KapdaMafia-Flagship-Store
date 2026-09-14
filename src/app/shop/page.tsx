@@ -1,15 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Product } from '@/types/ecommerce';
 import ProductCard360 from '@/components/ProductCard360';
-import { ShieldCheck, SlidersHorizontal, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 
-export default function ShopPage() {
+function ShopContent() {
+  const searchParams = useSearchParams();
+  const urlCategory = searchParams.get('category')?.toUpperCase() || 'ALL';
+  const [categoryOverride, setCategoryOverride] = useState<string | null>(null);
+  const activeCategory = categoryOverride !== null ? categoryOverride : urlCategory;
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedFit, setSelectedFit] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<string>('featured');
 
@@ -20,7 +24,7 @@ export default function ShopPage() {
       try {
         const queryParams = new URLSearchParams();
         queryParams.set('world', 'clothing');
-        if (selectedCategory !== 'ALL') queryParams.set('category', selectedCategory);
+        if (activeCategory !== 'ALL') queryParams.set('category', activeCategory);
         if (selectedFit !== 'ALL') queryParams.set('fit', selectedFit);
 
         const res = await fetch(`/api/products?${queryParams.toString()}`);
@@ -41,7 +45,7 @@ export default function ShopPage() {
     }
 
     fetchCatalog();
-  }, [selectedCategory, selectedFit, sortBy]);
+  }, [activeCategory, selectedFit, sortBy]);
 
   return (
     <div className="py-12 bg-[#050505] min-h-screen text-[#EEEAE1] font-mono selection:bg-[#8F1118]">
@@ -70,9 +74,9 @@ export default function ShopPage() {
             {['ALL', 'TEES', 'HOODIES', 'CARGOS', 'DENIM'].map(cat => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => setCategoryOverride(cat)}
                 className={`pb-1 transition-all uppercase tracking-widest font-bold ${
-                  selectedCategory === cat 
+                  activeCategory === cat 
                     ? 'text-[#EEEAE1] border-b-2 border-[#8F1118]' 
                     : 'hover:text-[#EEEAE1]'
                 }`}
@@ -126,7 +130,7 @@ export default function ShopPage() {
           <div className="py-24 text-center space-y-3">
             <div className="text-sm font-bold text-[#EEEAE1] uppercase">NO PIECES MATCH THIS FILTER</div>
             <button 
-              onClick={() => { setSelectedCategory('ALL'); setSelectedFit('ALL'); }}
+              onClick={() => { setCategoryOverride('ALL'); setSelectedFit('ALL'); }}
               className="px-4 py-2 bg-[#1c1c1c] text-xs font-bold uppercase tracking-wider text-[#EEEAE1]"
             >
               RESET FILTERS
@@ -142,5 +146,17 @@ export default function ShopPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={
+      <div className="py-24 text-center text-xs font-mono text-[#77746E]">
+        LOADING SHOP CATALOG...
+      </div>
+    }>
+      <ShopContent />
+    </Suspense>
   );
 }

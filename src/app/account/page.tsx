@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { User, Package, MapPin, Sparkles, LogOut } from 'lucide-react';
+import { Package, MapPin, Sparkles, LogOut } from 'lucide-react';
 
 export default function AccountPage() {
   return (

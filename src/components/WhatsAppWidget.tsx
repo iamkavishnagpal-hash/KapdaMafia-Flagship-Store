@@ -1,16 +1,22 @@
 'use client';
 
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export default function WhatsAppWidget() {
+  const pathname = usePathname();
   const phoneNumber = '918375000819';
   const defaultMessage = encodeURIComponent('Hey Kapda Mafia team, I have a question about the latest drop / fit recommendation!');
+
+  // On PDP mobile, hide to give full priority to sticky Add to Bag
+  if (pathname.startsWith('/product/')) {
+    return null;
+  }
 
   return (
     <aside
       aria-label="Direct Support"
-      className="fixed bottom-5 right-4 sm:bottom-8 sm:right-6 z-40 flex items-center group"
+      className="fixed bottom-16 right-3 sm:bottom-8 sm:right-6 z-30 flex items-center group"
     >
       <a
         href={`https://wa.me/${phoneNumber}?text=${defaultMessage}`}

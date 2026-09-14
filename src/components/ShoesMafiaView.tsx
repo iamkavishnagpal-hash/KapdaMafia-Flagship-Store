@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ShoppingCart, Rocket, Share2, Eye, ShieldCheck, Truck, RotateCcw, Headphones } from 'lucide-react';
+import { ShoppingCart, Rocket, Share2, ShieldCheck, Truck, RotateCcw, Headphones } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
 import { useCart } from '@/context/CartContext';
 import InstagramLiveFeed from './InstagramLiveFeed';

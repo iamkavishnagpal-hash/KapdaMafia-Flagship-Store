@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { MOCK_PRODUCTS, MOCK_REVIEWS } from '@/data/products';
-import { ShieldCheck, Truck, RotateCcw, Sparkles, Star, CheckCircle } from 'lucide-react';
+import { MOCK_PRODUCTS } from '@/data/products';
+import { ShieldCheck, Truck, RotateCcw, Sparkles, Star } from 'lucide-react';
 import SmartSizeModal from '@/components/SmartSizeModal';
 import { useCart } from '@/context/CartContext';
 
@@ -19,7 +19,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
   const [addedToBag, setAddedToBag] = useState(false);
 
   const activeVariant = product.variants[0];
-  const reviews = MOCK_REVIEWS;
 
   return (
     <div className="py-10 bg-[#080808] min-h-screen text-[#F3F0E8] font-mono">
