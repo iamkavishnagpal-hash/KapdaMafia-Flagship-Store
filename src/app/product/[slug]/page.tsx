@@ -95,23 +95,32 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             <div className="space-y-3 pt-4 border-t border-[#181818]">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-[#8C8C86]">SELECT SIZE ({product.fit} SILHOUETTE):</span>
-                <button 
-                  onClick={() => setIsSizeModalOpen(true)}
-                  className="text-[#F3F0E8] font-bold flex items-center gap-1 hover:underline text-[10px]"
+                <Link 
+                  href="/ai-fit"
+                  className="text-[#8F1118] hover:text-white font-bold flex items-center gap-1 text-[10px] tracking-wider uppercase transition-colors"
                 >
-                  <Sparkles size={12} /> FIND MY SIZE (AI)
-                </button>
+                  <Sparkles size={12} /> OPEN IN VIRTUAL TRY-ON →
+                </Link>
               </div>
 
-              <div className="grid grid-cols-5 gap-2 text-xs">
+              <div className="grid grid-cols-4 gap-2 text-xs">
                 {activeVariant.sizes.map(s => (
                   <button
                     key={s.size}
                     disabled={s.stock === 0}
                     onClick={() => setSelectedSize(s.size)}
-                    className={`py-3 border text-center transition-all ${selectedSize === s.size ? 'border-[#F3F0E8] bg-[#F3F0E8] text-[#080808] font-bold' : s.stock > 0 ? 'border-[#222222] bg-[#111111] text-[#F3F0E8] hover:border-[#8C8C86]' : 'border-transparent bg-[#111111]/40 text-[#8C8C86] line-through cursor-not-allowed'}`}
+                    className={`py-3 border text-center transition-all rounded-none ${
+                      selectedSize === s.size 
+                        ? 'border-[#8F1118] bg-[#8F1118] text-white font-bold' 
+                        : s.stock > 0 
+                        ? 'border-[#222222] bg-[#111111] text-[#F3F0E8] hover:border-[#8C8C86]' 
+                        : 'border-transparent bg-[#111111]/40 text-[#8C8C86] line-through cursor-not-allowed'
+                    }`}
                   >
-                    {s.size}
+                    <span className="block text-sm">{s.size}</span>
+                    <span className="block text-[8px] mt-0.5 opacity-80">
+                      {s.stock === 0 ? 'SOLD OUT' : s.stock <= 3 ? `ONLY ${s.stock} LEFT` : 'IN STOCK'}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -128,15 +137,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                     image: activeVariant.images[0]?.url || '',
                     size: selectedSize,
                     category: product.category,
-                    storeWorld: 'clothing'
+                    storeWorld: product.storeWorld || 'clothing'
                   });
                   setAddedToBag(true);
                   setTimeout(() => setAddedToBag(false), 2000);
                   openCart();
                 }}
-                className="w-full py-4 bg-[#F3F0E8] hover:bg-[#B8B4AA] text-[#080808] font-bold text-xs tracking-[0.25em] uppercase transition-colors cursor-pointer"
+                className="w-full py-4 bg-[#8F1118] hover:bg-[#B91C1C] text-white font-bold text-xs tracking-[0.25em] uppercase transition-colors cursor-pointer rounded-none"
               >
-                {addedToBag ? '✓ ADDED TO KAPDA BAG' : 'ADD TO BAG →'}
+                {addedToBag ? '✓ ADDED TO KAPDA BAG' : `ADD TO BAG (${selectedSize}) →`}
               </button>
 
               <button 

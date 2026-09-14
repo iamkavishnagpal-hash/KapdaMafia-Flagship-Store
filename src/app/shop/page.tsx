@@ -1,69 +1,97 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Product } from '@/types/ecommerce';
-import { MOCK_PRODUCTS } from '@/data/products';
-import { Eye, ShoppingBag } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
+import ProductCard360 from '@/components/ProductCard360';
+import { ShieldCheck, SlidersHorizontal, RefreshCw } from 'lucide-react';
 
 export default function ShopPage() {
-  const { addToCart, openCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedFit, setSelectedFit] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<string>('featured');
 
-  let filtered = MOCK_PRODUCTS.filter(p => p.storeWorld !== 'shoes' && p.category !== 'sneakers' && p.category !== 'sport-shoes' && p.category !== 'sneaker-shoes' && p.category !== 'formal-shoes');
-  if (selectedCategory !== 'ALL') {
-    filtered = filtered.filter(p => p.category.toUpperCase() === selectedCategory);
-  }
-  if (selectedFit !== 'ALL') {
-    filtered = filtered.filter(p => p.fit === selectedFit);
-  }
+  // Load from dynamic Next.js PostgreSQL-bound API endpoint
+  useEffect(() => {
+    async function fetchCatalog() {
+      setLoading(true);
+      try {
+        const queryParams = new URLSearchParams();
+        queryParams.set('world', 'clothing');
+        if (selectedCategory !== 'ALL') queryParams.set('category', selectedCategory);
+        if (selectedFit !== 'ALL') queryParams.set('fit', selectedFit);
 
-  if (sortBy === 'price-low') filtered.sort((a, b) => a.price - b.price);
-  if (sortBy === 'price-high') filtered.sort((a, b) => b.price - a.price);
+        const res = await fetch(`/api/products?${queryParams.toString()}`);
+        if (res.ok) {
+          const json = await res.json();
+          let items: Product[] = json.products || [];
+          
+          if (sortBy === 'price-low') items.sort((a, b) => a.price - b.price);
+          if (sortBy === 'price-high') items.sort((a, b) => b.price - a.price);
+
+          setProducts(items);
+        }
+      } catch (err) {
+        console.error('Failed to load products from API:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCatalog();
+  }, [selectedCategory, selectedFit, sortBy]);
 
   return (
-    <div className="py-12 bg-[#080808] min-h-screen text-[#F3F0E8] font-mono">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-12 bg-[#050505] min-h-screen text-[#EEEAE1] font-mono selection:bg-[#8F1118]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         
-        {/* Editorial Header */}
-        <div className="mb-10 pb-6 border-b border-[#181818]">
-          <div className="text-[10px] text-[#8C8C86] uppercase tracking-[0.35em] font-bold mb-1">
-            CATALOG / MEN / {filtered.length} ITEMS
+        {/* Brutalist Editorial Header */}
+        <div className="mb-10 pb-6 border-b border-[#1c1c1c]">
+          <div className="text-[9px] text-[#8F1118] uppercase tracking-[0.35em] font-bold mb-2">
+            MENSWEAR DROP 09 • REALTIME INVENTORY SYNC
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight">
-            SHOP UNIFORMS
-          </h1>
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+            <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-[-0.04em] font-editorial">
+              STREET UNIFORMS
+            </h1>
+            <span className="text-xs text-[#77746E] tracking-widest uppercase">
+              {loading ? 'SYNCING DATABASE...' : `${products.length} VERIFIED STYLES`}
+            </span>
+          </div>
         </div>
 
-        {/* Editorial Filter Navigation */}
-        <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between pb-8 border-b border-[#181818] text-xs">
+        {/* Brutalist Filter Navigation */}
+        <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between pb-6 border-b border-[#1c1c1c] text-xs">
           
-          {/* Underline Category Filter Tabs */}
-          <div className="flex flex-wrap gap-6 text-[#8C8C86]">
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-4 sm:gap-6 text-[#77746E]">
             {['ALL', 'TEES', 'HOODIES', 'CARGOS', 'DENIM'].map(cat => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`pb-1 transition-all uppercase tracking-widest ${selectedCategory === cat ? 'text-[#F3F0E8] font-bold border-b-2 border-[#F3F0E8]' : 'hover:text-[#F3F0E8]'}`}
+                className={`pb-1 transition-all uppercase tracking-widest font-bold ${
+                  selectedCategory === cat 
+                    ? 'text-[#EEEAE1] border-b-2 border-[#8F1118]' 
+                    : 'hover:text-[#EEEAE1]'
+                }`}
               >
                 {cat}
               </button>
             ))}
           </div>
 
-          {/* Fit & Sort Dropdowns */}
-          <div className="flex items-center gap-6 text-xs text-[#8C8C86]">
+          {/* Fit & Sort Selectors */}
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-[#77746E]">
             <div className="flex items-center gap-2">
-              <span>FIT:</span>
+              <span className="text-[10px] tracking-wider">FIT:</span>
               <select 
                 value={selectedFit} 
                 onChange={(e) => setSelectedFit(e.target.value)}
-                className="bg-[#111111] border border-[#222222] text-[#F3F0E8] px-2.5 py-1 rounded-sm focus:outline-none focus:border-[#8C8C86]"
+                className="bg-[#0f0f0f] border border-[#262626] text-[#EEEAE1] px-2.5 py-1.5 rounded-none focus:outline-none focus:border-[#8F1118]"
               >
-                <option value="ALL">ALL FITS</option>
+                <option value="ALL">ALL SILHOUETTES</option>
                 <option value="OVERSIZED">OVERSIZED</option>
                 <option value="BAGGY">BAGGY</option>
                 <option value="REGULAR">REGULAR</option>
@@ -71,13 +99,13 @@ export default function ShopPage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span>SORT:</span>
+              <span className="text-[10px] tracking-wider">SORT:</span>
               <select 
                 value={sortBy} 
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#111111] border border-[#222222] text-[#F3F0E8] px-2.5 py-1 rounded-sm focus:outline-none focus:border-[#8C8C86]"
+                className="bg-[#0f0f0f] border border-[#262626] text-[#EEEAE1] px-2.5 py-1.5 rounded-none focus:outline-none focus:border-[#8F1118]"
               >
-                <option value="featured">FEATURED</option>
+                <option value="featured">FEATURED DROPS</option>
                 <option value="price-low">PRICE: LOW TO HIGH</option>
                 <option value="price-high">PRICE: HIGH TO LOW</option>
               </select>
@@ -86,59 +114,31 @@ export default function ShopPage() {
 
         </div>
 
-        {/* Dense 4-Column Editorial Grid (16px Gap) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-10">
-          {filtered.map(product => (
-            <div key={product.id} className="bg-[#111111] border border-[#181818] rounded-sm overflow-hidden group flex flex-col justify-between">
-              <div className="relative aspect-[3/4] bg-[#181818] overflow-hidden">
-                <img 
-                  src={product.variants[0].images[0].url} 
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Quiet Badge */}
-                <div className="absolute top-3 left-3 bg-[#080808]/90 border border-[#222222] text-[#F3F0E8] text-[9px] font-bold tracking-widest px-2 py-0.5 uppercase">
-                  {product.badge}
-                </div>
-
-                <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
-                  <Link 
-                    href={`/product/${product.slug}`}
-                    className="flex-1 py-2.5 bg-[#F3F0E8] text-[#080808] text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 hover:bg-[#B8B4AA] transition-colors"
-                  >
-                    <Eye size={13} /> DETAILS
-                  </Link>
-                  <button
-                    onClick={() => {
-                      addToCart({
-                        productId: product.id,
-                        name: product.name,
-                        price: product.price,
-                        image: product.variants[0]?.images[0]?.url || '',
-                        size: product.variants[0]?.sizes[0]?.size || 'L',
-                        category: product.category,
-                        storeWorld: 'clothing'
-                      });
-                      openCart();
-                    }}
-                    className="flex-1 py-2.5 bg-[#8F1118] text-white text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 hover:bg-[#A8151D] transition-colors cursor-pointer"
-                  >
-                    <ShoppingBag size={13} /> + BAG
-                  </button>
-                </div>
-              </div>
-
-              <div className="p-4 space-y-1.5">
-                <div className="flex justify-between items-start text-[10px] text-[#8C8C86]">
-                  <span>{product.category} • {product.gsm ? `${product.gsm} GSM` : product.fit}</span>
-                  <span className="text-xs font-bold text-[#F3F0E8]">₹{product.price.toLocaleString()}</span>
-                </div>
-                <h3 className="text-xs font-bold text-[#F3F0E8] uppercase tracking-wide line-clamp-1">{product.name}</h3>
-              </div>
+        {/* Dynamic Product Grid with 360 Scrubbers */}
+        {loading ? (
+          <div className="py-24 text-center space-y-4">
+            <RefreshCw size={24} className="mx-auto text-[#8F1118] animate-spin" />
+            <div className="text-xs text-[#77746E] tracking-widest uppercase">
+              QUERYING POSTGRESQL PRODUCT REPOSITORY...
             </div>
-          ))}
-        </div>
+          </div>
+        ) : products.length === 0 ? (
+          <div className="py-24 text-center space-y-3">
+            <div className="text-sm font-bold text-[#EEEAE1] uppercase">NO PIECES MATCH THIS FILTER</div>
+            <button 
+              onClick={() => { setSelectedCategory('ALL'); setSelectedFit('ALL'); }}
+              className="px-4 py-2 bg-[#1c1c1c] text-xs font-bold uppercase tracking-wider text-[#EEEAE1]"
+            >
+              RESET FILTERS
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
+            {products.map(product => (
+              <ProductCard360 key={product.id} product={product} />
+            ))}
+          </div>
+        )}
 
       </div>
     </div>

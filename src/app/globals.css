@@ -2,7 +2,7 @@
 
 :root {
   --ink: #050505;
-  --warm-black: #0d0c0b;
+  --warm-black: #0a0a0a;
   --graphite: #121212;
   --ivory: #eeeae1;
   --stone: #c8c3b8;
@@ -18,7 +18,14 @@ body {
   background: var(--ink);
   color: var(--ivory);
   overflow-x: hidden;
+  font-family: var(--font-mono, monospace);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+h1, h2, h3, .font-editorial {
+  font-family: var(--font-syne, var(--font-display, sans-serif));
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
