@@ -26,7 +26,7 @@ export default function ShopPage() {
         const res = await fetch(`/api/products?${queryParams.toString()}`);
         if (res.ok) {
           const json = await res.json();
-          let items: Product[] = json.products || [];
+          const items: Product[] = json.products || [];
           
           if (sortBy === 'price-low') items.sort((a, b) => a.price - b.price);
           if (sortBy === 'price-high') items.sort((a, b) => b.price - a.price);

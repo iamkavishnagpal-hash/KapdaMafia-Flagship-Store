@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 export interface CartItem {
   id: string;
@@ -37,78 +37,77 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children, currentWorld }: { children: React.ReactNode; currentWorld: 'clothing' | 'shoes' }) {
-  const [clothingItems, setClothingItems] = useState<CartItem[]>([]);
-  const [shoeItems, setShoeItems] = useState<CartItem[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [initialized, setInitialized] = useState(false);
-
-  // Load carts from localStorage
-  useEffect(() => {
+  const [clothingItems, setClothingItems] = useState<CartItem[]>(() => {
+    if (typeof window === 'undefined') return [];
     try {
       const savedClothing = localStorage.getItem('km_cart_clothing');
-      if (savedClothing) {
-        setClothingItems(JSON.parse(savedClothing));
-      } else {
-        // Default initial demo item for Kapda Mafia
-        setClothingItems([
-          {
-            id: 'init-cloth-1',
-            productId: 'pl-001',
-            name: 'DARK BLUE BARREL FIT JEANS',
-            price: 1899,
-            image: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
-            size: 'L',
-            quantity: 1,
-            category: 'denim',
-            storeWorld: 'clothing'
-          }
-        ]);
-      }
-
-      const savedShoes = localStorage.getItem('km_cart_shoes');
-      if (savedShoes) {
-        setShoeItems(JSON.parse(savedShoes));
-      } else {
-        // Default initial demo item for Shoes Mafia
-        setShoeItems([
-          {
-            id: 'init-shoe-1',
-            productId: 'bb-114',
-            name: '1239 HIGH-STREET SNEAKER',
-            price: 499,
-            image: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg',
-            size: '8',
-            quantity: 1,
-            category: 'sport-shoes',
-            storeWorld: 'shoes'
-          }
-        ]);
-      }
+      if (savedClothing) return JSON.parse(savedClothing);
     } catch {
-      // ignore
-    } finally {
-      setInitialized(true);
+      // fallback
     }
+    return [
+      {
+        id: 'init-cloth-1',
+        productId: 'pl-001',
+        name: 'DARK BLUE BARREL FIT JEANS',
+        price: 1899,
+        image: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
+        size: 'L',
+        quantity: 1,
+        category: 'denim',
+        storeWorld: 'clothing'
+      }
+    ];
+  });
+
+  const [shoeItems, setShoeItems] = useState<CartItem[]>(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const savedShoes = localStorage.getItem('km_cart_shoes');
+      if (savedShoes) return JSON.parse(savedShoes);
+    } catch {
+      // fallback
+    }
+    return [
+      {
+        id: 'init-shoe-1',
+        productId: 'bb-114',
+        name: '1239 HIGH-STREET SNEAKER',
+        price: 499,
+        image: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg',
+        size: '8',
+        quantity: 1,
+        category: 'Sneakers',
+        storeWorld: 'shoes'
+      }
+    ];
+  });
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const isMountedRef = useRef(false);
+
+  useEffect(() => {
+    isMountedRef.current = true;
   }, []);
 
   // Save changes to localStorage
   useEffect(() => {
-    if (!initialized) return;
+    if (!isMountedRef.current) return;
     try {
       localStorage.setItem('km_cart_clothing', JSON.stringify(clothingItems));
     } catch {
       // ignore
     }
-  }, [clothingItems, initialized]);
+  }, [clothingItems]);
 
   useEffect(() => {
-    if (!initialized) return;
+    if (!isMountedRef.current) return;
     try {
       localStorage.setItem('km_cart_shoes', JSON.stringify(shoeItems));
     } catch {
       // ignore
     }
-  }, [shoeItems, initialized]);
+  }, [shoeItems]);
 
   const activeItems = currentWorld === 'shoes' ? shoeItems : clothingItems;
 

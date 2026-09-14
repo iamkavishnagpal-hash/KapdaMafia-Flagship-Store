@@ -19,31 +19,36 @@ interface WorldContextType {
 const WorldContext = createContext<WorldContextType | undefined>(undefined);
 
 export function WorldProvider({ children }: { children: React.ReactNode }) {
-  const [world, setWorldState] = useState<StoreWorld>('clothing');
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [userPhone, setUserPhone] = useState<string>('');
-  const [showWorldSelector, setShowWorldSelector] = useState<boolean>(false);
-  const [isInitialized, setIsInitialized] = useState<boolean>(false);
-
-  useEffect(() => {
-    // Read persisted state from localStorage
+  const [world, setWorldState] = useState<StoreWorld>(() => {
+    if (typeof window === 'undefined') return 'clothing';
     try {
       const savedWorld = localStorage.getItem('km_active_world') as StoreWorld;
-      if (savedWorld === 'clothing' || savedWorld === 'shoes') {
-        setWorldState(savedWorld);
-      }
-      const savedAuth = localStorage.getItem('km_user_authenticated');
-      const savedPhone = localStorage.getItem('km_user_phone');
-      if (savedAuth === 'true' && savedPhone) {
-        setIsAuthenticated(true);
-        setUserPhone(savedPhone);
-      }
+      if (savedWorld === 'clothing' || savedWorld === 'shoes') return savedWorld;
     } catch {
-      // ignore SSR/storage error
-    } finally {
-      setIsInitialized(true);
+      // fallback
     }
-  }, []);
+    return 'clothing';
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      return localStorage.getItem('km_user_authenticated') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const [userPhone, setUserPhone] = useState<string>(() => {
+    if (typeof window === 'undefined') return '';
+    try {
+      return localStorage.getItem('km_user_phone') || '';
+    } catch {
+      return '';
+    }
+  });
+
+  const [showWorldSelector, setShowWorldSelector] = useState<boolean>(false);
 
   const setWorld = (newWorld: StoreWorld) => {
     setWorldState(newWorld);
