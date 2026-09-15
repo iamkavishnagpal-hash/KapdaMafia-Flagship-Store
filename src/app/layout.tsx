@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Syne, Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
+import { Space_Grotesk, JetBrains_Mono, Inter_Tight } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
@@ -11,24 +11,26 @@ import CartDrawer from '@/components/CartDrawer';
 import MobileBottomBar from '@/components/MobileBottomBar';
 import { AppProviders } from '@/components/AppProviders';
 
-const syne = Syne({ 
+// TIER 1: Display & High-Tension Headlines (Monument Extended / Space Grotesk Bold 700)
+const display = Space_Grotesk({ 
   subsets: ['latin'], 
-  weight: ['700', '800'],
-  variable: '--font-syne' 
+  weight: ['700'],
+  variable: '--font-display' 
 });
 
-const sans = Inter({
+// TIER 2: Technical Specs & Metadata (Commit Mono / JetBrains Mono Medium 500)
+const mono = JetBrains_Mono({ 
+  subsets: ['latin'], 
+  weight: ['500', '700'],
+  variable: '--font-mono' 
+});
+
+// TIER 3: Product Titles & Prices (The Commerce Layer - Inter Tight Medium 500/600)
+const sans = Inter_Tight({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-sans'
 });
-
-const mono = JetBrains_Mono({ 
-  subsets: ['latin'],
-  variable: '--font-mono' 
-});
-
-const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' });
 
 export const metadata: Metadata = {
   title: "KAPDA MAFIA & SHOES MAFIA | Streetwear & Footwear Portals",
@@ -59,16 +61,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${syne.variable} ${sans.variable} ${mono.variable} ${display.variable} font-sans bg-[#050505] text-[#EEEAE1] antialiased pb-16 sm:pb-0`}>
+      <body className={`${display.variable} ${mono.variable} ${sans.variable} font-sans bg-[#080808] text-[#F4F4F4] antialiased`}>
         <AppProviders>
           <MafiaDropTransition />
           <PhoneOtpModal />
           <WorldSelectorModal />
           <Navbar />
           <CartDrawer />
-          <main className="min-h-screen pt-[96px] sm:pt-24">{children}</main>
+          <main className="min-h-screen pt-[56px] lg:pt-[68px]">{children}</main>
           <Footer />
-          <MobileBottomBar />
         </AppProviders>
       </body>
     </html>

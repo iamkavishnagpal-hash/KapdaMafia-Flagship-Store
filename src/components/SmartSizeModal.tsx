@@ -31,22 +31,23 @@ export default function SmartSizeModal({ isOpen, onClose }: SmartSizeModalProps)
   const drapeWeightCoefficient = ((weight / (height / 100) ** 2) * (targetGsm / 400)).toFixed(1);
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#050505]/95 backdrop-blur-md flex items-center justify-center p-4 font-mono">
-      <div className="max-w-lg w-full bg-[#090909] border border-[#222] p-6 sm:p-7 shadow-2xl text-[#EEEAE1] space-y-6">
+    <div className="fixed inset-0 z-50 bg-[#080808]/95 backdrop-blur-md flex items-center justify-center p-4 font-mono">
+      <div className="max-w-lg w-full bg-[#111111] border border-[#1E1E1E] p-6 sm:p-7 shadow-2xl text-[#F4F4F4] space-y-6">
         
-        {/* Header */}
-        <div className="flex justify-between items-start border-b border-[#1c1c1c] pb-4">
+        {/* Header - Blueprint 4: PROPORTIONAL DRAPE LAB */}
+        <div className="flex justify-between items-start border-b border-[#1E1E1E] pb-4">
           <div>
-            <div className="text-xs text-[#8F1118] uppercase tracking-wider font-semibold">
-              Fit &amp; Sizing Assistant
+            <div className="text-[10px] text-[#7D0A0A] uppercase tracking-widest font-mono font-bold">
+              ARCHIVE DRAPE MATRIX // LAB 01
             </div>
-            <h3 className="text-xl font-bold text-white uppercase tracking-tight font-editorial mt-0.5">
-              Proportional Fit Matrix
+            <h3 className="text-xl font-bold text-[#F4F4F4] uppercase tracking-tight font-editorial mt-0.5">
+              PROPORTIONAL DRAPE LAB
             </h3>
           </div>
           <button 
             onClick={onClose} 
-            className="p-1 text-[#77746E] hover:text-white transition-colors cursor-pointer"
+            className="p-1 text-[#666666] hover:text-[#F4F4F4] transition-colors cursor-pointer"
+            aria-label="Close drape lab"
           >
             <X size={20} />
           </button>

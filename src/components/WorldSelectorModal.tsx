@@ -29,7 +29,7 @@ export default function WorldSelectorModal() {
 
         {/* Background glow */}
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-[#8F1118]/20 blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-[#009688]/20 blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-[#00695c]/20 blur-[100px] pointer-events-none" />
 
         {/* Modal Header */}
         <div className="text-center mb-8">
@@ -85,20 +85,20 @@ export default function WorldSelectorModal() {
             onClick={() => handleSelectWorld('shoes')}
             className={`group relative overflow-hidden rounded-2xl border p-6 cursor-pointer transition-all duration-300 ${
               world === 'shoes'
-                ? 'border-[#009688] bg-gradient-to-b from-[#0f1f1d] to-[#121212] shadow-xl shadow-[#009688]/20'
-                : 'border-white/15 bg-[#141414] hover:border-[#009688]/60 hover:bg-[#121a19]'
+                ? 'border-[#00695c] bg-gradient-to-b from-[#0f1f1d] to-[#121212] shadow-xl shadow-[#00695c]/20'
+                : 'border-white/15 bg-[#141414] hover:border-[#00695c]/60 hover:bg-[#121a19]'
             }`}
           >
             <div className="flex items-center justify-between mb-4">
-              <div className="h-12 w-12 rounded-xl bg-[#009688]/20 border border-[#009688]/40 flex items-center justify-center text-[#009688] group-hover:scale-110 transition-transform">
+              <div className="h-12 w-12 rounded-xl bg-[#00695c]/20 border border-[#00695c]/40 flex items-center justify-center text-[#00695c] group-hover:scale-110 transition-transform">
                 <Footprints size={24} />
               </div>
-              <span className="text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded bg-[#009688] text-white">
+              <span className="text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded bg-[#00695c] text-white">
                 KAPDA MAFIA FOOTWEAR
               </span>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white mb-2 group-hover:text-[#009688] transition-colors">
+            <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white mb-2 group-hover:text-[#00695c] transition-colors">
               SHOES MAFIA
             </h3>
             <p className="text-xs text-[#8C8C86] leading-relaxed mb-6">
@@ -107,7 +107,7 @@ export default function WorldSelectorModal() {
 
             <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-bold text-[#EEEAE1]">
               <span className="text-[10px] text-[#C8C3B8] tracking-widest uppercase">SIZES 6 — 10 IN STOCK</span>
-              <span className="flex items-center gap-1 text-[#009688] group-hover:translate-x-1 transition-transform">
+              <span className="flex items-center gap-1 text-[#00695c] group-hover:translate-x-1 transition-transform">
                 ENTER WORLD <ArrowRight size={14} />
               </span>
             </div>

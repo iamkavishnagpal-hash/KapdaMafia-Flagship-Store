@@ -36,12 +36,12 @@ export default function TrackOrderPage() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <div className={`text-[10px] uppercase tracking-[0.3em] font-bold ${
-            isShoeWorld ? 'text-[#009688]' : 'text-[#8F1118]'
+            isShoeWorld ? 'text-[#00695c]' : 'text-[#8F1118]'
           }`}>
             {isShoeWorld ? 'SHOES MAFIA · CENTRAL FOOTWEAR DISPATCH' : 'KAPDA MAFIA · FLAGSHIP LOGISTICS REPOSITORY'}
           </div>
           <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight">
-            TRACK YOUR <span className={isShoeWorld ? 'text-[#009688]' : 'text-[#8F1118]'}>
+            TRACK YOUR <span className={isShoeWorld ? 'text-[#00695c]' : 'text-[#8F1118]'}>
               {isShoeWorld ? 'SHOES' : 'ORDER'}
             </span>
           </h1>
@@ -66,7 +66,7 @@ export default function TrackOrderPage() {
               onClick={() => handleSwitchTab('shoes')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase transition-all cursor-pointer ${
                 isShoeWorld 
-                  ? 'bg-[#009688] text-white shadow-lg' 
+                  ? 'bg-[#00695c] text-white shadow-lg' 
                   : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -84,13 +84,13 @@ export default function TrackOrderPage() {
             onChange={(e) => setOrderId(e.target.value)}
             placeholder={isShoeWorld ? 'ENTER SHOES ORDER ID (E.G. SM-4829104)' : 'ENTER CLOTHING ORDER ID (E.G. KM-9847120)'}
             className={`flex-1 bg-[#111111] border text-[#F3F0E8] text-xs px-4 py-3.5 rounded-sm focus:outline-none uppercase tracking-wider ${
-              isShoeWorld ? 'border-[#009688]/40 focus:border-[#009688]' : 'border-[#222222] focus:border-[#8F1118]'
+              isShoeWorld ? 'border-[#00695c]/40 focus:border-[#00695c]' : 'border-[#222222] focus:border-[#8F1118]'
             }`}
           />
           <button 
             type="submit"
             className={`px-8 py-3.5 text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer ${
-              isShoeWorld ? 'bg-[#009688] hover:bg-[#00796b]' : 'bg-[#8F1118] hover:bg-[#B91C1C]'
+              isShoeWorld ? 'bg-[#00695c] hover:bg-[#00796b]' : 'bg-[#8F1118] hover:bg-[#B91C1C]'
             }`}
           >
             <Search size={16} /> SEARCH
@@ -100,7 +100,7 @@ export default function TrackOrderPage() {
         {/* Shipment Status Display */}
         {searched && orderData && (
           <div className={`bg-[#111111] border p-6 sm:p-8 rounded-sm space-y-8 ${
-            orderData.id.startsWith('SM') ? 'border-[#009688]/50' : 'border-[#8F1118]/50'
+            orderData.id.startsWith('SM') ? 'border-[#00695c]/50' : 'border-[#8F1118]/50'
           }`}>
             
             <div className="flex flex-col sm:flex-row justify-between sm:items-center pb-6 border-b border-[#181818] gap-4">
@@ -110,7 +110,7 @@ export default function TrackOrderPage() {
               </div>
               <div>
                 <div className="text-[10px] text-[#8C8C86]">COURIER TRACKING NO.</div>
-                <div className={`text-sm font-bold ${orderData.id.startsWith('SM') ? 'text-[#009688]' : 'text-[#8F1118]'}`}>
+                <div className={`text-sm font-bold ${orderData.id.startsWith('SM') ? 'text-[#00695c]' : 'text-[#8F1118]'}`}>
                   {orderData.trackingNumber} ({orderData.courierName})
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function TrackOrderPage() {
               <div className="text-xs">
                 <div className="font-bold text-white">{orderData.items[0]?.productName}</div>
                 <div className="text-[10px] text-gray-400">SIZE: {orderData.items[0]?.size} • QTY: {orderData.items[0]?.quantity}</div>
-                <div className={`font-bold mt-1 ${orderData.id.startsWith('SM') ? 'text-[#009688]' : 'text-[#8F1118]'}`}>
+                <div className={`font-bold mt-1 ${orderData.id.startsWith('SM') ? 'text-[#00695c]' : 'text-[#8F1118]'}`}>
                   TOTAL: ₹{orderData.total.toLocaleString()}
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function TrackOrderPage() {
                   <div key={idx} className="flex items-start gap-4 relative z-10">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0 ${
                       step.completed 
-                        ? orderData.id.startsWith('SM') ? 'bg-[#009688] text-white' : 'bg-[#8F1118] text-white' 
+                        ? orderData.id.startsWith('SM') ? 'bg-[#00695c] text-white' : 'bg-[#8F1118] text-white' 
                         : 'bg-[#181818] text-[#8C8C86] border border-[#222222]'
                     }`}>
                       {step.completed ? <CheckCircle2 size={14} /> : <Clock size={14} />}

@@ -28,17 +28,18 @@ export function VideoProductCard({ title, subtitle, poster, videoSrc, href = '/s
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-transparent to-[#090909]/30" />
       <div className="absolute left-3 right-3 top-3 flex items-center justify-between text-[#EEEAE1]">
-        <span className="border border-white/20 bg-black/60 px-2.5 py-1 text-xs tracking-wider font-mono uppercase">
-          {title}
+        <span className="border border-white/20 bg-black/70 px-2.5 py-1 text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase text-[#F4F4F4] flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+          <span>REC ● 00:14:09</span>
         </span>
-        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-black/60">
-          <Play size={11} fill="currentColor" />
+        <span className="border border-white/20 bg-black/70 px-2.5 py-1 text-[10px] font-mono tracking-[0.12em] text-[#888888] uppercase">
+          440 GSM TERRY FLEECE
         </span>
       </div>
       <div className="absolute bottom-3 left-3 right-3 text-[#EEEAE1]">
-        <div className="flex items-center gap-1.5 text-xs tracking-wider text-[#8C8C86] font-mono uppercase">
+        <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] tracking-[0.12em] text-[#888888] font-mono uppercase">
           <VolumeX size={12} />
-          <span>EDITORIAL ARCHIVE</span>
+          <span>EDITORIAL MOVEMENT</span>
         </div>
         
         {/* Issue 15 & 16 Fix: Prominent Shop Look CTA with consistent arrow icon and 36px touch target */}

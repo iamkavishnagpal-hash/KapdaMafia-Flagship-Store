@@ -1,233 +1,219 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Compass, Plus } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+
+interface SlideData {
+  id: number;
+  badge: string;
+  headline: string;
+  subheadline: string;
+  spec: string;
+  image: string;
+  href: string;
+  ctaText: string;
+}
+
+const SLIDES: SlideData[] = [
+  {
+    id: 1,
+    badge: 'RUN 001 // EDITION OF 250',
+    headline: 'AFTER DARK // 440 GSM',
+    subheadline: 'HEAVYWEIGHT DRAPE ARCHIVE',
+    spec: '440 GSM COMBED TERRY · NITRO-WASHED · OVERSIZED FIT',
+    image: '/media/hero/hero-slide-1.jpg',
+    href: '/shop',
+    ctaText: 'ENTER DROP'
+  },
+  {
+    id: 2,
+    badge: 'ARCHIVE DROP 002 // RESTRICTED RUN',
+    headline: 'SELVEDGE // BARREL CUT',
+    subheadline: 'RAW INDIGO STREET ARCHITECTURE',
+    spec: '14.5 OZ RIGID DENIM · ARTICULATED KNEE · HAND-SANDED',
+    image: '/media/hero/hero-slide-2.jpg',
+    href: '/shop?category=denim',
+    ctaText: 'ENTER DROP'
+  },
+  {
+    id: 3,
+    badge: 'TACTICAL MATRIX // RUN 003',
+    headline: 'MODULAR // CARGO VAULT',
+    subheadline: 'DEEP POCKET VOLUMETRIC UTILITY',
+    spec: '380 GSM HEAVY TWILL · D-RING HARDWARE · RELAXED TAPER',
+    image: '/media/hero/hero-slide-3.jpg',
+    href: '/shop?category=cargos',
+    ctaText: 'ENTER DROP'
+  }
+];
+
+import { playMechanicalClick, playSubBassThud } from '@/utils/soundEffects';
 
 export default function Hero() {
-  const { addToCart, openCart } = useCart();
-  const [activePin, setActivePin] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const touchStartXRef = React.useRef<number | null>(null);
 
-  const pins = [
-    {
-      id: 1,
-      title: 'OLIVE BOXY OVERSIZED TEE',
-      spec: '400 GSM PURE COMBED BIO-WASH COTTON',
-      top: '32%',
-      left: '48%',
-      productId: 'km-001',
-      price: 1449,
-      image: 'https://www.powerlook.in/cdn/shop/files/1_5e7b2125-f589-427a-bb51-b884a594d154.jpg?v=1782216345',
-      category: 'tees'
-    },
-    {
-      id: 2,
-      title: 'CHARCOAL RELAXED CARGO PANT',
-      spec: '380 GSM HEAVY DUTY TWILL WITH UTILITY POCKETS',
-      top: '68%',
-      left: '50%',
-      productId: 'pl-005',
-      price: 1899,
-      image: 'https://www.powerlook.in/cdn/shop/files/7_3x_888d77c3-7b5a-4a6f-bf88-66c15809bf99.jpg?v=1787637637',
-      category: 'cargos'
-    }
-  ];
-
-  const handleQuickAddPin = (pin: typeof pins[0]) => {
-    addToCart({
-      productId: pin.productId,
-      name: pin.title,
-      price: pin.price,
-      image: pin.image,
-      size: 'L',
-      category: pin.category,
-      storeWorld: 'clothing'
-    });
-    openCart();
+  const nextSlide = () => {
+    playSubBassThud();
+    setCurrentSlide((curr) => (curr + 1) % SLIDES.length);
   };
 
+  const prevSlide = () => {
+    playSubBassThud();
+    setCurrentSlide((curr) => (curr - 1 + SLIDES.length) % SLIDES.length);
+  };
+
+  // 5-second auto transition with continuous progress bar
+  useEffect(() => {
+    setProgress(0);
+    const intervalTime = 50; // updates every 50ms for smooth 60fps progress
+    const totalTime = 5000;
+    const step = (intervalTime / totalTime) * 100;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setCurrentSlide((curr) => (curr + 1) % SLIDES.length);
+          return 0;
+        }
+        return prev + step;
+      });
+    }, intervalTime);
+
+    return () => clearInterval(timer);
+  }, [currentSlide]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+    touchStartXRef.current = null;
+  };
+
+  const active = SLIDES[currentSlide];
+
   return (
-    <section className="relative w-full bg-[#050505] text-[#EEEAE1] border-b border-[#181818] overflow-hidden">
-      {/* 1. MAIN ASYMMETRICAL EDITORIAL CANVAS */}
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(88vh-48px)]">
+    <section 
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative w-full h-[100svh] sm:h-[calc(100svh-56px)] min-h-[620px] sm:max-h-[1080px] bg-[#080808] text-[#F4F4F4] border-b border-[#1E1E1E] overflow-hidden select-none font-mono"
+    >
+      
+      {/* 100svh Full-Bleed Male Street Model Visual Canvas */}
+      {SLIDES.map((slide, idx) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-out ${
+            idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={slide.headline}
+            className="w-full h-full object-cover object-top sm:object-center transform scale-100 group-hover:scale-105 transition-transform duration-1000"
+          />
+          {/* Brutalist Vignette & Deep Canvas Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-[#080808]/30 to-transparent sm:w-2/3" />
+        </div>
+      ))}
+
+      {/* Foreground Compressed Content Block — Bottom 35% on mobile */}
+      <div className="relative z-20 h-full max-w-[1600px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col justify-end pb-6 sm:pb-16 pointer-events-none">
         
-        {/* LEFT COLUMN: RAW HIGH-TENSION TYPOGRAPHY (7 COLS) */}
-        <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#161616] relative z-10">
-          
-          <div className="space-y-4">
-            {/* Clean Luxury Collection Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#111111] border border-white/15 text-xs tracking-wider uppercase text-[#C8C3B8]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#8F1118]" />
-              <span className="font-semibold">Autumn / Winter 2026 Collection</span>
-            </div>
+        <div className="max-w-3xl space-y-4 sm:space-y-6 pointer-events-auto">
+          {/* Tactical Spec Tag */}
+          <div className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase text-[#888888]">
+            <span className="w-1.5 h-1.5 bg-[#7D0A0A] animate-pulse" />
+            <span>{active.badge}</span>
+          </div>
 
-            {/* High-tension scannable title */}
-            <h1 className="text-4xl sm:text-7xl md:text-8xl xl:text-9xl font-black uppercase tracking-[-0.05em] leading-[0.88] sm:leading-[0.85] font-editorial text-[#F3F0E8] select-none pt-2">
-              Clothes<br />
-              Tell Better<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8F1118] via-[#B91C1C] to-[#F3F0E8]">
-                Stories.
-              </span>
+          {/* Compressed Brutalist Headline: AFTER DARK // 440 GSM */}
+          <div>
+            <h1 className="text-4xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-[-0.05em] leading-[0.95] text-[#F4F4F4] font-[var(--font-display)] drop-shadow-2xl">
+              {active.headline}
             </h1>
-
-            {/* Editorial Doctrine */}
-            <p className="max-w-xl text-sm text-[#8C8C86] leading-relaxed pt-2 tracking-normal">
-              Custom 280–440 GSM heavyweight terry and selvedge denim. Sculpted silhouettes, deliberate drape, and underground streetwear attitude.
+            <p className="text-xs sm:text-sm font-mono tracking-[0.12em] text-[#AAAAAA] uppercase mt-2">
+              {active.subheadline}
             </p>
           </div>
 
-          {/* Action CTAs: Balanced dimensions & visual weight */}
-          <div className="pt-6 sm:pt-12 space-y-6">
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 text-xs font-semibold">
-              <Link
-                href="/shop"
-                className="w-full sm:w-56 h-12 bg-[#F3F0E8] hover:bg-white text-[#050505] font-bold tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.12)] hover:scale-[1.01]"
-              >
-                <span>Explore Collection</span>
-                <ArrowRight size={14} />
-              </Link>
-
-              {/* Standardized Virtual Mirror label */}
-              <Link
-                href="/ai-fit"
-                className="w-full sm:w-56 h-12 bg-[#111111] hover:bg-[#181818] text-[#F3F0E8] border border-white/20 hover:border-white/50 font-semibold tracking-wider uppercase transition-all flex items-center justify-center gap-2"
-              >
-                <Compass size={15} className="text-[#8F1118]" />
-                <span>Virtual Mirror</span>
-              </Link>
-            </div>
-
-            {/* Clean Spec Strip */}
-            <div className="flex items-center gap-4 sm:gap-6 text-xs text-[#8C8C86] tracking-wider uppercase border-t border-[#161616] pt-4 overflow-x-auto whitespace-nowrap">
-              <span>Limited Edition · 250 Units</span>
-              <span className="text-[#333]">|</span>
-              <span>440 GSM Combed French Terry</span>
-              <span className="text-[#333]">|</span>
-              <span className="text-[#8F1118] font-bold">Strictly No Restocks</span>
-            </div>
+          {/* Micro Hairline Spec */}
+          <div className="flex items-center gap-3 text-[10px] sm:text-[11px] font-mono tracking-[0.12em] text-[#888888] uppercase">
+            <span className="text-[#F4F4F4] font-bold">{active.spec}</span>
           </div>
 
-        </div>
-
-        {/* RIGHT COLUMN: FULL-BLEED EDITORIAL MODEL CANVAS (5 COLS) */}
-        <div className="lg:col-span-5 relative bg-[#090909] overflow-hidden flex flex-col justify-between group min-h-[440px] sm:min-h-[560px] lg:min-h-full">
-          
-          {/* Main Visual Canvas - Unique High-Grain Editorial */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="/media/campaign-editorial-model.jpg" 
-              alt="Kapda Mafia Editorial Campaign Silhouette"
-              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/40 to-transparent" />
-          </div>
-
-          {/* Interactive Streetwear Micro-Pins */}
-          {pins.map(pin => (
-            <div
-              key={pin.id}
-              style={{ top: pin.top, left: pin.left }}
-              className="absolute z-20 -translate-x-1/2 -translate-y-1/2 font-mono"
+          {/* Direct 1-Tap CTA Action */}
+          <div className="pt-2 flex items-center gap-4">
+            <Link
+              href={active.href}
+              className="w-full sm:w-72 h-14 bg-[#FFFFFF] hover:bg-[#F4F4F4] active:scale-[0.99] text-[#080808] font-mono font-black text-xs tracking-[0.2em] uppercase flex items-center justify-center gap-3 shadow-2xl transition-all cursor-pointer"
             >
-              <div className="relative group/pin">
-                {/* Tactical Radar Pulse Pin */}
-                <button
-                  onClick={() => setActivePin(activePin === pin.id ? null : pin.id)}
-                  aria-label={`Inspect ${pin.title}`}
-                  className="flex items-center justify-center w-7 h-7 rounded-full bg-black/90 border border-white/40 text-white shadow-2xl hover:border-[#8F1118] hover:scale-110 transition-all cursor-pointer min-h-[44px] min-w-[44px]"
-                >
-                  <span className="absolute w-7 h-7 rounded-full bg-[#8F1118] animate-ping opacity-60 pointer-events-none" />
-                  <span className="text-xs font-black text-[#8F1118]">0{pin.id}</span>
-                </button>
+              <span>[{active.ctaText}]</span>
+              <ArrowRight size={15} />
+            </Link>
 
-                {/* Tactile Micro-Spec Card Popover */}
-                <div className={`absolute left-9 top-1/2 -translate-y-1/2 w-52 sm:w-60 p-3.5 bg-[#0a0a0a]/95 backdrop-blur-md border border-white/20 shadow-2xl transition-all duration-200 pointer-events-auto ${
-                  activePin === pin.id ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none group-hover/pin:opacity-100 group-hover/pin:scale-100 group-hover/pin:pointer-events-auto'
-                }`}>
-                  <div className="text-xs text-[#8F1118] uppercase tracking-wider font-semibold">
-                    Featured Piece
-                  </div>
-                  <div className="text-xs font-bold text-white uppercase mt-0.5 font-editorial line-clamp-1">
-                    {pin.title}
-                  </div>
-                  <div className="text-xs text-[#8C8C86] uppercase mt-1 leading-tight">
-                    {pin.spec}
-                  </div>
-                  <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between">
-                    <span className="text-xs font-bold text-white">₹{pin.price}</span>
-                    
-                    {/* Standardized button size and affordance */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleQuickAddPin(pin);
-                      }}
-                      className="min-h-[32px] px-3 py-1.5 bg-[#8F1118] hover:bg-[#a6151e] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <Plus size={12} /> Quick Add
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+            <Link
+              href="/lookbook"
+              className="hidden sm:inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-[#F4F4F4] hover:text-[#7D0A0A] uppercase px-4 py-3 border border-white/20 hover:border-white transition-colors bg-black/50 backdrop-blur-md"
+            >
+              <span>LOOKBOOK</span>
+              <ArrowRight size={13} />
+            </Link>
+          </div>
+        </div>
 
-          {/* Top Floating Badge */}
-          <div className="relative z-10 p-5 sm:p-6 flex items-start justify-between">
-            <div className="bg-[#050505]/90 backdrop-blur-md border border-white/15 px-3.5 py-1.5 text-xs tracking-wider uppercase text-[#EEEAE1]">
-              Editorial Campaign
-            </div>
-            <div className="bg-[#8F1118] text-white text-xs font-bold tracking-wider px-3 py-1.5 uppercase">
-              Current Drop
-            </div>
+        {/* Slide Controls & Continuous Smooth Progress Bar */}
+        <div className="pt-8 sm:pt-10 flex items-center justify-between pointer-events-auto border-t border-white/10 mt-6 sm:mt-8">
+          
+          <div className="flex items-center gap-3 text-xs font-mono text-[#888888]">
+            <span className="text-white font-bold">0{currentSlide + 1}</span>
+            <span>/</span>
+            <span>0{SLIDES.length}</span>
           </div>
 
-          {/* Bottom Interactive Spec Card */}
-          <div className="relative z-10 p-5 sm:p-6 bg-gradient-to-t from-[#050505] to-transparent space-y-2">
-            <div className="flex items-end justify-between font-mono">
-              <div>
-                <span className="text-xs text-[#8F1118] uppercase tracking-wider font-bold block mb-1">
-                  KEY SILHOUETTE
-                </span>
-                <span className="text-sm sm:text-base font-black text-white uppercase tracking-tight font-editorial">
-                  OLIVE BOXY OVERSIZED TEE + CHARCOAL CARGOS
-                </span>
-              </div>
-              <Link 
-                href="/shop"
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-bold tracking-wider text-[#F3F0E8] hover:text-[#8F1118] uppercase underline underline-offset-4 transition-colors min-h-[36px]"
-              >
-                <span>View Full Archive</span> <ArrowRight size={13} />
-              </Link>
-            </div>
+          {/* Progress Bar Line */}
+          <div className="flex-1 max-w-xs sm:max-w-md mx-4 sm:mx-8 h-0.5 bg-[#1E1E1E] overflow-hidden">
+            <div
+              className="h-full bg-[#FFFFFF] transition-all duration-75 ease-linear will-change-transform"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          {/* Arrow Triggers */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={prevSlide}
+              onMouseEnter={playMechanicalClick}
+              className="p-2 bg-[#111111] hover:bg-white hover:text-black border border-[#1E1E1E] text-white transition-colors cursor-pointer"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={nextSlide}
+              onMouseEnter={playMechanicalClick}
+              className="p-2 bg-[#111111] hover:bg-white hover:text-black border border-[#1E1E1E] text-white transition-colors cursor-pointer"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={16} />
+            </button>
           </div>
 
         </div>
 
-      </div>
-
-      {/* 3. INDUSTRIAL MONOLITHIC SPEC STRIP */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#181818] border-t border-[#181818] text-xs text-[#8C8C86]">
-        <div className="bg-[#080808] p-4 sm:p-5 hover:bg-[#0c0c0c] transition-colors">
-          <span className="block text-[#EEEAE1] font-bold text-xs uppercase mb-0.5 tracking-wider">440 GSM Heavyweight</span>
-          Custom Combed Terry Weave
-        </div>
-        <div className="bg-[#080808] p-4 sm:p-5 hover:bg-[#0c0c0c] transition-colors">
-          <span className="block text-[#EEEAE1] font-bold text-xs uppercase mb-0.5 tracking-wider">Acid Wash & Pigment</span>
-          Hand-Distressed Mineral Dye
-        </div>
-        <div className="bg-[#080808] p-4 sm:p-5 hover:bg-[#0c0c0c] transition-colors">
-          <span className="block text-[#EEEAE1] font-bold text-xs uppercase mb-0.5 tracking-wider">Small-Batch Production</span>
-          Individually Numbered Archive
-        </div>
-        <div className="bg-[#080808] p-4 sm:p-5 hover:bg-[#0c0c0c] transition-colors">
-          <span className="block text-[#EEEAE1] font-bold text-xs uppercase mb-0.5 tracking-wider">Express Dispatch</span>
-          Flagship Warehouse Transit
-        </div>
       </div>
 
     </section>
   );
 }
+

@@ -74,11 +74,11 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
   };
 
   return (
-    <div className="bg-[#070b0e] text-[#EEEAE1] font-mono min-h-screen selection:bg-[#009688]">
+    <div className="bg-[#070b0e] text-[#EEEAE1] font-mono min-h-screen selection:bg-[#00695c]">
       
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#009688] text-white px-5 py-3 shadow-2xl font-mono text-xs tracking-wider flex items-center gap-2 border border-teal-400">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#00695c] text-white px-5 py-3 shadow-2xl font-mono text-xs tracking-wider flex items-center gap-2 border border-teal-400">
           <span>✓</span> {toastMessage}
         </div>
       )}
@@ -87,13 +87,13 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
       <div className="relative border-b border-[#142028] bg-gradient-to-b from-[#0a1217] to-[#070b0e] py-14 sm:py-20">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#09181f] border border-[#009688]/40 text-[#009688] text-xs font-bold tracking-wider uppercase mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#009688] animate-ping" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#09181f] border border-[#00695c]/40 text-[#00695c] text-xs font-bold tracking-wider uppercase mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00695c] animate-ping" />
             <span>Official Footwear Division</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white font-editorial leading-[0.88]">
-            SHOES <span className="text-[#009688]">MAFIA</span>
+            SHOES <span className="text-[#00695c]">MAFIA</span>
           </h1>
 
           <p className="mt-4 text-xs sm:text-sm text-[#8a9ba8] max-w-2xl mx-auto leading-relaxed tracking-tight">
@@ -102,7 +102,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
 
           {/* Faridabad Store Pill */}
           <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-4 bg-[#0a141a] border border-[#1a2d38] p-3 sm:p-4 text-xs text-[#8a9ba8]">
-            <span className="text-[#009688] font-bold">Concierge: 083750 00819</span>
+            <span className="text-[#00695c] font-bold">Concierge: 083750 00819</span>
             <span className="text-white/20 hidden sm:inline">|</span>
             <span className="text-[#c1d1db]">NIT-5 Flagship Store · Faridabad</span>
           </div>
@@ -126,7 +126,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
                 onClick={() => setActiveCategory(cat.value)}
                 className={`min-h-[38px] px-3.5 py-2 uppercase tracking-wider font-bold transition-all text-xs whitespace-nowrap cursor-pointer border ${
                   activeCategory === cat.value
-                    ? 'bg-[#009688] text-white border-[#009688] shadow-md shadow-[#009688]/30'
+                    ? 'bg-[#00695c] text-white border-[#00695c] shadow-md shadow-[#00695c]/30'
                     : 'bg-[#0e1b24] text-[#8a9ba8] border-[#162733] hover:text-white hover:border-[#2a4457]'
                 }`}
               >
@@ -145,19 +145,19 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
       <div className="border-b border-[#142028] bg-[#091117] py-3.5 font-mono text-xs text-[#8a9ba8]">
         <div className="max-w-[1600px] mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           <div className="flex items-center justify-center gap-2">
-            <Truck size={15} className="text-[#009688]" />
+            <Truck size={15} className="text-[#00695c]" />
             <span className="uppercase tracking-wider">EXPRESS PRIORITY TRANSIT</span>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <RotateCcw size={15} className="text-[#009688]" />
+            <RotateCcw size={15} className="text-[#00695c]" />
             <span className="uppercase tracking-wider">7-DAY SIZE REPLACEMENT</span>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <ShieldCheck size={15} className="text-[#009688]" />
+            <ShieldCheck size={15} className="text-[#00695c]" />
             <span className="uppercase tracking-wider">100% GENUINE SOLE DENSITY</span>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <Footprints size={15} className="text-[#009688]" />
+            <Footprints size={15} className="text-[#00695c]" />
             <span className="uppercase tracking-wider">FARIDABAD STORE STOCK</span>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
               >
                 {/* Image Canvas with Spec Tag */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#060b0e]">
-                  <div className="absolute top-2.5 left-2.5 z-10 bg-[#009688] px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-white">
+                  <div className="absolute top-2.5 left-2.5 z-10 bg-[#00695c] px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-white">
                     {shoe.badge || 'KM-SOLE'}
                   </div>
 
@@ -194,7 +194,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
                         showToast(`Link copied for ${shoe.name}!`);
                       }
                     }}
-                    className="absolute top-2.5 right-2.5 z-10 flex h-8 w-8 items-center justify-center bg-black/60 text-white border border-white/10 hover:bg-[#009688] transition-colors"
+                    className="absolute top-2.5 right-2.5 z-10 flex h-8 w-8 items-center justify-center bg-black/60 text-white border border-white/10 hover:bg-[#00695c] transition-colors"
                     title="Share Spec"
                   >
                     <Share2 size={13} />
@@ -210,7 +210,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
                 {/* Body Details */}
                 <div className="p-3 sm:p-4 border-t border-[#142028] space-y-3">
                   <div>
-                    <div className="text-xs uppercase tracking-wider text-[#009688] font-bold">
+                    <div className="text-xs uppercase tracking-wider text-[#00695c] font-bold">
                       {shoe.shoeCategory || 'FOOTWEAR DIVISION'}
                     </div>
                     <h3 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-white mt-1 line-clamp-1">
@@ -247,7 +247,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
                               isOutOfStock
                                 ? 'bg-white/5 text-gray-600 line-through border-transparent'
                                 : isSelected
-                                ? 'bg-[#009688] text-white border-[#009688]'
+                                ? 'bg-[#00695c] text-white border-[#00695c]'
                                 : 'bg-[#0e1a22] text-[#8a9ba8] border-[#1b2c38] hover:border-[#355266]'
                             }`}
                           >
@@ -270,7 +270,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
 
                     <button
                       onClick={() => handleOrderNow(shoe)}
-                      className="flex min-h-[38px] items-center justify-center gap-1.5 bg-[#009688] hover:bg-[#007a6e] py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all cursor-pointer"
+                      className="flex min-h-[38px] items-center justify-center gap-1.5 bg-[#00695c] hover:bg-[#007a6e] py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all cursor-pointer"
                     >
                       <span>ORDER NOW</span>
                       <ArrowRight size={13} />

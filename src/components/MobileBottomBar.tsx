@@ -62,7 +62,7 @@ export default function MobileBottomBar() {
         >
           <div className={`w-11 h-11 rounded-none border flex items-center justify-center shadow-lg transition-transform active:scale-95 ${
             isShoes 
-              ? 'bg-[#009688] border-[#80cbc4] text-white shadow-[#009688]/30' 
+              ? 'bg-[#00695c] border-[#80cbc4] text-white shadow-[#00695c]/30' 
               : 'bg-[#8F1118] border-[#B91C1C] text-white shadow-[#8F1118]/30'
           }`}>
             {isShoes ? <Footprints size={20} /> : <Shirt size={20} />}
@@ -93,7 +93,7 @@ export default function MobileBottomBar() {
             <ShoppingBag size={18} />
             {activeCount > 0 && (
               <span className={`absolute -top-1.5 -right-2 w-4 h-4 rounded-full text-[9px] font-bold text-white flex items-center justify-center ${
-                isShoes ? 'bg-[#009688]' : 'bg-[#8F1118]'
+                isShoes ? 'bg-[#00695c]' : 'bg-[#8F1118]'
               }`}>
                 {activeCount}
               </span>

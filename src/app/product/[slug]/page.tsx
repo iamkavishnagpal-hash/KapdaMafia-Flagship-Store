@@ -65,26 +65,34 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
           <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
             
             <div>
-              <div className="text-[10px] text-[#8C8C86] uppercase tracking-[0.3em] font-bold mb-1">
-                {product.dropName}
+              <div className="text-[10px] sm:text-[11px] text-[#888888] uppercase font-mono tracking-[0.12em] font-medium mb-1">
+                {product.dropName} · ARCHIVE ALLOCATION
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black uppercase text-[#F3F0E8] tracking-tight">{product.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold uppercase text-[#F4F4F4] tracking-[-0.05em] leading-[0.95]">
+                {product.name}
+              </h1>
               
               <div className="flex items-center gap-4 mt-2">
-                <div className="flex items-center text-amber-400 text-xs">
+                <div className="flex items-center text-amber-400 text-xs font-mono tracking-[0.12em]">
                   <Star size={12} className="fill-amber-400" />
                   <span className="ml-1 font-bold">{product.rating}</span>
-                  <span className="text-[#8C8C86] ml-1">({product.reviewCount} REVIEWS)</span>
+                  <span className="text-[#888888] ml-1">({product.reviewCount} REVIEWS)</span>
                 </div>
-                <span className="text-xs text-[#8C8C86]">GSM: <strong className="text-[#F3F0E8]">{product.gsm}</strong></span>
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.12em] text-[#888888]">
+                  GSM: <strong className="text-[#F4F4F4]">{product.gsm || '440'}</strong>
+                </span>
               </div>
             </div>
 
-            {/* Price Tag */}
-            <div className="flex items-baseline gap-3 pt-2 border-t border-[#181818]">
-              <span className="text-3xl font-black text-[#F3F0E8]">₹{product.price.toLocaleString()}</span>
+            {/* Price Tag: Tier 3 Tabular Numbers */}
+            <div className="flex items-baseline gap-3 pt-2 border-t border-[#1E1E1E]">
+              <span className="text-3xl font-bold text-[#F4F4F4] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
+                ₹{product.price.toLocaleString('en-IN')}
+              </span>
               {product.originalPrice && (
-                <span className="text-sm text-[#8C8C86] line-through">₹{product.originalPrice.toLocaleString()}</span>
+                <span className="text-sm text-[#888888] line-through [font-variant-numeric:tabular-nums] font-mono tracking-[0.12em]">
+                  ₹{product.originalPrice.toLocaleString('en-IN')}
+                </span>
               )}
             </div>
 
@@ -93,12 +101,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             {/* Size Selector */}
             <div className="space-y-3 pt-4 border-t border-[#181818]">
               <div className="flex justify-between items-center text-xs">
-                <span className="text-[#8C8C86]">SELECT SIZE ({product.fit} SILHOUETTE):</span>
+                <span className="text-[#666666] font-mono">SELECT SIZE ({product.fit} SILHOUETTE):</span>
                 <Link 
                   href="/ai-fit"
-                  className="text-[#8F1118] hover:text-white font-bold flex items-center gap-1 text-[10px] tracking-wider uppercase transition-colors"
+                  className="text-[#7D0A0A] hover:text-white font-mono font-bold flex items-center gap-1 text-[10px] tracking-widest uppercase transition-colors"
                 >
-                  <Sparkles size={12} /> OPEN IN VIRTUAL TRY-ON →
+                  <Sparkles size={12} /> PROPORTIONAL DRAPE LAB →
                 </Link>
               </div>
 

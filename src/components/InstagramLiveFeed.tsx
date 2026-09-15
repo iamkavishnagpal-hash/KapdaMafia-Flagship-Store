@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { Play, Eye, Heart, ExternalLink, CheckCircle2, MapPin, Phone } from 'lucide-react';
 import { useWorld } from '@/context/WorldContext';
+import { useCart } from '@/context/CartContext';
+import { playMechanicalClick, playSubBassThud } from '@/utils/soundEffects';
 import { InstagramIcon } from './InstagramIcon';
 
 export interface ReelData {
@@ -17,6 +19,13 @@ export interface ReelData {
   tag: string;
   isLatest: boolean;
   storeWorld: 'clothing' | 'shoes';
+  shoppableProduct?: {
+    id: string;
+    name: string;
+    price: number;
+    size: string;
+    image: string;
+  };
 }
 
 const LIVE_REELS: ReelData[] = [
@@ -30,19 +39,14 @@ const LIVE_REELS: ReelData[] = [
     caption: 'AUTUMN / WINTER IN MOTION: Heavyweight 440 GSM Acid wash & Selvedge barrel fit jeans on the street 🔥',
     tag: '⚡ LATEST LIVE REEL',
     isLatest: true,
-    storeWorld: 'clothing'
-  },
-  {
-    id: 'reel-sm-1',
-    handle: '@shoesmafia.store',
-    profileUrl: 'https://www.instagram.com/shoesmafia.store?stkn=MTBpN3B4MmF6NHpxNA==',
-    poster: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg',
-    views: '98K',
-    likes: '12.9K',
-    caption: 'Model 1239 High-Street Sneaker unboxing & on-feet review! Sizes 7–10 now in stock 👟',
-    tag: '⚡ LATEST LIVE REEL',
-    isLatest: true,
-    storeWorld: 'shoes'
+    storeWorld: 'clothing',
+    shoppableProduct: {
+      id: 'pl-001',
+      name: '440 GSM ACID WASH HOODIE',
+      price: 3490,
+      size: 'L',
+      image: '/media/streetwear-night-lamp.jpg'
+    }
   },
   {
     id: 'reel-km-2',
@@ -54,7 +58,33 @@ const LIVE_REELS: ReelData[] = [
     caption: 'Tactical Baggy Cargos engineered for effortless drape and high-mobility streetwear styling.',
     tag: 'TRENDING FIT',
     isLatest: false,
-    storeWorld: 'clothing'
+    storeWorld: 'clothing',
+    shoppableProduct: {
+      id: 'pl-002',
+      name: 'TACTICAL BAGGY CARGOS',
+      price: 2890,
+      size: '32',
+      image: '/media/product-cargo.png'
+    }
+  },
+  {
+    id: 'reel-sm-1',
+    handle: '@shoesmafia.store',
+    profileUrl: 'https://www.instagram.com/shoesmafia.store?stkn=MTBpN3B4MmF6NHpxNA==',
+    poster: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg',
+    views: '98K',
+    likes: '12.9K',
+    caption: 'Model 1239 High-Street Sneaker unboxing & on-feet review! Sizes 7–10 now in stock 👟',
+    tag: '⚡ LATEST LIVE REEL',
+    isLatest: true,
+    storeWorld: 'shoes',
+    shoppableProduct: {
+      id: 'sm-1239',
+      name: 'MODEL 1239 HIGH-STREET SNEAKER',
+      price: 1999,
+      size: 'UK 8',
+      image: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg'
+    }
   },
   {
     id: 'reel-sm-2',
@@ -66,12 +96,20 @@ const LIVE_REELS: ReelData[] = [
     caption: 'Model 24 Court High-Top: Real leather texture and vintage basketball sole test 🏀',
     tag: 'COURT EDITION',
     isLatest: false,
-    storeWorld: 'shoes'
+    storeWorld: 'shoes',
+    shoppableProduct: {
+      id: 'sm-court-24',
+      name: 'MODEL 24 COURT HIGH-TOP',
+      price: 2499,
+      size: 'UK 9',
+      image: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788695961_IMG_2627.PNG'
+    }
   }
 ];
 
 export default function InstagramLiveFeed() {
   const { world } = useWorld();
+  const { addToCart, openCart } = useCart();
   const [activeTab, setActiveTab] = useState<'ALL' | 'KAPDA' | 'SHOES'>('ALL');
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
 
@@ -182,10 +220,10 @@ export default function InstagramLiveFeed() {
             href="https://www.instagram.com/shoesmafia.store?stkn=MTBpN3B4MmF6NHpxNA=="
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-between p-4 rounded-2xl border border-white/10 bg-[#121212] hover:border-[#009688]/50 hover:bg-[#101817] transition-all"
+            className="group flex items-center justify-between p-4 rounded-2xl border border-white/10 bg-[#121212] hover:border-[#00695c]/50 hover:bg-[#101817] transition-all"
           >
             <div className="flex items-center gap-3">
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#009688] via-[#00b4d8] to-[#833AB4] p-[2px]">
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#00695c] via-[#00b4d8] to-[#833AB4] p-[2px]">
                 <div className="flex h-full w-full items-center justify-center rounded-full bg-[#0e0e0e]">
                   <InstagramIcon size={22} className="text-[#00b4d8]" />
                 </div>
@@ -199,7 +237,7 @@ export default function InstagramLiveFeed() {
                 <span className="text-[10px] text-gray-400">Exclusive Sneaker Vault & Chunky Runners</span>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-[10px] font-bold text-[#009688] group-hover:translate-x-1 transition-transform">
+            <div className="flex items-center gap-2 text-[10px] font-bold text-[#00695c] group-hover:translate-x-1 transition-transform">
               <span>VISIT PROFILE</span>
               <ExternalLink size={13} />
             </div>
@@ -207,20 +245,43 @@ export default function InstagramLiveFeed() {
 
         </div>
 
-        {/* 9:16 Vertical Instagram Reels Grid (Gen-Z TikTok/Reels Layout) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {filteredReels.map((reel) => (
+        {/* 3-Card Horizontal Snap Carousel (9:16 vertical reels, snap-x for mobile swipe) */}
+        <div className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {filteredReels.slice(0, 3).map((reel) => (
             <div
               key={reel.id}
               onClick={() => setActiveReelModal(reel)}
-              className="group relative aspect-[9/16] overflow-hidden rounded-2xl border border-white/15 bg-[#141414] shadow-2xl cursor-pointer hover:border-[#E1306C]/70 transition-all duration-300 hover:-translate-y-1.5"
+              onMouseEnter={(e) => {
+                const video = e.currentTarget.querySelector('video');
+                if (video) video.play().catch(() => {});
+              }}
+              onMouseLeave={(e) => {
+                const video = e.currentTarget.querySelector('video');
+                if (video) {
+                  video.pause();
+                  video.currentTime = 0;
+                }
+              }}
+              className="group relative flex-shrink-0 w-[75vw] sm:w-[45vw] lg:w-[calc(33.333%-1rem)] snap-start aspect-[9/16] overflow-hidden rounded-2xl border border-white/15 bg-[#141414] shadow-2xl cursor-pointer hover:border-[#E1306C]/70 transition-all duration-300 hover:-translate-y-1.5"
             >
-              {/* Background Poster Image */}
-              <img
-                src={reel.poster}
-                alt={reel.caption}
-                className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
+              {/* Video or Background Poster Image */}
+              {reel.videoSrc ? (
+                <video
+                  src={reel.videoSrc}
+                  poster={reel.poster}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
+              ) : (
+                <img
+                  src={reel.poster}
+                  alt={reel.caption}
+                  className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
+              )}
 
               {/* Top Bar with Live Tag */}
               <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
@@ -238,7 +299,7 @@ export default function InstagramLiveFeed() {
               </div>
 
               {/* Center Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 backdrop-blur-[2px]">
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 backdrop-blur-[1px] pointer-events-none">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-[#F77737] via-[#FD1D1D] to-[#833AB4] text-white shadow-2xl scale-75 group-hover:scale-100 transition-transform">
                   <Play size={24} fill="currentColor" className="ml-1" />
                 </div>
@@ -252,6 +313,39 @@ export default function InstagramLiveFeed() {
                     <Eye size={10} /> {reel.views}
                   </span>
                 </div>
+
+                {/* Shoppable Floating Tag Pill (Gen-Z 1-Tap Quick Bag without leaving video) */}
+                {reel.shoppableProduct && (
+                  <div className="mb-2.5">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playSubBassThud();
+                        addToCart({
+                          productId: reel.shoppableProduct!.id,
+                          name: reel.shoppableProduct!.name,
+                          price: reel.shoppableProduct!.price,
+                          image: reel.shoppableProduct!.image,
+                          size: reel.shoppableProduct!.size,
+                          category: reel.storeWorld === 'shoes' ? 'Sneakers' : 'Streetwear',
+                          storeWorld: reel.storeWorld
+                        });
+                        openCart();
+                      }}
+                      onMouseEnter={playMechanicalClick}
+                      className="w-full py-1.5 px-2.5 bg-white/95 hover:bg-white text-black text-[9px] font-mono font-black tracking-wider uppercase rounded-md flex items-center justify-between shadow-xl transition-all hover:scale-[1.02] cursor-pointer"
+                      title="Tap to bag worn outfit"
+                    >
+                      <span className="truncate max-w-[140px] text-left">
+                        ⚡ {reel.shoppableProduct.name}
+                      </span>
+                      <span className="bg-black text-white px-1.5 py-0.5 rounded text-[8px] shrink-0 font-mono">
+                        ₹{reel.shoppableProduct.price.toLocaleString('en-IN')} [BAG]
+                      </span>
+                    </button>
+                  </div>
+                )}
 
                 <p className="text-[10px] text-gray-200 line-clamp-2 leading-relaxed mb-3">
                   {reel.caption}
@@ -306,7 +400,7 @@ export default function InstagramLiveFeed() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 hover:text-white transition-colors"
                 >
-                  <MapPin size={14} className="text-[#009688]" /> NIT-5, Faridabad, Haryana
+                  <MapPin size={14} className="text-[#00695c]" /> NIT-5, Faridabad, Haryana
                 </a>
               </div>
             </div>
@@ -325,7 +419,7 @@ export default function InstagramLiveFeed() {
                 href="https://www.instagram.com/shoesmafia.store?stkn=MTBpN3B4MmF6NHpxNA=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-5 rounded-xl bg-[#009688] hover:bg-[#00796b] text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 shadow-lg shadow-[#009688]/25 transition-all text-center"
+                className="w-full py-3 px-5 rounded-xl bg-[#00695c] hover:bg-[#00796b] text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 shadow-lg shadow-[#00695c]/25 transition-all text-center"
               >
                 <InstagramIcon size={16} /> OPEN @SHOESMAFIA.STORE
               </a>

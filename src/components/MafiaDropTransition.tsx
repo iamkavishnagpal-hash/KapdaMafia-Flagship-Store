@@ -18,20 +18,20 @@ export default function MafiaDropTransition() {
   const { setWorld } = useWorld();
 
   useEffect(() => {
-    // Step 1: Hold the pure artwork shutter clean for 1.1s
+    // Step 1: Brief pure artwork shutter hold (400ms)
     const t1 = window.setTimeout(() => {
       setPhase('shutter-opening');
-    }, 1100);
+    }, 450);
 
-    // Step 2: Shutter completes roll-up, tempered glass sliding doors start opening (2.3s)
+    // Step 2: Shutter rolls up fast & silky, glass doors part (1100ms)
     const t2 = window.setTimeout(() => {
       setPhase('glass-opening');
-    }, 2300);
+    }, 1150);
 
-    // Step 3: Glass doors fully parted, reveal store selector portal (3.4s)
+    // Step 3: Glass doors open, reveal portal without lag (1700ms)
     const t3 = window.setTimeout(() => {
       setPhase('store-selection');
-    }, 3400);
+    }, 1750);
 
     return () => {
       window.clearTimeout(t1);
@@ -45,7 +45,7 @@ export default function MafiaDropTransition() {
     setPhase('completed');
     setTimeout(() => {
       setRemoved(true);
-    }, 600);
+    }, 400);
   };
 
   if (removed) return null;
@@ -55,7 +55,7 @@ export default function MafiaDropTransition() {
 
   return (
     <div
-      className={`fixed inset-0 z-50 transition-opacity duration-700 ${
+      className={`fixed inset-0 z-50 transition-opacity duration-400 ${
         phase === 'completed' ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
       aria-hidden={phase === 'completed'}
@@ -64,7 +64,7 @@ export default function MafiaDropTransition() {
       <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050505] p-4 font-mono text-[#EEEAE1]">
         {/* Ambient atmospheric glows */}
         <div className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-[#8F1118]/25 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 h-72 w-72 rounded-full bg-[#009688]/20 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 h-72 w-72 rounded-full bg-[#00695c]/20 blur-[120px] pointer-events-none" />
 
         <div
           className={`relative w-full max-w-3xl overflow-hidden rounded-3xl border border-white/15 bg-[#0d0d0d]/95 p-6 sm:p-10 shadow-2xl transition-all duration-700 ${
@@ -118,18 +118,18 @@ export default function MafiaDropTransition() {
             {/* PORTAL 2: SHOES MAFIA */}
             <button
               onClick={() => handleSelectStore('shoes')}
-              className="group relative overflow-hidden rounded-2xl border border-white/15 bg-[#141414] hover:border-[#009688] hover:bg-[#111c1a] p-6 text-left transition-all duration-300 shadow-xl cursor-pointer hover:scale-[1.01]"
+              className="group relative overflow-hidden rounded-2xl border border-white/15 bg-[#141414] hover:border-[#00695c] hover:bg-[#111c1a] p-6 text-left transition-all duration-300 shadow-xl cursor-pointer hover:scale-[1.01]"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="h-12 w-12 rounded-xl bg-[#009688]/20 border border-[#009688]/40 flex items-center justify-center text-[#009688] group-hover:scale-110 transition-transform">
+                <div className="h-12 w-12 rounded-xl bg-[#00695c]/20 border border-[#00695c]/40 flex items-center justify-center text-[#00695c] group-hover:scale-110 transition-transform">
                   <Footprints size={24} />
                 </div>
-                <span className="text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded bg-[#009688] text-white">
+                <span className="text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded bg-[#00695c] text-white">
                   FOOTWEAR COLLECTION
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white mb-2 group-hover:text-[#009688] transition-colors">
+              <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white mb-2 group-hover:text-[#00695c] transition-colors">
                 SHOES MAFIA
               </h3>
               <p className="text-xs sm:text-sm text-[#8C8C86] leading-relaxed mb-6">
@@ -138,7 +138,7 @@ export default function MafiaDropTransition() {
 
               <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-bold text-[#EEEAE1]">
                 <span className="text-xs text-[#C8C3B8] tracking-wider uppercase">Shop Footwear Line</span>
-                <span className="flex items-center gap-1.5 text-[#009688] group-hover:translate-x-1 transition-transform">
+                <span className="flex items-center gap-1.5 text-[#00695c] group-hover:translate-x-1 transition-transform">
                   Enter <ArrowRight size={14} />
                 </span>
               </div>
@@ -153,13 +153,13 @@ export default function MafiaDropTransition() {
 
       {/* 2. LUXURY TEMPERED GLASS SLIDING DOORS */}
       <div
-        className={`absolute inset-0 z-20 flex overflow-hidden pointer-events-none transition-opacity duration-700 ${
+        className={`absolute inset-0 z-20 flex overflow-hidden pointer-events-none transition-opacity duration-400 will-change-transform ${
           isShutterUp ? 'opacity-100' : 'opacity-0'
         }`}
       >
         {/* Left Glass Door */}
         <div
-          className={`relative w-1/2 h-full bg-[#0a0a0a]/75 backdrop-blur-[4px] border-r border-white/20 shadow-2xl flex items-center justify-end pr-8 transition-transform duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
+          className={`relative w-1/2 h-full bg-[#0a0a0a]/80 backdrop-blur-[6px] border-r border-white/20 shadow-2xl flex items-center justify-end pr-8 transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${
             isGlassOpen ? '-translate-x-full' : 'translate-x-0'
           }`}
         >
@@ -171,7 +171,7 @@ export default function MafiaDropTransition() {
 
         {/* Right Glass Door */}
         <div
-          className={`relative w-1/2 h-full bg-[#0a0a0a]/75 backdrop-blur-[4px] border-l border-white/20 shadow-2xl flex items-center justify-start pl-8 transition-transform duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
+          className={`relative w-1/2 h-full bg-[#0a0a0a]/80 backdrop-blur-[6px] border-l border-white/20 shadow-2xl flex items-center justify-start pl-8 transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${
             isGlassOpen ? 'translate-x-full' : 'translate-x-0'
           }`}
         >
@@ -182,9 +182,9 @@ export default function MafiaDropTransition() {
         </div>
       </div>
 
-      {/* 3. PURE AUTHENTIC SHUTTER: 100% clean graffiti artwork (NO text, NO headers, NO stretch) */}
+      {/* 3. PURE AUTHENTIC SHUTTER: 100% clean graffiti artwork */}
       <div
-        className="absolute inset-0 z-30 overflow-hidden bg-[#050505] transition-transform duration-[1300ms] ease-[cubic-bezier(0.77,0,0.175,1)] pointer-events-none"
+        className="absolute inset-0 z-30 overflow-hidden bg-[#050505] transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] pointer-events-none will-change-transform"
         style={{
           transform: isShutterUp ? 'translateY(-101%)' : 'translateY(0%)'
         }}

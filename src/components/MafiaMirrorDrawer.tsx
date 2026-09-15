@@ -344,11 +344,11 @@ function MafiaMirrorDrawer() {
             </div>
 
             {/* KICKS (Shoes Mafia Portal) */}
-            <div className="flex items-center gap-3 p-2.5 bg-[#101010] border border-[#009688]/30">
+            <div className="flex items-center gap-3 p-2.5 bg-[#101010] border border-[#00695c]/30">
               <img 
                 src={(kickItem as any).images?.[0]?.url || (kickItem as any).variants?.[0]?.images?.[0]?.url || '/media/product-cargo.png'} 
                 alt={kickItem.name} 
-                className="w-12 h-14 object-cover bg-black shrink-0 border border-[#009688]/20" 
+                className="w-12 h-14 object-cover bg-black shrink-0 border border-[#00695c]/20" 
               />
               <div className="flex-1 min-w-0">
                 <span className="text-[8px] text-[#80cbc4] font-bold uppercase tracking-wider block">KICKS (SHOES MAFIA)</span>

@@ -59,11 +59,11 @@ function CheckoutContent() {
     return (
       <div className="py-20 bg-[#080808] min-h-screen text-[#F3F0E8] font-mono flex items-center justify-center p-4">
         <div className={`max-w-xl w-full bg-[#111111] border p-8 rounded-sm text-center space-y-6 shadow-2xl ${
-          isShoesCheckout ? 'border-[#009688]' : 'border-[#8F1118]'
+          isShoesCheckout ? 'border-[#00695c]' : 'border-[#8F1118]'
         }`}>
           <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto border ${
             isShoesCheckout 
-              ? 'bg-[#009688]/20 border-[#009688] text-[#009688]' 
+              ? 'bg-[#00695c]/20 border-[#00695c] text-[#00695c]' 
               : 'bg-[#8F1118]/20 border-[#8F1118] text-[#8F1118]'
           }`}>
             <CheckCircle2 size={32} />
@@ -71,7 +71,7 @@ function CheckoutContent() {
 
           <div>
             <div className={`text-[10px] uppercase tracking-[0.3em] font-bold ${
-              isShoesCheckout ? 'text-[#009688]' : 'text-[#8F1118]'
+              isShoesCheckout ? 'text-[#00695c]' : 'text-[#8F1118]'
             }`}>
               {isShoesCheckout ? 'SHOES MAFIA · ORDER CONFIRMED' : 'KAPDA MAFIA · ORDER CONFIRMED'}
             </div>
@@ -98,7 +98,7 @@ function CheckoutContent() {
             <Link 
               href="/track-order" 
               className={`flex-1 py-3.5 text-white text-xs font-bold uppercase tracking-wider transition-colors text-center ${
-                isShoesCheckout ? 'bg-[#009688] hover:bg-[#00796b]' : 'bg-[#8F1118] hover:bg-[#B91C1C]'
+                isShoesCheckout ? 'bg-[#00695c] hover:bg-[#00796b]' : 'bg-[#8F1118] hover:bg-[#B91C1C]'
               }`}
             >
               TRACK YOUR ORDER →
@@ -201,7 +201,7 @@ function CheckoutContent() {
                   3. PAYMENT GATEWAY ({isShoesCheckout ? 'SHOES MAFIA PAY' : 'KAPDA MAFIA PAY'})
                 </h3>
                 <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase ${
-                  isShoesCheckout ? 'bg-[#009688]/20 text-[#009688]' : 'bg-[#8F1118]/20 text-[#8F1118]'
+                  isShoesCheckout ? 'bg-[#00695c]/20 text-[#00695c]' : 'bg-[#8F1118]/20 text-[#8F1118]'
                 }`}>
                   {isShoesCheckout ? 'FOOTWEAR ACCOUNT' : 'CLOTHING ACCOUNT'}
                 </span>
@@ -209,14 +209,14 @@ function CheckoutContent() {
               <div className="space-y-3 text-xs">
                 <label className={`block p-4 border rounded-sm cursor-pointer transition-colors ${
                   paymentMethod === 'PREPAID' 
-                    ? isShoesCheckout ? 'border-[#009688] bg-[#080808]' : 'border-[#8F1118] bg-[#080808]'
+                    ? isShoesCheckout ? 'border-[#00695c] bg-[#080808]' : 'border-[#8F1118] bg-[#080808]'
                     : 'border-[#222222] bg-[#080808]/50'
                 }`}>
                   <div className="flex items-center gap-3">
                     <input 
                       type="radio" name="payment" checked={paymentMethod === 'PREPAID'} 
                       onChange={() => setPaymentMethod('PREPAID')}
-                      className={isShoesCheckout ? 'accent-[#009688]' : 'accent-[#8F1118]'}
+                      className={isShoesCheckout ? 'accent-[#00695c]' : 'accent-[#8F1118]'}
                     />
                     <div>
                       <div className="font-bold text-[#F3F0E8]">
@@ -231,14 +231,14 @@ function CheckoutContent() {
 
                 <label className={`block p-4 border rounded-sm cursor-pointer transition-colors ${
                   paymentMethod === 'COD' 
-                    ? isShoesCheckout ? 'border-[#009688] bg-[#080808]' : 'border-[#8F1118] bg-[#080808]'
+                    ? isShoesCheckout ? 'border-[#00695c] bg-[#080808]' : 'border-[#8F1118] bg-[#080808]'
                     : 'border-[#222222] bg-[#080808]/50'
                 }`}>
                   <div className="flex items-center gap-3">
                     <input 
                       type="radio" name="payment" checked={paymentMethod === 'COD'} 
                       onChange={() => setPaymentMethod('COD')}
-                      className={isShoesCheckout ? 'accent-[#009688]' : 'accent-[#8F1118]'}
+                      className={isShoesCheckout ? 'accent-[#00695c]' : 'accent-[#8F1118]'}
                     />
                     <div>
                       <div className="font-bold text-[#F3F0E8]">CASH ON DELIVERY (COD)</div>
@@ -255,11 +255,11 @@ function CheckoutContent() {
           <div className="lg:col-span-5 bg-[#111111] border border-[#181818] p-6 rounded-sm space-y-6 h-fit lg:sticky lg:top-28">
             <div className="flex items-center justify-between border-b border-[#181818] pb-3">
               <h3 className="text-sm font-bold text-[#F3F0E8] uppercase tracking-wide flex items-center gap-2">
-                {isShoesCheckout ? <Footprints size={15} className="text-[#009688]" /> : <Shirt size={15} className="text-[#8F1118]" />}
+                {isShoesCheckout ? <Footprints size={15} className="text-[#00695c]" /> : <Shirt size={15} className="text-[#8F1118]" />}
                 <span>{isShoesCheckout ? 'SHOES MAFIA' : 'KAPDA MAFIA'} ORDER</span>
               </h3>
               <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase ${
-                isShoesCheckout ? 'bg-[#009688]/20 text-[#009688]' : 'bg-[#8F1118]/20 text-[#8F1118]'
+                isShoesCheckout ? 'bg-[#00695c]/20 text-[#00695c]' : 'bg-[#8F1118]/20 text-[#8F1118]'
               }`}>
                 {checkoutItems.length} {checkoutItems.length === 1 ? 'ITEM' : 'ITEMS'}
               </span>
@@ -297,7 +297,7 @@ function CheckoutContent() {
               </div>
               <div className="flex justify-between text-sm font-bold text-[#F3F0E8] pt-2 border-t border-[#181818]">
                 <span>TOTAL AMOUNT</span>
-                <span className={isShoesCheckout ? 'text-[#009688]' : 'text-[#8F1118]'}>
+                <span className={isShoesCheckout ? 'text-[#00695c]' : 'text-[#8F1118]'}>
                   ₹{total.toLocaleString()}
                 </span>
               </div>
@@ -306,14 +306,14 @@ function CheckoutContent() {
             <button 
               type="submit"
               className={`w-full py-4 text-white font-bold text-xs tracking-[0.25em] uppercase transition-colors shadow-lg cursor-pointer ${
-                isShoesCheckout ? 'bg-[#009688] hover:bg-[#00796b]' : 'bg-[#8F1118] hover:bg-[#B91C1C]'
+                isShoesCheckout ? 'bg-[#00695c] hover:bg-[#00796b]' : 'bg-[#8F1118] hover:bg-[#B91C1C]'
               }`}
             >
               PLACE ORDER NOW →
             </button>
 
             <div className="flex items-center justify-center gap-2 text-[10px] text-[#8C8C86] pt-2">
-              <ShieldCheck size={14} className={isShoesCheckout ? 'text-[#009688]' : 'text-[#8F1118]'} />
+              <ShieldCheck size={14} className={isShoesCheckout ? 'text-[#00695c]' : 'text-[#8F1118]'} />
               <span>OFFICIAL 100% VERIFIED STORE CHECKOUT</span>
             </div>
           </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ShoppingBag, Check } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
 import { useCart } from '@/context/CartContext';
+import { useWorld } from '@/context/WorldContext';
 import { useMafiaMirror } from '@/components/MafiaMirrorDrawer';
 
 interface ProductCard360Props {
@@ -14,8 +15,10 @@ interface ProductCard360Props {
 
 export default function ProductCard360({ product, priority = false }: ProductCard360Props) {
   const { addToCart, openCart } = useCart();
+  const { world } = useWorld();
   const { openMirror } = useMafiaMirror();
   const activeVariant = product.variants[0];
+  const isShoes = world === 'shoes' || product.storeWorld === 'shoes';
 
   const frames = useMemo(() => {
     return (activeVariant?.images && activeVariant.images.length > 1)
@@ -89,7 +92,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
   const availableSizes = activeVariant?.sizes?.map(s => s.size) || ['S', 'M', 'L', 'XL'];
 
   return (
-    <article className="group bg-[#080808] border border-[#161616] hover:border-[#333] transition-all flex flex-col justify-between font-mono relative overflow-hidden">
+    <article className="group bg-[#080808] border border-[#1E1E1E] hover:border-[#333] transition-all flex flex-col justify-between font-mono relative overflow-hidden">
       
       {/* Product Image Viewport */}
       <div 
@@ -98,7 +101,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         onPointerMove={handlePointerMove}
         onMouseLeave={() => setCurrentFrame(0)}
         onClick={handleMobileTapFlip}
-        className="relative aspect-[3/4] bg-[#0c0c0c] overflow-hidden select-none touch-pan-y cursor-pointer"
+        className="relative aspect-[3/4] bg-[#111111] overflow-hidden select-none touch-pan-y cursor-pointer"
       >
         <Link href={`/product/${product.slug}`} className="block w-full h-full" aria-label={`View ${product.name}`}>
           <img 
@@ -109,94 +112,118 @@ export default function ProductCard360({ product, priority = false }: ProductCar
           />
         </Link>
 
-        {/* Issue 17 & 18 Fix: Standardized Virtual Mirror label + accessible 44px touch target */}
+        {/* Seamless Canvas Gradient Overlay - Blends seamlessly into #080808 canvas like WTFLEX */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/20 pointer-events-none" />
+
+        {/* Blueprint 3.C: Spec Tag directly visible on image corner */}
+        <div className="absolute top-2.5 left-2.5 bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] px-2.5 py-1 text-[10px] font-mono tracking-wider uppercase text-[#F4F4F4] pointer-events-none z-10 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span>{product.gsm ? `${product.gsm} GSM` : '440 GSM'} // {product.fit ? product.fit.toUpperCase() : 'LOOSE FIT'}</span>
+        </div>
+
+        {/* Live Vault Scarcity HUD Matrix (Gen-Z Urgency Trigger) */}
+        <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex items-center justify-between text-[9px] font-mono tracking-widest bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] px-2.5 py-1 text-[#888888] uppercase">
+          <span className="text-[#F4F4F4] font-bold">RUN: 250 UNITS</span>
+          <span className={`${isShoes ? 'text-[#1a8f7a]' : 'text-[#7D0A0A]'} font-bold animate-pulse`}>ONLY {10 + (product.id.charCodeAt(product.id.length - 1) % 7)} LEFT IN SIZE {selectedSize}</span>
+        </div>
+
+        {/* Virtual Mirror Trigger */}
         <button
           onClick={handleOpenMirror}
-          className="absolute top-3 right-3 min-h-[44px] px-3.5 py-2 bg-black/90 hover:bg-black border border-white/25 hover:border-white/60 text-xs font-bold tracking-wider text-white uppercase backdrop-blur-md flex items-center gap-2 transition-all shadow-xl z-10 cursor-pointer"
-          title="Open Virtual Mirror Studio"
-          aria-label={`Virtual Mirror try on for ${product.name}`}
+          className="absolute top-2.5 right-2.5 min-h-[32px] px-2.5 py-1 bg-[#080808]/90 hover:bg-black border border-[#1E1E1E] hover:border-white/40 text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-md flex items-center gap-1.5 transition-all shadow-xl z-10 cursor-pointer"
+          title="Open Drape Lab"
+          aria-label={`Drape Lab try on for ${product.name}`}
         >
-          <span className="text-[#8F1118]">✦</span>
-          <span>Virtual Mirror</span>
+          <span className="text-[#7D0A0A]">✦</span>
+          <span>DRAPE LAB</span>
         </button>
 
-        {/* Subtle Frame Progress Track */}
+
+
+        {/* Frame Progress Track */}
         {totalFrames > 1 && (
-          <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black/40 flex">
+          <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black/50 flex">
             {frames.map((_, idx) => (
               <div 
                 key={idx}
-                className={`flex-1 h-full transition-colors ${idx === currentFrame ? 'bg-[#8F1118]' : 'bg-transparent'}`}
+                className={`flex-1 h-full transition-colors ${idx === currentFrame ? 'bg-[#7D0A0A]' : 'bg-transparent'}`}
               />
             ))}
           </div>
         )}
       </div>
 
-      {/* Issue 19 & 26 Fix: Generous padding & vertical breathing room */}
-      <div className="p-4 sm:p-5 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#161616] space-y-3">
+      {/* Card consistency vertical stack: Image -> Hairline micro-spec -> Product Title -> Price */}
+      <div className="p-4 sm:p-5 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#1E1E1E] space-y-3">
         
-        <div>
-          {/* Subtle Fabric & Fit Spec */}
-          <div className="text-xs text-[#8C8C86] tracking-wider uppercase mb-1">
-            {product.gsm ? `${product.gsm} GSM · ` : '400 GSM · '}{product.fit || 'OVERSIZED FIT'}
+        <div className="space-y-1.5">
+          {/* Hairline micro-spec: 440 GSM HEAVY COTTON // BOX CUT (10px Mono) */}
+          <div className="text-[10px] font-mono tracking-[0.12em] text-[#888888] uppercase">
+            {product.gsm ? `${product.gsm} GSM` : '440 GSM'} HEAVY COTTON // {product.fit ? product.fit.toUpperCase() : 'BOX CUT'}
           </div>
 
-          {/* Issue 9 Fix: Scannable product name in Title Case */}
-          <Link href={`/product/${product.slug}`}>
-            <h3 className="text-sm font-bold text-[#F3F0E8] capitalize tracking-normal line-clamp-1 hover:text-white transition-colors">
-              {product.name.toLowerCase()}
+          {/* Product Title: ACID WASH HOODIE (14px Bold) */}
+          <Link href={`/product/${product.slug}`} className="block">
+            <h3 className="text-sm font-bold text-[#F4F4F4] uppercase tracking-[-0.01em] line-clamp-1 hover:text-white transition-colors">
+              {product.name}
             </h3>
           </Link>
 
-          {/* Price */}
-          <div className="flex items-baseline gap-2 pt-1.5">
-            <span className="text-sm font-black text-white tracking-tight">
+          {/* Price: ₹3,490 (14px Clean Mono/Sans with tabular-nums) */}
+          <div className="flex items-baseline gap-2 pt-0.5">
+            <span className="text-sm font-bold text-[#F4F4F4] font-mono [font-variant-numeric:tabular-nums] tracking-[-0.01em]">
               ₹{product.price.toLocaleString('en-IN')}
             </span>
             {product.originalPrice && (
-              <span className="text-xs text-[#666] line-through font-normal">
+              <span className="text-xs text-[#888888] line-through font-normal font-mono [font-variant-numeric:tabular-nums]">
                 ₹{product.originalPrice.toLocaleString('en-IN')}
               </span>
             )}
           </div>
         </div>
 
-        {/* Issue 20 Fix: Interactive Size Selector eliminating default size confusion */}
-        <div className="pt-2 border-t border-white/10 space-y-2">
-          <div className="flex items-center justify-between text-[11px] text-[#8C8C86]">
-            <span>SELECT SIZE:</span>
-            <span className="text-white font-bold">{selectedSize}</span>
+        {/* Size Pills: Single-tap opens cart drawer directly */}
+        <div className="pt-2 border-t border-[#1E1E1E] space-y-2">
+          <div className="flex items-center justify-between text-[10px] text-[#888888] font-mono tracking-[0.12em]">
+            <span>SIZES (TAP TO BAG):</span>
+            <span className="text-[#F4F4F4] font-bold">{selectedSize}</span>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {availableSizes.map((size) => (
               <button
                 key={size}
                 type="button"
-                onClick={() => setSelectedSize(size)}
-                className={`min-w-[32px] h-7 px-2 text-xs font-mono font-bold uppercase border transition-colors cursor-pointer ${
+                onClick={(e) => {
+                  setSelectedSize(size);
+                  // Direct add to bag & open drawer
+                  addToCart({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: frames[0],
+                    size: size,
+                    category: product.category,
+                    storeWorld: product.storeWorld || 'clothing'
+                  });
+                  openCart();
+                }}
+                className={`min-w-[34px] h-7 px-2 text-[11px] font-mono font-bold uppercase border transition-colors cursor-pointer ${
                   selectedSize === size
-                    ? 'border-[#8F1118] bg-[#8F1118] text-white'
-                    : 'border-white/15 bg-black/40 text-[#C8C3B8] hover:border-white/40'
+                    ? isShoes
+                      ? 'border-[#00695c] bg-[#00695c] text-white'
+                      : 'border-[#7D0A0A] bg-[#7D0A0A] text-white'
+                    : isShoes
+                      ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a]'
+                      : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666]'
                 }`}
-                aria-pressed={selectedSize === size}
-                aria-label={`Select size ${size}`}
+                aria-label={`Select size ${size} and open cart`}
               >
                 {size}
               </button>
             ))}
           </div>
 
-          {/* Issue 19 Fix: Separated Add to Bag button with generous breathing room */}
-          <button 
-            type="button" 
-            onClick={handleQuickAdd}
-            className="w-full h-10 mt-2 bg-[#EEEAE1] hover:bg-white active:bg-emerald-600 active:text-white text-black text-xs font-mono font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-colors cursor-pointer"
-            aria-label={`Add ${product.name} in size ${selectedSize} to bag`}
-          >
-            {isAdded ? <Check size={14} /> : <ShoppingBag size={14} />}
-            <span>{isAdded ? 'Added to Bag' : `Add to Bag (${selectedSize})`}</span>
-          </button>
+
         </div>
 
       </div>

@@ -201,17 +201,17 @@ export default function AiFitPage() {
     <div className="py-8 sm:py-12 bg-[#050505] min-h-[100dvh] text-[#EEEAE1] font-mono selection:bg-[#8F1118]">
       <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-12">
         
-        {/* Header */}
-        <div className="mb-10 pb-6 border-b border-[#1c1c1c] text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#121212] border border-[#262626] text-[#8F1118] text-[9px] font-bold tracking-[0.3em] uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#8F1118] animate-ping" />
-            2026 VIRTUAL TRY-ON ENGINE • REAL BODY POSE CONTOURING
+        {/* Header - Blueprint 4: PROPORTIONAL DRAPE LAB */}
+        <div className="mb-10 pb-6 border-b border-[#1E1E1E] text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#111111] border border-[#1E1E1E] text-[#7D0A0A] text-[9px] font-mono font-bold tracking-[0.3em] uppercase">
+            <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
+            SILHOUETTE ARCHIVE // CALIBRATION LAB
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-[-0.04em] font-editorial">
-            VIRTUAL <span className="text-[#8F1118]">STUDIO</span>
+          <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-[-0.05em] font-editorial text-[#F4F4F4]">
+            PROPORTIONAL <span className="text-[#7D0A0A]">DRAPE LAB</span>
           </h1>
-          <p className="text-xs text-[#77746E] leading-relaxed max-w-xl mx-auto">
-            Client-side MediaPipe landmark calculation paired with 280–500 GSM fabric drape simulation and interactive 3D sneaker inspection.
+          <p className="text-xs text-[#666666] leading-relaxed max-w-xl mx-auto font-mono">
+            Body pose contouring paired with 280–500 GSM fabric drape simulation and interactive 3D footwear turntable inspection.
           </p>
         </div>
 
@@ -232,7 +232,7 @@ export default function AiFitPage() {
               onClick={() => setActiveMode('SNEAKER')}
               className={`px-6 py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
                 activeMode === 'SNEAKER'
-                  ? 'bg-[#009688] text-white shadow-md'
+                  ? 'bg-[#00695c] text-white shadow-md'
                   : 'text-[#77746E] hover:text-[#EEEAE1]'
               }`}
             >
@@ -464,7 +464,7 @@ export default function AiFitPage() {
                     const match = sneakerItems.find(p => p.id === e.target.value);
                     if (match) setSelectedSneaker(match);
                   }}
-                  className="w-full bg-[#050505] border border-[#262626] text-[#EEEAE1] text-xs px-3 py-3 rounded-none focus:outline-none focus:border-[#009688]"
+                  className="w-full bg-[#050505] border border-[#262626] text-[#EEEAE1] text-xs px-3 py-3 rounded-none focus:outline-none focus:border-[#00695c]"
                 >
                   {sneakerItems.map(item => (
                     <option key={item.id} value={item.id}>
@@ -478,7 +478,7 @@ export default function AiFitPage() {
               <div>
                 <div className="flex justify-between text-[10px] text-[#77746E] mb-2 font-bold">
                   <span>ORBITAL ANGLE INSPECTION:</span>
-                  <span className="text-[#009688] font-bold">{sneakerAngle}°</span>
+                  <span className="text-[#00695c] font-bold">{sneakerAngle}°</span>
                 </div>
                 <input 
                   type="range" 
@@ -486,7 +486,7 @@ export default function AiFitPage() {
                   max="360" 
                   value={sneakerAngle}
                   onChange={(e) => setSneakerAngle(Number(e.target.value))}
-                  className="w-full accent-[#009688]" 
+                  className="w-full accent-[#00695c]" 
                 />
               </div>
 
@@ -496,7 +496,7 @@ export default function AiFitPage() {
                   onClick={() => setZoomSole(!zoomSole)}
                   className={`flex-1 py-3 border text-xs font-bold uppercase tracking-wider transition-colors ${
                     zoomSole 
-                      ? 'border-[#009688] bg-[#009688] text-white' 
+                      ? 'border-[#00695c] bg-[#00695c] text-white' 
                       : 'border-[#262626] bg-[#0f0f0f] text-[#C8C3B8]'
                   }`}
                 >
@@ -505,8 +505,8 @@ export default function AiFitPage() {
               </div>
 
               {/* Mobile AR WebXR Launch Card */}
-              <div className="p-5 bg-[#050505] border border-[#009688]/30 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#009688] uppercase">
+              <div className="p-5 bg-[#050505] border border-[#00695c]/30 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#00695c] uppercase">
                   <QrCode size={18} />
                   <span>INSTANT MOBILE AR PROJECTION</span>
                 </div>
@@ -559,7 +559,7 @@ export default function AiFitPage() {
                 
                 {/* Turntable Floor Ring */}
                 <div 
-                  className="absolute bottom-6 inset-x-8 h-20 rounded-full border border-[#009688]/20 bg-gradient-to-b from-transparent to-[#009688]/10" 
+                  className="absolute bottom-6 inset-x-8 h-20 rounded-full border border-[#00695c]/20 bg-gradient-to-b from-transparent to-[#00695c]/10" 
                   style={{ transform: 'rotateX(70deg)' }}
                 />
 
@@ -580,7 +580,7 @@ export default function AiFitPage() {
 
                 {/* Sole Inspection Highlight Marker */}
                 {zoomSole && (
-                  <div className="absolute bottom-8 right-8 bg-[#009688] text-white text-[9px] font-bold uppercase px-2.5 py-1 tracking-wider shadow-lg">
+                  <div className="absolute bottom-8 right-8 bg-[#00695c] text-white text-[9px] font-bold uppercase px-2.5 py-1 tracking-wider shadow-lg">
                     VULCANIZED TREAD: 100% GRIP
                   </div>
                 )}

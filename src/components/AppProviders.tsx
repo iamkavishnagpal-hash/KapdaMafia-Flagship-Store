@@ -7,10 +7,21 @@ import { MafiaMirrorProvider } from '@/components/MafiaMirrorDrawer';
 
 function InnerProvider({ children }: { children: React.ReactNode }) {
   const { world } = useWorld();
+  const isShoes = world === 'shoes';
+
   return (
     <CartProvider currentWorld={world}>
       <MafiaMirrorProvider>
-        {children}
+        <div 
+          className={`min-h-screen transition-colors duration-500 relative ${
+            isShoes ? 'bg-[#060e0a]' : 'bg-[#080808]'
+          }`}
+          data-store-canvas={world}
+        >
+          {/* Tactile Film Grain / CRT Shader Overlay */}
+          <div className="film-grain-overlay" aria-hidden="true" />
+          {children}
+        </div>
       </MafiaMirrorProvider>
     </CartProvider>
   );

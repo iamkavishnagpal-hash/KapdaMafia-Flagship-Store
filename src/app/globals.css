@@ -1,29 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #050505;
-  --warm-black: #0a0a0a;
-  --graphite: #121212;
-  --ivory: #eeeae1;
-  --stone: #c8c3b8;
-  --smoke: #77746e;
-  --oxblood: #8f1118;
+  /* 1. COLOR FOUNDATION & CONTRAST (Archive V1) */
+  --surface-void: #080808;
+  --surface-elevated: #111111;
+  --border-hairline: #1E1E1E;
+  --text-primary: #F4F4F4;
+  --text-muted: #666666;
+  --accent-oxblood: #7D0A0A;
+  --accent-core: #FFFFFF;
 
-  /* Usability Standard 4-Tier Semantic Typography Scale (Max 8 sizes) */
-  --text-micro: 11px;
+  /* Legacy mappings */
+  --ink: var(--surface-void);
+  --warm-black: var(--surface-void);
+  --graphite: var(--surface-elevated);
+  --ivory: var(--text-primary);
+  --stone: #c8c3b8;
+  --smoke: var(--text-muted);
+  --oxblood: var(--accent-oxblood);
+
+  /* Typography Scale */
+  --text-micro: 10px;
   --text-xs: 12px;
   --text-sm: 14px;
   --text-base: 16px;
   --text-lg: 18px;
   --text-xl: 22px;
   --text-2xl: 32px;
-  --text-display: 56px;
+  --text-display: clamp(2.5rem, 6vw, 5.5rem);
 
-  /* Standardized Text Color Tokens (Max 4 colors) */
-  --color-text-primary: #F3F0E8;
+  /* Standardized Text Color Tokens */
+  --color-text-primary: var(--text-primary);
   --color-text-secondary: #C8C3B8;
-  --color-text-muted: #8C8C86;
-  --color-text-accent: #8F1118;
+  --color-text-muted: var(--text-muted);
+  --color-text-accent: var(--accent-oxblood);
 }
 
 * { box-sizing: border-box; }
@@ -38,16 +48,74 @@ html {
 }
 
 body {
-  background: var(--ink);
-  color: var(--color-text-primary);
+  background: var(--surface-void);
+  color: var(--text-primary);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-h1, h2, h3, .font-editorial {
-  font-family: var(--font-syne, var(--font-display, sans-serif));
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
+/* ==========================================================================
+   3-TIER TYPOGRAPHY SYSTEM (STRICT TRACKING & KERNING SPECIFICATION)
+   ========================================================================== */
+
+/* TIER 1: Display & High-Tension Headlines (Brand & Drop Titles)
+   Font: Space Grotesk / Monument Extended (Bold 700 / Black 900)
+   Rules: All Caps, letter-spacing: -0.05em (tight tracking), line-height: 0.95
+   Rule of thumb: Solid compressed block, not scattered text */
+h1, h2, h3, .font-display, .font-editorial, .tier1-headline {
+  font-family: var(--font-display, var(--font-sans, sans-serif)) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.06em !important;
+  line-height: 0.95 !important;
+}
+
+/* TIER 2: Technical Specs & Metadata (GSM, Coordinates, Run IDs)
+   Font: JetBrains Mono / Commit Mono (Medium 500)
+   Rules: All Caps, font-size: 11px (Mobile: 10px), letter-spacing: +0.12em (wide tracking), color: #888888
+   Rule of thumb: Industrial lab labels jaisi crisp, raw reading */
+.font-mono, .tier2-spec, [data-spec="industrial"] {
+  font-family: var(--font-mono, monospace) !important;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.spec-badge, .spec-label, .tier2-label {
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #888888;
+}
+@media (min-width: 640px) {
+  .spec-badge, .spec-label, .tier2-label {
+    font-size: 11px;
+  }
+}
+
+/* TIER 3: Product Titles & Prices (The Commerce Layer)
+   Font: Inter / Geist Sans (Medium 500)
+   Rules: Title Case ya Clean Upper, font-size: 14px (Desktop: 15px), letter-spacing: -0.01em, line-height: 1.3
+   Price: Bold aur clean tabular numbers (font-variant-numeric: tabular-nums) */
+.product-title, .tier3-title {
+  font-family: var(--font-sans, sans-serif) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.3 !important;
+}
+@media (min-width: 1024px) {
+  .product-title, .tier3-title {
+    font-size: 15px !important;
+  }
+}
+
+.tabular-price, .tier3-price {
+  font-family: var(--font-sans, sans-serif) !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.01em !important;
 }
 
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
@@ -80,6 +148,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .infinite-marquee:hover .infinite-marquee-track { animation-play-state: paused; }
 .infinite-marquee-item { display: inline-flex; align-items: center; gap: 2.2rem; padding: 1rem 1.1rem; white-space: nowrap; }
 .infinite-marquee-item i { color: var(--oxblood); font-style: normal; }
+
+@keyframes marquee-hardware {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+.animate-marquee-hardware {
+  animation: marquee-hardware 22s linear infinite;
+  will-change: transform;
+}
 
 @keyframes mafia-marquee { to { transform: translateX(-50%); } }
 @keyframes mafia-hero-drift { 0%, 100% { transform: scale(1.03) translate3d(0, 0, 0); } 50% { transform: scale(1.08) translate3d(-.8%, -.4%, 0); } }
@@ -177,5 +259,60 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     rgba(0, 0, 0, 0.8) 16px,
     rgba(255, 255, 255, 0.08) 17px
   );
+}
+
+/* ==========================================================================
+   THE $60K GEN-Z ADD-ONS: ANALOG FILM GRAIN OVERLAY & MARQUEE PAUSE
+   ========================================================================== */
+
+/* 2% Analog Film Grain Overlay - hardware-accelerated SVG noise */
+.film-grain-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Marquee Pause on Hover */
+.marquee-container:hover .animate-marquee-hardware {
+  animation-play-state: paused;
+}
+
+/* Scroll Reveal System — Progressive content entrance */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Hide scrollbar for snap carousels */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
