@@ -145,187 +145,188 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* FULL-SCREEN BESPOKE DUAL-STORE HAMBURGER DRAWER */}
-        {menuOpen && (
-          <div className="fixed inset-0 z-50 bg-[#070707]/98 backdrop-blur-2xl flex flex-col justify-between p-5 sm:p-10 font-mono text-[#F4F4F4] animate-fade-in overflow-y-auto">
+      </header>
+
+      {/* FULL-SCREEN BESPOKE DUAL-STORE HAMBURGER DRAWER */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-[100] w-screen h-screen bg-[#080808] flex flex-col justify-between p-5 sm:p-10 font-mono text-[#F4F4F4] animate-fade-in overflow-y-auto">
+          
+          {/* Top Bar inside Menu */}
+          <div className="flex items-center justify-between pb-5 border-b border-white/10 shrink-0">
+            <div className="flex items-center gap-3">
+              <span className="text-xs sm:text-sm font-black uppercase tracking-tight font-[var(--font-display)] text-white">
+                {isShoesWorld ? '[SHOES MAFIA // FOOTWEAR DIRECTORY]' : '[KAPDA MAFIA // APPAREL DIRECTORY]'}
+              </span>
+              <span className={`text-[9px] sm:text-[10px] font-mono tracking-widest px-2.5 py-1 rounded font-bold uppercase ${
+                isShoesWorld ? 'bg-[#00695c] text-white' : 'bg-[#7D0A0A] text-white'
+              }`}>
+                {isShoesWorld ? 'FOOTWEAR VAULT' : 'APPAREL VAULT'}
+              </span>
+            </div>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="px-3.5 py-2 text-[#888888] hover:text-white border border-white/15 hover:border-white transition-colors cursor-pointer flex items-center gap-2 text-xs uppercase"
+              aria-label="Close menu"
+            >
+              <span>CLOSE</span>
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* Store Portal Switcher Tabs inside Menu */}
+          <div className="mt-5 grid grid-cols-2 gap-3 p-1.5 bg-[#121212] border border-white/10 shrink-0">
+            <button
+              onClick={() => setWorld('clothing')}
+              className={`py-3 px-4 text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                !isShoesWorld
+                  ? 'bg-white text-black shadow-lg font-black'
+                  : 'text-[#888888] hover:text-white'
+              }`}
+            >
+              <span>KAPDA MAFIA (CLOTHING)</span>
+            </button>
+            <button
+              onClick={() => setWorld('shoes')}
+              className={`py-3 px-4 text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                isShoesWorld
+                  ? 'bg-[#00695c] text-white shadow-lg shadow-[#00695c]/30 font-black'
+                  : 'text-[#888888] hover:text-[#00695c]'
+              }`}
+            >
+              <span>SHOES MAFIA (FOOTWEAR)</span>
+            </button>
+          </div>
+
+          {/* Menu Links Body: Tailored per Store World */}
+          <div className="my-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start flex-1">
             
-            {/* Top Bar inside Menu */}
-            <div className="flex items-center justify-between pb-5 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <span className="text-xs sm:text-sm font-black uppercase tracking-tight font-[var(--font-display)] text-white">
-                  {isShoesWorld ? '[SHOES MAFIA // FOOTWEAR DIRECTORY]' : '[KAPDA MAFIA // APPAREL DIRECTORY]'}
-                </span>
-                <span className={`text-[9px] sm:text-[10px] font-mono tracking-widest px-2 py-0.5 rounded font-bold uppercase ${
-                  isShoesWorld ? 'bg-[#00695c] text-white' : 'bg-[#7D0A0A] text-white'
-                }`}>
-                  {isShoesWorld ? 'FOOTWEAR VAULT' : 'APPAREL VAULT'}
-                </span>
+            {/* Main Category Links (Left 8 Cols) */}
+            <div className="lg:col-span-8 space-y-2 sm:space-y-3">
+              <div className="text-[10px] font-mono tracking-widest text-[#666666] uppercase pb-1 border-b border-white/5">
+                {isShoesWorld ? 'FOOTWEAR CATEGORIES & ARCHIVES' : 'STREETWEAR UNIFORM SILHOUETTES'}
               </div>
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="px-3 py-1.5 text-[#888888] hover:text-white border border-white/15 hover:border-white transition-colors cursor-pointer flex items-center gap-2 text-xs uppercase"
-                aria-label="Close menu"
-              >
-                <span>CLOSE</span>
-                <X size={16} />
-              </button>
-            </div>
 
-            {/* Store Portal Switcher Tabs inside Menu */}
-            <div className="mt-5 grid grid-cols-2 gap-3 p-1 bg-[#121212] border border-white/10">
-              <button
-                onClick={() => setWorld('clothing')}
-                className={`py-3 px-4 text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                  !isShoesWorld
-                    ? 'bg-white text-black shadow-lg font-black'
-                    : 'text-[#888888] hover:text-white'
-                }`}
-              >
-                <span>KAPDA MAFIA (CLOTHING)</span>
-              </button>
-              <button
-                onClick={() => setWorld('shoes')}
-                className={`py-3 px-4 text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                  isShoesWorld
-                    ? 'bg-[#00695c] text-white shadow-lg shadow-[#00695c]/30 font-black'
-                    : 'text-[#888888] hover:text-[#00695c]'
-                }`}
-              >
-                <span>SHOES MAFIA (FOOTWEAR)</span>
-              </button>
-            </div>
-
-            {/* Menu Links Body: Tailored per Store World */}
-            <div className="my-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              
-              {/* Main Category Links (Left 8 Cols) */}
-              <div className="lg:col-span-8 space-y-2 sm:space-y-3">
-                <div className="text-[10px] font-mono tracking-widest text-[#666666] uppercase pb-1 border-b border-white/5">
-                  {isShoesWorld ? 'FOOTWEAR CATEGORIES & ARCHIVES' : 'STREETWEAR UNIFORM SILHOUETTES'}
-                </div>
-
-                {(isShoesWorld ? [
-                  { name: 'ALL SNEAKERS & RUNNERS', href: '/shoes', desc: 'Full vault catalog UK 6 - 10' },
-                  { name: 'SPORT RUNNERS', href: '/shoes?cat=sport', desc: 'Breathable fly-knit shock absorption' },
-                  { name: 'STREETWEAR SNEAKERS', href: '/shoes?cat=sneaker', desc: 'Chunky soles & court high-tops' },
-                  { name: 'FORMAL HIGH-STREET', href: '/shoes?cat=formal', desc: 'Underground dress casual kicks' },
-                  { name: 'NEW ARRIVALS 2026', href: '/shoes?sort=new', desc: 'Freshly allocated stock from factory' }
-                ] : [
-                  { name: 'ALL APPAREL PIECES', href: '/shop', desc: 'Complete menswear uniform drop' },
-                  { name: 'OVERSIZED TEES (280 GSM)', href: '/shop?category=tees', desc: 'Heavyweight bio-washed drop-shoulder' },
-                  { name: 'FLEECE HOODIES (440 GSM)', href: '/shop?category=hoodies', desc: 'Ultra-dense brushed cotton fleece' },
-                  { name: 'TACTICAL CARGOS (380 GSM)', href: '/shop?category=cargos', desc: 'Custom 6-pocket functional hardware' },
-                  { name: 'ACID WASH DENIM', href: '/shop?category=denim', desc: 'Subtle hand-scraped raw denim cuts' }
-                ]).map((item, idx) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="group flex items-center justify-between py-2 sm:py-3 border-b border-white/5 hover:border-white/30 transition-all"
-                  >
-                    <div className="flex items-center gap-4 sm:gap-6">
-                      <span className="text-xs font-mono text-[#555] group-hover:text-white transition-colors">
-                        0{idx + 1} //
-                      </span>
-                      <div>
-                        <div className={`text-xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight font-[var(--font-display)] transition-transform group-hover:translate-x-2 duration-200 ${
-                          isShoesWorld ? 'text-[#e0f2f1] group-hover:text-[#80cbc4]' : 'text-[#f5f5f5] group-hover:text-white'
-                        }`}>
-                          {item.name}
-                        </div>
-                        <div className="text-[10px] text-[#777] font-mono tracking-wider">
-                          {item.desc}
-                        </div>
+              {(isShoesWorld ? [
+                { name: 'ALL SNEAKERS & RUNNERS', href: '/shoes', desc: 'Full vault catalog UK 6 - 10' },
+                { name: 'SPORT RUNNERS', href: '/shoes', desc: 'Breathable fly-knit shock absorption' },
+                { name: 'STREETWEAR SNEAKERS', href: '/shoes', desc: 'Chunky soles & court high-tops' },
+                { name: 'FORMAL HIGH-STREET', href: '/shoes', desc: 'Underground dress casual kicks' },
+                { name: 'NEW ARRIVALS 2026', href: '/shoes', desc: 'Freshly allocated stock from factory' }
+              ] : [
+                { name: 'ALL APPAREL PIECES', href: '/shop', desc: 'Complete menswear uniform drop' },
+                { name: 'OVERSIZED TEES (280 GSM)', href: '/shop?category=tees', desc: 'Heavyweight bio-washed drop-shoulder' },
+                { name: 'FLEECE HOODIES (440 GSM)', href: '/shop?category=hoodies', desc: 'Ultra-dense brushed cotton fleece' },
+                { name: 'TACTICAL CARGOS (380 GSM)', href: '/shop?category=cargos', desc: 'Custom 6-pocket functional hardware' },
+                { name: 'ACID WASH DENIM', href: '/shop?category=denim', desc: 'Subtle hand-scraped raw denim cuts' }
+              ]).map((item, idx) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="group flex items-center justify-between py-2 sm:py-3 border-b border-white/5 hover:border-white/30 transition-all"
+                >
+                  <div className="flex items-center gap-4 sm:gap-6">
+                    <span className="text-xs font-mono text-[#555] group-hover:text-white transition-colors">
+                      0{idx + 1} //
+                    </span>
+                    <div>
+                      <div className={`text-xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight font-[var(--font-display)] transition-transform group-hover:translate-x-2 duration-200 ${
+                        isShoesWorld ? 'text-[#e0f2f1] group-hover:text-[#80cbc4]' : 'text-[#f5f5f5] group-hover:text-white'
+                      }`}>
+                        {item.name}
+                      </div>
+                      <div className="text-[10px] text-[#777] font-mono tracking-wider">
+                        {item.desc}
                       </div>
                     </div>
-                    <ArrowRight size={18} className="text-[#555] group-hover:text-white group-hover:translate-x-1 transition-all" />
-                  </Link>
-                ))}
-              </div>
-
-              {/* Store Utilities & Customer Support (Right 4 Cols) */}
-              <div className="lg:col-span-4 space-y-4 bg-[#111111] p-5 sm:p-6 border border-white/10">
-                <div className="text-[10px] font-mono tracking-widest text-[#888888] uppercase pb-2 border-b border-white/10">
-                  ESSENTIAL STORE SERVICES
-                </div>
-
-                <div className="space-y-3 text-xs font-mono">
-                  <Link
-                    href="/track-order"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
-                  >
-                    <span>📦 TRACK YOUR ORDER</span>
-                    <ArrowRight size={14} />
-                  </Link>
-
-                  <Link
-                    href="/ai-fit"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
-                  >
-                    <span>✨ AI 3D SIZE &amp; DRAPE LAB</span>
-                    <ArrowRight size={14} />
-                  </Link>
-
-                  <Link
-                    href="/lookbook"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
-                  >
-                    <span>📸 LOOKBOOK // MOTION ARCHIVE</span>
-                    <ArrowRight size={14} />
-                  </Link>
-
-                  <Link
-                    href="/store"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
-                  >
-                    <span>📍 FLAGSHIP STORE (FARIDABAD)</span>
-                    <ArrowRight size={14} />
-                  </Link>
-
-                  <a
-                    href="https://wa.me/918375000819?text=Hi%20Kapda%20Mafia,%20I%20have%20an%20order%20inquiry"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-[#0d2818] border border-emerald-500/40 text-emerald-300 hover:bg-[#133822] transition-colors"
-                  >
-                    <span>💬 WHATSAPP CONCIERGE (24/7)</span>
-                    <ArrowRight size={14} />
-                  </a>
-                </div>
-
-                <div className="pt-3 border-t border-white/10 text-[10px] text-[#777] leading-relaxed">
-                  <div>SECURE PAYMENTS: UPI · CARDS · CASH ON DELIVERY</div>
-                  <div>DISPATCH IN 24H · 7 DAYS EASY SIZE REPLACEMENT</div>
-                </div>
-              </div>
-
+                  </div>
+                  <ArrowRight size={18} className="text-[#555] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
             </div>
 
-            {/* Bottom Meta & Contact Info */}
-            <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-[#888888]">
-              <div>
-                FLAGSHIP STORE: GROUND FLOOR, 5G-38, NIT-5 FARIDABAD · PHONE: +91 83750 00819
+            {/* Store Utilities & Customer Support (Right 4 Cols) */}
+            <div className="lg:col-span-4 space-y-4 bg-[#111111] p-5 sm:p-6 border border-white/10">
+              <div className="text-[10px] font-mono tracking-widest text-[#888888] uppercase pb-2 border-b border-white/10">
+                ESSENTIAL STORE SERVICES
               </div>
-              <div className="flex items-center gap-4">
-                <Link href="/privacy" onClick={() => setMenuOpen(false)} className="hover:text-white">
-                  PRIVACY POLICY
+
+              <div className="space-y-3 text-xs font-mono">
+                <Link
+                  href="/track-order"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
+                >
+                  <span>📦 TRACK YOUR ORDER</span>
+                  <ArrowRight size={14} />
                 </Link>
-                <span>·</span>
-                <Link href="/terms" onClick={() => setMenuOpen(false)} className="hover:text-white">
-                  TERMS OF SERVICE
+
+                <Link
+                  href="/ai-fit"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
+                >
+                  <span>✨ AI 3D SIZE &amp; DRAPE LAB</span>
+                  <ArrowRight size={14} />
                 </Link>
-                <span>·</span>
-                <span className="text-white font-bold">KAPDA MAFIA © 2026</span>
+
+                <Link
+                  href="/lookbook"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
+                >
+                  <span>📸 LOOKBOOK // MOTION ARCHIVE</span>
+                  <ArrowRight size={14} />
+                </Link>
+
+                <Link
+                  href="/store"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-between p-3 bg-[#181818] border border-white/10 hover:border-white text-white transition-colors"
+                >
+                  <span>📍 FLAGSHIP STORE (FARIDABAD)</span>
+                  <ArrowRight size={14} />
+                </Link>
+
+                <a
+                  href="https://wa.me/918375000819?text=Hi%20Kapda%20Mafia,%20I%20have%20an%20order%20inquiry"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3 bg-[#0d2818] border border-emerald-500/40 text-emerald-300 hover:bg-[#133822] transition-colors"
+                >
+                  <span>💬 WHATSAPP CONCIERGE (24/7)</span>
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+
+              <div className="pt-3 border-t border-white/10 text-[10px] text-[#777] leading-relaxed">
+                <div>SECURE PAYMENTS: UPI · CARDS · CASH ON DELIVERY</div>
+                <div>DISPATCH IN 24H · 7 DAYS EASY SIZE REPLACEMENT</div>
               </div>
             </div>
 
           </div>
-        )}
-      </header>
+
+          {/* Bottom Meta & Contact Info */}
+          <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-[#888888] shrink-0">
+            <div>
+              FLAGSHIP STORE: GROUND FLOOR, 5G-38, NIT-5 FARIDABAD · PHONE: +91 83750 00819
+            </div>
+            <div className="flex items-center gap-4">
+              <Link href="/privacy" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                PRIVACY POLICY
+              </Link>
+              <span>·</span>
+              <Link href="/terms" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                TERMS OF SERVICE
+              </Link>
+              <span>·</span>
+              <span className="text-white font-bold">KAPDA MAFIA © 2026</span>
+            </div>
+          </div>
+
+        </div>
+      )}
 
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
