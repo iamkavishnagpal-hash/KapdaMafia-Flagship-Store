@@ -23,6 +23,9 @@ export function useScrollReveal() {
       return;
     }
 
+    // Make immediately visible if already in viewport or after quick fallback
+    const elements = container.querySelectorAll('.reveal');
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -33,15 +36,27 @@ export function useScrollReveal() {
         });
       },
       {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.02,
+        rootMargin: '100px 0px 100px 0px'
       }
     );
 
-    const elements = container.querySelectorAll('.reveal');
     elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Fallback: ensure visible if IntersectionObserver delays on fast scroll
+    const fallbackTimer = setTimeout(() => {
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 200) {
+          el.classList.add('reveal-visible');
+        }
+      });
+    }, 400);
+
+    return () => {
+      clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
   }, []);
 
   return containerRef;

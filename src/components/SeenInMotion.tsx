@@ -70,19 +70,19 @@ const cards = [
 
 export default function SeenInMotion() {
   return (
-    <section className="bg-[#EEEAE1] py-20 text-[#090909] sm:py-24">
+    <section className="bg-[#080808] border-b border-[#1E1E1E] py-20 text-[#F4F4F4] sm:py-24">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">
         <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <div className="mb-2 text-xs tracking-wider text-[#77746E] uppercase font-semibold">
-              Campaign Visuals · Editorial Movement
+            <div className="mb-2 text-xs tracking-widest text-[#7D0A0A] uppercase font-mono font-bold">
+              Campaign Visuals // Editorial Movement
             </div>
-            <h2 className="font-[var(--font-display)] text-4xl font-bold tracking-[-0.04em] uppercase sm:text-6xl">
+            <h2 className="font-[var(--font-display)] text-4xl font-bold tracking-[-0.04em] uppercase sm:text-6xl text-[#F4F4F4]">
               Seen in Motion
             </h2>
           </div>
-          <span className="max-w-xs text-xs leading-relaxed text-[#77746E]">
-            Heavyweight drape in real urban environments. Natural drape and authentic street presence.
+          <span className="max-w-xs text-xs leading-relaxed text-[#888888] font-mono">
+            Heavyweight drape in real urban environments. Natural volumetric fall and authentic street presence.
           </span>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">

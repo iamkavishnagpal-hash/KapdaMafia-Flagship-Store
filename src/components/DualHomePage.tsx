@@ -38,22 +38,16 @@ export default function DualHomePage({
 
   // Otherwise render the Kapda Mafia streetwear digital flagship
   return (
-    <div ref={scrollRef} className="bg-[#090909]">
+    <div ref={scrollRef} className="bg-[#080808]">
       <Hero />
       
       <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
         <NewDropSection products={clothingProducts} />
       </div>
 
-      {/* Gradient transition: dark → light for SeenInMotion */}
-      <div className="h-16 sm:h-24 bg-gradient-to-b from-[#080808] to-[#EEEAE1]" />
-      
       <div className="reveal" style={{ '--reveal-delay': '100ms' } as React.CSSProperties}>
         <SeenInMotion />
       </div>
-
-      {/* Gradient transition: light → dark */}
-      <div className="h-16 sm:h-24 bg-gradient-to-b from-[#EEEAE1] to-[#0D0C0B]" />
 
       <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
         <LimitedDropBanner />
@@ -71,15 +65,9 @@ export default function DualHomePage({
         <LookbookSection lookbooks={lookbooks} />
       </div>
 
-      {/* Gradient transition: dark → light for FabricStory */}
-      <div className="h-16 sm:h-24 bg-gradient-to-b from-[#090909] to-[#EEEAE1]" />
-
       <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
         <FabricStory />
       </div>
-
-      {/* Gradient transition: light → dark for Instagram */}
-      <div className="h-16 sm:h-24 bg-gradient-to-b from-[#EEEAE1] to-[#0a0a0a]" />
 
       <div className="reveal" style={{ '--reveal-delay': '100ms' } as React.CSSProperties}>
         <InstagramLiveFeed />
@@ -123,24 +111,24 @@ export default function DualHomePage({
         </div>
       </section>
 
-      {/* Branded Trust Specification Bar — NOT generic trust icons */}
-      <section className="border-b border-white/10 bg-[#111111] py-7 text-[#EEEAE1]">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-5 px-5 text-xs tracking-wider text-[#C8C3B8] uppercase font-mono sm:grid-cols-4 sm:px-8 lg:px-16">
+      {/* Branded Trust Specification Bar — Industrial Coordinates & Origin */}
+      <section className="border-b border-[#1E1E1E] bg-[#080808] py-8 text-[#F4F4F4]">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-5 px-5 text-xs tracking-wider text-[#888888] uppercase font-mono sm:grid-cols-4 sm:px-8 lg:px-16">
           <div className="flex items-center gap-3">
             <Zap size={16} className="text-[#7D0A0A] shrink-0" />
-            <span>440 GSM Lab-Tested Cotton</span>
+            <span className="text-[#F4F4F4]">440 GSM Lab-Tested Cotton</span>
           </div>
           <div className="flex items-center gap-3">
             <MapPin size={16} className="text-[#7D0A0A] shrink-0" />
-            <span>NIT-5 Faridabad Origin</span>
+            <span className="text-[#F4F4F4]">NIT-5 Faridabad Origin</span>
           </div>
           <div className="flex items-center gap-3">
             <Package size={16} className="text-[#7D0A0A] shrink-0" />
-            <span>250-Unit Limited Runs</span>
+            <span className="text-[#F4F4F4]">250-Unit Limited Runs</span>
           </div>
           <div className="flex items-center gap-3">
             <MessageCircle size={16} className="text-[#7D0A0A] shrink-0" />
-            <span>Direct WhatsApp Concierge</span>
+            <span className="text-[#F4F4F4]">Direct WhatsApp Concierge</span>
           </div>
         </div>
       </section>
