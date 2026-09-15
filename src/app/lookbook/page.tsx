@@ -9,18 +9,18 @@ export default function LookbookPage() {
     {
       id: 'look-01',
       tag: 'LOOK 01',
-      title: 'AFTER DARK',
+      title: 'MIDNIGHT UNIFORM',
       description: 'Oversized crest tee paired with tactical cargo pants.',
-      image: '/media/campaign-after-dark.png',
+      image: '/media/lookbook-rain-editorial.jpg',
       pieces: '2 PIECES / ONE LOOK',
       link: '/shop'
     },
     {
       id: 'look-02',
       tag: 'LOOK 02',
-      title: 'MONOLITH REBEL',
-      description: 'Heavyweight flame hoodie styled with parachute cargos.',
-      image: '/media/product-jacket.png',
+      title: 'MONOLITH FLEECE',
+      description: 'Heavyweight flame hoodie styled with relaxed denim.',
+      image: '/media/lookbook-concrete-studio.jpg',
       pieces: '2 PIECES / ONE LOOK',
       link: '/shop'
     }
@@ -32,13 +32,13 @@ export default function LookbookPage() {
       <section className="relative pt-32 pb-20 border-b border-[#181818] overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16">
           <div className="text-[10px] tracking-[0.35em] text-[#8C8C86] uppercase font-bold mb-3">
-            LOOKBOOK / DROP 09 / AFTER DARK
+            EDITORIAL LOOKBOOK / AUTUMN WINTER
           </div>
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.9] text-white">
             COMPLETE<br />OUTFITS.
           </h1>
           <p className="mt-6 max-w-md text-xs sm:text-sm text-[#8C8C86] leading-relaxed">
-            The full Kapda Mafia uniform, styled for nights that do not need a dress code.
+            The full Kapda Mafia uniform, styled for intentional presence and sculpted street drape.
           </p>
         </div>
       </section>

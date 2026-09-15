@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import Link from 'next/link';
-import { Eye, ShoppingBag, Rotate3D, Check, ShieldAlert, X } from 'lucide-react';
+import { ShoppingBag, Check } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
 import { useCart } from '@/context/CartContext';
+import { useMafiaMirror } from '@/components/MafiaMirrorDrawer';
 
 interface ProductCard360Props {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductCard360Props {
 
 export default function ProductCard360({ product, priority = false }: ProductCard360Props) {
   const { addToCart, openCart } = useCart();
+  const { openMirror } = useMafiaMirror();
   const activeVariant = product.variants[0];
 
   const frames = useMemo(() => {
@@ -21,18 +23,14 @@ export default function ProductCard360({ product, priority = false }: ProductCar
       : [
           activeVariant?.images[0]?.url || '/media/product-tee.png',
           activeVariant?.images[1]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
-          activeVariant?.images[2]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
           activeVariant?.images[0]?.url || '/media/product-tee.png'
         ];
   }, [activeVariant]);
 
   const totalFrames = frames.length;
   const [currentFrame, setCurrentFrame] = useState(0);
-  const [isScrubbing, setIsScrubbing] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>(activeVariant?.sizes?.[0]?.size || 'M');
-  const [availableStock, setAvailableStock] = useState<number>(3);
   const [isAdded, setIsAdded] = useState(false);
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Preload and cache frames in memory on hover / touch start (zero-lag 60fps)
@@ -46,27 +44,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     });
   }, [frames]);
 
-  // Fetch real available stock from /api/inventory
-  useEffect(() => {
-    async function loadStock() {
-      try {
-        const res = await fetch(`/api/inventory?slug=${product.slug}`);
-        if (res.ok) {
-          const data = await res.json();
-          const match = data.inventory?.find((inv: { size: string; available_stock: number }) => inv.size === selectedSize);
-          if (match) {
-            setAvailableStock(match.available_stock);
-          }
-        }
-      } catch {
-        const sizeObj = activeVariant?.sizes?.find(s => s.size === selectedSize);
-        if (sizeObj) setAvailableStock(sizeObj.stock);
-      }
-    }
-    loadStock();
-  }, [product.slug, selectedSize, activeVariant]);
-
-  // Desktop Pointer / Mouse Scrubbing
+  // Desktop Pointer / Mouse Scrubbing for angles
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!containerRef.current || totalFrames <= 1) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -76,13 +54,13 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     setCurrentFrame(frameIndex);
   };
 
-  // Mobile Tap-to-Spin / Dual-frame flip (Never freezes page vertical scroll)
-  const handleMobileTapSpin = () => {
+  // Mobile Tap-to-Flip
+  const handleMobileTapFlip = () => {
     preloadFrames();
     setCurrentFrame(prev => (prev + 1) % totalFrames);
   };
 
-  // Optimistic Add To Bag
+  // 1-Click Quick Add
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -98,68 +76,53 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     });
 
     setIsAdded(true);
-    setMobileDrawerOpen(false);
     setTimeout(() => setIsAdded(false), 2000);
     openCart();
   };
 
+  const handleOpenMirror = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openMirror(product);
+  };
+
+  const availableSizes = activeVariant?.sizes?.map(s => s.size) || ['S', 'M', 'L', 'XL'];
+
   return (
-    <>
-      <article className="group bg-[#080808] border border-[#1a1a1a] hover:border-[#444] transition-all rounded-none flex flex-col justify-between font-mono relative overflow-hidden">
-        
-        {/* Top Architectural Spec Ticker Bar */}
-        <div className="flex items-center justify-between border-b border-[#181818] px-2.5 py-1.5 bg-[#050505] text-[8px] text-[#77746E] uppercase tracking-widest">
-          <div className="flex items-center gap-1.5 truncate">
-            <span className="h-1 w-1 rounded-full bg-[#8F1118]" />
-            <span className="font-bold text-[#A5A096]">[{product.id.toUpperCase()}]</span>
-            <span className="truncate">DROP 09 // 100% COTTON</span>
-          </div>
-          <span className="text-[#8F1118] font-bold shrink-0">
-            {availableStock > 0 && availableStock <= 3 ? `[STOCK: 0${availableStock}]` : '[VAULT: ALLOCATED]'}
-          </span>
-        </div>
+    <article className="group bg-[#080808] border border-[#161616] hover:border-[#333] transition-all flex flex-col justify-between font-mono relative overflow-hidden">
+      
+      {/* Product Image Viewport */}
+      <div 
+        ref={containerRef}
+        onPointerEnter={preloadFrames}
+        onPointerMove={handlePointerMove}
+        onMouseLeave={() => setCurrentFrame(0)}
+        onClick={handleMobileTapFlip}
+        className="relative aspect-[3/4] bg-[#0c0c0c] overflow-hidden select-none touch-pan-y cursor-pointer"
+      >
+        <Link href={`/product/${product.slug}`} className="block w-full h-full" aria-label={`View ${product.name}`}>
+          <img 
+            src={frames[currentFrame]} 
+            alt={`${product.name} angle ${currentFrame + 1}`}
+            loading={priority ? 'eager' : 'lazy'}
+            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03] contrast-[1.04]"
+          />
+        </Link>
 
-        {/* 360 Edge-to-Edge Scrubbing Viewport with touch-action: pan-y (Zero Mobile Scroll Freezing) */}
-        <div 
-          ref={containerRef}
-          onPointerEnter={preloadFrames}
-          onPointerMove={handlePointerMove}
-          onMouseEnter={() => setIsScrubbing(true)}
-          onMouseLeave={() => { setIsScrubbing(false); setCurrentFrame(0); }}
-          className="relative aspect-[3/4] bg-[#0c0c0c] overflow-hidden select-none touch-pan-y"
+        {/* Issue 17 & 18 Fix: Standardized Virtual Mirror label + accessible 44px touch target */}
+        <button
+          onClick={handleOpenMirror}
+          className="absolute top-3 right-3 min-h-[44px] px-3.5 py-2 bg-black/90 hover:bg-black border border-white/25 hover:border-white/60 text-xs font-bold tracking-wider text-white uppercase backdrop-blur-md flex items-center gap-2 transition-all shadow-xl z-10 cursor-pointer"
+          title="Open Virtual Mirror Studio"
+          aria-label={`Virtual Mirror try on for ${product.name}`}
         >
-          <Link href={`/product/${product.slug}`} className="block w-full h-full">
-            <img 
-              src={frames[currentFrame]} 
-              alt={`${product.name} angle ${currentFrame + 1}`}
-              loading={priority ? 'eager' : 'lazy'}
-              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03] contrast-[1.05]"
-            />
-          </Link>
+          <span className="text-[#8F1118]">✦</span>
+          <span>Virtual Mirror</span>
+        </button>
 
-          {/* High-Contrast Flash Badge */}
-          <div className="absolute top-2 left-2 bg-black/90 border border-white/20 px-2 py-0.5 text-[7px] sm:text-[8px] font-bold tracking-[0.2em] text-[#EEEAE1] uppercase backdrop-blur-md">
-            {product.badge || 'KAPDA'}
-          </div>
-
-          {/* Desktop 360 Angle Badge */}
-          <div className="hidden sm:flex absolute top-2 right-2 bg-black/90 border border-[#262626] px-2 py-0.5 items-center gap-1.5 text-[8px] tracking-widest text-[#EEEAE1] uppercase">
-            <Rotate3D size={11} className={isScrubbing ? 'text-[#8F1118] animate-spin' : 'text-[#77746E]'} />
-            <span>{isScrubbing ? `ANGLE ${currentFrame + 1}/${totalFrames}` : '360° SCRUB'}</span>
-          </div>
-
-          {/* Mobile Tap-to-Spin Pill */}
-          <button
-            type="button"
-            onClick={handleMobileTapSpin}
-            className="sm:hidden absolute top-2 right-2 bg-black/95 border border-white/30 px-2 py-1 flex items-center gap-1 text-[8px] font-bold tracking-wider text-white uppercase active:scale-95 transition-transform"
-          >
-            <Rotate3D size={10} className="text-[#8F1118]" />
-            <span>{currentFrame === 0 ? 'SPIN' : `${currentFrame + 1}/${totalFrames}`}</span>
-          </button>
-
-          {/* Scrubber Progress Track Indicator */}
-          <div className="absolute inset-x-0 bottom-0 h-1 bg-black/60 flex">
+        {/* Subtle Frame Progress Track */}
+        {totalFrames > 1 && (
+          <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black/40 flex">
             {frames.map((_, idx) => (
               <div 
                 key={idx}
@@ -167,168 +130,77 @@ export default function ProductCard360({ product, priority = false }: ProductCar
               />
             ))}
           </div>
+        )}
+      </div>
 
-          {/* Quick View Button on Desktop Hover */}
-          <div className="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
-            <Link 
-              href={`/product/${product.slug}`}
-              className="w-full bg-[#EEEAE1] hover:bg-white text-black text-[9px] font-bold tracking-[0.25em] uppercase py-2.5 flex items-center justify-center gap-2 shadow-2xl"
-            >
-              <Eye size={12} /> VIEW SPECIFICATION SHEET
-            </Link>
+      {/* Issue 19 & 26 Fix: Generous padding & vertical breathing room */}
+      <div className="p-4 sm:p-5 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#161616] space-y-3">
+        
+        <div>
+          {/* Subtle Fabric & Fit Spec */}
+          <div className="text-xs text-[#8C8C86] tracking-wider uppercase mb-1">
+            {product.gsm ? `${product.gsm} GSM · ` : '400 GSM · '}{product.fit || 'OVERSIZED FIT'}
+          </div>
+
+          {/* Issue 9 Fix: Scannable product name in Title Case */}
+          <Link href={`/product/${product.slug}`}>
+            <h3 className="text-sm font-bold text-[#F3F0E8] capitalize tracking-normal line-clamp-1 hover:text-white transition-colors">
+              {product.name.toLowerCase()}
+            </h3>
+          </Link>
+
+          {/* Price */}
+          <div className="flex items-baseline gap-2 pt-1.5">
+            <span className="text-sm font-black text-white tracking-tight">
+              ₹{product.price.toLocaleString('en-IN')}
+            </span>
+            {product.originalPrice && (
+              <span className="text-xs text-[#666] line-through font-normal">
+                ₹{product.originalPrice.toLocaleString('en-IN')}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Technical Military Spec Sheet Metadata Block */}
-        <div className="p-3 sm:p-4 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#181818] space-y-2.5">
-          
-          <div>
-            {/* Monospace Spec Line: GSM // SILHOUETTE */}
-            <div className="flex justify-between items-baseline text-[8px] sm:text-[9px] text-[#77746E] tracking-[0.2em] uppercase font-mono pb-1 border-b border-[#141414]">
-              <span className="truncate">
-                {product.gsm ? `${product.gsm} GSM // ` : ''}{product.fit || 'OVERSIZED'}
-              </span>
-              <span className="text-[#8F1118] font-bold shrink-0">
-                FARIDABAD REF.
-              </span>
-            </div>
-
-            {/* Product Name in High-Fashion Display Style */}
-            <Link href={`/product/${product.slug}`}>
-              <h3 className="text-xs sm:text-sm font-bold text-[#F3F0E8] uppercase tracking-wide line-clamp-1 mt-1.5 hover:text-[#8F1118] transition-colors">
-                {product.name}
-              </h3>
-            </Link>
-
-            {/* Price Tag */}
-            <div className="flex items-baseline justify-between pt-1">
-              <span className="text-xs sm:text-sm font-black text-[#EEEAE1] tracking-tight">
-                ₹{product.price.toLocaleString('en-IN')}
-              </span>
-              {product.originalPrice && (
-                <span className="text-[10px] text-[#555] line-through">
-                  ₹{product.originalPrice.toLocaleString('en-IN')}
-                </span>
-              )}
-            </div>
+        {/* Issue 20 Fix: Interactive Size Selector eliminating default size confusion */}
+        <div className="pt-2 border-t border-white/10 space-y-2">
+          <div className="flex items-center justify-between text-[11px] text-[#8C8C86]">
+            <span>SELECT SIZE:</span>
+            <span className="text-white font-bold">{selectedSize}</span>
           </div>
-
-          {/* Desktop Size Selector & Add To Bag */}
-          <div className="hidden sm:block pt-2 border-t border-[#181818] space-y-2">
-            <div className="flex items-center justify-between text-[8px] text-[#77746E]">
-              <span>SELECT PROPORTION:</span>
-              {availableStock > 0 && availableStock <= 3 && (
-                <span className="text-[#8F1118] font-bold flex items-center gap-1">
-                  <ShieldAlert size={9} /> ONLY {availableStock} REMAINING
-                </span>
-              )}
-              {availableStock === 0 && (
-                <span className="text-red-500 font-bold">BATCH SOLD OUT</span>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-1">
-              {activeVariant?.sizes?.map(s => (
-                <button
-                  key={s.size}
-                  type="button"
-                  onClick={() => setSelectedSize(s.size)}
-                  className={`px-2 py-1 text-[8px] font-bold uppercase transition-all rounded-none border ${
-                    selectedSize === s.size 
-                      ? 'border-[#8F1118] bg-[#8F1118] text-white' 
-                      : 'border-[#222] bg-[#111] text-[#C8C3B8] hover:border-[#444]'
-                  }`}
-                >
-                  {s.size}
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={handleQuickAdd}
-              disabled={availableStock === 0}
-              className={`w-full py-2 text-[9px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-1.5 transition-all rounded-none ${
-                availableStock === 0
-                  ? 'bg-[#141414] text-[#444] cursor-not-allowed border border-[#1a1a1a]'
-                  : isAdded
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-[#121212] hover:bg-[#8F1118] text-[#EEEAE1] hover:text-white border border-[#222] hover:border-[#8F1118]'
-              }`}
-            >
-              {isAdded ? <Check size={11} /> : <ShoppingBag size={11} />}
-              {isAdded ? 'COMMITTED TO BAG' : `ACQUIRE PIECE (${selectedSize})`}
-            </button>
-          </div>
-
-          {/* Mobile Tap Trigger for Bottom Sheet Drawer */}
-          <button
-            type="button"
-            onClick={() => setMobileDrawerOpen(true)}
-            className="sm:hidden w-full py-2 bg-[#121212] active:bg-[#8F1118] text-[#EEEAE1] text-[9px] font-bold tracking-[0.2em] uppercase border border-[#222] flex items-center justify-center gap-1.5"
-          >
-            <ShoppingBag size={10} />
-            <span>SELECT & ACQUIRE</span>
-          </button>
-
-        </div>
-
-      </article>
-
-      {/* MOBILE BOTTOM SHEET FOR INSTANT SIZE SELECTOR (GEN-Z THUMB ZONE) */}
-      {mobileDrawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm sm:hidden flex flex-col justify-end animate-fade-in font-mono">
-          <div className="bg-[#0c0c0c] border-t border-[#262626] p-5 space-y-4 max-h-[80vh] overflow-y-auto">
-            
-            <div className="flex items-start justify-between border-b border-[#1c1c1c] pb-3">
-              <div>
-                <span className="text-[9px] text-[#77746E] uppercase">{product.category}</span>
-                <h4 className="text-xs font-bold text-white uppercase">{product.name}</h4>
-                <div className="text-sm font-bold text-[#8F1118] mt-1">₹{product.price.toLocaleString('en-IN')}</div>
-              </div>
-              <button 
-                onClick={() => setMobileDrawerOpen(false)}
-                className="p-1.5 text-gray-400 hover:text-white"
+          <div className="flex flex-wrap gap-1.5">
+            {availableSizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => setSelectedSize(size)}
+                className={`min-w-[32px] h-7 px-2 text-xs font-mono font-bold uppercase border transition-colors cursor-pointer ${
+                  selectedSize === size
+                    ? 'border-[#8F1118] bg-[#8F1118] text-white'
+                    : 'border-white/15 bg-black/40 text-[#C8C3B8] hover:border-white/40'
+                }`}
+                aria-pressed={selectedSize === size}
+                aria-label={`Select size ${size}`}
               >
-                <X size={18} />
+                {size}
               </button>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex justify-between items-center text-[10px] text-[#77746E]">
-                <span>SELECT SIZE:</span>
-                {availableStock <= 3 && (
-                  <span className="text-[#8F1118] font-bold">ONLY {availableStock} LEFT</span>
-                )}
-              </div>
-
-              <div className="grid grid-cols-4 gap-2">
-                {activeVariant?.sizes?.map(s => (
-                  <button
-                    key={s.size}
-                    type="button"
-                    onClick={() => setSelectedSize(s.size)}
-                    className={`py-2.5 text-xs font-bold uppercase border transition-colors ${
-                      selectedSize === s.size
-                        ? 'border-[#8F1118] bg-[#8F1118] text-white'
-                        : 'border-[#222] bg-[#141414] text-[#C8C3B8]'
-                    }`}
-                  >
-                    {s.size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <button
-              onClick={handleQuickAdd}
-              className="w-full py-3.5 bg-[#8F1118] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2"
-            >
-              <ShoppingBag size={14} /> CONFIRM &amp; ADD ({selectedSize})
-            </button>
-
+            ))}
           </div>
+
+          {/* Issue 19 Fix: Separated Add to Bag button with generous breathing room */}
+          <button 
+            type="button" 
+            onClick={handleQuickAdd}
+            className="w-full h-10 mt-2 bg-[#EEEAE1] hover:bg-white active:bg-emerald-600 active:text-white text-black text-xs font-mono font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            aria-label={`Add ${product.name} in size ${selectedSize} to bag`}
+          >
+            {isAdded ? <Check size={14} /> : <ShoppingBag size={14} />}
+            <span>{isAdded ? 'Added to Bag' : `Add to Bag (${selectedSize})`}</span>
+          </button>
         </div>
-      )}
-    </>
+
+      </div>
+
+    </article>
   );
 }

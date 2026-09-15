@@ -24,10 +24,10 @@ const LIVE_REELS: ReelData[] = [
     id: 'reel-km-1',
     handle: '@kapdamafia.store',
     profileUrl: 'https://www.instagram.com/kapdamafia.store?stkn=eGZxam1lbjJ6dHly',
-    poster: '/media/campaign-after-dark.png',
+    poster: '/media/streetwear-night-lamp.jpg',
     views: '142K',
     likes: '18.4K',
-    caption: 'DROP 09 LIVE: Heavyweight 400 GSM Acid wash & Selvedge barrel fit jeans on the street 🔥',
+    caption: 'AUTUMN / WINTER IN MOTION: Heavyweight 440 GSM Acid wash & Selvedge barrel fit jeans on the street 🔥',
     tag: '⚡ LATEST LIVE REEL',
     isLatest: true,
     storeWorld: 'clothing'
@@ -103,15 +103,15 @@ export default function InstagramLiveFeed() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-[#833AB4]/20 via-[#FD1D1D]/20 to-[#F77737]/20 border border-[#E1306C]/40 text-[#E1306C] text-[9px] tracking-[0.25em] font-bold uppercase mb-3">
-              <InstagramIcon size={12} className="text-[#E1306C] animate-pulse" />
-              <span>LIVE INSTAGRAM RADAR · REAL-TIME REELS</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-[#C8C3B8] text-xs tracking-wider font-semibold uppercase mb-3">
+              <InstagramIcon size={13} className="text-[#E1306C]" />
+              <span>Official Community Feed</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-              SEEN ON <span className="bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] bg-clip-text text-transparent">INSTAGRAM</span>
+            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white font-editorial">
+              Seen on <span className="bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] bg-clip-text text-transparent">Instagram</span>
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#8C8C86] max-w-xl">
-              Always tracked live: watch the latest reels, outfit styling, and unboxings directly from the official handles.
+              Streetwear styling, fit checks, and latest drops shared by the community and official stores.
             </p>
           </div>
 

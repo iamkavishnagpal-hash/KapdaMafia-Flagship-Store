@@ -83,28 +83,28 @@ export async function initializeDatabase() {
         (
           'prod-001', 'KM-DENIM-001', 'dark-blue-barrel-fit-jeans', 'DARK BLUE BARREL FIT JEANS',
           'Heavyweight Rigid Cotton Denim with Structured Curved Leg Silhouette', 'clothing', 'denim', 'BAGGY',
-          1899.00, 2699.00, 'GEN-Z TREND', 'DROP 09 — AFTER DARK',
+          1899.00, 2699.00, 'GEN-Z TREND', 'AUTUMN / WINTER EDITION',
           'Engineered with premium rigid cotton denim in a deep indigo wash. Features the signature Gen-Z barrel-leg curve, relaxed rise, and vintage whiskering treatment.',
           440, 4.9, 47, 1, '6''1" (185 cm)', '32', 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605'
         ),
         (
           'prod-002', 'KM-TEE-002', 'black-and-white-striped-t-shirt', 'BLACK AND WHITE STRIPED T-SHIRT',
           '280 GSM Premium Combed Cotton in Relaxed Boxy Silhouette', 'clothing', 'tees', 'OVERSIZED',
-          1449.00, 1999.00, 'BEST SELLER', 'DROP 09 — AFTER DARK',
+          1449.00, 1999.00, 'BEST SELLER', 'AUTUMN / WINTER EDITION',
           'Yarn-dyed monochrome stripe pattern constructed from 280 GSM combed cotton. Dropped shoulder seams and reinforced ribbed collar for an effortless streetwear drape.',
           280, 4.8, 39, 1, '6''0" (183 cm)', 'L', 'https://www.powerlook.in/cdn/shop/files/2_4b938529-ec1a-4ee8-937f-540ba48bc2dc.jpg?v=1759921304'
         ),
         (
           'prod-003', 'KM-HOOD-003', 'flame-graphic-heavyweight-hoodie', 'FLAME GRAPHIC HEAVYWEIGHT HOODIE',
           '500 GSM Brushed Fleece with Double-Layered Hood Construction', 'clothing', 'hoodies', 'OVERSIZED',
-          2499.00, 3499.00, 'CORE DROP', 'DROP 09 — AFTER DARK',
+          2499.00, 3499.00, 'CORE DROP', 'AUTUMN / WINTER EDITION',
           'Maximum density 500 GSM loopback fleece built for winter night shifts. Features deep kangaroo pockets, reinforced eyelets, and high-density distressed flame artwork.',
           500, 4.9, 63, 1, '6''2" (188 cm)', 'XL', '/media/product-hoodie.png'
         ),
         (
           'prod-004', 'KM-CARGO-004', 'tactical-parachute-cargo-pant', 'TACTICAL PARACHUTE CARGO PANT',
           'Heavy Duty Ripstop Fabric with Adjustable Drawcord Ankles', 'clothing', 'cargos', 'BAGGY',
-          1999.00, 2799.00, 'LIMITED', 'DROP 09 — AFTER DARK',
+          1999.00, 2799.00, 'LIMITED', 'AUTUMN / WINTER EDITION',
           'Engineered for maximum utility with deep dimensional pocket bags, reinforced knee articulation, and custom metal hardware.',
           360, 4.8, 51, 1, '6''1" (185 cm)', '32', '/media/product-cargo.png'
         ),

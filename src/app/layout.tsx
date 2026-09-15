@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Syne, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
+import { Syne, Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
@@ -15,6 +15,12 @@ const syne = Syne({
   subsets: ['latin'], 
   weight: ['700', '800'],
   variable: '--font-syne' 
+});
+
+const sans = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans'
 });
 
 const mono = JetBrains_Mono({ 
@@ -35,9 +41,9 @@ export const metadata: Metadata = {
     siteName: "KAPDA MAFIA",
     images: [
       {
-        url: "/media/campaign-after-dark.png",
+        url: "/media/kapda-mafia-storefront-hero.jpg",
         width: 1200,
-        height: 630,
+        height: 675,
         alt: "KAPDA MAFIA Menswear Campaign"
       }
     ],
@@ -53,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${syne.variable} ${mono.variable} ${display.variable} font-mono bg-[#050505] text-[#EEEAE1] antialiased pb-16 sm:pb-0`}>
+      <body className={`${syne.variable} ${sans.variable} ${mono.variable} ${display.variable} font-sans bg-[#050505] text-[#EEEAE1] antialiased pb-16 sm:pb-0`}>
         <AppProviders>
           <MafiaDropTransition />
           <PhoneOtpModal />
@@ -63,7 +69,6 @@ export default function RootLayout({
           <main className="min-h-screen pt-[96px] sm:pt-24">{children}</main>
           <Footer />
           <MobileBottomBar />
-          <WhatsAppWidget />
         </AppProviders>
       </body>
     </html>

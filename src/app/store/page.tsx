@@ -26,9 +26,9 @@ export default function StorePage() {
           
           <div className="lg:col-span-7 aspect-[4/3] bg-[#0a0a0a] overflow-hidden relative">
             <img 
-              src="/media/campaign-after-dark.png" 
+              src="/media/kapda-mafia-storefront-hero.jpg" 
               alt="Kapda Mafia Concrete Vault"
-              className="w-full h-full object-cover grayscale contrast-125"
+              className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
             />
             <div className="absolute top-3 left-3 bg-[#080808]/90 border border-[#222] px-2.5 py-1 text-[9px] font-mono text-[#EEEAE1]">
               [FACILITY CODE: NIT-5-FARIDABAD]

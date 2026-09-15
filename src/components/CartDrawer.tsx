@@ -217,20 +217,31 @@ export default function CartDrawer() {
             </div>
           </div>
 
-          <Link 
-            href={`/checkout?store=${isShoes ? 'shoes' : 'clothing'}`} 
-            onClick={closeCart}
-            className={`w-full py-4 rounded-xl text-white font-bold text-xs tracking-[0.25em] uppercase flex items-center justify-center gap-2 transition-all shadow-xl cursor-pointer ${
-              activeItems.length === 0
-                ? 'opacity-50 pointer-events-none bg-gray-700'
-                : isShoes
-                ? 'bg-[#009688] hover:bg-[#00796b] shadow-[#009688]/30'
-                : 'bg-[#8F1118] hover:bg-[#a6151e] shadow-[#8F1118]/30'
-            }`}
-          >
-            <span>PROCEED TO CHECKOUT</span>
-            <ArrowRight size={16} />
-          </Link>
+          <div className="space-y-2">
+            <Link 
+              href={`/checkout?store=${isShoes ? 'shoes' : 'clothing'}&quick=upi`} 
+              onClick={closeCart}
+              className="w-full py-3.5 bg-[#F3F0E8] hover:bg-white text-[#050505] font-black text-xs tracking-[0.2em] uppercase flex flex-col items-center justify-center gap-0.5 transition-all shadow-xl cursor-pointer"
+            >
+              <span>⚡ 1-CLICK INSTANT UPI</span>
+              <span className="text-[9px] font-bold text-[#666] tracking-widest font-mono">GPAY · PHONEPE · PAYTM</span>
+            </Link>
+
+            <Link 
+              href={`/checkout?store=${isShoes ? 'shoes' : 'clothing'}`} 
+              onClick={closeCart}
+              className={`w-full py-3 text-white font-bold text-xs tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-all shadow-xl cursor-pointer border ${
+                activeItems.length === 0
+                  ? 'opacity-50 pointer-events-none bg-gray-700'
+                  : isShoes
+                  ? 'bg-[#009688] hover:bg-[#00796b] border-[#80cbc4]/40'
+                  : 'bg-[#8F1118] hover:bg-[#a6151e] border-[#B91C1C]/40'
+              }`}
+            >
+              <span>PROCEED TO STANDARD CHECKOUT</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
 
           <div className="flex items-center justify-center gap-2 text-[10px] text-gray-400">
             <ShieldCheck size={14} className={isShoes ? 'text-[#009688]' : 'text-[#8F1118]'} />

@@ -8,6 +8,22 @@
   --stone: #c8c3b8;
   --smoke: #77746e;
   --oxblood: #8f1118;
+
+  /* Usability Standard 4-Tier Semantic Typography Scale (Max 8 sizes) */
+  --text-micro: 11px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 32px;
+  --text-display: 56px;
+
+  /* Standardized Text Color Tokens (Max 4 colors) */
+  --color-text-primary: #F3F0E8;
+  --color-text-secondary: #C8C3B8;
+  --color-text-muted: #8C8C86;
+  --color-text-accent: #8F1118;
 }
 
 * { box-sizing: border-box; }
@@ -23,8 +39,8 @@ html {
 
 body {
   background: var(--ink);
-  color: var(--ivory);
-  font-family: var(--font-mono, monospace);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 

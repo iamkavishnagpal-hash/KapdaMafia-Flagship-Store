@@ -6,9 +6,9 @@ export default function StoreStory() {
     <section className="border-b border-white/10 bg-[#0D0C0B] py-20 text-[#EEEAE1] sm:py-24">
       <div className="mx-auto grid max-w-[1440px] items-stretch gap-8 px-5 sm:px-8 lg:grid-cols-12 lg:px-16">
         <div className="relative overflow-hidden border border-white/10 lg:col-span-7">
-          <img src="/media/campaign-after-dark.png" alt="Kapda Mafia store story development still" className="h-full min-h-[320px] w-full object-cover object-[58%_center] transition duration-1000 hover:scale-105" />
+          <img src="/media/kapda-mafia-storefront-hero.jpg" alt="Kapda Mafia Flagship Storefront" className="h-full min-h-[320px] w-full object-cover object-center transition duration-1000 hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-tr from-[#090909]/70 via-transparent to-transparent" />
-          <span className="absolute bottom-4 left-4 border border-white/20 bg-[#090909]/75 px-3 py-2 font-mono text-[9px] tracking-[0.18em] text-[#C8C3B8] uppercase">MUMBAI / NIGHT EDITION</span>
+          <span className="absolute bottom-4 left-4 border border-white/20 bg-[#090909]/75 px-3 py-2 font-mono text-[9px] tracking-[0.18em] text-[#C8C3B8] uppercase">NIT-5 / FLAGSHIP EDITION</span>
         </div>
         <div className="flex flex-col justify-between border border-white/10 bg-[#111111] p-7 sm:p-10 lg:col-span-5">
           <div>

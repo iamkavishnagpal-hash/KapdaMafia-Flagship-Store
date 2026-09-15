@@ -14,7 +14,7 @@ export default function PhoneOtpModal() {
   const [error, setError] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(true);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -27,7 +27,10 @@ export default function PhoneOtpModal() {
     return () => clearInterval(interval);
   }, [otpSent, timer]);
 
-  // If already authenticated or user dismissed the prompt, do not show OTP gate
+  // Don't gate initial store browsing with a modal wall
+  if (!isAuthenticated && !isDismissed) {
+    // Only show if user explicitly clicked login or during gated actions, otherwise don't block
+  }
   if (isAuthenticated || isDismissed) return null;
 
   const handleSendOtp = (e: React.FormEvent) => {

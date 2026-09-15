@@ -153,7 +153,7 @@ export default function AiFitPage() {
 
   // Preset demo model for zero-friction instant try-on test
   const loadDemoSubject = () => {
-    setUserImage('/media/campaign-after-dark.png');
+    setUserImage('/media/hero-editorial-model.jpg');
     setIsAnalyzing(true);
     setTimeout(() => {
       setIsAnalyzing(false);

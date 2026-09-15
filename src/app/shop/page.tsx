@@ -53,8 +53,8 @@ function ShopContent() {
         
         {/* Brutalist Editorial Header */}
         <div className="mb-10 pb-6 border-b border-[#1c1c1c]">
-          <div className="text-[9px] text-[#8F1118] uppercase tracking-[0.35em] font-bold mb-2">
-            MENSWEAR DROP 09 • REALTIME INVENTORY SYNC
+          <div className="text-[10px] text-[#8F1118] uppercase tracking-[0.25em] font-semibold mb-2">
+            AUTUMN / WINTER ARCHIVE • REALTIME ALLOCATION SYNC
           </div>
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
             <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-[-0.04em] font-editorial">

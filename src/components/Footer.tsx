@@ -5,29 +5,29 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#080808] border-t border-[#181818] text-[#B8B4AA] pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#080808] border-t border-[#181818] text-[#B8B4AA] pt-16 pb-12 px-4 sm:px-6 lg:px-8 font-mono">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
         
-        {/* Brand Manifesto */}
-        <div className="lg:col-span-2 space-y-4">
+        {/* Brand Manifesto: Issue 14 Fix (Standardized vertical rhythm) */}
+        <div className="lg:col-span-2 space-y-3">
           <Link href="/" className="inline-block">
-            <span className="text-2xl font-black tracking-[0.35em] text-[#F3F0E8]">KAPDA MAFIA</span>
-            <span className="block text-[10px] tracking-[0.4em] uppercase text-[#8C8C86] font-mono mt-1">CULTURE & UNIFORM</span>
+            <span className="text-xl sm:text-2xl font-black tracking-widest text-[#F3F0E8]">KAPDA MAFIA</span>
+            <span className="block text-xs tracking-wider uppercase text-[#8C8C86] font-mono mt-1">CULTURE & UNIFORM</span>
           </Link>
           <p className="text-xs text-[#8C8C86] leading-relaxed max-w-sm">
             A digital fashion world engineered for Gen-Z rebels, architects of culture, and individuals who refuse to blend in.
           </p>
-          <div className="pt-2 text-[11px] font-mono text-[#8F1118] font-semibold tracking-wider">
+          <div className="text-xs font-mono text-[#8F1118] font-semibold tracking-wide pt-1">
             FLAGSHIP STORE: NIT-5, FARIDABAD · TEL: 083750 00819
           </div>
           
-          {/* Social Instagram Pills in Footer */}
-          <div className="flex flex-wrap gap-2 pt-2">
+          {/* Issue 31 Fix: Subtle monochrome social pills that do not distract from newsletter CTA */}
+          <div className="flex flex-wrap gap-2 pt-1">
             <a
               href="https://www.instagram.com/kapdamafia.store?stkn=eGZxam1lbjJ6dHly"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white text-[10px] font-mono font-bold tracking-wider hover:opacity-90 transition-all shadow-md shadow-rose-950/30"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-mono font-medium text-[#C8C3B8] hover:text-white transition-colors"
             >
               <span>@kapdamafia.store</span>
             </a>
@@ -35,16 +35,16 @@ export default function Footer() {
               href="https://www.instagram.com/shoesmafia.store?stkn=MTBpN3B4MmF6NHpxNA=="
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#009688] hover:bg-[#00796b] text-white text-[10px] font-mono font-bold tracking-wider transition-all shadow-md shadow-teal-950/30"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#009688]/30 bg-[#009688]/10 hover:bg-[#009688]/20 text-xs font-mono font-medium text-[#80cbc4] hover:text-white transition-colors"
             >
               <span>@shoesmafia.store</span>
             </a>
           </div>
         </div>
 
-        {/* Shop Category Navigation */}
+        {/* Shop Category Navigation: Issue 12 Fix (Semantic h3 instead of skipped h4) */}
         <div className="space-y-3">
-          <h4 className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F3F0E8]">SHOP UNIFORM</h4>
+          <h3 className="text-xs font-mono uppercase tracking-widest text-[#F3F0E8] font-bold">SHOP UNIFORM</h3>
           <ul className="space-y-2 text-xs font-mono">
             <li><Link href="/shop?category=tees" className="hover:text-[#F3F0E8] transition-colors">400 GSM TEES</Link></li>
             <li><Link href="/shop?category=hoodies" className="hover:text-[#F3F0E8] transition-colors">HEAVYWEIGHT HOODIES</Link></li>
@@ -54,30 +54,33 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Client Care & Tracking */}
+        {/* Client Care & Tracking: Issue 12 Fix */}
         <div className="space-y-3">
-          <h4 className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F3F0E8]">CLIENT CARE</h4>
+          <h3 className="text-xs font-mono uppercase tracking-widest text-[#F3F0E8] font-bold">CLIENT CARE</h3>
           <ul className="space-y-2 text-xs font-mono">
             <li><Link href="/track-order" className="hover:text-[#F3F0E8] transition-colors">TRACK YOUR ORDER</Link></li>
             <li><Link href="/store" className="hover:text-[#F3F0E8] transition-colors">VISIT FLAGSHIP STORE</Link></li>
-            <li><Link href="/ai-fit" className="hover:text-[#F3F0E8] transition-colors">AI FIT & TRY-ON STUDIO</Link></li>
+            <li><Link href="/ai-fit" className="hover:text-[#F3F0E8] transition-colors">VIRTUAL MIRROR STUDIO</Link></li>
             <li><Link href="/track-order" className="hover:text-[#F3F0E8] text-[#8C8C86] transition-colors">EASY 7-DAY RETURNS & EXCHANGES</Link></li>
           </ul>
         </div>
 
-        {/* Newsletter Subscription */}
-        <div className="space-y-4">
-          <h4 className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F3F0E8]">ENTER THE MAFIA</h4>
-          <p className="text-xs text-[#8C8C86]">Get secret drop invites, early access links, and member discounts before public launch.</p>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
+        {/* Newsletter Subscription: Issue 30 Fix (Consistent vertical gap) */}
+        <div className="space-y-3">
+          <h3 className="text-xs font-mono uppercase tracking-widest text-[#F3F0E8] font-bold">ENTER THE MAFIA</h3>
+          <p className="text-xs text-[#8C8C86] leading-relaxed">
+            Get secret drop invites, early access links, and member discounts before public launch.
+          </p>
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-2 pt-1">
             <input 
               type="email" 
               placeholder="YOUR EMAIL ADDRESS" 
               className="w-full bg-[#111111] border border-[#222222] text-[#F3F0E8] placeholder-[#8C8C86] text-xs font-mono px-3.5 py-2.5 rounded-sm focus:outline-none focus:border-[#8F1118]"
+              aria-label="Email address for secret list"
             />
             <button 
               type="submit" 
-              className="w-full bg-[#181818] border border-[#222222] text-[#F3F0E8] hover:bg-[#8F1118] hover:border-[#8F1118] text-xs font-mono font-bold tracking-widest uppercase py-2.5 rounded-sm transition-colors"
+              className="w-full h-10 bg-[#F3F0E8] hover:bg-white text-black text-xs font-mono font-bold tracking-widest uppercase rounded-sm transition-colors cursor-pointer"
             >
               JOIN SECRET LIST →
             </button>
@@ -87,12 +90,12 @@ export default function Footer() {
       </div>
 
       {/* Footer Copyright & Legal */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#181818] flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#8C8C86]">
-        <div>© 2026 KAPDA MAFIA INDIA. ALL RIGHTS RESERVED.</div>
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#181818] flex flex-col sm:flex-row items-center justify-between text-xs text-[#8C8C86]">
+        <div>© 2026 KAPDA MAFIA. ALL RIGHTS RESERVED.</div>
         <div className="flex space-x-6 mt-4 sm:mt-0">
-          <span>PRIVACY POLICY</span>
-          <span>TERMS OF SERVICE</span>
-          <span>MYBILLBOOK INTEGRATED</span>
+          <Link href="/privacy" className="hover:text-white transition-colors">PRIVACY POLICY</Link>
+          <Link href="/terms" className="hover:text-white transition-colors">TERMS OF SERVICE</Link>
+          <span className="text-[#666]">Flagship Store · Faridabad</span>
         </div>
       </div>
     </footer>
