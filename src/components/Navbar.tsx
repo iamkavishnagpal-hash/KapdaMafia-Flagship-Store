@@ -36,22 +36,21 @@ export default function Navbar() {
 
         <div className="mx-auto flex h-[56px] max-w-[1600px] items-center justify-between px-4 sm:px-8 lg:px-12 font-mono">
           
-          {/* LEFT: Minimalist 2-line hamburger icon */}
-          <div className="flex items-center gap-3">
+          {/* LEFT: Minimalist 2-line hamburger icon & clean MENU label */}
+          <div className="flex items-center gap-2">
             <button 
               onClick={() => setMenuOpen(true)} 
-              className="p-2 text-[#F4F4F4] hover:text-white cursor-pointer min-h-[44px] min-w-[44px] flex flex-col justify-center gap-1.5 -ml-2" 
+              className="p-2 text-[#F4F4F4] hover:text-white cursor-pointer min-h-[44px] min-w-[44px] flex items-center gap-2 -ml-2 group" 
               aria-label="Open Full-Screen Menu"
             >
-              <span className="w-5 h-[2px] bg-[#F4F4F4] transition-all block" />
-              <span className="w-3.5 h-[2px] bg-[#F4F4F4] transition-all block" />
-            </button>
-
-            <Link href="/" className="hidden sm:flex items-center">
-              <span className="text-sm font-black tracking-[-0.04em] font-[var(--font-display)] uppercase text-[#F4F4F4]">
-                KAPDA MAFIA
+              <div className="flex flex-col gap-1.5">
+                <span className="w-5 h-[2px] bg-[#F4F4F4] group-hover:w-6 transition-all block" />
+                <span className="w-3.5 h-[2px] bg-[#F4F4F4] group-hover:w-6 transition-all block" />
+              </div>
+              <span className="text-[10px] font-mono tracking-widest text-[#888888] group-hover:text-white uppercase hidden sm:inline">
+                MENU
               </span>
-            </Link>
+            </button>
           </div>
 
           {/* CENTER: High-contrast [KAPDA MAFIA] aur [SHOES MAFIA] direct toggle */}

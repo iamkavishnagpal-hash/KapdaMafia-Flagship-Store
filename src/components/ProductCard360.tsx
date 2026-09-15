@@ -115,28 +115,11 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         {/* Seamless Canvas Gradient Overlay - Blends seamlessly into #080808 canvas like WTFLEX */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/20 pointer-events-none" />
 
-        {/* Blueprint 3.C: Spec Tag directly visible on image corner */}
-        <div className="absolute top-2.5 left-2.5 bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] px-2.5 py-1 text-[10px] font-mono tracking-wider uppercase text-[#F4F4F4] pointer-events-none z-10 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span>{product.gsm ? `${product.gsm} GSM` : '440 GSM'} // {product.fit ? product.fit.toUpperCase() : 'LOOSE FIT'}</span>
-        </div>
-
         {/* Live Vault Scarcity HUD Matrix (Gen-Z Urgency Trigger) */}
         <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex items-center justify-between text-[9px] font-mono tracking-widest bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] px-2.5 py-1 text-[#888888] uppercase">
           <span className="text-[#F4F4F4] font-bold">RUN: 250 UNITS</span>
           <span className={`${isShoes ? 'text-[#1a8f7a]' : 'text-[#7D0A0A]'} font-bold animate-pulse`}>ONLY {10 + (product.id.charCodeAt(product.id.length - 1) % 7)} LEFT IN SIZE {selectedSize}</span>
         </div>
-
-        {/* Virtual Mirror Trigger */}
-        <button
-          onClick={handleOpenMirror}
-          className="absolute top-2.5 right-2.5 min-h-[32px] px-2.5 py-1 bg-[#080808]/90 hover:bg-black border border-[#1E1E1E] hover:border-white/40 text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-md flex items-center gap-1.5 transition-all shadow-xl z-10 cursor-pointer"
-          title="Open Drape Lab"
-          aria-label={`Drape Lab try on for ${product.name}`}
-        >
-          <span className="text-[#7D0A0A]">✦</span>
-          <span>DRAPE LAB</span>
-        </button>
 
 
 

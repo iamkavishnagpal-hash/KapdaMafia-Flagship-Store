@@ -112,6 +112,7 @@ export default function InstagramLiveFeed() {
   const { addToCart, openCart } = useCart();
   const [activeTab, setActiveTab] = useState<'ALL' | 'KAPDA' | 'SHOES'>('ALL');
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
+  const [activeSizeSelectReelId, setActiveSizeSelectReelId] = useState<string | null>(null);
 
   const filteredReels = LIVE_REELS.filter(reel => {
     if (activeTab === 'ALL') {
@@ -314,36 +315,74 @@ export default function InstagramLiveFeed() {
                   </span>
                 </div>
 
-                {/* Shoppable Floating Tag Pill (Gen-Z 1-Tap Quick Bag without leaving video) */}
+                {/* Shoppable Floating Tag Pill with Micro Size Selector */}
                 {reel.shoppableProduct && (
                   <div className="mb-2.5">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playSubBassThud();
-                        addToCart({
-                          productId: reel.shoppableProduct!.id,
-                          name: reel.shoppableProduct!.name,
-                          price: reel.shoppableProduct!.price,
-                          image: reel.shoppableProduct!.image,
-                          size: reel.shoppableProduct!.size,
-                          category: reel.storeWorld === 'shoes' ? 'Sneakers' : 'Streetwear',
-                          storeWorld: reel.storeWorld
-                        });
-                        openCart();
-                      }}
-                      onMouseEnter={playMechanicalClick}
-                      className="w-full py-1.5 px-2.5 bg-white/95 hover:bg-white text-black text-[9px] font-mono font-black tracking-wider uppercase rounded-md flex items-center justify-between shadow-xl transition-all hover:scale-[1.02] cursor-pointer"
-                      title="Tap to bag worn outfit"
-                    >
-                      <span className="truncate max-w-[140px] text-left">
-                        ⚡ {reel.shoppableProduct.name}
-                      </span>
-                      <span className="bg-black text-white px-1.5 py-0.5 rounded text-[8px] shrink-0 font-mono">
-                        ₹{reel.shoppableProduct.price.toLocaleString('en-IN')} [BAG]
-                      </span>
-                    </button>
+                    {activeSizeSelectReelId === reel.id ? (
+                      <div 
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-2 bg-[#080808]/95 border border-[#1E1E1E] rounded-md space-y-1.5 animate-fade-in shadow-2xl"
+                      >
+                        <div className="flex items-center justify-between text-[8px] font-mono tracking-widest text-[#888888] uppercase">
+                          <span>SELECT YOUR SIZE:</span>
+                          <button 
+                            type="button" 
+                            onClick={() => setActiveSizeSelectReelId(null)}
+                            className="text-white/60 hover:text-white text-[9px] px-1"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          {(reel.storeWorld === 'shoes' 
+                            ? ['UK 7', 'UK 8', 'UK 9', 'UK 10'] 
+                            : ['S', 'M', 'L', 'XL']
+                          ).map((sizeOption) => (
+                            <button
+                              key={sizeOption}
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                playSubBassThud();
+                                addToCart({
+                                  productId: reel.shoppableProduct!.id,
+                                  name: reel.shoppableProduct!.name,
+                                  price: reel.shoppableProduct!.price,
+                                  image: reel.shoppableProduct!.image,
+                                  size: sizeOption,
+                                  category: reel.storeWorld === 'shoes' ? 'Sneakers' : 'Streetwear',
+                                  storeWorld: reel.storeWorld
+                                });
+                                setActiveSizeSelectReelId(null);
+                                openCart();
+                              }}
+                              className="flex-1 py-1 text-[8px] font-mono font-bold bg-[#1A1A1A] hover:bg-white hover:text-black text-white border border-[#2A2A2A] transition-colors"
+                            >
+                              {sizeOption}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playMechanicalClick();
+                          setActiveSizeSelectReelId(reel.id);
+                        }}
+                        onMouseEnter={playMechanicalClick}
+                        className="w-full py-1.5 px-2.5 bg-white/95 hover:bg-white text-black text-[9px] font-mono font-black tracking-wider uppercase rounded-md flex items-center justify-between shadow-xl transition-all hover:scale-[1.02] cursor-pointer"
+                        title="Choose size & bag worn outfit"
+                      >
+                        <span className="truncate max-w-[140px] text-left">
+                          ⚡ {reel.shoppableProduct.name}
+                        </span>
+                        <span className="bg-black text-white px-1.5 py-0.5 rounded text-[8px] shrink-0 font-mono">
+                          ₹{reel.shoppableProduct.price.toLocaleString('en-IN')} [SELECT SIZE]
+                        </span>
+                      </button>
+                    )}
                   </div>
                 )}
 

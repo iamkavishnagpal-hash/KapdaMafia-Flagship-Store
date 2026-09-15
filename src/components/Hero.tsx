@@ -23,7 +23,7 @@ const SLIDES: SlideData[] = [
     subheadline: 'HEAVYWEIGHT DRAPE ARCHIVE',
     spec: '440 GSM COMBED TERRY · NITRO-WASHED · OVERSIZED FIT',
     image: '/media/hero/hero-slide-1.jpg',
-    href: '/shop',
+    href: '#drop-archive',
     ctaText: 'ENTER DROP'
   },
   {
@@ -108,7 +108,7 @@ export default function Hero() {
       className="relative w-full h-[100svh] sm:h-[calc(100svh-56px)] min-h-[620px] sm:max-h-[1080px] bg-[#080808] text-[#F4F4F4] border-b border-[#1E1E1E] overflow-hidden select-none font-mono"
     >
       
-      {/* 100svh Full-Bleed Male Street Model Visual Canvas */}
+      {/* Asymmetric 60/40 Split: Right-Anchored Street Model Visual */}
       {SLIDES.map((slide, idx) => (
         <div
           key={slide.id}
@@ -116,33 +116,38 @@ export default function Hero() {
             idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
-          <img
-            src={slide.image}
-            alt={slide.headline}
-            className="w-full h-full object-cover object-top sm:object-center transform scale-100 group-hover:scale-105 transition-transform duration-1000"
-          />
-          {/* Brutalist Vignette & Deep Canvas Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-[#080808]/30 to-transparent sm:w-2/3" />
+          <div className="relative w-full h-full sm:w-[60%] sm:ml-auto">
+            <img
+              src={slide.image}
+              alt={slide.headline}
+              className="w-full h-full object-cover object-top sm:object-center transform scale-100 transition-transform duration-1000"
+            />
+            {/* Deep gradient blending model softly into left black column */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent sm:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/50 to-transparent hidden sm:block" />
+          </div>
+          {/* Background Void Base for Left Text Column */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/90 to-transparent sm:w-[55%] pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
         </div>
       ))}
 
-      {/* Foreground Compressed Content Block — Bottom 35% on mobile */}
-      <div className="relative z-20 h-full max-w-[1600px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col justify-end pb-6 sm:pb-16 pointer-events-none">
+      {/* Foreground Left Column Content Block — 100% Unobstructed Clean Typography */}
+      <div className="relative z-20 h-full max-w-[1600px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col justify-end pb-8 sm:pb-16 pointer-events-none">
         
-        <div className="max-w-3xl space-y-4 sm:space-y-6 pointer-events-auto">
+        <div className="max-w-2xl space-y-4 sm:space-y-6 pointer-events-auto">
           {/* Tactical Spec Tag */}
-          <div className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase text-[#888888]">
+          <div className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-[#080808]/95 backdrop-blur-md border border-[#1E1E1E] text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase text-[#888888]">
             <span className="w-1.5 h-1.5 bg-[#7D0A0A] animate-pulse" />
             <span>{active.badge}</span>
           </div>
 
           {/* Compressed Brutalist Headline: AFTER DARK // 440 GSM */}
           <div>
-            <h1 className="text-4xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-[-0.05em] leading-[0.95] text-[#F4F4F4] font-[var(--font-display)] drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-[-0.05em] leading-[0.92] text-[#F4F4F4] font-[var(--font-display)]">
               {active.headline}
             </h1>
-            <p className="text-xs sm:text-sm font-mono tracking-[0.12em] text-[#AAAAAA] uppercase mt-2">
+            <p className="text-xs sm:text-sm font-mono tracking-[0.12em] text-[#888888] uppercase mt-2.5">
               {active.subheadline}
             </p>
           </div>

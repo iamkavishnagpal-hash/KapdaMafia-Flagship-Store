@@ -18,7 +18,7 @@ export default function NewDropSection({ products }: NewDropProps) {
   if (menswearDrops.length === 0) return null;
 
   return (
-    <section className="py-16 sm:py-24 bg-[#080808] border-b border-[#1E1E1E]">
+    <section id="drop-archive" className="py-16 sm:py-24 bg-[#080808] border-b border-[#1E1E1E] scroll-mt-16">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Baseline alignment between heading and archive link */}
