@@ -61,10 +61,10 @@ export function VideoProductCard({ title, subtitle, poster, videoSrc, href = '/s
 }
 
 const cards = [
-  ['THE FIT', '400 GSM Heavyweight Terry', '/media/motion-card-1.jpg'], 
-  ['THE SILHOUETTE', 'Tactical Relaxed Cargo', '/media/motion-card-2.jpg'], 
-  ['THE DENIM', '440 GSM Selvedge Denim', '/media/motion-card-3.jpg'], 
-  ['THE FLEECE', '500 GSM Relaxed Fleece', '/media/motion-card-4.jpg']
+  ['THE FIT', '280 GSM Boxy Striped Tee', 'https://www.powerlook.in/cdn/shop/files/2_4b938529-ec1a-4ee8-937f-540ba48bc2dc.jpg?v=1759921304'], 
+  ['THE SILHOUETTE', 'Tactical Relaxed Cargo', 'https://www.powerlook.in/cdn/shop/files/5_3x_b697cc80-2592-4205-b80b-903930ceac49.jpg?v=1787549048'], 
+  ['THE DENIM', '440 GSM Selvedge Barrel Denim', 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605'], 
+  ['THE LINEN', 'Relaxed Resort Camp Collar', 'https://www.powerlook.in/cdn/shop/files/1497220.jpg?v=1779534340']
 ] as const;
 
 export default function SeenInMotion() {

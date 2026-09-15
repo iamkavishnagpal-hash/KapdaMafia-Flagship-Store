@@ -36,8 +36,8 @@ export default function BrandStory() {
         <div className="relative lg:col-span-5">
           <div className="overflow-hidden border border-white/10 bg-[#121212]">
             <img 
-              src="/media/hero-editorial-model.jpg" 
-              alt="Kapda Mafia 440 GSM Studio Editorial" 
+              src="https://www.powerlook.in/cdn/shop/files/7_3x_f7a35f71-6348-451e-9f9c-28906b1c4885.jpg?v=1788935826" 
+              alt="Kapda Mafia Menswear Streetwear Editorial" 
               className="aspect-[4/5] w-full object-cover transition duration-700 hover:scale-105" 
             />
           </div>

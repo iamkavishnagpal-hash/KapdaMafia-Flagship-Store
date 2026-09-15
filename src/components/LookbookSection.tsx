@@ -3,7 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import { Lookbook } from '@/types/ecommerce';
 
 export default function LookbookSection({ lookbooks }: { lookbooks: Lookbook[] }) {
-  const images = ['/media/lookbook-rain-editorial.jpg', '/media/lookbook-concrete-studio.jpg'];
+  const images = [
+    'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
+    'https://www.powerlook.in/cdn/shop/files/2_4b938529-ec1a-4ee8-937f-540ba48bc2dc.jpg?v=1759921304'
+  ];
   return (
     <section className="border-b border-white/10 bg-[#090909] py-20 text-[#EEEAE1] sm:py-24">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">

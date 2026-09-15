@@ -19,7 +19,7 @@ export default function LimitedDropBanner() {
         </div>
         <div className="relative overflow-hidden border border-white/10 bg-[#090909]">
           <img 
-            src="/media/streetwear-night-lamp.jpg" 
+            src="https://www.powerlook.in/cdn/shop/files/7_3x_888d77c3-7b5a-4a6f-bf88-66c15809bf99.jpg?v=1787637637" 
             alt="Kapda Mafia Digital Flagship Release" 
             className="h-full min-h-[300px] w-full object-cover transition-transform duration-700 hover:scale-105" 
           />

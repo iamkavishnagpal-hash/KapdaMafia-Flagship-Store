@@ -12,25 +12,25 @@ export default function Hero() {
   const pins = [
     {
       id: 1,
-      title: 'MAFIA CREST TEE',
-      spec: '400 GSM ACID WASH COMBED COTTON',
-      top: '28%',
-      left: '42%',
+      title: 'OLIVE BOXY OVERSIZED TEE',
+      spec: '400 GSM PURE COMBED BIO-WASH COTTON',
+      top: '32%',
+      left: '48%',
       productId: 'km-001',
-      price: 1499,
-      image: '/media/product-tee.png',
+      price: 1449,
+      image: 'https://www.powerlook.in/cdn/shop/files/1_5e7b2125-f589-427a-bb51-b884a594d154.jpg?v=1782216345',
       category: 'tees'
     },
     {
       id: 2,
-      title: 'BARREL DENIM PANT',
-      spec: '440 GSM RIGID INDIGO SELVEDGE',
-      top: '64%',
-      left: '52%',
-      productId: 'pl-001',
+      title: 'CHARCOAL RELAXED CARGO PANT',
+      spec: '380 GSM HEAVY DUTY TWILL WITH UTILITY POCKETS',
+      top: '68%',
+      left: '50%',
+      productId: 'pl-005',
       price: 1899,
-      image: '/media/campaign-after-dark.png',
-      category: 'denim'
+      image: 'https://www.powerlook.in/cdn/shop/files/7_3x_888d77c3-7b5a-4a6f-bf88-66c15809bf99.jpg?v=1787637637',
+      category: 'cargos'
     }
   ];
 
@@ -192,7 +192,7 @@ export default function Hero() {
                   KEY SILHOUETTE
                 </span>
                 <span className="text-sm sm:text-base font-black text-white uppercase tracking-tight font-editorial">
-                  MAFIA CREST OVERSIZED TEE + BARREL DENIM
+                  OLIVE BOXY OVERSIZED TEE + CHARCOAL CARGOS
                 </span>
               </div>
               <Link 
