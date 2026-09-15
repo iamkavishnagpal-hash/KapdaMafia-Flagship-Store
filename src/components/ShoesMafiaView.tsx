@@ -160,11 +160,6 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
                   alt="Shoes Mafia 3D Street Sneaker"
                   className="w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(0,105,92,0.6)] filter contrast-105 group-hover:scale-105 transition-transform duration-500"
                 />
-                
-                <div className="absolute bottom-2 right-2 px-2 py-0.5 bg-black/85 border border-[#00695c]/60 text-[9px] font-mono tracking-widest text-teal-300 uppercase shadow-lg backdrop-blur-sm flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                  <span>3D UGC PROTOTYPE // AF-1 MAFIA</span>
-                </div>
               </div>
             </div>
 
