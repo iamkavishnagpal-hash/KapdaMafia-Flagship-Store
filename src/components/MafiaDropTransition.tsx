@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Shirt, Footprints, Zap } from 'lucide-react';
+import { ArrowRight, Shirt, Footprints, Zap, Sparkles } from 'lucide-react';
 import { useWorld, StoreWorld } from '@/context/WorldContext';
+import { playSubBassThud, playMechanicalClick } from '@/utils/soundEffects';
 
 export default function MafiaDropTransition() {
   // Startup Sequence:
@@ -10,9 +11,10 @@ export default function MafiaDropTransition() {
   // 2. shutter-opening: metal shutter smoothly rolls up with mechanical tension.
   // 3. glass-opening: luxury tempered sliding glass doors glide open (left & right).
   // 4. store-selection: "WHERE DO YOU WANT TO SHOP?" portal choice (KAPDA MAFIA vs SHOES MAFIA).
-  // 5. completed: fades out into the chosen store world.
+  // 5. shoe-launch-3d: 3D sneaker launches out towards screen like high-budget UGC commercial before entering shoes world.
+  // 6. completed: fades out into the chosen store world.
   const [phase, setPhase] = useState<
-    'shutter-closed' | 'shutter-opening' | 'glass-opening' | 'store-selection' | 'completed'
+    'shutter-closed' | 'shutter-opening' | 'glass-opening' | 'store-selection' | 'shoe-launch-3d' | 'completed'
   >('shutter-closed');
   const [removed, setRemoved] = useState(false);
   const { setWorld } = useWorld();
@@ -41,17 +43,31 @@ export default function MafiaDropTransition() {
   }, []);
 
   const handleSelectStore = (selected: StoreWorld) => {
-    setWorld(selected);
-    setPhase('completed');
-    setTimeout(() => {
-      setRemoved(true);
-    }, 400);
+    playMechanicalClick();
+    if (selected === 'shoes') {
+      // Trigger dramatic 3D UGC Flying Shoe effect
+      playSubBassThud();
+      setPhase('shoe-launch-3d');
+      setTimeout(() => {
+        setWorld('shoes');
+        setPhase('completed');
+        setTimeout(() => {
+          setRemoved(true);
+        }, 400);
+      }, 1650);
+    } else {
+      setWorld(selected);
+      setPhase('completed');
+      setTimeout(() => {
+        setRemoved(true);
+      }, 400);
+    }
   };
 
   if (removed) return null;
 
   const isShutterUp = phase !== 'shutter-closed';
-  const isGlassOpen = phase === 'glass-opening' || phase === 'store-selection' || phase === 'completed';
+  const isGlassOpen = phase === 'glass-opening' || phase === 'store-selection' || phase === 'shoe-launch-3d' || phase === 'completed';
 
   return (
     <div
@@ -150,6 +166,51 @@ export default function MafiaDropTransition() {
           </div>
         </div>
       </div>
+
+      {/* 1.5. CINEMATIC 3D UGC FLYING SNEAKER OVERLAY (Shoe flies out towards camera) */}
+      {phase === 'shoe-launch-3d' && (
+        <div className="absolute inset-0 z-40 flex items-center justify-center overflow-hidden bg-black/95 font-mono text-[#EEEAE1] pointer-events-none">
+          {/* Radial shockwave pulse rings */}
+          <div className="absolute h-[600px] w-[600px] rounded-full border border-teal-500/50 animate-shockwave pointer-events-none" />
+          <div className="absolute h-[420px] w-[420px] rounded-full border-2 border-emerald-400/40 animate-shockwave pointer-events-none" style={{ animationDelay: '0.35s' }} />
+          <div className="absolute h-[250px] w-[250px] rounded-full bg-teal-500/20 blur-[90px] animate-pulse pointer-events-none" />
+
+          {/* Speed & Light streaks */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
+            <div className="absolute left-1/4 top-0 w-0.5 h-64 bg-gradient-to-b from-transparent via-teal-300 to-transparent animate-pulse" />
+            <div className="absolute right-1/4 top-1/3 w-0.5 h-72 bg-gradient-to-b from-transparent via-cyan-300 to-transparent animate-pulse" style={{ animationDelay: '0.2s' }} />
+          </div>
+
+          {/* 3D Flying Sneaker Canvas */}
+          <div className="relative z-10 flex flex-col items-center justify-center">
+            {/* Sneaker Graphic with 3D Trajectory Fly-In towards screen */}
+            <div className="relative w-[340px] sm:w-[540px] md:w-[680px] aspect-[16/10] flex items-center justify-center animate-shoe-fly-camera">
+              {/* High-fidelity 3D UGC Sneaker Image */}
+              <img
+                src="/media/flying-sneaker-3d.jpg"
+                alt="3D UGC Flying Sneaker"
+                className="w-full h-full object-contain drop-shadow-[0_25px_50px_rgba(0,105,92,0.85)] filter contrast-110"
+              />
+              {/* Dynamic light reflection flare */}
+              <div className="absolute top-1/4 left-1/3 w-28 h-28 bg-white/30 rounded-full blur-2xl pointer-events-none" />
+            </div>
+
+            {/* UGC Editorial Stamp */}
+            <div className="mt-4 flex flex-col items-center gap-1 text-center animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-teal-500/40 bg-teal-950/80 text-[10px] sm:text-xs tracking-widest text-teal-300 uppercase font-mono font-bold shadow-lg shadow-teal-900/50">
+                <Sparkles size={13} className="text-teal-300 animate-spin" />
+                <span>3D SNEAKER VAULT ALLOCATION</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black tracking-widest uppercase text-white font-editorial mt-1 drop-shadow-md">
+                SHOES <span className="text-teal-400">MAFIA</span>
+              </h2>
+              <p className="text-[10px] sm:text-xs tracking-widest text-[#8a9ba8] uppercase">
+                CALIBRATING HIGH-STREET SNEAKER ENGINE...
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 2. LUXURY TEMPERED GLASS SLIDING DOORS */}
       <div

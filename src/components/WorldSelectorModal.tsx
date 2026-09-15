@@ -1,17 +1,30 @@
 'use client';
 
-import React from 'react';
-import { ArrowRight, Shirt, Footprints, Zap, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Shirt, Footprints, Zap, X, Sparkles } from 'lucide-react';
 import { useWorld, StoreWorld } from '@/context/WorldContext';
+import { playSubBassThud, playMechanicalClick } from '@/utils/soundEffects';
 
 export default function WorldSelectorModal() {
   const { showWorldSelector, setShowWorldSelector, setWorld, world } = useWorld();
+  const [shoeFlying, setShoeFlying] = useState(false);
 
   if (!showWorldSelector) return null;
 
   const handleSelectWorld = (selected: StoreWorld) => {
-    setWorld(selected);
-    setShowWorldSelector(false);
+    playMechanicalClick();
+    if (selected === 'shoes') {
+      playSubBassThud();
+      setShoeFlying(true);
+      setTimeout(() => {
+        setWorld('shoes');
+        setShoeFlying(false);
+        setShowWorldSelector(false);
+      }, 1500);
+    } else {
+      setWorld(selected);
+      setShowWorldSelector(false);
+    }
   };
 
   return (
@@ -119,6 +132,27 @@ export default function WorldSelectorModal() {
         <div className="mt-8 text-center text-[10px] tracking-[0.2em] text-[#77746E] uppercase">
           Switch anytime via the portal switcher at the top of your screen
         </div>
+
+        {/* 3D UGC Flying Shoe Launch Animation inside World Selector Modal */}
+        {shoeFlying && (
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/95 overflow-hidden">
+            <div className="absolute h-80 w-80 rounded-full border border-teal-500/50 animate-shockwave pointer-events-none" />
+            <div className="absolute h-56 w-56 rounded-full bg-teal-500/20 blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col items-center justify-center">
+              <div className="w-80 sm:w-96 aspect-[16/10] animate-shoe-fly-camera flex items-center justify-center">
+                <img
+                  src="/media/flying-sneaker-3d.jpg"
+                  alt="3D Flying Sneaker"
+                  className="w-full h-full object-contain drop-shadow-[0_25px_40px_rgba(0,105,92,0.85)]"
+                />
+              </div>
+              <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-950/80 border border-teal-400 text-teal-300 font-mono text-xs font-bold uppercase tracking-widest animate-pulse">
+                <Sparkles size={12} /> ENTERING SHOES MAFIA VAULT...
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

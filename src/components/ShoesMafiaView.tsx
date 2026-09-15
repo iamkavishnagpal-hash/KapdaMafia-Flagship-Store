@@ -83,30 +83,65 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
         </div>
       )}
 
-      {/* Luxury Brutalist Sneaker Vault Hero */}
-      <div className="relative border-b border-[#142028] bg-gradient-to-b from-[#0a1217] to-[#070b0e] py-14 sm:py-20">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#09181f] border border-[#00695c]/40 text-[#00695c] text-xs font-bold tracking-wider uppercase mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00695c] animate-ping" />
-            <span>Official Footwear Division</span>
+      {/* Luxury Brutalist Sneaker Vault Hero with 3D UGC Levitation Showcase */}
+      <div className="relative border-b border-[#142028] bg-gradient-to-b from-[#0a1217] via-[#091117] to-[#070b0e] py-10 sm:py-16 overflow-hidden">
+        {/* Ambient atmospheric glow behind 3D sneaker */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#00695c]/15 blur-[120px] pointer-events-none" />
+
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Left 7 Columns: Editorial Headline & Store Identity */}
+            <div className="lg:col-span-7 text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#09181f] border border-[#00695c]/40 text-[#00695c] text-xs font-bold tracking-wider uppercase mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00695c] animate-ping" />
+                <span>Official Footwear Division // Nit-5 Faridabad</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white font-editorial leading-[0.9]">
+                SHOES <span className="text-[#00695c]">MAFIA</span>
+              </h1>
+
+              <p className="mt-4 text-xs sm:text-sm text-[#8a9ba8] max-w-xl leading-relaxed tracking-tight">
+                High-street silhouettes, performance runners, and court high-tops calibrated for underground streetwear styling. Engineered shock-absorbent dual-density sole fabrication with 100% genuine street pedigree.
+              </p>
+
+              {/* Action Stats Pill */}
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-[#8a9ba8]">
+                <div className="px-3 py-1.5 bg-[#0e1c24] border border-[#162a36] text-white font-mono font-bold flex items-center gap-2">
+                  <span className="text-[#00695c]">●</span> UK 6 — 10 READY FOR DISPATCH
+                </div>
+                <div className="px-3 py-1.5 bg-[#0e1c24] border border-[#162a36] text-[#c1d1db] font-mono">
+                  EXPRESS 48-HR LOCAL TRANSIT
+                </div>
+                <div className="px-3 py-1.5 bg-[#0e1c24] border border-[#162a36] text-[#00695c] font-mono font-bold">
+                  FLAGSHIP NIT-5 FARIDABAD
+                </div>
+              </div>
+            </div>
+
+            {/* Right 5 Columns: 3D UGC Levitating Sneaker Spotlight */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+              {/* Concentric subtle shockwave pulse */}
+              <div className="absolute w-72 h-72 rounded-full border border-teal-500/20 animate-shockwave pointer-events-none" />
+              
+              {/* 3D Levitating Sneaker Container */}
+              <div className="relative w-full max-w-[420px] aspect-[4/3] flex items-center justify-center animate-shoe-3d-hover group cursor-pointer">
+                <img
+                  src="/media/flying-sneaker-3d.jpg"
+                  alt="Shoes Mafia 3D Street Sneaker"
+                  className="w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(0,105,92,0.6)] filter contrast-105 group-hover:scale-105 transition-transform duration-500"
+                />
+                
+                {/* 3D UGC Interactive Badge */}
+                <div className="absolute bottom-2 right-2 px-2.5 py-1 bg-black/85 border border-[#00695c]/60 text-[10px] font-mono tracking-widest text-teal-300 uppercase shadow-lg backdrop-blur-sm flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                  <span>3D UGC PROTOTYPE // AF-1 MAFIA</span>
+                </div>
+              </div>
+            </div>
+
           </div>
-
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white font-editorial leading-[0.88]">
-            SHOES <span className="text-[#00695c]">MAFIA</span>
-          </h1>
-
-          <p className="mt-4 text-xs sm:text-sm text-[#8a9ba8] max-w-2xl mx-auto leading-relaxed tracking-tight">
-            High-street silhouettes, performance runners, and court high-tops calibrated for underground streetwear styling. Verified sole fabrication.
-          </p>
-
-          {/* Faridabad Store Pill */}
-          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-4 bg-[#0a141a] border border-[#1a2d38] p-3 sm:p-4 text-xs text-[#8a9ba8]">
-            <span className="text-[#00695c] font-bold">Concierge: 083750 00819</span>
-            <span className="text-white/20 hidden sm:inline">|</span>
-            <span className="text-[#c1d1db]">NIT-5 Flagship Store · Faridabad</span>
-          </div>
-
         </div>
       </div>
 
