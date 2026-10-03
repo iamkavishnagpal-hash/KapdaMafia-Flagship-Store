@@ -1,4 +1,375 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-:root{color-scheme:dark} body{margin:0;background:#070707;color:#f4f0e8} *{box-sizing:border-box} a{color:inherit;text-decoration:none} .grain:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.22) 1px,transparent 0);background-size:18px 18px;mix-blend-mode:overlay}.focus-ring:focus-visible{outline:2px solid #d9252e;outline-offset:3px}
+@import "tailwindcss";
+
+:root {
+  /* ==========================================================================
+     KAPDA MAFIA SEMANTIC DESIGN TOKENS
+     Controlled palette: Canvas, Surfaces, Hairlines, Warm White, Oxblood Accent
+     ========================================================================== */
+  --color-bg: #080808;
+  --color-surface: #111111;
+  --color-surface-elevated: #161616;
+  --color-border: #1E1E1E;
+  --color-border-subtle: #181818;
+  
+  --color-text-primary: #F4F4F4;
+  --color-text-secondary: #C8C3B8;
+  --color-text-muted: #888888;
+  --color-text-dim: #555555;
+  
+  /* Utilitarian Deep Oxblood - used for controlled accents & indicators only */
+  --color-accent: #7D0A0A;
+  --color-accent-hover: #9E1010;
+  
+  /* Status tokens */
+  --color-success: #1a8f7a;
+  --color-warning: #d97706;
+  --color-error: #b91c1c;
+
+  /* Legacy variable aliases for component compatibility */
+  --surface-void: var(--color-bg);
+  --surface-elevated: var(--color-surface);
+  --border-hairline: var(--color-border);
+  --text-primary: var(--color-text-primary);
+  --text-muted: var(--color-text-muted);
+  --accent-oxblood: var(--color-accent);
+  --ink: var(--color-bg);
+  --ivory: var(--color-text-primary);
+  --warm-black: var(--color-bg);
+  --graphite: var(--color-surface);
+  --stone: var(--color-text-secondary);
+  --smoke: var(--color-text-muted);
+  --oxblood: var(--color-accent);
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+/* ==========================================================================
+   TYPOGRAPHY SYSTEM HIERARCHY
+   Intentional sizing, weight, tracking, and leading — NO random uppercase/mono
+   ========================================================================== */
+
+/* Display / Editorial Title (High impact, tight tracking, editorial balance) */
+.font-display, .type-display {
+  font-family: var(--font-display, var(--font-sans, sans-serif));
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+/* Editorial Luxury Serif for haute-couture and dramatic contrast */
+.font-serif, .type-serif {
+  font-family: var(--font-serif, 'Times New Roman', serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Headings */
+.type-heading-xl {
+  font-family: var(--font-display, var(--font-sans, sans-serif));
+  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.type-heading-lg {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.type-heading-md {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+/* Body Typography */
+.type-body-lg {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.type-body-md {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+.type-body-sm {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Label & Utility */
+.type-label {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.type-utility {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Tabular Prices */
+.type-price {
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+/* Clean Form Focus & Accessible Interactions */
+button, a, input, select, textarea { 
+  -webkit-tap-highlight-color: transparent; 
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+::selection { 
+  background: var(--color-accent); 
+  color: #FFFFFF; 
+}
+
+/* Scrollbar Minimalist Treatment */
+::-webkit-scrollbar { 
+  width: 5px; 
+  height: 5px; 
+}
+::-webkit-scrollbar-track { 
+  background: var(--color-bg); 
+}
+::-webkit-scrollbar-thumb { 
+  background: var(--color-border); 
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: var(--color-accent); 
+}
+
+/* Gentle Reveal Motion */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   PREMIUM MOTION: SHUTTER, TEMPERED GLASS DOORS & 3D SNEAKER LAUNCH
+   ========================================================================== */
+
+.shutter-metal-grooves {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 4px,
+    rgba(0, 0, 0, 0.6) 5px,
+    rgba(0, 0, 0, 0.8) 16px,
+    rgba(255, 255, 255, 0.08) 17px
+  );
+}
+
+@keyframes glass-slide-left {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0.15;
+  }
+}
+
+@keyframes glass-slide-right {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0.15;
+  }
+}
+
+.animate-glass-left {
+  animation: glass-slide-left 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.animate-glass-right {
+  animation: glass-slide-right 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* 3D Flying Sneaker UGC Launch Animation */
+@keyframes shoe-fly-towards-camera {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) translate3d(0, 100px, -800px) rotateX(35deg) rotateY(-45deg) rotateZ(-20deg) scale(0.25);
+    filter: blur(12px) brightness(1.8);
+  }
+  45% {
+    opacity: 1;
+    transform: perspective(1000px) translate3d(0, -25px, 220px) rotateX(-8deg) rotateY(15deg) rotateZ(6deg) scale(1.25);
+    filter: blur(0px) brightness(1.2);
+  }
+  75% {
+    transform: perspective(1000px) translate3d(0, 8px, 40px) rotateX(3deg) rotateY(-6deg) rotateZ(-2deg) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+.animate-shoe-fly-camera {
+  animation: shoe-fly-towards-camera 1.4s cubic-bezier(0.14, 1, 0.25, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes shockwave-pulse {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-shockwave {
+  animation: shockwave-pulse 1.4s cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* ==========================================================================
+   FLAGSHIP THRESHOLD SPATIAL DEPTH & LUXURY LIGHTING UTILITIES
+   Restrained, continuous camera push through architectural entrance
+   ========================================================================== */
+
+.spatial-perspective-rig {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.architectural-dolly-transition {
+  transition: transform 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter, opacity;
+}
+
+.tungsten-architectural-bleed {
+  background: radial-gradient(
+    ellipse 85% 65% at 50% 45%,
+    rgba(200, 195, 184, 0.18) 0%,
+    rgba(125, 10, 10, 0.08) 35%,
+    rgba(8, 8, 8, 0.85) 75%,
+    rgba(8, 8, 8, 0.98) 100%
+  );
+}
+
+.tungsten-threshold-glow {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(244, 244, 244, 0.15) 0%,
+    rgba(200, 195, 184, 0.10) 30%,
+    rgba(125, 10, 10, 0.04) 60%,
+    transparent 100%
+  );
+}
+
+.storefront-glass-sheen {
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.04) 38%,
+    rgba(255, 255, 255, 0.12) 42%,
+    rgba(255, 255, 255, 0.02) 48%,
+    transparent 70%
+  );
+}
+
+

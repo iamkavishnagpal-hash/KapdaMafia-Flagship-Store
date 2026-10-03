@@ -1,3 +1,16 @@
-import { SiteHeader } from '@/components/site-header';
-const sections=['New Drop','Trending Now','Shop by Vibe','Featured Collection','Editorial Lookbook','AI Virtual Try-On','Best Sellers','Customer UGC','Reviews','Store Experience','Find Physical Store','WhatsApp Commerce'];
-export default function Home(){return <main><SiteHeader/><section className="relative grid min-h-screen place-items-end overflow-hidden px-4 pb-16 pt-28 sm:px-8"><div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(159,17,27,.38),transparent_34%),linear-gradient(115deg,#070707_15%,#17171b_55%,#050505)]"/><div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.1fr_.9fr]"><div><p className="mb-5 text-xs uppercase tracking-[.4em] text-mafia-red">Production-grade omnichannel fashion</p><h1 className="font-display text-6xl uppercase leading-[.85] sm:text-8xl lg:text-[10rem]">Wear the attitude.</h1><p className="mt-6 max-w-xl text-lg text-mafia-bone/70">A cinematic customer website connected to the same commerce core as POS, inventory, orders, WhatsApp and marketplaces.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><a className="focus-ring bg-mafia-red px-6 py-4 text-center text-sm uppercase tracking-[.18em]" href="/shop">Shop new drop</a><a className="focus-ring border border-white/15 px-6 py-4 text-center text-sm uppercase tracking-[.18em]" href="/os">Open Business OS</a></div></div><div className="min-h-[420px] border border-white/10 bg-gradient-to-b from-white/10 to-white/[.03] p-4 shadow-cinema"><div className="h-full bg-[linear-gradient(140deg,rgba(244,240,232,.12),rgba(159,17,27,.22),rgba(0,0,0,.2))] p-5"><p className="text-right text-xs uppercase tracking-[.3em] text-white/50">Campaign visual slot</p></div></div></div></section><section className="mx-auto grid max-w-7xl gap-4 px-4 py-20 sm:px-6 md:grid-cols-3">{sections.map((s,i)=><a className="focus-ring group min-h-52 border border-white/10 bg-mafia-charcoal p-5 transition hover:border-mafia-red md:even:translate-y-10" href={s.includes('Try')?'/try-on':s.includes('WhatsApp')?'/checkout':'/shop'} key={s}><span className="text-xs text-mafia-red">0{i+1}</span><h2 className="mt-16 font-display text-3xl uppercase">{s}</h2><p className="mt-3 text-sm text-white/55">Designed for loading, empty, error and production integration states.</p></a>)}</section><footer className="border-t border-white/10 p-8 text-sm text-white/50">Kapda Mafia Commerce Core — website, POS, WhatsApp and marketplaces share inventory.</footer></main>}
+import { CatalogService } from '@/services/catalog';
+import DualHomePage from '@/components/DualHomePage';
+
+export default async function HomePage() {
+  const clothingProducts = await CatalogService.getProducts({ world: 'clothing' });
+  const shoeProducts = await CatalogService.getProducts({ world: 'shoes' });
+  const lookbooks = await CatalogService.getLookbooks();
+
+  return (
+    <DualHomePage
+      clothingProducts={clothingProducts}
+      shoeProducts={shoeProducts}
+      lookbooks={lookbooks}
+    />
+  );
+}

@@ -1,0 +1,162 @@
+export type CategorySlug = 
+  | 'tees'
+  | 'hoodies'
+  | 'cargos'
+  | 'denim'
+  | 'jackets'
+  | 'sneakers'
+  | 'caps'
+  | 'accessories'
+  | 'sport-shoes'
+  | 'sneaker-shoes'
+  | 'formal-shoes';
+
+export type ProductBadge = 'NEW' | 'LIMITED' | 'LOW STOCK' | 'BEST SELLER' | 'RESTOCK' | 'GEN-Z TREND' | 'HOT';
+
+export type FitType = 'OVERSIZED' | 'BAGGY' | 'RELAXED' | 'REGULAR' | 'BOXY' | 'STANDARD FIT';
+
+export type AssetProvenance = 'OWNED' | 'LICENSED' | 'GENERATED' | 'DEV_PLACEHOLDER';
+
+export type ThreeDTier = 'TYPE_A_GLTF' | 'TYPE_B_PHOTO_SCRUB' | 'TYPE_C_HERO_3D';
+
+export interface Product3DConfig {
+  tier: ThreeDTier;
+  gltfUrl?: string;
+  turntableFrames?: string[];
+  initialRotation?: [number, number, number];
+}
+
+export interface ProductMedia {
+  id: string;
+  url: string;
+  type: 'image' | 'video';
+  alt: string;
+  view: 'hero' | 'front' | 'back' | 'model' | 'detail' | 'texture';
+  provenance?: AssetProvenance;
+}
+
+export interface SizeStock {
+  size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'UK7' | 'UK8' | 'UK9' | 'UK10' | 'ONE SIZE' | '6' | '7' | '8' | '9' | '10';
+  stock: number;
+}
+
+export interface ProductVariant {
+  id: string;
+  colorName: string;
+  colorHex: string;
+  sizes: SizeStock[];
+  images: ProductMedia[];
+}
+
+export interface Product {
+  id: string;
+  slug: string;
+  name: string;
+  tagline: string;
+  category: CategorySlug;
+  storeWorld?: 'clothing' | 'shoes';
+  shoeCategory?: 'SPORT SHOES' | 'Sneaker Shoes' | 'FORMAL SHOES';
+  price: number;
+  originalPrice?: number;
+  badge?: ProductBadge;
+  dropName?: string;
+  threeDConfig?: Product3DConfig;
+  description: string;
+  fit: FitType;
+  gsm?: number;
+  fabricDetails: string[];
+  careInstructions: string[];
+  modelInfo?: {
+    height: string;
+    wearingSize: string;
+  };
+  variants: ProductVariant[];
+  myBillBookMeta: {
+    itemId: string;
+    hsnCode: string;
+    taxRatePercentage: number;
+  };
+  rating: number;
+  reviewCount: number;
+  isFeatured?: boolean;
+}
+
+export interface Review {
+  id: string;
+  productId: string;
+  authorName: string;
+  rating: number;
+  date: string;
+  title: string;
+  comment: string;
+  verifiedPurchase: boolean;
+  userFitRating: 'True to size' | 'Runs large' | 'Runs small';
+  userHeightWeight?: string;
+  purchasedSize: string;
+}
+
+export interface CartItem {
+  productId: string;
+  variantId: string;
+  size: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+export interface Cart {
+  items: CartItem[];
+  subtotal: number;
+  discount: number;
+  shipping: number;
+  freeShippingThreshold: number;
+  total: number;
+}
+
+export interface OrderItem extends CartItem {
+  productName: string;
+  productImage: string;
+  colorName: string;
+}
+
+export type OrderStatus = 'ORDER_CONFIRMED' | 'PACKED' | 'SHIPPED' | 'OUT_FOR_DELIVERY' | 'DELIVERED';
+
+export interface OrderTrackingStep {
+  status: OrderStatus;
+  label: string;
+  date?: string;
+  completed: boolean;
+}
+
+export interface Order {
+  id: string;
+  customerName: string;
+  email: string;
+  phone: string;
+  items: OrderItem[];
+  subtotal: number;
+  shipping: number;
+  total: number;
+  paymentMethod: 'PREPAID_RAZORPAY' | 'CASH_ON_DELIVERY';
+  paymentStatus: 'PAID' | 'PENDING' | 'FAILED';
+  orderStatus: OrderStatus;
+  trackingSteps: OrderTrackingStep[];
+  trackingNumber?: string;
+  courierName?: string;
+  createdAt: string;
+  shippingAddress: {
+    street: string;
+    city: string;
+    state: string;
+    pincode: string;
+  };
+}
+
+export interface Lookbook {
+  id: string;
+  code: string;
+  title: string;
+  subtitle: string;
+  heroImage: string;
+  description: string;
+  productIds: string[];
+}
