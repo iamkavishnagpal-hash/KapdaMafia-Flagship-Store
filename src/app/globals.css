@@ -372,4 +372,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   );
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .architectural-dolly-transition {
+    transition: opacity 300ms ease-out !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+
 
