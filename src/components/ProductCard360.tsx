@@ -188,12 +188,12 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         </div>
 
         {/* Size Pills: Single-tap opens cart drawer directly */}
-        <div className="pt-2 border-t border-[#1E1E1E] space-y-2">
-          <div className="flex items-center justify-between text-[10px] text-[#888888] font-mono tracking-[0.12em]">
+        <div className="pt-2.5 border-t border-[#1E1E1E] space-y-2">
+          <div className="flex items-center justify-between text-[10px] text-[#888888] font-mono tracking-[0.14em]">
             <span>SIZES (TAP TO BAG):</span>
-            <span className="text-[#F4F4F4] font-bold">{selectedSize}</span>
+            <span className="text-[#F4F4F4] font-bold bg-[#141414] border border-[#222] px-1.5 py-0.5">{selectedSize}</span>
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 pt-0.5">
             {availableSizes.map((size) => (
               <button
                 key={size}
@@ -212,14 +212,14 @@ export default function ProductCard360({ product, priority = false }: ProductCar
                   });
                   openCart();
                 }}
-                className={`min-w-[34px] h-7 px-2 text-[11px] font-mono font-bold uppercase border transition-colors cursor-pointer ${
+                className={`min-w-[36px] h-7 px-2.5 text-[11px] font-mono font-bold uppercase border transition-all cursor-pointer ${
                   selectedSize === size
                     ? isShoes
-                      ? 'border-[#00695c] bg-[#00695c] text-white'
-                      : 'border-[#7D0A0A] bg-[#7D0A0A] text-white'
+                      ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
+                      : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
                     : isShoes
-                      ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a]'
-                      : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666]'
+                      ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a] hover:bg-[#161f1d]'
+                      : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666] hover:bg-[#181818]'
                 }`}
                 aria-label={`Select size ${size} and open cart`}
               >

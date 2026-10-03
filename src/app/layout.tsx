@@ -68,7 +68,7 @@ export default function RootLayout({
           <WorldSelectorModal />
           <Navbar />
           <CartDrawer />
-          <main className="min-h-screen pt-[58px]">{children}</main>
+          <main className="min-h-screen pt-[84px] lg:pt-[106px]">{children}</main>
           <Footer />
           <MobileBottomBar />
         </AppProviders>
