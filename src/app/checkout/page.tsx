@@ -32,6 +32,9 @@ function CheckoutContent() {
   const [paymentMethod, setPaymentMethod] = useState<'PREPAID' | 'COD'>('PREPAID');
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState('KM-9847120');
+  const [promoCode, setPromoCode] = useState('');
+  const [appliedPromoName, setAppliedPromoName] = useState(checkoutItems.length >= 2 ? 'COMBO DISCOUNT (2+ PIECES)' : '');
+  const [appliedDiscount, setAppliedDiscount] = useState(checkoutItems.length >= 2 ? 300 : 0);
   const [formData, setFormData] = useState({
     name: 'Aarav Sharma',
     email: 'aarav@kapdamafia.com',
@@ -42,10 +45,27 @@ function CheckoutContent() {
     pincode: '400050'
   });
 
+  const handleApplyPromo = () => {
+    const code = promoCode.trim().toUpperCase();
+    if (code === 'KM300' || code === 'COMBO300') {
+      setAppliedDiscount(300);
+      setAppliedPromoName(`${code} (₹300 OFF)`);
+    } else if (code === 'WELCOME10') {
+      const disc = Math.round(subtotal * 0.1);
+      setAppliedDiscount(disc);
+      setAppliedPromoName('WELCOME10 (10% OFF)');
+    } else if (code === 'MAFIA500' && subtotal >= 3500) {
+      setAppliedDiscount(500);
+      setAppliedPromoName('MAFIA500 (₹500 OFF)');
+    } else {
+      alert('Invalid or expired promo code');
+    }
+  };
+
   const freeShippingThreshold = isShoesCheckout ? 999 : 1999;
   const isFreeShipping = paymentMethod === 'PREPAID' || subtotal >= freeShippingThreshold;
   const shipping = isFreeShipping ? 0 : 99;
-  const total = subtotal + shipping;
+  const total = subtotal - appliedDiscount + shipping;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -286,11 +306,43 @@ function CheckoutContent() {
               )}
             </div>
 
+            {/* Coupon Code Section */}
+            <div className="pt-2 border-t border-[#181818]">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="PROMO CODE (e.g. KM300)"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                  className="flex-1 bg-[#080808] border border-[#222222] text-[#F3F0E8] px-3 py-2 text-xs uppercase focus:outline-none focus:border-[#8F1118]"
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyPromo}
+                  className="px-4 py-2 bg-[#222222] hover:bg-[#333333] text-white text-xs font-bold uppercase tracking-wider"
+                >
+                  APPLY
+                </button>
+              </div>
+              {appliedDiscount > 0 && (
+                <div className="text-[10px] text-emerald-400 mt-1.5 flex items-center justify-between">
+                  <span>✓ PROMO APPLIED: {appliedPromoName}</span>
+                  <span>-₹{appliedDiscount}</span>
+                </div>
+              )}
+            </div>
+
             <div className="space-y-2 text-xs border-t border-[#181818] pt-4">
               <div className="flex justify-between text-[#8C8C86]">
                 <span>SUBTOTAL</span>
                 <span>₹{subtotal.toLocaleString()}</span>
               </div>
+              {appliedDiscount > 0 && (
+                <div className="flex justify-between text-emerald-400">
+                  <span>SAVINGS & DISCOUNTS</span>
+                  <span>-₹{appliedDiscount.toLocaleString()}</span>
+                </div>
+              )}
               <div className="flex justify-between text-[#8C8C86]">
                 <span>SHIPPING</span>
                 <span>{shipping === 0 ? 'FREE' : `₹${shipping}`}</span>
@@ -298,7 +350,7 @@ function CheckoutContent() {
               <div className="flex justify-between text-sm font-bold text-[#F3F0E8] pt-2 border-t border-[#181818]">
                 <span>TOTAL AMOUNT</span>
                 <span className={isShoesCheckout ? 'text-[#00695c]' : 'text-[#8F1118]'}>
-                  ₹{total.toLocaleString()}
+                  ₹{Math.max(0, total).toLocaleString()}
                 </span>
               </div>
             </div>
