@@ -9,6 +9,43 @@ The digital store is not a generic e-commerce website. It is an **architectural 
 
 ---
 
+## 2. THE FIRST PRINCIPLE: INTENT > IMPLEMENTATION
+
+Every line of code and every visual component must flow strictly down the architectural chain of intent:
+
+```
+BUSINESS GOAL
+      ↓
+USER EXPERIENCE
+      ↓
+CREATIVE DIRECTION
+      ↓
+INTERACTION DESIGN
+      ↓
+TECHNICAL DECISION
+      ↓
+CODE
+```
+
+### The Strict Anti-Pattern:
+```
+USER WORD
+   ↓
+CODE  ❌ NEVER PERMITTED
+```
+
+- When the client says: *"Make an entrance that feels like entering the flagship store."*
+  - **Literal / Amateur Response**: Create a vector graphic of two doors that flap open when clicked (`USER WORD -> CODE`).
+  - **Architectural Response**:
+    1. **Business Goal**: Position Kapda Mafia as a physical-origin, heavyweight Indian luxury brand commanding ₹2,500–₹6,000 price points.
+    2. **User Experience**: Visitor feels an unhurried, tangible transition from the evening street outside into an imposing, high-ceiling retail showroom.
+    3. **Creative Direction**: Brutalist cast concrete, dusk sky, warm 2700K tungsten halogen light bleeding onto the threshold, heavy loopback cotton drape.
+    4. **Interaction Design**: Unbroken forward camera dolly (`1400px` spatial rig) accompanied by low-frequency acoustic air seal decompression and resonant arrival chime.
+    5. **Technical Decision**: Procedural Web Audio API synthesis (0 latency, 0 external asset load) + CSS 3D matrix transforms with cubic-bezier easing.
+    6. **Code**: Clean, accessible, typed, responsive implementation.
+
+---
+
 ## 2. CORE RESPONSIBILITIES
 1. **Physical Spatial Continuity**: Every entrance, transition, and interaction must feel grounded in real physical architecture rather than standard webpage route changes.
 2. **Dual-World Shopping Architecture**:
