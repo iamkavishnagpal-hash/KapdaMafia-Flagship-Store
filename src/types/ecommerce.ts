@@ -7,6 +7,11 @@ export type CategorySlug =
   | 'sneakers'
   | 'caps'
   | 'accessories'
+  | 'topwear'
+  | 'bottomwear'
+  | 'winterwear'
+  | 'coord-sets'
+  | 'basics'
   | 'sport-shoes'
   | 'sneaker-shoes'
   | 'formal-shoes';

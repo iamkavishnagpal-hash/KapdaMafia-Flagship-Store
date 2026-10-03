@@ -173,11 +173,15 @@ export default function Navbar() {
             {/* Massive Brutalist Typography Links */}
             <div className="flex-1 flex flex-col justify-center py-10 space-y-4 sm:space-y-6">
               {[
-                { name: 'NEW ARRIVALS', href: '/shop?sort=new' },
-                { name: 'HOODIES & TEES', href: '/shop?category=tees' },
-                { name: 'CARGO ARCHIVE', href: '/shop?category=cargos' },
-                { name: 'SNEAKER VAULT', href: '/shoes', accent: '#00695c' },
-                { name: 'FLAGSHIP STORE', href: '/store' }
+                { name: 'SHOP ALL ARCHIVE', href: '/shop' },
+                { name: 'NEW RELEASES', href: '/shop?sort=new' },
+                { name: 'TOPWEAR (TEES & SHIRTS)', href: '/shop?category=topwear' },
+                { name: 'BOTTOMWEAR (DENIM & CARGOS)', href: '/shop?category=bottomwear' },
+                { name: 'WINTERWEAR (500 GSM HOODIES)', href: '/shop?category=winterwear' },
+                { name: 'CO-ORD SETS', href: '/shop?category=coord-sets' },
+                { name: 'SHOP THE LOOK', href: '/lookbook' },
+                { name: 'SHOES MAFIA VAULT', href: '/shoes', accent: '#00695c' },
+                { name: 'FLAGSHIP STORE (FARIDABAD)', href: '/store' }
               ].map((item, idx) => (
                 <Link
                   key={item.name}

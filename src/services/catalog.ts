@@ -14,7 +14,20 @@ export const CatalogService = {
     }
 
     if (params?.category) {
-      result = result.filter(p => p.category === params.category);
+      const cat = params.category;
+      if (cat === 'topwear') {
+        result = result.filter(p => p.category === 'tees' || p.category === 'hoodies' || p.category === 'jackets');
+      } else if (cat === 'bottomwear') {
+        result = result.filter(p => p.category === 'cargos' || p.category === 'denim');
+      } else if (cat === 'winterwear') {
+        result = result.filter(p => p.category === 'hoodies' || p.category === 'jackets' || (p.gsm && p.gsm >= 380));
+      } else if (cat === 'coord-sets') {
+        result = result.filter(p => p.category === 'cargos' || p.name.includes('PANELED') || p.name.includes('TRACKPANT') || p.tagline.toLowerCase().includes('set'));
+      } else if (cat === 'basics') {
+        result = result.filter(p => p.category === 'tees' || p.name.includes('STRIPED') || p.price < 1500);
+      } else {
+        result = result.filter(p => p.category === cat);
+      }
     }
 
     if (params?.search) {

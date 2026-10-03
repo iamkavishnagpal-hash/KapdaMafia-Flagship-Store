@@ -152,17 +152,39 @@ export default function ProductCard360({ product, priority = false }: ProductCar
             </h3>
           </Link>
 
-          {/* Price: ₹3,490 (14px Clean Mono/Sans with tabular-nums) */}
+          {/* Price: ₹3,490 (14px Clean Mono/Sans with tabular-nums) & Savings Badge */}
           <div className="flex items-baseline gap-2 pt-0.5">
             <span className="text-sm font-bold text-[#F4F4F4] font-mono [font-variant-numeric:tabular-nums] tracking-[-0.01em]">
               ₹{product.price.toLocaleString('en-IN')}
             </span>
             {product.originalPrice && (
-              <span className="text-xs text-[#888888] line-through font-normal font-mono [font-variant-numeric:tabular-nums]">
-                ₹{product.originalPrice.toLocaleString('en-IN')}
-              </span>
+              <>
+                <span className="text-xs text-[#888888] line-through font-normal font-mono [font-variant-numeric:tabular-nums]">
+                  ₹{product.originalPrice.toLocaleString('en-IN')}
+                </span>
+                <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-1.5 py-0.2">
+                  {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                </span>
+              </>
             )}
           </div>
+
+          {/* Color Variant Swatches (Reference 03 Tripr / Genrage) */}
+          {product.variants && product.variants.length > 0 && (
+            <div className="flex items-center gap-1.5 pt-1">
+              {product.variants.map((v, vIdx) => (
+                <span
+                  key={v.id || vIdx}
+                  className="w-2.5 h-2.5 rounded-full border border-white/30 inline-block shadow-sm"
+                  style={{ backgroundColor: v.colorHex || '#222' }}
+                  title={v.colorName}
+                />
+              ))}
+              <span className="text-[9px] font-mono text-[#777] uppercase tracking-wider ml-1">
+                {product.variants[0]?.colorName || 'ORIGINAL WASH'}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Size Pills: Single-tap opens cart drawer directly */}

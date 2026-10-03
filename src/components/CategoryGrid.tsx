@@ -4,12 +4,12 @@ import { ArrowUpRight } from 'lucide-react';
 import SectionHeader from '@/components/ui/SectionHeader';
 
 const categories = [
-  { label: 'Heavyweight Tees', slug: 'tees', count: '400 GSM', image: '/media/product-tee.png', accent: 'Boxy Silhouette' },
-  { label: 'Hoodies & Fleece', slug: 'hoodies', count: '500 GSM', image: '/media/product-hoodie.png', accent: 'Double Hood' },
-  { label: 'Tactical Cargos', slug: 'cargos', count: 'Ripstop', image: '/media/product-cargo.png', accent: 'Deep Pocket Vault' },
-  { label: 'Rigid Denim', slug: 'denim', count: '14.5 OZ', image: '/media/category-denim.jpg', accent: 'Barrel Leg Fit' },
-  { label: 'Outerwear', slug: 'jackets', count: 'Heavy Twill', image: '/media/product-jacket.png', accent: 'Tactical Hardware' },
-  { label: 'Shoes Mafia Kicks', slug: 'sneakers', count: 'Official Line', image: '/media/category-accessories.jpg', accent: 'Chunky Runners' }
+  { label: 'Topwear', slug: 'topwear', count: '280-440 GSM', image: '/media/product-tee.png', accent: 'Boxy Tees & Shirts' },
+  { label: 'Bottomwear', slug: 'bottomwear', count: 'Denim & Cargos', image: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605', accent: 'Curved Barrel & Wide Leg' },
+  { label: 'Winterwear', slug: 'winterwear', count: '500 GSM Heavy', image: '/media/product-hoodie.png', accent: 'Double Hood & Fleece' },
+  { label: 'Co-ord Sets', slug: 'coord-sets', count: 'Matching Sets', image: 'https://www.powerlook.in/cdn/shop/files/7_3x_888d77c3-7b5a-4a6f-bf88-66c15809bf99.jpg?v=1787637637', accent: 'Trackpants & Tops' },
+  { label: 'Street Basics', slug: 'basics', count: 'Core Essentials', image: 'https://www.powerlook.in/cdn/shop/files/2_4b938529-ec1a-4ee8-937f-540ba48bc2dc.jpg?v=1759921304', accent: 'Heavy Combed Rib' },
+  { label: 'Shoes Mafia', slug: 'sneakers', count: 'Kicks Archive', image: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg', accent: 'Chunky Runners & Court' }
 ];
 
 export default function CategoryGrid() {

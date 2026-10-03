@@ -31,8 +31,21 @@ export async function GET(request: Request) {
       params.push(world);
     }
     if (category && category !== 'ALL') {
-      sql += ' AND LOWER(p.category) = LOWER(?)';
-      params.push(category);
+      const lower = category.toLowerCase();
+      if (lower === 'topwear') {
+        sql += " AND p.category IN ('tees', 'hoodies', 'jackets')";
+      } else if (lower === 'bottomwear') {
+        sql += " AND p.category IN ('cargos', 'denim')";
+      } else if (lower === 'winterwear') {
+        sql += " AND (p.category IN ('hoodies', 'jackets') OR p.gsm >= 380)";
+      } else if (lower === 'coord-sets') {
+        sql += " AND (p.category = 'cargos' OR p.name LIKE '%PANELED%' OR p.name LIKE '%TRACKPANT%')";
+      } else if (lower === 'basics') {
+        sql += " AND (p.category = 'tees' OR p.price < 1500)";
+      } else {
+        sql += ' AND LOWER(p.category) = LOWER(?)';
+        params.push(category);
+      }
     }
     if (slug) {
       sql += ' AND p.slug = ?';

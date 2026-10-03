@@ -85,16 +85,51 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
 
-            {/* Price Tag: Tier 3 Tabular Numbers */}
+            {/* Price Tag: Tier 3 Tabular Numbers & Discount Badge */}
             <div className="flex items-baseline gap-3 pt-2 border-t border-[#1E1E1E]">
               <span className="text-3xl font-bold text-[#F4F4F4] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
                 ₹{product.price.toLocaleString('en-IN')}
               </span>
               {product.originalPrice && (
-                <span className="text-sm text-[#888888] line-through [font-variant-numeric:tabular-nums] font-mono tracking-[0.12em]">
-                  ₹{product.originalPrice.toLocaleString('en-IN')}
-                </span>
+                <>
+                  <span className="text-sm text-[#888888] line-through [font-variant-numeric:tabular-nums] font-mono tracking-[0.12em]">
+                    ₹{product.originalPrice.toLocaleString('en-IN')}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-2 py-0.5">
+                    {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                  </span>
+                </>
               )}
+            </div>
+
+            {/* Tripr / Genrage Color Variants Selector */}
+            {product.variants && product.variants.length > 0 && (
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center justify-between text-xs font-mono text-[#888]">
+                  <span>COLOR: <strong className="text-white">{product.variants[0]?.colorName}</strong></span>
+                  <span className="text-[10px] text-[#777]">AUTHENTIC WASH</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {product.variants.map((v, i) => (
+                    <button
+                      key={v.id || i}
+                      className="w-7 h-7 rounded-full border-2 border-white/80 p-0.5 flex items-center justify-center cursor-pointer shadow-md"
+                      title={v.colorName}
+                    >
+                      <span className="w-full h-full rounded-full" style={{ backgroundColor: v.colorHex || '#222' }} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Multi-Buy / Bundle Incentive (Tripr convention) */}
+            <div className="p-3 bg-[#111111] border border-[#222222] text-xs font-mono text-[#A0A0A0] flex items-center justify-between">
+              <div>
+                <span className="text-white font-bold block">BUY ANY 2 PIECES → GET EXTRA ₹300 OFF</span>
+                <span className="text-[10px] text-[#777]">Automated discount applied at instant checkout</span>
+              </div>
+              <span className="px-2 py-1 bg-[#7D0A0A] text-white font-bold text-[10px]">COMBO CODE: KM300</span>
             </div>
 
             <p className="text-xs text-[#B8B4AA] leading-relaxed">{product.description}</p>

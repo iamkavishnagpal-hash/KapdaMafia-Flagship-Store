@@ -10,6 +10,7 @@ import FabricStory from '@/components/FabricStory';
 import LookbookSection from '@/components/LookbookSection';
 import LimitedDropBanner from '@/components/LimitedDropBanner';
 import CategoryGrid from '@/components/CategoryGrid';
+import BundleOffersSection from '@/components/BundleOffersSection';
 import SeenInMotion from '@/components/SeenInMotion';
 import ShoesMafiaView from '@/components/ShoesMafiaView';
 import InstagramLiveFeed from '@/components/InstagramLiveFeed';
@@ -61,6 +62,11 @@ export default function DualHomePage({
 
       <div className="reveal" style={{ '--reveal-delay': '100ms' } as React.CSSProperties}>
         <CategoryGrid />
+      </div>
+
+      {/* Tripr & Genrage Merchandising: Streetwear Combo Bundles */}
+      <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
+        <BundleOffersSection />
       </div>
 
       <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>

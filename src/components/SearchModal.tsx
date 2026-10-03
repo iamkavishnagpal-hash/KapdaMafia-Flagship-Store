@@ -158,11 +158,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 BROWSE BY SILHOUETTE
               </div>
               <div className="flex flex-wrap gap-2 text-xs font-mono">
-                {['TEES', 'HOODIES', 'CARGOS', 'DENIM', 'SHOES', '440 GSM'].map(cat => (
+                {['ALL', 'TOPWEAR', 'BOTTOMWEAR', 'WINTERWEAR', 'CO-ORD SETS', 'BASICS', 'TEES', 'CARGOS', 'DENIM', 'SHOES', '440 GSM'].map(cat => (
                   <button 
                     key={cat}
                     onClick={() => handleQuickPrompt(cat.toLowerCase())}
-                    className="px-3.5 py-1.5 bg-[#121212] border border-[#222222] hover:border-white text-[#A0A0A0] hover:text-white uppercase transition-colors cursor-pointer"
+                    className="px-3 py-1.5 bg-[#121212] border border-[#222222] hover:border-white text-[#A0A0A0] hover:text-white uppercase transition-colors cursor-pointer text-[11px]"
                   >
                     {cat}
                   </button>

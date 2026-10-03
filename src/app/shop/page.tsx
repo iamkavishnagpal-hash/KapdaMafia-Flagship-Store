@@ -70,18 +70,28 @@ function ShopContent() {
         <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between pb-6 border-b border-[#1c1c1c] text-xs">
           
           {/* Category Tabs */}
-          <div className="flex flex-wrap gap-4 sm:gap-6 text-[#77746E]">
-            {['ALL', 'TEES', 'HOODIES', 'CARGOS', 'DENIM'].map(cat => (
+          <div className="flex flex-wrap gap-3 sm:gap-5 text-[#888888] font-mono text-[11px]">
+            {[
+              { id: 'ALL', label: 'ALL RELEASES' },
+              { id: 'TOPWEAR', label: 'TOPWEAR' },
+              { id: 'BOTTOMWEAR', label: 'BOTTOMWEAR' },
+              { id: 'WINTERWEAR', label: 'WINTERWEAR' },
+              { id: 'COORD-SETS', label: 'CO-ORD SETS' },
+              { id: 'BASICS', label: 'BASICS' },
+              { id: 'TEES', label: 'TEES' },
+              { id: 'DENIM', label: 'DENIM' },
+              { id: 'CARGOS', label: 'CARGOS' }
+            ].map(cat => (
               <button
-                key={cat}
-                onClick={() => setCategoryOverride(cat)}
-                className={`pb-1 transition-all uppercase tracking-widest font-bold ${
-                  activeCategory === cat 
-                    ? 'text-[#EEEAE1] border-b-2 border-[#8F1118]' 
-                    : 'hover:text-[#EEEAE1]'
+                key={cat.id}
+                onClick={() => setCategoryOverride(cat.id)}
+                className={`pb-1 transition-all uppercase tracking-wider font-bold ${
+                  activeCategory === cat.id 
+                    ? 'text-[#F4F4F4] border-b-2 border-[#7D0A0A]' 
+                    : 'hover:text-[#F4F4F4]'
                 }`}
               >
-                {cat}
+                {cat.label}
               </button>
             ))}
           </div>
