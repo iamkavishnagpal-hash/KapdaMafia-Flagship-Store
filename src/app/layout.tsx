@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import MobileBottomBar from '@/components/MobileBottomBar';
-import SpatialShowroomSequence from '@/components/SpatialShowroomSequence';
+import MafiaDropTransition from '@/components/MafiaDropTransition';
 import WorldSelectorModal from '@/components/WorldSelectorModal';
 import { AppProviders } from '@/components/AppProviders';
 
@@ -62,8 +62,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${display.variable} ${sans.variable} ${serif.variable} font-sans bg-[#080808] text-[#F4F4F4] antialiased`}>
         <AppProviders>
-          {/* Continuous Spatial Showroom Sequence (Black -> Shutter -> Exterior -> Glass Door -> Grand Lobby -> World) */}
-          <SpatialShowroomSequence />
+          {/* Authentic Entrance Transition & Shopping World Selection Modal */}
+          <MafiaDropTransition />
           {/* Global world portal modal switcher */}
           <WorldSelectorModal />
           <Navbar />

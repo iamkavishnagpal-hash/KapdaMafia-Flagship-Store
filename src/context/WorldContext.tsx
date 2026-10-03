@@ -14,9 +14,9 @@ interface WorldContextType {
   logout: () => void;
   showWorldSelector: boolean;
   setShowWorldSelector: (show: boolean) => void;
-  isShowroomOpen: boolean;
-  openShowroom: () => void;
-  closeShowroom: () => void;
+  isShowroomOpen?: boolean;
+  openShowroom?: () => void;
+  closeShowroom?: () => void;
 }
 
 const WorldContext = createContext<WorldContextType | undefined>(undefined);
@@ -52,27 +52,6 @@ export function WorldProvider({ children }: { children: React.ReactNode }) {
   });
 
   const [showWorldSelector, setShowWorldSelector] = useState<boolean>(false);
-  const [isShowroomOpen, setIsShowroomOpen] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return true;
-    try {
-      return sessionStorage.getItem('km_entered_portal') !== 'true';
-    } catch {
-      return true;
-    }
-  });
-
-  const openShowroom = () => {
-    setIsShowroomOpen(true);
-  };
-
-  const closeShowroom = () => {
-    setIsShowroomOpen(false);
-    try {
-      sessionStorage.setItem('km_entered_portal', 'true');
-    } catch {
-      // ignore
-    }
-  };
 
   const setWorld = (newWorld: StoreWorld) => {
     setWorldState(newWorld);
@@ -124,9 +103,9 @@ export function WorldProvider({ children }: { children: React.ReactNode }) {
         logout,
         showWorldSelector,
         setShowWorldSelector,
-        isShowroomOpen,
-        openShowroom,
-        closeShowroom
+        isShowroomOpen: false,
+        openShowroom: () => {},
+        closeShowroom: () => {}
       }}
     >
       {children}

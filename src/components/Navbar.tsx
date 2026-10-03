@@ -1,191 +1,239 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, Search, X } from 'lucide-react';
+import { ShoppingBag, Search, X, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 import SearchModal from './SearchModal';
 import { useWorld } from '@/context/WorldContext';
 import { useCart } from '@/context/CartContext';
+import { isSoundEnabled, setSoundEnabled, playMechanicalClick, playSubBassThud } from '@/utils/soundEffects';
 
 export default function Navbar() {
   const { openCart, activeCount } = useCart();
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { world, setWorld, openShowroom } = useWorld();
+  const [soundActive, setSoundActive] = useState(false);
+  const { world, setWorld } = useWorld();
+
+  useEffect(() => {
+    setSoundActive(isSoundEnabled());
+  }, []);
 
   const isShoesWorld = world === 'shoes';
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-[#1E1E1E] bg-[#080808]/95 backdrop-blur-md transition-colors duration-200">
-        <div className="mx-auto flex h-[58px] max-w-[1600px] items-center justify-between px-4 sm:px-8 lg:px-12 font-sans">
+      <header className={`fixed inset-x-0 top-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${
+        isShoesWorld
+          ? 'border-[#00695c]/30 bg-[#060e0a]/95'
+          : 'border-[#1E1E1E] bg-[#080808]/95'
+      }`}>
+        {/* Top Ticker: Desktop Minimal Industrial Coordinates Bar */}
+        <div className="hidden lg:flex h-6 bg-[#0B0B0B] border-b border-[#1E1E1E] items-center justify-between px-8 lg:px-12 text-[10px] font-mono tracking-[0.12em] text-[#888888] uppercase">
+          <div>FLAGSHIP STORE: NIT-5 FARIDABAD [28.3846° N, 77.3086° E] // WORLDWIDE SHIPPING</div>
+          <div className="text-[#7D0A0A] font-bold">RUN 001 // EDITION OF 250</div>
+        </div>
+
+        <div className="mx-auto flex h-[56px] max-w-[1600px] items-center justify-between px-4 sm:px-8 lg:px-12 font-mono">
           
-          {/* LEFT: Menu Toggle & Brand Wordmark */}
-          <div className="flex items-center gap-4 sm:gap-6">
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="p-2 text-[#C8C3B8] hover:text-[#F4F4F4] cursor-pointer min-h-[44px] min-w-[44px] flex items-center gap-2 -ml-2"
-              aria-label="Open Navigation Menu"
+          {/* LEFT: Minimalist 2-line hamburger icon */}
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setMenuOpen(true)} 
+              className="p-2 text-[#F4F4F4] hover:text-white cursor-pointer min-h-[44px] min-w-[44px] flex flex-col justify-center gap-1.5 -ml-2" 
+              aria-label="Open Full-Screen Menu"
             >
-              <div className="flex flex-col gap-1.5">
-                <span className="w-5 h-[1.5px] bg-[#F4F4F4] block" />
-                <span className="w-3.5 h-[1.5px] bg-[#F4F4F4] block" />
-              </div>
-              <span className="text-xs font-medium uppercase tracking-wider text-[#888888] hidden sm:inline">
-                Menu
-              </span>
+              <span className="w-5 h-[2px] bg-[#F4F4F4] transition-all block" />
+              <span className="w-3.5 h-[2px] bg-[#F4F4F4] transition-all block" />
             </button>
 
-            <Link href="/" className="text-base sm:text-lg font-bold tracking-tight text-[#F4F4F4]">
-              KAPDA MAFIA
+            <Link href="/" className="hidden sm:flex items-center">
+              <span className="text-sm font-black tracking-[-0.04em] font-[var(--font-display)] uppercase text-[#F4F4F4]">
+                KAPDA MAFIA
+              </span>
             </Link>
           </div>
 
-          {/* CENTER: Dual Store Portal Switcher */}
-          <nav
-            aria-label="Store World Selector"
-            className="flex items-center border border-[#1E1E1E] bg-[#111111] p-0.5 text-xs font-medium"
-          >
+          {/* CENTER: High-contrast [KAPDA MAFIA] aur [SHOES MAFIA] direct toggle */}
+          <nav aria-label="Store Switcher" className="flex items-center border border-[#1E1E1E] bg-[#111111] p-0.5 text-[10px] sm:text-[11px] font-mono tracking-wider">
             <button
               onClick={() => setWorld('clothing')}
-              className={`px-3 sm:px-4 py-1.5 transition-colors cursor-pointer ${
+              className={`px-3 sm:px-4 py-1.5 font-bold uppercase transition-all duration-200 cursor-pointer ${
                 !isShoesWorld
-                  ? 'bg-[#F4F4F4] text-[#080808] font-semibold'
+                  ? 'bg-[#FFFFFF] text-[#080808] shadow-md'
                   : 'text-[#888888] hover:text-[#F4F4F4]'
               }`}
               aria-pressed={!isShoesWorld}
             >
-              Kapda Mafia
+              [KAPDA MAFIA]
             </button>
             <button
               onClick={() => setWorld('shoes')}
-              className={`px-3 sm:px-4 py-1.5 transition-colors cursor-pointer ${
+              className={`px-3 sm:px-4 py-1.5 font-bold uppercase transition-all duration-200 cursor-pointer ${
                 isShoesWorld
-                  ? 'bg-[#1a8f7a] text-white font-semibold'
+                  ? 'bg-[#00695c] text-white shadow-md hover:bg-[#1a8f7a]'
                   : 'text-[#888888] hover:text-[#1a8f7a]'
               }`}
               aria-pressed={isShoesWorld}
             >
-              Shoes Mafia
+              [SHOES MAFIA]
             </button>
           </nav>
 
-          {/* RIGHT: Search & Bag */}
-          <div className="flex items-center gap-3 sm:gap-4 text-xs font-sans text-[#F4F4F4]">
+          {/* RIGHT: SOUND TOGGLE · SEARCH · BAG [0] */}
+          <div className="flex items-center gap-2 sm:gap-4 text-xs font-mono text-[#F4F4F4]">
+            {/* Audio Micro-Haptics Switch */}
             <button
-              onClick={() => setSearchOpen(true)}
-              className="p-2 text-[#888888] hover:text-[#F4F4F4] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Search Catalog"
+              onClick={() => {
+                const next = !soundActive;
+                setSoundActive(next);
+                setSoundEnabled(next);
+                if (next) playSubBassThud();
+              }}
+              onMouseEnter={playMechanicalClick}
+              className={`px-2 py-1 text-[10px] font-mono font-bold tracking-widest border transition-colors cursor-pointer flex items-center gap-1 ${
+                soundActive
+                  ? 'border-emerald-500 bg-emerald-950/40 text-emerald-400'
+                  : 'border-[#1E1E1E] bg-[#111111] text-[#888888] hover:text-white'
+              }`}
+              title="Toggle Audio Micro-Haptics"
+              aria-label="Toggle sound"
             >
-              <Search size={18} />
+              {soundActive ? <Volume2 size={12} /> : <VolumeX size={12} />}
+              <span className="hidden sm:inline">SOUND: {soundActive ? 'ON' : 'OFF'}</span>
             </button>
 
-            <button
-              onClick={openCart}
-              className="px-3 py-1.5 border border-[#1E1E1E] bg-[#111111] hover:border-[#333333] hover:text-white transition-colors cursor-pointer flex items-center gap-2 min-h-[44px]"
-              aria-label={`Shopping bag containing ${activeCount} items`}
+            <button 
+              onClick={() => setSearchOpen(true)} 
+              onMouseEnter={playMechanicalClick}
+              className="hidden sm:flex p-2 text-[#888888] hover:text-white transition-colors cursor-pointer min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 text-xs uppercase tracking-wider" 
+              aria-label="Search catalog"
             >
-              <ShoppingBag size={15} />
-              <span className="font-semibold text-xs">{activeCount}</span>
+              <Search size={15} />
+              <span>SEARCH</span>
+            </button>
+
+            <button 
+              onClick={() => { playMechanicalClick(); openCart(); }} 
+              onMouseEnter={playMechanicalClick}
+              className="flex items-center gap-2 border border-[#1E1E1E] bg-[#111111] hover:bg-[#181818] px-3.5 py-1.5 text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer min-h-[36px] text-[#F4F4F4]" 
+              aria-label={`Open shopping bag with ${activeCount} items`}
+            >
+              <ShoppingBag size={14} />
+              <span>BAG [{activeCount}]</span>
             </button>
           </div>
 
         </div>
-      </header>
 
-      {/* Clean Full-Screen Slide Navigation Drawer */}
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site Navigation"
-        >
-          <div className="fixed inset-y-0 left-0 w-full max-w-md bg-[#0D0D0D] border-r border-[#1E1E1E] p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
-            <div className="space-y-8">
-              <div className="flex items-center justify-between pb-4 border-b border-[#1E1E1E]">
-                <span className="text-sm font-bold tracking-tight text-[#F4F4F4]">NAVIGATION</span>
-                <button
+        {/* INFINITE MARQUEE ENGINE: Ultra-smooth 60fps continuous strip with pause-on-hover */}
+        <div className="marquee-container overflow-hidden border-t border-b border-[#1E1E1E] bg-[#0A0A0A] text-[#888888] py-1.5 text-[10px] font-mono tracking-[0.15em] uppercase select-none cursor-pointer">
+          <div className="flex w-max animate-marquee-hardware whitespace-nowrap will-change-transform">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center gap-6 px-3">
+                <span>HEAVYWEIGHT ARCHIVE 001</span>
+                <span className="text-[#7D0A0A] font-bold">//</span>
+                <span>NITRO-WASHED COTTON</span>
+                <span className="text-[#7D0A0A] font-bold">//</span>
+                <span>WORLDWIDE DISPATCH</span>
+                <span className="text-[#7D0A0A] font-bold">//</span>
+                <span>FARIDABAD NIT-5 FLAGSHIP</span>
+                <span className="text-[#7D0A0A] font-bold">//</span>
+                <span className="text-[#F4F4F4] font-bold">NO RESTOCKS</span>
+                <span className="text-[#7D0A0A] font-bold">//</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* FULL-SCREEN BRUTALIST OVERLAY MENU */}
+        {menuOpen && (
+          <div className="fixed inset-0 z-50 bg-[#080808] flex flex-col justify-between p-6 sm:p-12 font-mono text-[#F4F4F4] animate-fade-in overflow-y-auto">
+            
+            {/* Top Bar inside Menu */}
+            <div className="flex items-center justify-between pb-6 border-b border-[#1E1E1E]">
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-black uppercase tracking-tight font-[var(--font-display)]">
+                  [KAPDA MAFIA ARCHIVE DIRECTORY]
+                </span>
+                <span className="text-[10px] font-mono tracking-[0.12em] text-[#7D0A0A] font-bold">
+                  PORTAL 2026
+                </span>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="p-3 text-[#888888] hover:text-white border border-[#1E1E1E] hover:border-white transition-colors cursor-pointer flex items-center gap-2 text-xs uppercase"
+                aria-label="Close menu"
+              >
+                <span>CLOSE</span>
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Massive Brutalist Typography Links */}
+            <div className="flex-1 flex flex-col justify-center py-10 space-y-4 sm:space-y-6">
+              {[
+                { name: 'NEW ARRIVALS', href: '/shop?sort=new' },
+                { name: 'HOODIES & TEES', href: '/shop?category=tees' },
+                { name: 'CARGO ARCHIVE', href: '/shop?category=cargos' },
+                { name: 'SNEAKER VAULT', href: '/shoes', accent: '#00695c' },
+                { name: 'FLAGSHIP STORE', href: '/store' }
+              ].map((item, idx) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="p-2 text-[#888888] hover:text-[#F4F4F4] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center -mr-2"
-                  aria-label="Close Navigation"
+                  className="group flex items-baseline justify-between border-b border-[#1A1A1A] pb-3 hover:border-white transition-colors"
                 >
-                  <X size={20} />
-                </button>
+                  <div className="flex items-baseline gap-4 sm:gap-8">
+                    <span className="text-xs font-mono text-[#666666] group-hover:text-white transition-colors">
+                      0{idx + 1} //
+                    </span>
+                    <span 
+                      className={`text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-[-0.05em] leading-[0.95] font-[var(--font-display)] transition-transform group-hover:translate-x-3 duration-200 ${
+                        item.accent ? 'text-[#80cbc4] group-hover:text-[#1a8f7a]' : 'text-[#F4F4F4]'
+                      }`}
+                    >
+                      {item.name}
+                    </span>
+                  </div>
+                  <ArrowRight size={24} className="text-[#666666] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
+            </div>
+
+            {/* Bottom Meta & World Switcher in Menu */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-[#1E1E1E] text-xs">
+              <div className="space-y-1 text-[#888888]">
+                <div className="text-[#F4F4F4] font-bold">DIGITAL FLAGSHIP DIRECTORY</div>
+                <div>NIT-5 FARIDABAD · 28.3846° N, 77.3086° E</div>
+                <div>DELIVERY WORLDWIDE · DISPATCH IN 24H</div>
               </div>
 
-              <nav className="space-y-4 font-sans">
-                <Link
-                  href="/shop"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-2xl font-bold text-[#F4F4F4] hover:text-white transition-colors"
-                >
-                  Shop All Collections
-                </Link>
-                <Link
-                  href="/shop?category=tees"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-base text-[#C8C3B8] hover:text-white transition-colors"
-                >
-                  Heavyweight Tees
-                </Link>
-                <Link
-                  href="/shop?category=hoodies"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-base text-[#C8C3B8] hover:text-white transition-colors"
-                >
-                  Hoodies & Fleece
-                </Link>
-                <Link
-                  href="/shop?category=cargos"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-base text-[#C8C3B8] hover:text-white transition-colors"
-                >
-                  Tactical Cargos
-                </Link>
-                <Link
-                  href="/shop?category=denim"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-base text-[#C8C3B8] hover:text-white transition-colors"
-                >
-                  Denim Architecture
-                </Link>
-                <Link
-                  href="/lookbook"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-base text-[#C8C3B8] hover:text-white transition-colors"
-                >
-                  Lookbook Editorial
-                </Link>
-                <Link
-                  href="/store"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-base text-[#C8C3B8] hover:text-white transition-colors"
-                >
-                  Flagship Store (Faridabad)
-                </Link>
+              <div className="flex items-center sm:justify-end gap-3">
                 <button
-                  onClick={() => {
-                    setMenuOpen(false);
-                    openShowroom();
-                  }}
-                  className="w-full text-left text-base text-[#F4F4F4] hover:text-white flex items-center justify-between py-2 border-t border-[#1E1E1E] mt-2 cursor-pointer font-medium"
+                  onClick={() => { setWorld('clothing'); setMenuOpen(false); }}
+                  className={`px-4 py-2 text-xs font-bold uppercase border transition-colors cursor-pointer ${
+                    !isShoesWorld ? 'border-white bg-white text-black' : 'border-[#1E1E1E] text-[#888888]'
+                  }`}
                 >
-                  <span>Experience Flagship Walk-In</span>
-                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 bg-[#7D0A0A] text-white">Cinematic</span>
+                  KAPDA MAFIA
                 </button>
-              </nav>
+                <button
+                  onClick={() => { setWorld('shoes'); setMenuOpen(false); }}
+                  className={`px-4 py-2 text-xs font-bold uppercase border transition-colors cursor-pointer ${
+                    isShoesWorld ? 'border-[#00695c] bg-[#00695c] text-white hover:bg-[#1a8f7a]' : 'border-[#1E1E1E] text-[#888888] hover:text-[#1a8f7a]'
+                  }`}
+                >
+                  SHOES MAFIA
+                </button>
+              </div>
             </div>
 
-            <div className="pt-6 border-t border-[#1E1E1E] text-xs text-[#888888] space-y-1">
-              <div>KAPDA MAFIA · NIT-5 FARIDABAD</div>
-              <div>Worldwide shipping · 7-day exchanges</div>
-            </div>
           </div>
-        </div>
-      )}
+        )}
+      </header>
 
-      {/* Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
