@@ -115,10 +115,10 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         {/* Seamless Canvas Gradient Overlay - Blends seamlessly into #080808 canvas like WTFLEX */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/20 pointer-events-none" />
 
-        {/* Live Vault Scarcity HUD Matrix (Gen-Z Urgency Trigger) */}
-        <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex items-center justify-between text-[9px] font-mono tracking-widest bg-[#080808]/90 backdrop-blur-md border border-[#1E1E1E] px-2.5 py-1 text-[#888888] uppercase">
-          <span className="text-[#F4F4F4] font-bold">RUN: 250 UNITS</span>
-          <span className={`${isShoes ? 'text-[#1a8f7a]' : 'text-[#7D0A0A]'} font-bold animate-pulse`}>ONLY {10 + (product.id.charCodeAt(product.id.length - 1) % 7)} LEFT IN SIZE {selectedSize}</span>
+        {/* Edition Run Specification HUD (Brutalist Luxury Standard) */}
+        <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex items-center justify-between text-[9px] font-mono tracking-widest bg-[#0A0A0A]/95 border border-[#222222] px-2.5 py-1.5 text-[#9E9E9E] uppercase">
+          <span className="text-[#F4F4F4] font-bold">LIMITED ARCHIVE</span>
+          <span className={`${isShoes ? 'text-[#1a8f7a]' : 'text-[#A0A0A0]'} font-bold`}>EDITION OF 250</span>
         </div>
 
 
