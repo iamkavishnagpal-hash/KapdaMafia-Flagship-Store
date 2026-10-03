@@ -238,14 +238,15 @@ export default function SpatialShowroomSequence({
             <div className={`text-center mb-6 sm:mb-10 transition-all duration-700 ${
               phase === 'reveal' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#121212] border border-[#222222] text-[11px] font-mono uppercase tracking-[0.2em] text-[#C8C3B8] mb-3">
-                <span>SELECT RETAIL WING</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#121212] border border-[#222222] text-[11px] font-mono uppercase tracking-[0.25em] text-[#C8C3B8] mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7D0A0A]" />
+                <span>CENTRAL ATRIUM // PROCEED TO WING</span>
               </div>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F4F4]">
-                Choose Your Retail World
+                The Dual Flagship Floors
               </h1>
-              <p className="mt-2 text-xs sm:text-sm text-[#888888] max-w-md mx-auto">
-                Two distinct masculine universes under one roof. Shared unified bag and single-tap checkout.
+              <p className="mt-2 text-xs sm:text-sm text-[#A0A0A0] max-w-lg mx-auto leading-relaxed">
+                Structured heavyweight menswear to the west. High-street vulcanized footwear to the east. Continuous session and shared bag across both wings.
               </p>
             </div>
 
