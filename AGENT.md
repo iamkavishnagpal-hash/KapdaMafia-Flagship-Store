@@ -58,7 +58,41 @@ When a request is **ambiguous at the implementation level but clear at the exper
 
 ---
 
-## 4. CORE RESPONSIBILITIES
+## 4. THE IDEAL EXECUTION FORMULA
+
+Every task must execute through this exact compounding quality stack:
+
+```
+MASTER AGENCY RULES
+        +
+PROJECT DESIGN DIRECTION
+        +
+EXPERIENCE-BASED PROMPT
+        +
+GSD (Autonomous Drive to Completion)
+        +
+RALPH LOOP (Plan → Execute → Test → Observe → Diagnose → Patch)
+        +
+VISUAL INSPECTION (Live Browser Subagent Verification)
+        +
+CODE REVIEW (Performance, Types, Bundle Weight, Security)
+        +
+FINAL HUMAN-QUALITY GATE (Agency & Creative Director Standard)
+```
+
+### The 8-Stage Operating Loop:
+1. **Master Agency Rules**: Uphold non-negotiable global UX/UI standards (visual hierarchy, zero AI smell, touch ergonomics).
+2. **Project Design Direction**: Adhere strictly to [`DESIGN_DIRECTION.md`](./DESIGN_DIRECTION.md) (Obsidian canvas, 440 GSM drape, 2700K tungsten halogen bleed).
+3. **Experience-Based Prompt**: Translate business & brand intent into tangible sensory goals before writing a single component.
+4. **GSD (Get Stuff Done)**: Execute with radical autonomy. Do not pause to ask the client technical micro-questions.
+5. **Ralph Loop**: Iterate continuously in an autonomous self-correcting feedback loop until all compiler, functional, and layout criteria are satisfied.
+6. **Visual Inspection**: Never declare done based on code alone. Run the browser subagent, record viewport behavior, and inspect the rendered result across desktop and mobile.
+7. **Code Review**: Ensure clean architectural abstraction, zero memory leaks, type-safety, and minimal DOM footprint.
+8. **Final Human-Quality Gate**: Evaluate through the eyes of a demanding Creative Director and paying client. Only ship when it feels bespoke and intentionally authored.
+
+---
+
+## 5. CORE RESPONSIBILITIES
 1. **Physical Spatial Continuity**: Every entrance, transition, and interaction must feel grounded in real physical architecture rather than standard webpage route changes.
 2. **Dual-World Shopping Architecture**:
    - **West Wing / Primary**: *KAPDA MAFIA* — Heavyweight menswear (280–500 GSM loopback terry, fleece, denim, tactical cargos). Tone: Obsidian (`#080808`), Ivory (`#F4F4F4`), Utilitarian Oxblood (`#7D0A0A`).
