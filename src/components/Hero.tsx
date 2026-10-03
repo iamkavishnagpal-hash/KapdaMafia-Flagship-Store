@@ -2,10 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Shield, Compass } from 'lucide-react';
+import { ArrowRight, Sparkles, Shield, Compass, DoorOpen } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { useWorld } from '@/context/WorldContext';
 
 export default function Hero() {
+  const { openShowroom } = useWorld();
+
   return (
     <section className="relative bg-[#080808] border-b border-[#1E1E1E] overflow-hidden">
       {/* Editorial Top Meta Strip */}
@@ -14,7 +17,14 @@ export default function Hero() {
           <span className="w-1.5 h-1.5 rounded-full bg-[#7D0A0A]" />
           <span className="tracking-wider uppercase font-sans font-medium text-[#C8C3B8]">AUTUMN / WINTER 2026</span>
           <span className="text-[#333] hidden sm:inline">|</span>
-          <span className="hidden sm:inline text-[#888]">FLAGSHIP STORE: NIT-5, FARIDABAD</span>
+          <button 
+            onClick={openShowroom}
+            className="hidden sm:inline-flex items-center gap-1.5 text-[#888] hover:text-[#F4F4F4] transition-colors cursor-pointer group"
+            title="Step through the physical flagship entrance"
+          >
+            <span>FLAGSHIP STORE: NIT-5, FARIDABAD</span>
+            <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 bg-[#181818] border border-[#282828] text-[#C8C3B8] group-hover:border-[#7D0A0A] group-hover:text-white transition-colors">Walk In</span>
+          </button>
         </div>
         <div className="flex items-center gap-4 text-xs font-sans tracking-wide text-[#A0A0A0]">
           <span>PAN-INDIA DISPATCH</span>

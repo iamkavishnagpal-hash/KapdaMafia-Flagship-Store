@@ -4,13 +4,20 @@ import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Shirt, Footprints, Play, RotateCcw, Volume2, VolumeX, Eye, Sparkles } from 'lucide-react';
 import { useWorld, StoreWorld } from '@/context/WorldContext';
-import { playSubBassThud, playMechanicalClick } from '@/utils/soundEffects';
+import { 
+  playSubBassThud, 
+  playMechanicalClick, 
+  playPneumaticHiss, 
+  playStorefrontArrivalChime,
+  setSoundEnabled as persistSoundEnabled,
+  isSoundEnabled
+} from '@/utils/soundEffects';
 
 export type EntranceScene = 
   | 'scene-00-black'      // Pitch black canvas + ambient room tone
-  | 'scene-01-shutter'    // Heavy corrugated showroom shutter roll-up (~1.2s)
+  | 'scene-01-shutter'    // Heavy corrugated showroom shutter roll-up (~1.4s)
   | 'scene-02-exterior'   // Evening exterior street facade, warm reflections
-  | 'scene-03-glass'      // Sensor-guided sliding tempered glass doors + chime
+  | 'scene-03-glass'      // Sensor-guided sliding tempered glass doors + pneumatic hiss & chime
   | 'scene-04-lobby'      // Grand split lobby: Left Kapda, Right Shoes
   | 'scene-05-transition' // Spatial camera push into chosen world
   | 'completed';          // Seamless handoff to live digital flagship
@@ -24,12 +31,18 @@ export default function SpatialShowroomSequence({
   onComplete,
   autoPlay = true
 }: SpatialShowroomSequenceProps) {
-  const { setWorld } = useWorld();
+  const { setWorld, isShowroomOpen, closeShowroom } = useWorld();
   const [currentScene, setCurrentScene] = useState<EntranceScene>('scene-00-black');
-  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [soundEnabled, setSoundEnabledState] = useState(() => isSoundEnabled());
   const [selectedWorld, setSelectedWorld] = useState<StoreWorld | null>(null);
   const [cameraZoom, setCameraZoom] = useState<'normal' | 'entering-left' | 'entering-right'>('normal');
   const timerRef = useRef<NodeJS.Timeout[]>([]);
+
+  const toggleSound = () => {
+    const next = !soundEnabled;
+    setSoundEnabledState(next);
+    persistSoundEnabled(next);
+  };
 
   const clearAllTimers = () => {
     timerRef.current.forEach(t => clearTimeout(t));
@@ -46,37 +59,60 @@ export default function SpatialShowroomSequence({
       playSubBassThud();
     }
 
-    // SCENE 00 -> SCENE 01: Shutter begins rolling up after 1.4s of quiet anticipation
+    // SCENE 00 -> SCENE 01: Hydraulic shutter begins rolling up with mechanical latch release
     const t1 = setTimeout(() => {
       if (soundEnabled) playMechanicalClick();
       setCurrentScene('scene-01-shutter');
-    }, 1400);
+    }, 1200);
 
-    // SCENE 01 -> SCENE 02: Exterior facade revealed through the rising shutter at 3.0s
+    // SCENE 01 -> SCENE 02: Exterior facade emerges through the shutter reveal
     const t2 = setTimeout(() => {
       setCurrentScene('scene-02-exterior');
-    }, 3200);
+    }, 2800);
 
-    // SCENE 02 -> SCENE 03: Approaching the glass entrance, doors glide open at 6.0s
+    // SCENE 02 -> SCENE 03: Approaching glass portals — automatic motion sensor triggers pneumatic seal release & soft acoustic chime
     const t3 = setTimeout(() => {
-      if (soundEnabled) playMechanicalClick();
+      if (soundEnabled) {
+        playPneumaticHiss();
+        setTimeout(() => playStorefrontArrivalChime(), 180);
+      }
       setCurrentScene('scene-03-glass');
-    }, 6200);
+    }, 5600);
 
-    // SCENE 03 -> SCENE 04: Stepping inside the Grand Lobby at 9.0s
+    // SCENE 03 -> SCENE 04: Gliding past threshold into Grand Dual Lobby
     const t4 = setTimeout(() => {
       setCurrentScene('scene-04-lobby');
-    }, 9400);
+    }, 8400);
 
     timerRef.current = [t1, t2, t3, t4];
   };
 
   useEffect(() => {
-    if (autoPlay) {
+    if (isShowroomOpen && autoPlay) {
       startContinuousSequence();
     }
     return () => clearAllTimers();
-  }, [autoPlay]);
+  }, [isShowroomOpen, autoPlay]);
+
+  // Keyboard accessibility: ESC or Space to advance or exit
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isShowroomOpen) return;
+      if (e.key === 'Escape') {
+        dismissSequence('clothing');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isShowroomOpen]);
+
+  const dismissSequence = (world: StoreWorld) => {
+    clearAllTimers();
+    setWorld(world);
+    setCurrentScene('completed');
+    closeShowroom();
+    if (onComplete) onComplete(world);
+  };
 
   const handleSelectWorld = (world: StoreWorld) => {
     clearAllTimers();
@@ -92,9 +128,7 @@ export default function SpatialShowroomSequence({
     const t = setTimeout(() => {
       setWorld(world);
       setCurrentScene('completed');
-      try {
-        sessionStorage.setItem('km_entered_portal', 'true');
-      } catch {}
+      closeShowroom();
       if (onComplete) onComplete(world);
     }, 1800);
 
@@ -107,7 +141,7 @@ export default function SpatialShowroomSequence({
     setCameraZoom('normal');
   };
 
-  if (currentScene === 'completed') return null;
+  if (!isShowroomOpen || currentScene === 'completed') return null;
 
   return (
     <div 
@@ -117,7 +151,7 @@ export default function SpatialShowroomSequence({
       {/* PERSISTENT CINEMATIC AUDIO / REPLAY SCRUBBER CONTROLS (Top Right) */}
       <aside aria-label="Showroom Controls" className="absolute top-4 right-4 z-50 flex items-center gap-2 bg-[#111111]/90 backdrop-blur-md border border-[#222222] p-1.5 text-xs">
         <button
-          onClick={() => setSoundEnabled(!soundEnabled)}
+          onClick={toggleSound}
           className="p-1.5 hover:text-white text-[#888888] transition-colors cursor-pointer"
           title={soundEnabled ? 'Mute ambient sound' : 'Enable ambient sound'}
         >
@@ -129,14 +163,14 @@ export default function SpatialShowroomSequence({
           className="flex items-center gap-1.5 px-2.5 py-1 bg-[#1a1a1a] hover:bg-[#252525] text-[#C8C3B8] hover:text-white transition-colors cursor-pointer text-[11px] font-mono uppercase"
         >
           <RotateCcw size={12} />
-          <span>Replay (20s)</span>
+          <span>Replay Sequence</span>
         </button>
 
         <button
-          onClick={() => handleSelectWorld('clothing')}
+          onClick={() => dismissSequence('clothing')}
           className="px-2.5 py-1 bg-[#7D0A0A] hover:bg-[#9B1111] text-white font-medium text-[11px] uppercase tracking-wider transition-colors cursor-pointer"
         >
-          Skip to Shop
+          Enter Store
         </button>
       </aside>
 

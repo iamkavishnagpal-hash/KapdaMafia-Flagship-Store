@@ -11,7 +11,7 @@ export default function Navbar() {
   const { openCart, activeCount } = useCart();
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { world, setWorld } = useWorld();
+  const { world, setWorld, openShowroom } = useWorld();
 
   const isShoesWorld = world === 'shoes';
 
@@ -164,6 +164,16 @@ export default function Navbar() {
                 >
                   Flagship Store (Faridabad)
                 </Link>
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    openShowroom();
+                  }}
+                  className="w-full text-left text-base text-[#F4F4F4] hover:text-white flex items-center justify-between py-2 border-t border-[#1E1E1E] mt-2 cursor-pointer font-medium"
+                >
+                  <span>Experience Flagship Walk-In</span>
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 bg-[#7D0A0A] text-white">Cinematic</span>
+                </button>
               </nav>
             </div>
 
