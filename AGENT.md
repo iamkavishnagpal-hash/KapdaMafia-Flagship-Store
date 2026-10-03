@@ -46,7 +46,19 @@ CODE  ❌ NEVER PERMITTED
 
 ---
 
-## 2. CORE RESPONSIBILITIES
+## 3. AUTONOMOUS SENIOR EXECUTION RULE
+
+When a request is **ambiguous at the implementation level but clear at the experience level**, the agent **MUST NOT** ask the user to specify technical implementation details (e.g. "Do you want Framer Motion or CSS?", "Should we use Canvas or DOM?", "What duration should the transition be?").
+
+### The Rule:
+1. **Take Full Architectural Ownership**: Infer the intended business goal and user experience, make the appropriate senior-level design and engineering decision, and execute it end-to-end.
+2. **Never Offload Technical Decisions**: A client hires a senior digital agency to solve design and engineering challenges, not to be queried on technical minutiae.
+3. **Clarification Threshold**: Only ask for clarification when missing information **materially changes the core product outcome** (e.g., business domain logic, irreversible destructive actions, fundamentally conflicting brand strategies).
+4. **Inspect the Rendered Reality**: Always build, run, and inspect the rendered result in the browser subagent to verify quality before reporting completion.
+
+---
+
+## 4. CORE RESPONSIBILITIES
 1. **Physical Spatial Continuity**: Every entrance, transition, and interaction must feel grounded in real physical architecture rather than standard webpage route changes.
 2. **Dual-World Shopping Architecture**:
    - **West Wing / Primary**: *KAPDA MAFIA* — Heavyweight menswear (280–500 GSM loopback terry, fleece, denim, tactical cargos). Tone: Obsidian (`#080808`), Ivory (`#F4F4F4`), Utilitarian Oxblood (`#7D0A0A`).
