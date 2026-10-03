@@ -28,18 +28,107 @@ BUSINESS GOAL → USER EXPERIENCE → CREATIVE DIRECTION → INTERACTION DESIGN 
 
 ---
 
-## 2. Core Architecture & Spatial Journey
+## 2. End-to-End System Architecture Pipeline
+
+The platform operates as a cohesive, distributed omnichannel pipeline connecting the physical flagship in **NIT-5 Faridabad** with high-throughput cloud edge commerce:
 
 ```mermaid
-graph TD
-    A[Exterior Dusk Facade // NIT-5 Faridabad] -->|Tactile Walk-In Trigger| B[Continuous Spatial Push // 1400px 3D Perspective]
-    B -->|Pneumatic Air Seal & Acoustic Chime| C[Central Atrium // Dual Flagship Floors]
-    C -->|West Wing| D[KAPDA MAFIA: 440 GSM Heavyweight Apparel]
-    C -->|East Wing| E[SHOES MAFIA: Dual-Density Footwear Vault]
-    D --> F[Unified Commerce Engine // Shared Bag & 1-Click Checkout]
-    E --> F
-    F --> G[Atomic SQL Inventory Ledger // 10-Min Reservation Hold]
+flowchart TB
+    subgraph CLIENT_LAYER["1. CLIENT RUNTIME & SPATIAL ENGINE"]
+        EXT["Exterior Storefront Facade\n(Dusk Atmosphere // NIT-5 Faridabad)"]
+        AUDIO["Procedural Acoustic Synthesizer\n(Web Audio API // Sub-Bass & Air Seal)"]
+        DOLLY["Spatial Camera Rig\n(1400px 3D Perspective Dolly)"]
+        ATRIUM["Central Atrium // Dual Retail Floors"]
+        KAPDA["West Wing: KAPDA MAFIA\n(440 GSM Apparel Showroom)"]
+        SHOES["East Wing: SHOES MAFIA\n(Footwear Vault & Sneaker Pedestals)"]
+        CONCIERGE["Natural Intent Fashion Concierge\n(Hinglish & English Parser)"]
+        MIRROR["Virtual Mirror / Try-On Studio\n(Multi-Angle Fit Calibration)"]
+        
+        EXT -->|Tactile Trigger / Space| DOLLY
+        DOLLY --- AUDIO
+        DOLLY --> ATRIUM
+        ATRIUM --> KAPDA
+        ATRIUM --> SHOES
+        KAPDA -.-> CONCIERGE
+        SHOES -.-> CONCIERGE
+        KAPDA -.-> MIRROR
+        SHOES -.-> MIRROR
+    end
+
+    subgraph STATE_LAYER["2. DISTRIBUTED STATE & SESSION ENGINE"]
+        WORLD_CTX["WorldContext\n(Dual-Store Routing & Entrance State)"]
+        CART_CTX["CartContext\n(Unified Multi-Brand Shopping Bag)"]
+        A11Y["Accessibility & Preferences\n(prefers-reduced-motion // Sound Mute)"]
+        
+        KAPDA -->|Add to Bag| CART_CTX
+        SHOES -->|Add to Bag| CART_CTX
+        CONCIERGE -->|1-Tap Dock| CART_CTX
+    end
+
+    subgraph API_PIPELINE["3. EDGE API & TRANSACTION PIPELINE"]
+        RESERVE_API["/api/inventory/reserve\n(Atomic Hold with 10-Min TTL)"]
+        CATALOG_API["/api/products\n(Category, World & GSM Filter Service)"]
+        CHECKOUT_ROUTER["/checkout\n(Prepaid UPI / COD & Pin-Code Validator)"]
+        
+        CART_CTX --> CHECKOUT_ROUTER
+        CHECKOUT_ROUTER -->|Idempotency Key| RESERVE_API
+    end
+
+    subgraph DATA_PERSISTENCE["4. ATOMIC PERSISTENCE & PHYSICAL STORE SYNC"]
+        SQL_DB[("LibSQL / SQLite Ledger\n(inventory_stocks & reservations)")]
+        PHYSICAL_SYNC["Physical Flagship Companion\n(Real-Time NIT-5 Rack Inventory)"]
+        OWNER_OS["Owner OS Management Suite\n(Fulfillment, Orders & POS)"]
+        
+        RESERVE_API -->|Atomic Update| SQL_DB
+        PHYSICAL_SYNC <--> SQL_DB
+        OWNER_OS <--> SQL_DB
+    end
+
+    classDef client fill:#111111,stroke:#7D0A0A,stroke-width:2px,color:#F4F4F4;
+    classDef engine fill:#0C1417,stroke:#1A8F7A,stroke-width:2px,color:#F4F4F4;
+    classDef database fill:#1A1A1A,stroke:#C8C3B8,stroke-width:2px,color:#FFFFFF;
+    
+    class EXT,DOLLY,ATRIUM,KAPDA,SHOES,CONCIERGE,MIRROR client;
+    class WORLD_CTX,CART_CTX,RESERVE_API,CHECKOUT_ROUTER engine;
+    class SQL_DB,PHYSICAL_SYNC,OWNER_OS database;
 ```
+
+---
+
+### End-to-End Transaction Pipeline Sequence
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Customer as 👤 Customer
+    participant Concierge as ⚡ Fashion Concierge
+    participant Bag as 🛍️ Unified Bag
+    participant API as 🛡️ Reserve API (/api/inventory/reserve)
+    participant DB as 🗄️ SQL Stock Ledger
+    participant Gateway as 💳 Payment Gateway
+    participant Store as 🏬 NIT-5 Physical Store
+
+    Customer->>Concierge: "Mujhe black drop shoulder t-shirt chahiye under 2500"
+    Concierge->>Customer: Parses intent (TEES, OVERSIZED, BLACK, < ₹2,500)
+    Customer->>Bag: 1-Tap "Add to Bag" (Holds in client session)
+    Customer->>Bag: Initiates Checkout
+    Bag->>API: POST /api/inventory/reserve { idempotencyKey, items }
+    API->>DB: Begin SQL Transaction (Decrements available_stock, increments reserved_cart_stock)
+    DB-->>API: Reservation Created (RES-XXXX, TTL: 10 mins)
+    API-->>Bag: 200 OK (Reservation Active)
+    Bag->>Gateway: Process UPI / Card / COD
+    alt Payment Successful
+        Gateway-->>Bag: Payment Confirmed
+        Bag->>API: PATCH /api/inventory/reserve { action: 'COMMIT' }
+        API->>DB: Decrements total_physical_stock, Marks COMMITTED
+        API->>Store: Triggers Dispatch from Faridabad Hub
+    else Payment Cancelled or Expired
+        Gateway-->>Bag: Payment Failed
+        Bag->>API: PATCH /api/inventory/reserve { action: 'RELEASE' }
+        API->>DB: Restores available_stock, Clears Hold
+    end
+```
+
 
 ### Key Experience Pillars
 - **Continuous Architectural Entrance (`SpatialShowroomSequence.tsx`)**: Eliminates artificial slide labels, timeline scrubbers, and cartoon door flaps. Uses an unbroken optical forward camera dolly (`scale 1.0 -> 1.12 -> 1.03` with `cubic-bezier(0.16, 1, 0.3, 1)`) that dissolves the dusk exterior plane into the central atrium.
