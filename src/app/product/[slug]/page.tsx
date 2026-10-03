@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { MOCK_PRODUCTS } from '@/data/products';
 import { ShieldCheck, Truck, RotateCcw, Sparkles, Star } from 'lucide-react';
 import SmartSizeModal from '@/components/SmartSizeModal';
+import PhysicalStoreCompanion from '@/components/PhysicalStoreCompanion';
 import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -132,6 +133,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                 ))}
               </div>
             </div>
+
+            {/* In-Store Physical Store Companion */}
+            <PhysicalStoreCompanion product={product} selectedSize={selectedSize} />
 
             {/* CTAs */}
             <div className="space-y-3 pt-2">

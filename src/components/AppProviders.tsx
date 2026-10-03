@@ -18,8 +18,6 @@ function InnerProvider({ children }: { children: React.ReactNode }) {
           }`}
           data-store-canvas={world}
         >
-          {/* Tactile Film Grain / CRT Shader Overlay */}
-          <div className="film-grain-overlay" aria-hidden="true" />
           {children}
         </div>
       </MafiaMirrorProvider>

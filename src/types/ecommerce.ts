@@ -15,12 +15,24 @@ export type ProductBadge = 'NEW' | 'LIMITED' | 'LOW STOCK' | 'BEST SELLER' | 'RE
 
 export type FitType = 'OVERSIZED' | 'BAGGY' | 'RELAXED' | 'REGULAR' | 'BOXY' | 'STANDARD FIT';
 
+export type AssetProvenance = 'OWNED' | 'LICENSED' | 'GENERATED' | 'DEV_PLACEHOLDER';
+
+export type ThreeDTier = 'TYPE_A_GLTF' | 'TYPE_B_PHOTO_SCRUB' | 'TYPE_C_HERO_3D';
+
+export interface Product3DConfig {
+  tier: ThreeDTier;
+  gltfUrl?: string;
+  turntableFrames?: string[];
+  initialRotation?: [number, number, number];
+}
+
 export interface ProductMedia {
   id: string;
   url: string;
   type: 'image' | 'video';
   alt: string;
   view: 'hero' | 'front' | 'back' | 'model' | 'detail' | 'texture';
+  provenance?: AssetProvenance;
 }
 
 export interface SizeStock {
@@ -48,6 +60,7 @@ export interface Product {
   originalPrice?: number;
   badge?: ProductBadge;
   dropName?: string;
+  threeDConfig?: Product3DConfig;
   description: string;
   fit: FitType;
   gsm?: number;

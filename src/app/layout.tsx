@@ -1,31 +1,30 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Space_Grotesk, JetBrains_Mono, Inter_Tight } from 'next/font/google';
+import { Space_Grotesk, Inter_Tight, Cormorant_Garamond } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import WhatsAppWidget from '@/components/WhatsAppWidget';
-import MafiaDropTransition from '@/components/MafiaDropTransition';
-import PhoneOtpModal from '@/components/PhoneOtpModal';
-import WorldSelectorModal from '@/components/WorldSelectorModal';
 import CartDrawer from '@/components/CartDrawer';
 import MobileBottomBar from '@/components/MobileBottomBar';
+import SpatialShowroomSequence from '@/components/SpatialShowroomSequence';
+import WorldSelectorModal from '@/components/WorldSelectorModal';
 import { AppProviders } from '@/components/AppProviders';
 
-// TIER 1: Display & High-Tension Headlines (Monument Extended / Space Grotesk Bold 700)
+// Editorial display font for high-impact headlines
 const display = Space_Grotesk({ 
   subsets: ['latin'], 
-  weight: ['700'],
+  weight: ['600', '700'],
   variable: '--font-display' 
 });
 
-// TIER 2: Technical Specs & Metadata (Commit Mono / JetBrains Mono Medium 500)
-const mono = JetBrains_Mono({ 
-  subsets: ['latin'], 
-  weight: ['500', '700'],
-  variable: '--font-mono' 
+// Editorial Luxury Serif accent for high-end fashion moments
+const serif = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif'
 });
 
-// TIER 3: Product Titles & Prices (The Commerce Layer - Inter Tight Medium 500/600)
+// Primary body and commerce typeface
 const sans = Inter_Tight({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -33,9 +32,9 @@ const sans = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "KAPDA MAFIA & SHOES MAFIA | Streetwear & Footwear Portals",
-  description: "Built for the ones who don't blend in. Explore 400 GSM heavyweight tees, tactical cargos, 500 GSM fleece hoodies, and Kapda Mafia official sneaker collection.",
-  keywords: ["streetwear", "menswear", "oversized tees", "cargos", "hoodies", "shoes", "sneakers", "Shoes Mafia", "Kapda Mafia"],
+  title: "KAPDA MAFIA | Heavyweight Streetwear & Shoes Mafia Portals",
+  description: "Explore 400 GSM heavyweight tees, tactical cargos, and Shoes Mafia sneaker line. Two distinct shopping worlds under one flagship.",
+  keywords: ["streetwear", "menswear", "heavyweight tees", "cargos", "hoodies", "sneakers", "Shoes Mafia", "Kapda Mafia"],
   openGraph: {
     title: "KAPDA MAFIA & SHOES MAFIA — Dual Shopping Worlds",
     description: "Premium Men's Streetwear & Footwear Digital Flagship Experience.",
@@ -61,15 +60,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${display.variable} ${mono.variable} ${sans.variable} font-sans bg-[#080808] text-[#F4F4F4] antialiased`}>
+      <body className={`${display.variable} ${sans.variable} ${serif.variable} font-sans bg-[#080808] text-[#F4F4F4] antialiased`}>
         <AppProviders>
-          <MafiaDropTransition />
-          <PhoneOtpModal />
+          {/* Continuous Spatial Showroom Sequence (Black -> Shutter -> Exterior -> Glass Door -> Grand Lobby -> World) */}
+          <SpatialShowroomSequence />
+          {/* Global world portal modal switcher */}
           <WorldSelectorModal />
           <Navbar />
           <CartDrawer />
-          <main className="min-h-screen pt-[56px] lg:pt-[68px]">{children}</main>
+          <main className="min-h-screen pt-[58px]">{children}</main>
           <Footer />
+          <MobileBottomBar />
         </AppProviders>
       </body>
     </html>
