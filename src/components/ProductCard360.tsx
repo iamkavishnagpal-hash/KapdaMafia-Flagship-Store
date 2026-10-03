@@ -24,10 +24,10 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     return (activeVariant?.images && activeVariant.images.length > 1)
       ? activeVariant.images.map(img => img.url)
       : [
-          activeVariant?.images[0]?.url || '/media/product-tee.png',
-          activeVariant?.images[1]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
-          activeVariant?.images[0]?.url || '/media/product-tee.png'
-        ];
+        activeVariant?.images[0]?.url || '/media/product-tee.png',
+        activeVariant?.images[1]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
+        activeVariant?.images[0]?.url || '/media/product-tee.png'
+      ];
   }, [activeVariant]);
 
   const totalFrames = frames.length;
@@ -93,9 +93,9 @@ export default function ProductCard360({ product, priority = false }: ProductCar
 
   return (
     <article className="group bg-[#080808] border border-[#1E1E1E] hover:border-[#333] transition-all flex flex-col justify-between font-mono relative overflow-hidden">
-      
+
       {/* Product Image Viewport */}
-      <div 
+      <div
         ref={containerRef}
         onPointerEnter={preloadFrames}
         onPointerMove={handlePointerMove}
@@ -104,8 +104,8 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         className="relative aspect-[3/4] bg-[#111111] overflow-hidden select-none touch-pan-y cursor-pointer"
       >
         <Link href={`/product/${product.slug}`} className="block w-full h-full" aria-label={`View ${product.name}`}>
-          <img 
-            src={frames[currentFrame]} 
+          <img
+            src={frames[currentFrame]}
             alt={`${product.name} angle ${currentFrame + 1}`}
             loading={priority ? 'eager' : 'lazy'}
             className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03] contrast-[1.04]"
@@ -127,7 +127,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         {totalFrames > 1 && (
           <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black/50 flex">
             {frames.map((_, idx) => (
-              <div 
+              <div
                 key={idx}
                 className={`flex-1 h-full transition-colors ${idx === currentFrame ? 'bg-[#7D0A0A]' : 'bg-transparent'}`}
               />
@@ -138,7 +138,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
 
       {/* Card consistency vertical stack: Image -> Hairline micro-spec -> Product Title -> Price */}
       <div className="p-4 sm:p-5 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#1E1E1E] space-y-3">
-        
+
         <div className="space-y-1.5">
           {/* Hairline micro-spec: 440 GSM HEAVY COTTON // BOX CUT (10px Mono) */}
           <div className="text-[10px] font-mono tracking-[0.12em] text-[#888888] uppercase">
@@ -212,15 +212,14 @@ export default function ProductCard360({ product, priority = false }: ProductCar
                   });
                   openCart();
                 }}
-                className={`min-w-[36px] h-7 px-2.5 text-[11px] font-mono font-bold uppercase border transition-all cursor-pointer ${
-                  selectedSize === size
+                className={`min-w-[36px] h-7 px-2.5 text-[11px] font-mono font-bold uppercase border transition-all cursor-pointer ${selectedSize === size
                     ? isShoes
                       ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
                       : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
                     : isShoes
                       ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a] hover:bg-[#161f1d]'
                       : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666] hover:bg-[#181818]'
-                }`}
+                  }`}
                 aria-label={`Select size ${size} and open cart`}
               >
                 {size}

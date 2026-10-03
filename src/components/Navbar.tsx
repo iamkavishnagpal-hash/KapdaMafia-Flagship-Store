@@ -31,7 +31,19 @@ export default function Navbar() {
         {/* Top Ticker: Desktop Minimal Industrial Coordinates Bar */}
         <div className="hidden lg:flex h-6 bg-[#0B0B0B] border-b border-[#1E1E1E] items-center justify-between px-8 lg:px-12 text-[10px] font-mono tracking-[0.12em] text-[#888888] uppercase">
           <div>FLAGSHIP STORE: NIT-5 FARIDABAD [28.3846° N, 77.3086° E] // WORLDWIDE SHIPPING</div>
-          <div className="text-[#7D0A0A] font-bold">RUN 001 // EDITION OF 250</div>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => {
+                sessionStorage.removeItem('km_portal_selected');
+                window.dispatchEvent(new Event('km_reopen_gateway'));
+              }}
+              className="text-[#F4F4F4] hover:text-[#7D0A0A] transition-colors cursor-pointer tracking-[0.2em] underline underline-offset-4"
+              title="Open Spatial Gateway Split Screen"
+            >
+              [ GATEWAY ]
+            </button>
+            <div className="text-[#7D0A0A] font-bold">RUN 001 // EDITION OF 250</div>
+          </div>
         </div>
 
         <div className="mx-auto flex h-[56px] max-w-[1600px] items-center justify-between px-4 sm:px-8 lg:px-12 font-mono">
@@ -173,6 +185,9 @@ export default function Navbar() {
             {/* Massive Brutalist Typography Links */}
             <div className="flex-1 flex flex-col justify-center py-10 space-y-4 sm:space-y-6">
               {[
+                { name: 'SPATIAL GATEWAY', href: '#gateway', isGateway: true, accent: '#8F1118' },
+                { name: 'APPAREL // ARCHIVE', href: '/apparel' },
+                { name: 'FOOTWEAR // VAULT', href: '/footwear', accent: '#00695c' },
                 { name: 'SHOP ALL ARCHIVE', href: '/shop' },
                 { name: 'NEW RELEASES', href: '/shop?sort=new' },
                 { name: 'TOPWEAR (TEES & SHIRTS)', href: '/shop?category=topwear' },
@@ -180,13 +195,21 @@ export default function Navbar() {
                 { name: 'WINTERWEAR (500 GSM HOODIES)', href: '/shop?category=winterwear' },
                 { name: 'CO-ORD SETS', href: '/shop?category=coord-sets' },
                 { name: 'SHOP THE LOOK', href: '/lookbook' },
-                { name: 'SHOES MAFIA VAULT', href: '/shoes', accent: '#00695c' },
                 { name: 'FLAGSHIP STORE (FARIDABAD)', href: '/store' }
               ].map((item, idx) => (
                 <Link
                   key={item.name}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
+                  href={item.isGateway ? '#' : item.href}
+                  onClick={(e) => {
+                    if (item.isGateway) {
+                      e.preventDefault();
+                      setMenuOpen(false);
+                      sessionStorage.removeItem('km_portal_selected');
+                      window.dispatchEvent(new Event('km_reopen_gateway'));
+                      return;
+                    }
+                    setMenuOpen(false);
+                  }}
                   className="group flex items-baseline justify-between border-b border-[#1A1A1A] pb-3 hover:border-white transition-colors"
                 >
                   <div className="flex items-baseline gap-4 sm:gap-8">
