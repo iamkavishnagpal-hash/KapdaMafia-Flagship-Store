@@ -52,6 +52,18 @@ export function WorldProvider({ children }: { children: React.ReactNode }) {
   });
 
   const [showWorldSelector, setShowWorldSelector] = useState<boolean>(false);
+  const [isShowroomOpen, setIsShowroomOpen] = useState<boolean>(false);
+
+  const openShowroom = () => {
+    setIsShowroomOpen(true);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('km_open_showroom'));
+    }
+  };
+
+  const closeShowroom = () => {
+    setIsShowroomOpen(false);
+  };
 
   const setWorld = (newWorld: StoreWorld) => {
     setWorldState(newWorld);
@@ -103,9 +115,9 @@ export function WorldProvider({ children }: { children: React.ReactNode }) {
         logout,
         showWorldSelector,
         setShowWorldSelector,
-        isShowroomOpen: false,
-        openShowroom: () => {},
-        closeShowroom: () => {}
+        isShowroomOpen,
+        openShowroom,
+        closeShowroom
       }}
     >
       {children}

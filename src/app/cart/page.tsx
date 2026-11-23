@@ -43,7 +43,7 @@ export default function DedicatedCartPage() {
             <span>CONTINUE SHOPPING</span>
           </Link>
           <div className="text-[10px] text-[#888888] uppercase tracking-wider">
-            CART ALLOCATION // SECURE ENCRYPTED CHECKOUT
+            YOUR BAG · SECURE CHECKOUT
           </div>
         </div>
 
@@ -118,7 +118,7 @@ export default function DedicatedCartPage() {
                   isShoes ? 'bg-[#00695c] hover:bg-[#00796b]' : 'bg-[#7D0A0A] hover:bg-[#991B1B]'
                 }`}
               >
-                <span>EXPLORE {isShoes ? 'FOOTWEAR VAULT' : 'STREETWEAR ARCHIVE'}</span>
+                <span>EXPLORE {isShoes ? 'FOOTWEAR' : 'STREETWEAR'}</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
@@ -192,7 +192,7 @@ export default function DedicatedCartPage() {
             {/* Order Summary (4 Columns Sticky) */}
             <div className="lg:col-span-4 bg-[#111111] border border-[#1E1E1E] p-6 space-y-6 sticky top-28">
               <h2 className="text-sm font-bold uppercase tracking-wider text-[#F4F4F4] pb-3 border-b border-[#1E1E1E]">
-                ORDER ALLOCATION SUMMARY
+                ORDER SUMMARY
               </h2>
 
               <div className="space-y-3 text-xs text-[#888888]">
@@ -213,7 +213,7 @@ export default function DedicatedCartPage() {
               </div>
 
               <div className="pt-4 border-t border-[#1E1E1E] flex justify-between items-baseline">
-                <span className="text-xs uppercase text-[#888888]">TOTAL ALLOCATION</span>
+                <span className="text-xs uppercase text-[#888888]">TOTAL</span>
                 <span className="text-2xl font-black text-[#F4F4F4] [font-variant-numeric:tabular-nums]">
                   ₹{finalTotal.toLocaleString('en-IN')}
                 </span>

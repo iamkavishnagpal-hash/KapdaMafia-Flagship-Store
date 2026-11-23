@@ -70,7 +70,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
 
   const handleAddToCart = (product: Product) => {
     const size = selectedSizes[product.id] || product.variants[0]?.sizes[0]?.size || '7';
-    const heroImage = product.variants[0]?.images[0]?.url || 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg';
+    const heroImage = product.variants[0]?.images[0]?.url || '/media/flying-sneaker-3d.jpg';
     
     addToCart({
       productId: product.id,
@@ -88,7 +88,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
 
   const handleOrderNow = (product: Product) => {
     const size = selectedSizes[product.id] || product.variants[0]?.sizes[0]?.size || '7';
-    const heroImage = product.variants[0]?.images[0]?.url || 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg';
+    const heroImage = product.variants[0]?.images[0]?.url || '/media/flying-sneaker-3d.jpg';
 
     addToCart({
       productId: product.id,
@@ -125,7 +125,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
             <div className="lg:col-span-7 text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#09181f] border border-[#00695c]/40 text-[#00695c] text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00695c] animate-ping" />
-                <span>OFFICIAL FOOTWEAR VAULT // NIT-5 FARIDABAD</span>
+                <span>FOOTWEAR · NIT-5 FARIDABAD</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight text-white font-editorial leading-[0.9]">
@@ -369,7 +369,7 @@ export default function ShoesMafiaView({ products }: ShoesMafiaViewProps) {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                 {filteredShoes.map(shoe => {
                   const currentVariant = shoe.variants[0];
-                  const heroImage = currentVariant?.images[0]?.url || 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg';
+                  const heroImage = currentVariant?.images[0]?.url || '/media/flying-sneaker-3d.jpg';
                   const availableSizes = currentVariant?.sizes || [];
                   const selectedSize = selectedSizes[shoe.id] || availableSizes[0]?.size || '7';
                   const isWishlisted = !!wishlist[shoe.id];

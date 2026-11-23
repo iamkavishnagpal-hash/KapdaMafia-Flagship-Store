@@ -67,7 +67,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             
             <div>
               <div className="text-[10px] sm:text-[11px] text-[#888888] uppercase font-mono tracking-[0.12em] font-medium mb-1">
-                {product.dropName} · ARCHIVE ALLOCATION
+                {product.dropName} · LIMITED DROP
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold uppercase text-[#F4F4F4] tracking-[-0.05em] leading-[0.95]">
                 {product.name}

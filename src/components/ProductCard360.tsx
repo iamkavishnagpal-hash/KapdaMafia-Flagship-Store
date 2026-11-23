@@ -1,12 +1,12 @@
+// src/components/ProductCard360.tsx
 'use client';
 
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, Check } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
 import { useCart } from '@/context/CartContext';
 import { useWorld } from '@/context/WorldContext';
-import { useMafiaMirror } from '@/components/MafiaMirrorDrawer';
+import { playMechanicalClick } from '@/utils/soundEffects';
 
 interface ProductCard360Props {
   product: Product;
@@ -16,236 +16,174 @@ interface ProductCard360Props {
 export default function ProductCard360({ product, priority = false }: ProductCard360Props) {
   const { addToCart, openCart } = useCart();
   const { world } = useWorld();
-  const { openMirror } = useMafiaMirror();
   const activeVariant = product.variants[0];
   const isShoes = world === 'shoes' || product.storeWorld === 'shoes';
 
-  const frames = useMemo(() => {
-    return (activeVariant?.images && activeVariant.images.length > 1)
-      ? activeVariant.images.map(img => img.url)
-      : [
-        activeVariant?.images[0]?.url || '/media/product-tee.png',
-        activeVariant?.images[1]?.url || activeVariant?.images[0]?.url || '/media/product-tee.png',
-        activeVariant?.images[0]?.url || '/media/product-tee.png'
-      ];
+  const images = useMemo(() => {
+    if (activeVariant?.images && activeVariant.images.length > 0) {
+      return activeVariant.images.map(img => img.url);
+    }
+    return ['/media/product-tee.png'];
   }, [activeVariant]);
 
-  const totalFrames = frames.length;
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [selectedSize, setSelectedSize] = useState<string>(activeVariant?.sizes?.[0]?.size || 'M');
-  const [isAdded, setIsAdded] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const primaryImage = images[0] || '/media/product-tee.png';
+  const secondaryImage = images[1] || images[0] || '/media/product-tee.png';
 
-  // Preload and cache frames in memory on hover / touch start (zero-lag 60fps)
-  const preloadedRef = useRef(false);
-  const preloadFrames = useCallback(() => {
-    if (preloadedRef.current) return;
-    preloadedRef.current = true;
-    frames.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [frames]);
+  const [mobileAngle, setMobileAngle] = useState(0);
 
-  // Desktop Pointer / Mouse Scrubbing for angles
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!containerRef.current || totalFrames <= 1) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
-    const percentage = x / rect.width;
-    const frameIndex = Math.min(Math.floor(percentage * totalFrames), totalFrames - 1);
-    setCurrentFrame(frameIndex);
-  };
+  // Available Sizes with Stock Tracking
+  const sizesWithStock = useMemo(() => {
+    if (activeVariant?.sizes && activeVariant.sizes.length > 0) {
+      return activeVariant.sizes.map(s => ({
+        size: s.size,
+        inStock: (s.stock ?? 1) > 0
+      }));
+    }
+    return [
+      { size: 'S', inStock: true },
+      { size: 'M', inStock: true },
+      { size: 'L', inStock: true },
+      { size: 'XL', inStock: true }
+    ];
+  }, [activeVariant]);
 
-  // Mobile Tap-to-Flip
-  const handleMobileTapFlip = () => {
-    preloadFrames();
-    setCurrentFrame(prev => (prev + 1) % totalFrames);
-  };
+  const allOutOfStock = sizesWithStock.every(s => !s.inStock);
+  const [selectedSize, setSelectedSize] = useState<string>(
+    sizesWithStock.find(s => s.inStock)?.size || sizesWithStock[0]?.size || 'M'
+  );
 
-  // 1-Click Quick Add
-  const handleQuickAdd = (e: React.MouseEvent) => {
+  // Calculate Single Badge (Rule: Maximum 1 badge per card)
+  const singleBadge = useMemo(() => {
+    if (allOutOfStock) {
+      return { text: 'SOLD OUT', bg: 'bg-[#2B2B2B] text-[#888888]' };
+    }
+    if (product.originalPrice && product.originalPrice > product.price) {
+      const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+      return { text: `SAVE ${discount}%`, bg: isShoes ? 'bg-[#00695c] text-white' : 'bg-[#7D0A0A] text-white' };
+    }
+    if (product.badge?.toUpperCase().includes('BEST') || product.isFeatured) {
+      return { text: 'BESTSELLER', bg: 'bg-white text-black font-bold' };
+    }
+    return null;
+  }, [allOutOfStock, product, isShoes]);
+
+  // Instant 1-Tap Size Click to Bag
+  const handleSizeClick = (e: React.MouseEvent, size: string, inStock: boolean) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!inStock) return;
+
+    playMechanicalClick();
+    setSelectedSize(size);
 
     addToCart({
       productId: product.id,
       name: product.name,
       price: product.price,
-      image: frames[0],
-      size: selectedSize,
+      image: primaryImage,
+      size: size,
       category: product.category,
-      storeWorld: product.storeWorld || 'clothing'
+      storeWorld: product.storeWorld || (isShoes ? 'shoes' : 'clothing')
     });
 
-    setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 2000);
     openCart();
   };
 
-  const handleOpenMirror = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openMirror(product);
-  };
-
-  const availableSizes = activeVariant?.sizes?.map(s => s.size) || ['S', 'M', 'L', 'XL'];
-
   return (
-    <article className="group bg-[#080808] border border-[#1E1E1E] hover:border-[#333] transition-all flex flex-col justify-between font-mono relative overflow-hidden">
-
-      {/* Product Image Viewport */}
-      <div
-        ref={containerRef}
-        onPointerEnter={preloadFrames}
-        onPointerMove={handlePointerMove}
-        onMouseLeave={() => setCurrentFrame(0)}
-        onClick={handleMobileTapFlip}
-        className="relative aspect-[3/4] bg-[#111111] overflow-hidden select-none touch-pan-y cursor-pointer"
+    <article className="group bg-[#080808] border border-[#1E1E1E] hover:border-[#383838] transition-colors flex flex-col justify-between relative overflow-hidden">
+      
+      {/* Product Image Viewport (3:4 Portrait Aspect Ratio) */}
+      <div 
+        onClick={() => setMobileAngle(prev => (prev === 0 ? 1 : 0))}
+        className="relative aspect-[3/4] bg-[#111111] overflow-hidden select-none cursor-pointer"
       >
         <Link href={`/product/${product.slug}`} className="block w-full h-full" aria-label={`View ${product.name}`}>
+          {/* Primary Front Shot */}
           <img
-            src={frames[currentFrame]}
-            alt={`${product.name} angle ${currentFrame + 1}`}
+            src={mobileAngle === 0 ? primaryImage : secondaryImage}
+            alt={product.name}
             loading={priority ? 'eager' : 'lazy'}
-            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03] contrast-[1.04]"
+            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
           />
+
+          {/* Desktop Hover Image Cross-Fade to 2nd Angle */}
+          {images.length > 1 && (
+            <img
+              src={secondaryImage}
+              alt={`${product.name} alternate view`}
+              loading="lazy"
+              className="hidden lg:block absolute inset-0 w-full h-full object-cover object-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
+          )}
         </Link>
 
-        {/* Seamless Canvas Gradient Overlay - Blends seamlessly into #080808 canvas like WTFLEX */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/20 pointer-events-none" />
-
-        {/* Top Badges (Genrage Style: Status Badge + Discount Badge) */}
-        <div className="absolute top-2.5 inset-x-2.5 z-10 flex items-center justify-between pointer-events-none">
-          {product.badge ? (
-            <span className="text-[9px] font-mono font-bold tracking-widest uppercase bg-[#7D0A0A] text-white px-2 py-0.5 rounded-sm shadow-md">
-              {product.badge}
+        {/* Single Status Badge (Top-Left) */}
+        {singleBadge && (
+          <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
+            <span className={`text-[9px] tracking-[0.08em] uppercase px-2 py-0.5 rounded-sm shadow-md font-bold ${singleBadge.bg}`}>
+              {singleBadge.text}
             </span>
-          ) : (
-            <span className="text-[9px] font-mono font-bold tracking-widest uppercase bg-black/70 backdrop-blur-sm border border-white/10 text-[#C8C3B8] px-2 py-0.5 rounded-sm">
-              VAULT DROP
-            </span>
-          )}
-          {product.originalPrice && (
-            <span className="text-[9px] font-mono font-bold tracking-widest uppercase bg-black/85 backdrop-blur-sm border border-emerald-500/30 text-emerald-400 px-2 py-0.5 rounded-sm shadow-md">
-              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-            </span>
-          )}
-        </div>
-
-        {/* Edition Run Specification HUD (Brutalist Luxury Standard) */}
-        <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex items-center justify-between text-[9px] font-mono tracking-widest bg-[#0A0A0A]/95 border border-[#222222] px-2.5 py-1.5 text-[#9E9E9E] uppercase">
-          <span className="text-[#F4F4F4] font-bold">LIMITED ARCHIVE</span>
-          <span className={`${isShoes ? 'text-[#1a8f7a]' : 'text-[#A0A0A0]'} font-bold`}>EDITION OF 250</span>
-        </div>
-
-
-
-        {/* Frame Progress Track */}
-        {totalFrames > 1 && (
-          <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black/50 flex">
-            {frames.map((_, idx) => (
-              <div
-                key={idx}
-                className={`flex-1 h-full transition-colors ${idx === currentFrame ? 'bg-[#7D0A0A]' : 'bg-transparent'}`}
-              />
-            ))}
           </div>
         )}
       </div>
 
-      {/* Card consistency vertical stack: Image -> Hairline micro-spec -> Product Title -> Price */}
+      {/* Product Information Card Body */}
       <div className="p-4 sm:p-5 bg-[#080808] flex flex-col justify-between flex-1 border-t border-[#1E1E1E] space-y-3">
-
-        <div className="space-y-1.5">
-          {/* Hairline micro-spec: 440 GSM HEAVY COTTON // BOX CUT (10px Mono) */}
-          <div className="text-[10px] font-mono tracking-[0.12em] text-[#888888] uppercase">
-            {product.gsm ? `${product.gsm} GSM` : '440 GSM'} HEAVY COTTON // {product.fit ? product.fit.toUpperCase() : 'BOX CUT'}
+        
+        <div className="space-y-1">
+          {/* Subtle Fabric & Fit Subtitle */}
+          <div className="text-[10px] tracking-[0.06em] text-[#888888] uppercase">
+            {product.gsm ? `${product.gsm} GSM Cotton` : 'Heavyweight Cotton'} · {product.fit ? `${product.fit} Cut` : 'Boxy Cut'}
           </div>
 
-          {/* Product Title: ACID WASH HOODIE (14px Bold) */}
+          {/* Product Title */}
           <Link href={`/product/${product.slug}`} className="block">
-            <h3 className="text-sm font-bold text-[#F4F4F4] uppercase tracking-[-0.01em] line-clamp-1 hover:text-white transition-colors">
+            <h3 className="text-sm font-semibold text-[#F4F4F4] group-hover:text-white transition-colors line-clamp-1 font-sans">
               {product.name}
             </h3>
           </Link>
 
-          {/* Price: ₹3,490 (14px Clean Mono/Sans with tabular-nums) & Savings Badge */}
-          <div className="flex items-baseline gap-2 pt-0.5">
-            <span className="text-sm font-bold text-[#F4F4F4] font-mono [font-variant-numeric:tabular-nums] tracking-[-0.01em]">
+          {/* Pricing Row: Sale Price & Strikethrough MRP */}
+          <div className="flex items-baseline gap-2 pt-1">
+            <span className="text-sm font-bold text-white [font-variant-numeric:tabular-nums]">
               ₹{product.price.toLocaleString('en-IN')}
             </span>
-            {product.originalPrice && (
-              <>
-                <span className="text-xs text-[#888888] line-through font-normal font-mono [font-variant-numeric:tabular-nums]">
-                  ₹{product.originalPrice.toLocaleString('en-IN')}
-                </span>
-                <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-1.5 py-0.2">
-                  {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-                </span>
-              </>
+            {product.originalPrice && product.originalPrice > product.price && (
+              <span className="text-xs text-[#777777] line-through [font-variant-numeric:tabular-nums]">
+                ₹{product.originalPrice.toLocaleString('en-IN')}
+              </span>
             )}
           </div>
-
-          {/* Color Variant Swatches (Reference 03 Tripr / Genrage) */}
-          {product.variants && product.variants.length > 0 && (
-            <div className="flex items-center gap-1.5 pt-1">
-              {product.variants.map((v, vIdx) => (
-                <span
-                  key={v.id || vIdx}
-                  className="w-2.5 h-2.5 rounded-full border border-white/30 inline-block shadow-sm"
-                  style={{ backgroundColor: v.colorHex || '#222' }}
-                  title={v.colorName}
-                />
-              ))}
-              <span className="text-[9px] font-mono text-[#777] uppercase tracking-wider ml-1">
-                {product.variants[0]?.colorName || 'ORIGINAL WASH'}
-              </span>
-            </div>
-          )}
         </div>
 
-        {/* Size Pills: Single-tap opens cart drawer directly */}
-        <div className="pt-2.5 border-t border-[#1E1E1E] space-y-2">
-          <div className="flex items-center justify-between text-[10px] text-[#888888] font-mono tracking-[0.14em]">
-            <span>SIZES (TAP TO BAG):</span>
-            <span className="text-[#F4F4F4] font-bold bg-[#141414] border border-[#222] px-1.5 py-0.5">{selectedSize}</span>
+        {/* Clean Single-Row Size Selector Pills (1-Tap to Bag) */}
+        <div className="pt-2.5 border-t border-[#1E1E1E]">
+          <div className="text-[9px] text-[#777777] tracking-[0.08em] uppercase mb-1.5">
+            PICK A SIZE TO ADD:
           </div>
-          <div className="flex flex-wrap gap-1.5 pt-0.5">
-            {availableSizes.map((size) => (
+          
+          <div className="flex flex-wrap gap-1.5">
+            {sizesWithStock.map(({ size, inStock }) => (
               <button
                 key={size}
                 type="button"
-                onClick={(e) => {
-                  setSelectedSize(size);
-                  // Direct add to bag & open drawer
-                  addToCart({
-                    productId: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: frames[0],
-                    size: size,
-                    category: product.category,
-                    storeWorld: product.storeWorld || 'clothing'
-                  });
-                  openCart();
-                }}
-                className={`min-w-[36px] h-7 px-2.5 text-[11px] font-mono font-bold uppercase border transition-all cursor-pointer ${selectedSize === size
-                  ? isShoes
-                    ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
-                    : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
-                  : isShoes
-                    ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a] hover:bg-[#161f1d]'
-                    : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666] hover:bg-[#181818]'
-                  }`}
-                aria-label={`Select size ${size} and open cart`}
+                disabled={!inStock}
+                onClick={(e) => handleSizeClick(e, size, inStock)}
+                className={`min-h-11 min-w-11 px-2 text-[11px] font-bold uppercase border transition-all cursor-pointer rounded-sm ${
+                  !inStock
+                    ? 'border-[#1C1C1C] bg-[#0D0D0D] text-[#444444] line-through cursor-not-allowed opacity-40'
+                    : selectedSize === size
+                    ? isShoes
+                      ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
+                      : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
+                    : 'border-[#222222] bg-[#111111] text-[#CCCCCC] hover:border-white hover:text-white'
+                }`}
+                aria-label={`Select size ${size}`}
               >
                 {size}
               </button>
             ))}
           </div>
-
-
         </div>
 
       </div>

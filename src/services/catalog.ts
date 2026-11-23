@@ -112,7 +112,7 @@ export const OrderTrackingService = {
             quantity: 1,
             unitPrice: 499,
             productName: '1239 CUSHION FOAM HIGH-STREET SNEAKER',
-            productImage: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg',
+            productImage: '/media/flying-sneaker-3d.jpg',
             colorName: 'Slate White'
           }
         ],
@@ -154,7 +154,7 @@ export const OrderTrackingService = {
           quantity: 1,
           unitPrice: 1899,
           productName: 'DARK BLUE BARREL FIT JEANS',
-          productImage: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
+          productImage: '/media/category-denim.jpg',
           colorName: 'Dark Indigo Blue'
         }
       ],

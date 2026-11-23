@@ -1,138 +1,123 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
-import { Play, VolumeX, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 
-type VideoProductCardProps = { 
-  title: string; 
-  subtitle: string; 
-  poster: string; 
+interface MovementCard {
+  id: string;
+  title: string;
+  subtitle: string;
+  poster: string;
   spec: string;
-  timecode: string;
-  videoSrc?: string; 
-  href?: string;
-};
-
-export function VideoProductCard({ title, subtitle, poster, spec, timecode, videoSrc, href = '/shop' }: VideoProductCardProps) {
-  return (
-    <article className="group relative aspect-[9/14] overflow-hidden bg-[#111111] border border-[#1E1E1E]">
-      {videoSrc ? (
-        <video 
-          src={videoSrc} 
-          poster={poster} 
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          preload="metadata" 
-        />
-      ) : (
-        <img 
-          src={poster} 
-          alt={subtitle} 
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
-        />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/30" />
-      <div className="absolute left-3 right-3 top-3 flex items-center justify-between text-[#EEEAE1]">
-        <span className="border border-white/20 bg-black/70 px-2 py-0.5 text-[9px] font-mono tracking-[0.12em] uppercase text-[#F4F4F4] flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-          <span>REC ● {timecode}</span>
-        </span>
-        <span className="border border-white/20 bg-black/70 px-2 py-0.5 text-[9px] font-mono tracking-[0.12em] text-[#888888] uppercase">
-          {spec}
-        </span>
-      </div>
-      <div className="absolute bottom-3 left-3 right-3 text-[#EEEAE1]">
-        <div className="flex items-center gap-1.5 text-[10px] tracking-[0.12em] text-[#888888] font-mono uppercase">
-          <VolumeX size={11} />
-          <span>EDITORIAL MOVEMENT</span>
-        </div>
-        
-        <div className="mt-2 flex items-center justify-between gap-2 border-t border-white/15 pt-2">
-          <span className="text-xs font-bold leading-tight tracking-normal font-mono text-white line-clamp-1">
-            {subtitle}
-          </span>
-          <Link 
-            href={href} 
-            className="shrink-0 px-2.5 py-1.5 bg-[#FFFFFF] hover:bg-[#F4F4F4] text-[#080808] text-xs font-mono font-black tracking-wider uppercase inline-flex items-center gap-1.5 transition-all min-h-[36px]"
-            aria-label={`Shop look: ${title}`}
-          >
-            <span>Shop Look</span>
-            <ArrowRight size={12} aria-hidden="true" />
-          </Link>
-        </div>
-      </div>
-    </article>
-  );
+  href: string;
 }
 
-const cards = [
+const CARDS: MovementCard[] = [
   {
-    title: 'THE FIT',
+    id: 'm1',
+    title: 'THE STRIPED FIT',
     subtitle: '280 GSM Boxy Striped Tee',
-    poster: 'https://www.powerlook.in/cdn/shop/files/2_4b938529-ec1a-4ee8-937f-540ba48bc2dc.jpg?v=1759921304',
+    poster: '/media/motion-card-1.jpg',
     spec: '280 GSM COMBED COTTON',
-    timecode: '00:14:09',
     href: '/product/black-and-white-striped-t-shirt'
   },
   {
+    id: 'm2',
     title: 'THE SILHOUETTE',
     subtitle: 'Tactical Relaxed Cargo',
-    poster: 'https://www.powerlook.in/cdn/shop/files/5_3x_b697cc80-2592-4205-b80b-903930ceac49.jpg?v=1787549048',
+    poster: '/media/motion-card-2.jpg',
     spec: '380 GSM HEAVY TWILL',
-    timecode: '00:21:44',
     href: '/product/grey-melange-paneled-baggy-trackpant'
   },
   {
-    title: 'THE DENIM',
+    id: 'm3',
+    title: 'THE BARREL DENIM',
     subtitle: '440 GSM Selvedge Barrel Denim',
-    poster: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
+    poster: '/media/motion-card-3.jpg',
     spec: '440 GSM RIGID SELVEDGE',
-    timecode: '00:08:12',
     href: '/product/dark-blue-barrel-fit-jeans'
   },
   {
-    title: 'THE LINEN',
+    id: 'm4',
+    title: 'THE RESORT LINEN',
     subtitle: 'Relaxed Resort Camp Collar',
-    poster: 'https://www.powerlook.in/cdn/shop/files/1497220.jpg?v=1779534340',
+    poster: '/media/motion-card-4.jpg',
     spec: '190 GSM AIRY LINEN',
-    timecode: '00:33:50',
     href: '/product/natural-embroidery-linen-shirt'
   }
 ];
 
 export default function SeenInMotion() {
   return (
-    <section className="bg-[#080808] border-b border-[#1E1E1E] py-20 text-[#F4F4F4] sm:py-24">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">
-        <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+    <section className="bg-[#080808] border-b border-[#1E1E1E] py-16 sm:py-24 text-[#F4F4F4]">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-10 pb-4 border-b border-[#1E1E1E] gap-4">
           <div>
-            <div className="mb-2 text-xs tracking-widest text-[#7D0A0A] uppercase font-mono font-bold">
-              Campaign Visuals // Editorial Movement
+            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#7D0A0A] uppercase tracking-[0.14em] font-bold mb-2">
+              <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
+              <span>On the street</span>
             </div>
-            <h2 className="font-[var(--font-display)] text-4xl font-bold tracking-[-0.04em] uppercase sm:text-6xl text-[#F4F4F4]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] text-[#F4F4F4] leading-[0.95] font-[var(--font-display)]">
               Seen in Motion
             </h2>
           </div>
-          <span className="max-w-xs text-xs leading-relaxed text-[#888888] font-mono">
-            Heavyweight drape in real urban environments. Natural volumetric fall and authentic street presence.
+          
+          <span className="text-xs text-[#888888] max-w-sm leading-relaxed">
+            A closer look at the fit, fabric and proportion away from the product page.
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          {cards.map((card) => (
-            <VideoProductCard 
-              key={card.title} 
-              title={card.title} 
-              subtitle={card.subtitle} 
-              poster={card.poster}
-              spec={card.spec}
-              timecode={card.timecode}
-              href={card.href}
-            />
+
+        {/* 4-Card Vertical Editorial Reel Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          {CARDS.map((card) => (
+            <article 
+              key={card.id} 
+              className="group relative aspect-[9/14] overflow-hidden bg-[#111111] border border-[#1E1E1E] transition-all hover:border-[#444444]"
+            >
+              <Image 
+                src={card.poster} 
+                alt={card.subtitle} 
+                fill 
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105" 
+              />
+              
+              {/* Subtle Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+              
+              {/* Top Spec Tag */}
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                <span className="bg-black/80 backdrop-blur-sm border border-white/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#C8C3B8]">
+                  {card.spec}
+                </span>
+              </div>
+
+              {/* Bottom Details & Shop Fit CTA */}
+              <div className="absolute bottom-3 left-3 right-3 text-[#F4F4F4]">
+                <div className="text-[10px] text-[#888888] uppercase tracking-wider mb-1">
+                  {card.title}
+                </div>
+                <div className="text-xs sm:text-sm font-bold leading-snug line-clamp-1 mb-3 text-white">
+                  {card.subtitle}
+                </div>
+
+                <Link 
+                  href={card.href} 
+                  className="w-full py-2.5 bg-white hover:bg-[#F4F4F4] text-black text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-md min-h-[38px]"
+                  aria-label={`Shop fit for ${card.subtitle}`}
+                >
+                  <span>SHOP FIT</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -45,19 +45,7 @@ export function CartProvider({ children, currentWorld }: { children: React.React
     } catch {
       // fallback
     }
-    return [
-      {
-        id: 'init-cloth-1',
-        productId: 'pl-001',
-        name: 'DARK BLUE BARREL FIT JEANS',
-        price: 1899,
-        image: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
-        size: 'L',
-        quantity: 1,
-        category: 'denim',
-        storeWorld: 'clothing'
-      }
-    ];
+    return [];
   });
 
   const [shoeItems, setShoeItems] = useState<CartItem[]>(() => {
@@ -68,19 +56,7 @@ export function CartProvider({ children, currentWorld }: { children: React.React
     } catch {
       // fallback
     }
-    return [
-      {
-        id: 'init-shoe-1',
-        productId: 'bb-114',
-        name: '1239 HIGH-STREET SNEAKER',
-        price: 499,
-        image: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg',
-        size: '8',
-        quantity: 1,
-        category: 'Sneakers',
-        storeWorld: 'shoes'
-      }
-    ];
+    return [];
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);

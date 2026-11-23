@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter_Tight, Cormorant_Garamond } from 'next/font/google';
+import { Instrument_Sans } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
@@ -9,29 +9,13 @@ import CinematicEntrance from '@/components/CinematicEntrance';
 import WorldSelectorModal from '@/components/WorldSelectorModal';
 import { AppProviders } from '@/components/AppProviders';
 
-// Editorial display font for high-impact headlines
-const display = Space_Grotesk({ 
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'], 
-  weight: ['600', '700'],
-  variable: '--font-display' 
-});
-
-// Editorial Luxury Serif accent for high-end fashion moments
-const serif = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-serif'
-});
-
-// Primary body and commerce typeface
-const sans = Inter_Tight({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-sans'
+  variable: '--font-instrument-sans'
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kapda-mafia.vercel.app'),
   title: "KAPDA MAFIA | Heavyweight Streetwear & Shoes Mafia Portals",
   description: "Explore 400 GSM heavyweight tees, tactical cargos, and Shoes Mafia sneaker line. Two distinct shopping worlds under one flagship.",
   keywords: ["streetwear", "menswear", "heavyweight tees", "cargos", "hoodies", "sneakers", "Shoes Mafia", "Kapda Mafia"],
@@ -60,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${display.variable} ${sans.variable} ${serif.variable} font-sans bg-[#080808] text-[#F4F4F4] antialiased`}>
+      <body className={`${instrumentSans.variable} bg-[#080808] text-[#F4F4F4] antialiased`}>
         <AppProviders>
           {/* Premium Cinematic Physical Storefront Entrance */}
           <CinematicEntrance />

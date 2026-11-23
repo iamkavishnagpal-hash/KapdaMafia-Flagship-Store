@@ -38,7 +38,7 @@ export default function SmartSizeModal({ isOpen, onClose }: SmartSizeModalProps)
         <div className="flex justify-between items-start border-b border-[#1E1E1E] pb-4">
           <div>
             <div className="text-[10px] text-[#7D0A0A] uppercase tracking-widest font-mono font-bold">
-              ARCHIVE DRAPE MATRIX // LAB 01
+              FIND YOUR SIZE
             </div>
             <h3 className="text-xl font-bold text-[#F4F4F4] uppercase tracking-tight font-editorial mt-0.5">
               PROPORTIONAL DRAPE LAB
@@ -143,7 +143,7 @@ export default function SmartSizeModal({ isOpen, onClose }: SmartSizeModalProps)
               onClick={handleCalculate}
               className="w-full py-4 bg-[#F3F0E8] hover:bg-[#C8C3B8] text-black font-black tracking-[0.24em] uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors"
             >
-              <span>RUN MATRIX &amp; SOLVE FIT</span>
+              <span>CHECK YOUR FIT</span>
               <ArrowRight size={14} />
             </button>
 

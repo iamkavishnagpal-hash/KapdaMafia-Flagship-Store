@@ -40,8 +40,8 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 4 }
         ],
         images: [
-          { id: 'pl-img-1', url: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605', type: 'image', alt: 'Dark Blue Barrel Fit Jeans', view: 'hero' },
-          { id: 'pl-img-1b', url: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605', type: 'image', alt: 'Jeans Detail', view: 'detail' }
+          { id: 'pl-img-1', url: '/media/category-denim.jpg', type: 'image', alt: 'Dark Blue Barrel Fit Jeans', view: 'hero' },
+          { id: 'pl-img-1b', url: '/media/motion-card-3.jpg', type: 'image', alt: 'Jeans Detail', view: 'detail' }
         ]
       }
     ]
@@ -85,7 +85,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 2 }
         ],
         images: [
-          { id: 'pl-img-2', url: 'https://www.powerlook.in/cdn/shop/files/2_4b938529-ec1a-4ee8-937f-540ba48bc2dc.jpg?v=1759921304', type: 'image', alt: 'Black And White Striped T-Shirt', view: 'hero' }
+          { id: 'pl-img-2', url: '/media/product-tee.png', type: 'image', alt: 'Black And White Striped T-Shirt', view: 'hero' }
         ]
       }
     ]
@@ -129,7 +129,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 3 }
         ],
         images: [
-          { id: 'pl-img-3', url: 'https://www.powerlook.in/cdn/shop/files/4_e933779f-2bf8-442e-8e66-f2d137b7b628.jpg?v=1780054457', type: 'image', alt: 'Multicolor Boxy Printed T-Shirt', view: 'hero' }
+          { id: 'pl-img-3', url: '/media/motion-card-1.jpg', type: 'image', alt: 'Multicolor Boxy Printed T-Shirt', view: 'hero' }
         ]
       }
     ]
@@ -173,7 +173,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 6 }
         ],
         images: [
-          { id: 'pl-img-4', url: 'https://www.powerlook.in/cdn/shop/files/5_3x_b697cc80-2592-4205-b80b-903930ceac49.jpg?v=1787549048', type: 'image', alt: 'Grey Melange Paneled Baggy Trackpant', view: 'hero' }
+          { id: 'pl-img-4', url: '/media/product-cargo.png', type: 'image', alt: 'Grey Melange Paneled Baggy Trackpant', view: 'hero' }
         ]
       }
     ]
@@ -217,7 +217,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 3 }
         ],
         images: [
-          { id: 'pl-img-5', url: 'https://www.powerlook.in/cdn/shop/files/7_3x_888d77c3-7b5a-4a6f-bf88-66c15809bf99.jpg?v=1787637637', type: 'image', alt: 'Black Paneled Baggy Trackpant', view: 'hero' }
+          { id: 'pl-img-5', url: '/media/motion-card-2.jpg', type: 'image', alt: 'Black Paneled Baggy Trackpant', view: 'hero' }
         ]
       }
     ]
@@ -261,7 +261,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 2 }
         ],
         images: [
-          { id: 'pl-img-6', url: 'https://www.powerlook.in/cdn/shop/files/1_3x_e4e27b70-b1c7-48e6-8949-a1b7f7588b05.jpg?v=1787636214', type: 'image', alt: 'Cream Paneled Baggy Trackpant', view: 'hero' }
+          { id: 'pl-img-6', url: '/media/motion-card-4.jpg', type: 'image', alt: 'Cream Paneled Baggy Trackpant', view: 'hero' }
         ]
       }
     ]
@@ -305,7 +305,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 5 }
         ],
         images: [
-          { id: 'pl-img-7', url: 'https://www.powerlook.in/cdn/shop/files/7_3x_f7a35f71-6348-451e-9f9c-28906b1c4885.jpg?v=1788935826', type: 'image', alt: 'Beige Panelled Barrel Fit Trackpant', view: 'hero' }
+          { id: 'pl-img-7', url: '/media/category-denim.jpg', type: 'image', alt: 'Beige Panelled Barrel Fit Trackpant', view: 'hero' }
         ]
       }
     ]
@@ -349,7 +349,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 1 }
         ],
         images: [
-          { id: 'pl-img-8', url: 'https://www.powerlook.in/cdn/shop/files/1497220.jpg?v=1779534340', type: 'image', alt: 'Natural Embroidery Linen Shirt', view: 'hero' }
+          { id: 'pl-img-8', url: '/media/product-jacket.png', type: 'image', alt: 'Natural Embroidery Linen Shirt', view: 'hero' }
         ]
       }
     ]
@@ -393,7 +393,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 2 }
         ],
         images: [
-          { id: 'pl-img-9', url: 'https://www.powerlook.in/cdn/shop/files/2_79136e3d-4c68-4174-bc19-67bb3cc66eb0.jpg?v=1782215844', type: 'image', alt: 'Cream Knit Structured Vest', view: 'hero' }
+          { id: 'pl-img-9', url: '/media/product-hoodie.png', type: 'image', alt: 'Cream Knit Structured Vest', view: 'hero' }
         ]
       }
     ]
@@ -437,7 +437,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 4 }
         ],
         images: [
-          { id: 'pl-img-10', url: 'https://www.powerlook.in/cdn/shop/files/1529021.jpg?v=1782969430', type: 'image', alt: 'Charcoal Black Washed Denim Shirt', view: 'hero' }
+          { id: 'pl-img-10', url: '/media/product-jacket.png', type: 'image', alt: 'Charcoal Black Washed Denim Shirt', view: 'hero' }
         ]
       }
     ]
@@ -481,7 +481,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 2 }
         ],
         images: [
-          { id: 'pl-img-11', url: 'https://www.powerlook.in/cdn/shop/files/1_5e7b2125-f589-427a-bb51-b884a594d154.jpg?v=1782216345', type: 'image', alt: 'Sage Graphic Varsity T-Shirt', view: 'hero' }
+          { id: 'pl-img-11', url: '/media/product-tee.png', type: 'image', alt: 'Sage Graphic Varsity T-Shirt', view: 'hero' }
         ]
       }
     ]
@@ -526,7 +526,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: 'XL', stock: 3 }
         ],
         images: [
-          { id: 'pl-img-12', url: 'https://www.powerlook.in/cdn/shop/files/2_cc639dba-8956-40b0-a26a-95b5099aff1b.jpg?v=1786427043', type: 'image', alt: 'Dark Grey Straight Fit Denim Jeans', view: 'hero' }
+          { id: 'pl-img-12', url: '/media/category-denim.jpg', type: 'image', alt: 'Dark Grey Straight Fit Denim Jeans', view: 'hero' }
         ]
       }
     ]
@@ -570,7 +570,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '10', stock: 27 }
         ],
         images: [
-          { id: 'bb-img-114', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875918_8060_img-7.jpeg', type: 'image', alt: '1239 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-114', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -611,7 +611,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '10', stock: 30 }
         ],
         images: [
-          { id: 'bb-img-113', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875803_1634_img-6.jpeg', type: 'image', alt: '1238 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-113', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -652,7 +652,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '10', stock: 5 }
         ],
         images: [
-          { id: 'bb-img-112', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875655_5795_img-5.jpeg', type: 'image', alt: '1237 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-112', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -693,7 +693,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '10', stock: 27 }
         ],
         images: [
-          { id: 'bb-img-110', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875334_7713_img-3.jpeg', type: 'image', alt: '1235 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-110', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -734,7 +734,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '10', stock: 28 }
         ],
         images: [
-          { id: 'bb-img-109', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788875152_img-2.jpeg', type: 'image', alt: '1234 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-109', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -775,7 +775,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '9', stock: 16 }
         ],
         images: [
-          { id: 'bb-img-108', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788874622_1415_img-1.jpeg', type: 'image', alt: '10021 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-108', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -817,7 +817,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { size: '10', stock: 4 }
         ],
         images: [
-          { id: 'bb-img-107', url: 'https://bunnyboss.in/secure-admin/uploads/item-master/1788695961_IMG_2627.PNG', type: 'image', alt: '24 Kapda Mafia Shoes', view: 'hero' }
+          { id: 'bb-img-107', url: '/media/flying-sneaker-3d.jpg', type: 'image', alt: 'Shoes Mafia runner', view: 'hero' }
         ]
       }
     ]
@@ -830,7 +830,7 @@ export const MOCK_LOOKBOOKS: Lookbook[] = [
     code: 'LOOK 01',
     title: 'MIDNIGHT EDITORIAL UNIFORM',
     subtitle: 'BARREL FIT & MONOCHROME STRIPES',
-    heroImage: 'https://www.powerlook.in/cdn/shop/files/3_3x_af828ed9-dc39-4c82-b83c-548de5ef1cdd.jpg?v=1787636605',
+    heroImage: '/media/category-denim.jpg',
     description: 'Dark Blue Barrel Fit Jeans paired with the Black & White Striped boxy tee. Built for high impact street movement.',
     productIds: ['pl-001', 'pl-002']
   },
@@ -839,7 +839,7 @@ export const MOCK_LOOKBOOKS: Lookbook[] = [
     code: 'LOOK 02',
     title: 'MONOLITH REBEL',
     subtitle: 'ACID DENIM & PANELED FLEECE',
-    heroImage: 'https://www.powerlook.in/cdn/shop/files/1529021.jpg?v=1782969430',
+    heroImage: '/media/product-jacket.png',
     description: 'Charcoal Black Washed Denim Shirt styled over Black Paneled Baggy Trackpants. Heavy drape meets raw luxury.',
     productIds: ['pl-010', 'pl-005']
   }
@@ -853,7 +853,7 @@ export const MOCK_REVIEWS: Review[] = [
     rating: 5,
     date: '2026-08-04',
     title: 'Insane fit. The barrel curve is exactly as shown.',
-    comment: 'The quality of the denim is heavy and the silhouette stacks naturally over my chunky sneakers. Powerlook Gen-Z collection hit the mark 100%.',
+    comment: 'The denim has a solid weight and the silhouette stacks naturally over chunky sneakers.',
     verifiedPurchase: true,
     userFitRating: 'True to size',
     userHeightWeight: "6'1\" / 78 kg",

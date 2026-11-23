@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-[#EEEAE1] py-20 px-4 sm:px-8 max-w-4xl mx-auto font-mono">
       <div className="mb-10 pb-6 border-b border-white/10">
-        <div className="text-xs text-[#8F1118] uppercase tracking-widest font-bold mb-2">TERMS OF SALE & ALLOCATION</div>
+        <div className="text-xs text-[#8F1118] uppercase tracking-widest font-bold mb-2">TERMS OF SALE</div>
         <h1 className="text-3xl sm:text-5xl font-black uppercase text-white">Terms of Service</h1>
         <p className="text-xs text-[#8C8C86] mt-2">Effective Date: January 1, 2026</p>
       </div>
@@ -19,7 +19,7 @@ export default function TermsPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-bold uppercase text-white tracking-wider">1. Limited Production & Drops</h2>
           <p>
-            All garments and footwear featured across Kapda Mafia and Shoes Mafia are manufactured in strictly limited small-batches (150–350 units per cut). Once an allocation is exhausted, restocks are not guaranteed.
+            All garments and footwear featured across Kapda Mafia and Shoes Mafia are made in limited small batches. Once a style sells out, restocks are not guaranteed.
           </p>
         </section>
 

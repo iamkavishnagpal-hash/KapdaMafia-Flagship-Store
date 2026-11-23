@@ -243,7 +243,7 @@ function CheckoutContent() {
                         PREPAID (UPI / RAZORPAY / GPAY / CARDS)
                       </div>
                       <div className="text-[10px] text-emerald-400">
-                        ✓ FREE EXPRESS DISPATCH TO {isShoesCheckout ? 'SHOES MAFIA VAULT' : 'KAPDA MAFIA'}
+                        ✓ FREE EXPRESS DISPATCH FROM {isShoesCheckout ? 'SHOES MAFIA' : 'KAPDA MAFIA'}
                       </div>
                     </div>
                   </div>
@@ -381,7 +381,7 @@ export default function CheckoutPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-[#080808] flex items-center justify-center font-mono text-white text-xs">
-        <div className="animate-pulse">LOADING CHECKOUT VAULT...</div>
+        <div className="animate-pulse">LOADING CHECKOUT...</div>
       </div>
     }>
       <CheckoutContent />

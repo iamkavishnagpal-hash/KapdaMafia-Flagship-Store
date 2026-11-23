@@ -3,7 +3,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { ArrowRight, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { ArrowRight, SlidersHorizontal } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
 import ProductCard360 from '@/components/ProductCard360';
 import { playMechanicalClick } from '@/utils/soundEffects';
@@ -62,19 +62,19 @@ export default function NewDropSection({ products }: NewDropProps) {
     <section className="py-16 sm:py-24 bg-[#080808] border-b border-[#1E1E1E]">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Title & Coordinates Bar */}
+        {/* Section title */}
         <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-8 pb-4 border-b border-[#1E1E1E] gap-4">
           <div>
-            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#7D0A0A] uppercase tracking-[0.14em] font-mono font-bold mb-2">
+            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#7D0A0A] uppercase tracking-[0.1em] font-bold mb-2">
               <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
-              <span>RUN 001 // ACTIVE VAULT ALLOCATION</span>
+              <span>New arrivals</span>
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.04em] text-[#F4F4F4] uppercase leading-[0.95] font-[var(--font-display)]">
-              Drop Archive <span className="text-[#888888]">· New Allocations</span>
+              Drop 001 <span className="text-[#888888]">· New arrivals</span>
             </h2>
           </div>
           
-          <div className="flex items-center gap-4 text-[10px] sm:text-[11px] font-mono tracking-[0.12em]">
+          <div className="flex items-center gap-4 text-[10px] sm:text-[11px] tracking-[0.08em]">
             <span className="text-[#888888] uppercase hidden lg:inline">280–440 GSM FRENCH TERRY &amp; DENIM</span>
             <Link 
               href="/shop" 
@@ -87,7 +87,7 @@ export default function NewDropSection({ products }: NewDropProps) {
         </div>
 
         {/* Genrage-Style Interactive Category Filter Tabs & Sort Dropdown */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 font-mono">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           
           {/* Filter Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
@@ -124,17 +124,17 @@ export default function NewDropSection({ products }: NewDropProps) {
               onChange={(e) => setSortBy(e.target.value as any)}
               className="bg-[#111111] border border-[#222222] text-[#EAE6DF] text-[11px] px-3 py-1.5 rounded-sm focus:outline-none focus:border-white transition-colors cursor-pointer"
             >
-              <option value="featured">FEATURED ALLOCATION</option>
+              <option value="featured">FEATURED</option>
               <option value="price-low">PRICE: LOW TO HIGH</option>
               <option value="price-high">PRICE: HIGH TO LOW</option>
-              <option value="rating">HIGHEST RATED (4.8+)</option>
+              <option value="rating">TOP RATED</option>
             </select>
           </div>
 
         </div>
 
-        {/* 3-Column Desktop, 2-Column Mobile Grid with Hairline Dividers */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-[#1E1E1E] border border-[#1E1E1E]">
+        {/* Dense desktop grid, easy 2-column mobile grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#1E1E1E] border border-[#1E1E1E]">
           {filteredProducts.map((product, idx) => (
             <ProductCard360 key={product.id} product={product} priority={idx === 0} />
           ))}
@@ -144,10 +144,10 @@ export default function NewDropSection({ products }: NewDropProps) {
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#666666] gap-3">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span>SHOWING {filteredProducts.length} OF {menswearDrops.length} ARCHIVAL PIECES</span>
+            <span>SHOWING {filteredProducts.length} OF {menswearDrops.length} PRODUCTS</span>
           </div>
           <Link href="/shop" className="text-[#7D0A0A] hover:text-[#961111] font-bold uppercase tracking-wider flex items-center gap-1.5">
-            <span>BROWSE FULL VAULT CATALOG</span>
+            <span>VIEW ALL PRODUCTS</span>
             <ArrowRight size={13} />
           </Link>
         </div>

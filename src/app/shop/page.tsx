@@ -17,7 +17,7 @@ function ShopContent() {
   const [selectedFit, setSelectedFit] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<string>('featured');
 
-  // Load from dynamic Next.js PostgreSQL-bound API endpoint
+  // Read from the same owned/local catalog used by the storefront.
   useEffect(() => {
     async function fetchCatalog() {
       setLoading(true);
@@ -54,14 +54,14 @@ function ShopContent() {
         {/* Brutalist Editorial Header */}
         <div className="mb-10 pb-6 border-b border-[#1c1c1c]">
           <div className="text-[10px] text-[#8F1118] uppercase tracking-[0.25em] font-semibold mb-2">
-            AUTUMN / WINTER ARCHIVE • REALTIME ALLOCATION SYNC
+            DROP 001 · MENSWEAR
           </div>
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
             <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-[-0.04em] font-editorial">
               STREET UNIFORMS
             </h1>
             <span className="text-xs text-[#77746E] tracking-widest uppercase">
-              {loading ? 'SYNCING DATABASE...' : `${products.length} VERIFIED STYLES`}
+              {loading ? 'LOADING PRODUCTS...' : `${products.length} PRODUCTS`}
             </span>
           </div>
         </div>
@@ -133,7 +133,7 @@ function ShopContent() {
           <div className="py-24 text-center space-y-4">
             <RefreshCw size={24} className="mx-auto text-[#7D0A0A] animate-spin" />
             <div className="text-xs font-mono text-[#666666] tracking-widest uppercase">
-              UPDATING VAULT INVENTORY ARCHIVE...
+              LOADING DROP 001...
             </div>
           </div>
         ) : products.length === 0 ? (
@@ -150,8 +150,8 @@ function ShopContent() {
           <div className="my-8">
             {/* Spec ticker bar above grid */}
             <div className="bg-[#111111] border border-[#1E1E1E] px-3 py-2 text-[10px] font-mono text-[#666666] flex items-center justify-between uppercase tracking-wider mb-[-1px] z-10 relative">
-              <span className="text-[#F4F4F4] font-bold">[ARCHIVE: ALLOCATION] // DELHI-NCR VAULT</span>
-              <span>100% MENSWEAR EDITIONS</span>
+              <span className="text-[#F4F4F4] font-bold">DROP 001 · AVAILABLE NOW</span>
+              <span>MENSWEAR</span>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#1E1E1E] border border-[#1E1E1E] overflow-hidden">
               {products.map(product => (

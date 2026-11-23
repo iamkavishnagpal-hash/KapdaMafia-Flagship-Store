@@ -27,7 +27,7 @@ export default function StorePage() {
           <div className="lg:col-span-7 aspect-[4/3] bg-[#0a0a0a] overflow-hidden relative">
             <img 
               src="/media/kapda-mafia-storefront-hero.jpg" 
-              alt="Kapda Mafia Concrete Vault"
+              alt="Kapda Mafia store interior"
               className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
             />
             <div className="absolute top-3 left-3 bg-[#080808]/90 border border-[#222] px-2.5 py-1 text-[9px] font-mono text-[#EEEAE1]">
@@ -39,11 +39,11 @@ export default function StorePage() {
             <div className="space-y-4">
               <div className="text-[10px] font-mono text-[#8F1118] uppercase tracking-widest flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#8F1118] animate-ping" />
-                <span>OPERATIONAL CONCRETE VAULT</span>
+                <span>VISIT THE STORE</span>
               </div>
 
               <div className="text-xl sm:text-2xl font-black text-[#F3F0E8] uppercase tracking-tight font-editorial">
-                NIT 5 CONCRETE VAULT
+                NIT 5, FARIDABAD
               </div>
 
               {/* Raw Industrial Coordinate Anchor */}
@@ -66,7 +66,7 @@ export default function StorePage() {
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Clock size={16} className="text-[#8F1118] flex-shrink-0" />
-                  <span>VAULT DOORS: 11:00 HRS – 21:30 HRS [MON–SUN]</span>
+                  <span>OPEN: 11:00 AM – 9:30 PM · MON–SUN</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Phone size={16} className="text-[#8F1118] flex-shrink-0" />
