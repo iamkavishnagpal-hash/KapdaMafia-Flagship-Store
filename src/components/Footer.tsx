@@ -153,7 +153,16 @@ export default function Footer() {
       </div>
 
       <div className="max-w-[1600px] mx-auto mt-12 pt-6 border-t border-[#1E1E1E] flex flex-col sm:flex-row items-center justify-between text-xs text-[#666666] gap-4">
-        <div>© {new Date().getFullYear()} KAPDA MAFIA. All rights reserved.</div>
+        <div>© {new Date().getFullYear()} KAPDA MAFIA. All rights reserved. Flagship NIT-5 Faridabad.</div>
+        
+        {/* Genrage-Style Payment Badges */}
+        <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono text-[#888888]">
+          <span className="bg-[#111111] border border-[#222222] px-2 py-0.5 rounded text-white font-bold">UPI / GPAY</span>
+          <span className="bg-[#111111] border border-[#222222] px-2 py-0.5 rounded text-white font-bold">CARDS</span>
+          <span className="bg-[#111111] border border-[#222222] px-2 py-0.5 rounded text-emerald-400 font-bold">CASH ON DELIVERY</span>
+          <span className="bg-[#111111] border border-[#222222] px-2 py-0.5 rounded text-[#A09D94]">100% SECURE SSL</span>
+        </div>
+
         <div className="flex items-center gap-6">
           <Link href="/privacy" className="hover:text-[#888888] transition-colors">Privacy</Link>
           <Link href="/terms" className="hover:text-[#888888] transition-colors">Terms</Link>

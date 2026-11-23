@@ -115,6 +115,24 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         {/* Seamless Canvas Gradient Overlay - Blends seamlessly into #080808 canvas like WTFLEX */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/20 pointer-events-none" />
 
+        {/* Top Badges (Genrage Style: Status Badge + Discount Badge) */}
+        <div className="absolute top-2.5 inset-x-2.5 z-10 flex items-center justify-between pointer-events-none">
+          {product.badge ? (
+            <span className="text-[9px] font-mono font-bold tracking-widest uppercase bg-[#7D0A0A] text-white px-2 py-0.5 rounded-sm shadow-md">
+              {product.badge}
+            </span>
+          ) : (
+            <span className="text-[9px] font-mono font-bold tracking-widest uppercase bg-black/70 backdrop-blur-sm border border-white/10 text-[#C8C3B8] px-2 py-0.5 rounded-sm">
+              VAULT DROP
+            </span>
+          )}
+          {product.originalPrice && (
+            <span className="text-[9px] font-mono font-bold tracking-widest uppercase bg-black/85 backdrop-blur-sm border border-emerald-500/30 text-emerald-400 px-2 py-0.5 rounded-sm shadow-md">
+              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+            </span>
+          )}
+        </div>
+
         {/* Edition Run Specification HUD (Brutalist Luxury Standard) */}
         <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex items-center justify-between text-[9px] font-mono tracking-widest bg-[#0A0A0A]/95 border border-[#222222] px-2.5 py-1.5 text-[#9E9E9E] uppercase">
           <span className="text-[#F4F4F4] font-bold">LIMITED ARCHIVE</span>

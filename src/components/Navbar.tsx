@@ -126,20 +126,22 @@ export default function Navbar() {
 
         </div>
 
-        {/* INFINITE MARQUEE ENGINE: Ultra-smooth 60fps continuous strip with pause-on-hover */}
-        <div className="marquee-container overflow-hidden border-t border-b border-[#1E1E1E] bg-[#0A0A0A] text-[#888888] py-1.5 text-[10px] font-mono tracking-[0.15em] uppercase select-none cursor-pointer">
+        {/* INFINITE MARQUEE ENGINE: Genrage-Style Ultra-smooth 60fps continuous strip with promo codes */}
+        <div className="marquee-container overflow-hidden border-t border-b border-[#1E1E1E] bg-[#0A0A0A] text-[#888888] py-2 text-[10px] font-mono tracking-[0.16em] uppercase select-none cursor-pointer">
           <div className="flex w-max animate-marquee-hardware whitespace-nowrap will-change-transform">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="flex items-center gap-6 px-3">
-                <span>HEAVYWEIGHT ARCHIVE 001</span>
+                <span className="text-[#F4F4F4] font-bold">⚡ FREE EXPRESS SHIPPING ON ALL PREPAID ORDERS PAN-INDIA</span>
                 <span className="text-[#7D0A0A] font-bold">//</span>
-                <span>NITRO-WASHED COTTON</span>
+                <span className="text-amber-400 font-bold">GET ₹300 OFF ON 2+ PIECES — CODE: KM300</span>
                 <span className="text-[#7D0A0A] font-bold">//</span>
-                <span>WORLDWIDE DISPATCH</span>
+                <span>100% COMBED HEAVYWEIGHT COTTON (280-440 GSM)</span>
                 <span className="text-[#7D0A0A] font-bold">//</span>
-                <span>FARIDABAD NIT-5 FLAGSHIP</span>
+                <span className="text-white font-bold">CASH ON DELIVERY (COD) AVAILABLE</span>
                 <span className="text-[#7D0A0A] font-bold">//</span>
-                <span className="text-[#F4F4F4] font-bold">NO RESTOCKS</span>
+                <span>7-DAY DOORSTEP EASY EXCHANGES</span>
+                <span className="text-[#7D0A0A] font-bold">//</span>
+                <span>NIT-5 FARIDABAD FLAGSHIP ARCHIVE</span>
                 <span className="text-[#7D0A0A] font-bold">//</span>
               </div>
             ))}
