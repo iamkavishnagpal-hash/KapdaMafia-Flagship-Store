@@ -213,12 +213,12 @@ export default function ProductCard360({ product, priority = false }: ProductCar
                   openCart();
                 }}
                 className={`min-w-[36px] h-7 px-2.5 text-[11px] font-mono font-bold uppercase border transition-all cursor-pointer ${selectedSize === size
-                    ? isShoes
-                      ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
-                      : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
-                    : isShoes
-                      ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a] hover:bg-[#161f1d]'
-                      : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666] hover:bg-[#181818]'
+                  ? isShoes
+                    ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
+                    : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
+                  : isShoes
+                    ? 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#1a8f7a] hover:bg-[#161f1d]'
+                    : 'border-[#1E1E1E] bg-[#111111] text-[#F4F4F4] hover:border-[#666666] hover:bg-[#181818]'
                   }`}
                 aria-label={`Select size ${size} and open cart`}
               >

@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import MobileBottomBar from '@/components/MobileBottomBar';
-import SpatialGatewayPortal from '@/components/SpatialGatewayPortal';
+import CinematicEntrance from '@/components/CinematicEntrance';
 import WorldSelectorModal from '@/components/WorldSelectorModal';
 import { AppProviders } from '@/components/AppProviders';
 
@@ -62,8 +62,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${display.variable} ${sans.variable} ${serif.variable} font-sans bg-[#080808] text-[#F4F4F4] antialiased`}>
         <AppProviders>
-          {/* Full-Viewport Spatial Gateway (50/50 Split-Pavilion Entrance) */}
-          <SpatialGatewayPortal />
+          {/* Premium Cinematic Physical Storefront Entrance */}
+          <CinematicEntrance />
           {/* Global world portal modal switcher */}
           <WorldSelectorModal />
           <Navbar />
