@@ -14,12 +14,27 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
   const { addToCart, openCart } = useCart();
   const resolvedParams = React.use(params);
   const product = MOCK_PRODUCTS.find(p => p.slug === resolvedParams.slug) || MOCK_PRODUCTS[0];
-  const [selectedSize, setSelectedSize] = useState(product.variants[0]?.sizes[0]?.size || 'M');
+  const [selectedSize, setSelectedSize] = useState('');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isSizeModalOpen, setIsSizeModalOpen] = useState(false);
   const [addedToBag, setAddedToBag] = useState(false);
 
   const activeVariant = product.variants[0];
+  const canPurchase = Boolean(selectedSize);
+
+  const addSelectedItem = () => {
+    if (!selectedSize) return false;
+    addToCart({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: activeVariant.images[0]?.url || '',
+      size: selectedSize,
+      category: product.category,
+      storeWorld: product.storeWorld || 'clothing'
+    });
+    return true;
+  };
 
   return (
     <div className="py-10 bg-[#080808] min-h-screen text-[#F3F0E8] font-mono">
@@ -138,12 +153,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             <div className="space-y-3 pt-4 border-t border-[#181818]">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-[#666666] font-mono">SELECT SIZE ({product.fit} SILHOUETTE):</span>
-                <Link 
-                  href="/ai-fit"
-                  className="text-[#7D0A0A] hover:text-white font-mono font-bold flex items-center gap-1 text-[10px] tracking-widest uppercase transition-colors"
+                <button
+                  type="button"
+                  onClick={() => setIsSizeModalOpen(true)}
+                  className="text-[#B6191A] hover:text-white font-semibold flex items-center gap-1 text-xs transition-colors"
                 >
-                  <Sparkles size={12} /> PROPORTIONAL DRAPE LAB →
-                </Link>
+                  <Sparkles size={12} /> Find my size
+                </button>
               </div>
 
               <div className="grid grid-cols-4 gap-2 text-xs">
@@ -152,9 +168,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                     key={s.size}
                     disabled={s.stock === 0}
                     onClick={() => setSelectedSize(s.size)}
+                    aria-pressed={selectedSize === s.size}
                     className={`py-3 border text-center transition-all rounded-none ${
                       selectedSize === s.size 
-                        ? 'border-[#8F1118] bg-[#8F1118] text-white font-bold' 
+                        ? 'border-white bg-white text-black font-bold' 
                         : s.stock > 0 
                         ? 'border-[#222222] bg-[#111111] text-[#F3F0E8] hover:border-[#8C8C86]' 
                         : 'border-transparent bg-[#111111]/40 text-[#8C8C86] line-through cursor-not-allowed'
@@ -175,41 +192,27 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             {/* CTAs */}
             <div className="space-y-3 pt-2">
               <button 
+                disabled={!canPurchase}
                 onClick={() => {
-                  addToCart({
-                    productId: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: activeVariant.images[0]?.url || '',
-                    size: selectedSize,
-                    category: product.category,
-                    storeWorld: product.storeWorld || 'clothing'
-                  });
+                  if (!addSelectedItem()) return;
                   setAddedToBag(true);
                   setTimeout(() => setAddedToBag(false), 2000);
                   openCart();
                 }}
-                className="w-full py-4 bg-[#8F1118] hover:bg-[#B91C1C] text-white font-bold text-xs tracking-[0.25em] uppercase transition-colors cursor-pointer rounded-none"
+                className="w-full min-h-12 py-4 bg-white hover:bg-[#EAE6DF] text-black font-semibold text-sm tracking-[0.08em] uppercase transition-colors cursor-pointer rounded-none disabled:cursor-not-allowed disabled:bg-[#222222] disabled:text-[#777777]"
               >
-                {addedToBag ? '✓ ADDED TO KAPDA BAG' : `ADD TO BAG (${selectedSize}) →`}
+                {addedToBag ? 'Added to bag' : selectedSize ? `Add size ${selectedSize} to bag` : 'Choose a size'}
               </button>
 
               <button 
+                disabled={!canPurchase}
                 onClick={() => {
-                  addToCart({
-                    productId: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: activeVariant.images[0]?.url || '',
-                    size: selectedSize,
-                    category: product.category,
-                    storeWorld: 'clothing'
-                  });
+                  if (!addSelectedItem()) return;
                   router.push('/checkout?store=clothing');
                 }}
-                className="block w-full py-4 bg-[#8F1118] hover:bg-[#A8151D] border border-[#8F1118] text-white font-bold text-xs tracking-[0.25em] uppercase text-center transition-colors cursor-pointer shadow-lg shadow-[#8F1118]/20"
+                className="block w-full min-h-12 py-4 border border-[#666666] text-[#F4F4F4] hover:border-white hover:bg-white/5 font-semibold text-sm tracking-[0.08em] uppercase text-center transition-colors cursor-pointer disabled:cursor-not-allowed disabled:border-[#333333] disabled:text-[#777777]"
               >
-                BUY NOW WITH 1-CLICK
+                Buy now
               </button>
             </div>
 

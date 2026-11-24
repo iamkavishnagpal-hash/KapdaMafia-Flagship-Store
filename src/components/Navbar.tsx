@@ -17,6 +17,40 @@ export default function Navbar() {
 
   const isShoesWorld = world === 'shoes';
 
+  React.useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [menuOpen]);
+
+  // Floto Audit D: Body scroll locking & ESC key dismissal when overlay is open
+  React.useEffect(() => {
+    if (menuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setMenuOpen(false);
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = originalOverflow || 'auto';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [menuOpen]);
+
   return (
     <>
       <header className={`fixed inset-x-0 top-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${
@@ -152,7 +186,15 @@ export default function Navbar() {
 
         {/* FULL-SCREEN OVERLAY MENU */}
         {menuOpen && (
-          <div className="fixed inset-0 z-50 bg-[#080808] flex flex-col justify-between p-6 sm:p-12 text-[#F4F4F4] animate-fade-in overflow-y-auto">
+          <div
+            className="fixed inset-0 z-50 bg-[#080808] flex flex-col justify-between p-6 sm:p-12 text-[#F4F4F4] animate-fade-in overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main navigation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setMenuOpen(false);
+            }}
+          >
             
             <div className="flex items-center justify-between pb-6 border-b border-[#1E1E1E]">
               <span className="text-base font-black uppercase tracking-tight font-[var(--font-display)]">

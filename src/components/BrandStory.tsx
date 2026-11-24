@@ -53,7 +53,7 @@ export default function BrandStory() {
               </Button>
             </Link>
             <Link href="/shop">
-              <Button variant="outline" size="md">
+              <Button variant="ghost" size="md">
                 Browse Full Catalog
               </Button>
             </Link>

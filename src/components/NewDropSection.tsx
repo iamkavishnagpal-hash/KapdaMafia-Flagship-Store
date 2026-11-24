@@ -100,6 +100,7 @@ export default function NewDropSection({ products }: NewDropProps) {
                     playMechanicalClick();
                     setActiveTab(tab.id);
                   }}
+                  aria-pressed={isActive}
                   className={`px-3.5 py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 min-h-[44px] ${
                     isActive
                       ? 'bg-white text-black shadow-md border border-white'
@@ -114,6 +115,16 @@ export default function NewDropSection({ products }: NewDropProps) {
               );
             })}
           </div>
+
+          {activeTab !== 'ALL' && (
+            <button
+              type="button"
+              onClick={() => setActiveTab('ALL')}
+              className="min-h-11 px-3 text-xs font-semibold text-[#C8C3B8] underline underline-offset-4 hover:text-white"
+            >
+              Clear filter
+            </button>
+          )}
 
           {/* Sort Selector */}
           <div className="flex items-center gap-2 shrink-0 text-xs">

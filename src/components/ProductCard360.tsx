@@ -48,9 +48,8 @@ export default function ProductCard360({ product, priority = false }: ProductCar
   }, [activeVariant]);
 
   const allOutOfStock = sizesWithStock.every(s => !s.inStock);
-  const [selectedSize, setSelectedSize] = useState<string>(
-    sizesWithStock.find(s => s.inStock)?.size || sizesWithStock[0]?.size || 'M'
-  );
+  // Floto Audit C: Start with null so no premature selection/red highlight occurs until user acts
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   // Calculate Single Badge (Rule: Maximum 1 badge per card)
   const singleBadge = useMemo(() => {
@@ -67,7 +66,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     return null;
   }, [allOutOfStock, product, isShoes]);
 
-  // Instant 1-Tap Size Click to Bag
+  // Selecting a size must never add an item implicitly.
   const handleSizeClick = (e: React.MouseEvent, size: string, inStock: boolean) => {
     e.preventDefault();
     e.stopPropagation();
@@ -76,12 +75,17 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     playMechanicalClick();
     setSelectedSize(size);
 
+  };
+
+  const handleAddToBag = () => {
+    if (!selectedSize || allOutOfStock) return;
+    playMechanicalClick();
     addToCart({
       productId: product.id,
       name: product.name,
       price: product.price,
       image: primaryImage,
-      size: size,
+      size: selectedSize,
       category: product.category,
       storeWorld: product.storeWorld || (isShoes ? 'shoes' : 'clothing')
     });
@@ -158,32 +162,48 @@ export default function ProductCard360({ product, priority = false }: ProductCar
 
         {/* Clean Single-Row Size Selector Pills (1-Tap to Bag) */}
         <div className="pt-2.5 border-t border-[#1E1E1E]">
-          <div className="text-xs text-[#888888] tracking-[0.08em] uppercase mb-1.5">
-            Select size to bag:
+          <div className="flex items-center justify-between text-xs text-[#888888] tracking-[0.08em] uppercase mb-1.5">
+            <span>Select size:</span>
+            {selectedSize && (
+              <span className="text-white font-mono text-[11px] font-bold">Selected: {selectedSize}</span>
+            )}
           </div>
           
-          <div className="flex flex-wrap gap-1.5">
-            {sizesWithStock.map(({ size, inStock }) => (
-              <button
-                key={size}
-                type="button"
-                disabled={!inStock}
-                onClick={(e) => handleSizeClick(e, size, inStock)}
-                className={`min-h-11 min-w-11 px-2 text-xs font-bold uppercase border transition-all cursor-pointer rounded-sm ${
-                  !inStock
-                    ? 'border-[#1C1C1C] bg-[#0D0D0D] text-[#555555] line-through cursor-not-allowed opacity-40'
-                    : selectedSize === size
-                    ? isShoes
-                      ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
-                      : 'border-[#B6191A] bg-[#B6191A] text-white shadow-sm'
-                    : 'border-[#222222] bg-[#111111] text-[#E5E5E5] hover:border-white hover:text-white'
-                }`}
-                aria-label={`Select size ${size}`}
-              >
-                {size}
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={`Select size for ${product.name}`}>
+            {sizesWithStock.map(({ size, inStock }) => {
+              const isSelected = selectedSize === size;
+              return (
+                <button
+                  key={size}
+                  type="button"
+                  role="radio"
+                  aria-checked={isSelected}
+                  disabled={!inStock}
+                  onClick={(e) => handleSizeClick(e, size, inStock)}
+                  className={`min-h-11 min-w-11 px-2.5 text-xs font-bold uppercase border transition-all cursor-pointer rounded-none focus-visible:outline-2 focus-visible:outline-white ${
+                    !inStock
+                      ? 'border-[#1C1C1C] bg-[#0D0D0D] text-[#555555] line-through cursor-not-allowed opacity-40'
+                      : isSelected
+                      ? isShoes
+                        ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
+                        : 'border-[#FFFFFF] bg-[#FFFFFF] text-black shadow-sm font-black'
+                      : 'border-[#262626] bg-[#111111] text-[#E5E5E5] hover:border-white hover:text-white'
+                  }`}
+                  aria-label={inStock ? `Size ${size}` : `Size ${size} out of stock`}
+                >
+                  {size}
+                </button>
+              );
+            })}
           </div>
+          <button
+            type="button"
+            disabled={!selectedSize || allOutOfStock}
+            onClick={handleAddToBag}
+            className="mt-3 min-h-11 w-full border border-white bg-white px-4 text-xs font-semibold uppercase tracking-[0.08em] text-black transition-colors hover:bg-[#EAE6DF] disabled:cursor-not-allowed disabled:border-[#333333] disabled:bg-[#161616] disabled:text-[#777777]"
+          >
+            {allOutOfStock ? 'Sold out' : selectedSize ? `Add size ${selectedSize} to bag` : 'Choose a size'}
+          </button>
         </div>
 
       </div>

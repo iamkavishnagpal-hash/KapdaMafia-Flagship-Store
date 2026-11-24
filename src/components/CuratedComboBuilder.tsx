@@ -314,11 +314,11 @@ export default function CuratedComboBuilder() {
                 <span className="shrink-0 line-through">₹{activeBottom.price}</span>
               </div>
               <div className="flex justify-between text-emerald-400 font-bold">
-                <span>COMBO DISCOUNT SAVINGS</span>
+                <span>BUNDLE & SAVE</span>
                 <span>-₹{savings}</span>
               </div>
               <div className="flex justify-between text-white text-base font-bold pt-2 border-t border-[#1E1E1E]">
-                <span>FINAL COMBO PRICE</span>
+                <span>VERIFIED COMBO PRICE</span>
                 <span className="text-[#F4F4F4]">₹{COMBO_PRICE.toLocaleString('en-IN')}</span>
               </div>
             </div>
@@ -333,12 +333,12 @@ export default function CuratedComboBuilder() {
               {isAdded ? (
                 <>
                   <Check size={16} />
-                  <span>COMBO ADDED TO BAG</span>
+                  <span>2-PIECE SET ADDED TO BAG</span>
                 </>
               ) : (
                 <>
                   <ShoppingBag size={16} />
-                  <span>ADD COMPLETE SET TO BAG — ₹{COMBO_PRICE.toLocaleString('en-IN')}</span>
+                  <span>ADD 2-PIECE SET TO BAG — ₹{COMBO_PRICE.toLocaleString('en-IN')}</span>
                 </>
               )}
             </button>
