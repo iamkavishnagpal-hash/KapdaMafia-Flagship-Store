@@ -5,6 +5,7 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import StoryCategories from '@/components/StoryCategories';
 import NewDropSection from '@/components/NewDropSection';
+import StitchEditorialSection from '@/components/StitchEditorialSection';
 import CuratedComboBuilder from '@/components/CuratedComboBuilder';
 import SeenInMotion from '@/components/SeenInMotion';
 import BrandProofSection from '@/components/BrandProofSection';
@@ -52,17 +53,22 @@ export default function DualHomePage({
         <NewDropSection products={clothingProducts} />
       </div>
 
-      {/* 4. CURATED COMBO BUILDER (1 PANT + 1 TEE @ ₹2,499) */}
+      {/* 4. STITCH EDITORIAL DUAL CATEGORIES & LOOKBOOK BANNER */}
+      <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
+        <StitchEditorialSection />
+      </div>
+
+      {/* 5. CURATED COMBO BUILDER (1 PANT + 1 TEE @ ₹2,499) */}
       <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
         <CuratedComboBuilder />
       </div>
 
-      {/* 5. ON-STREET MOVEMENT REEL */}
+      {/* 6. ON-STREET MOVEMENT REEL */}
       <div className="reveal" style={{ '--reveal-delay': '50ms' } as React.CSSProperties}>
         <SeenInMotion />
       </div>
 
-      {/* 6. BRAND PROOF: NIT-5 ORIGIN, 3 PILLARS & REVIEWS */}
+      {/* 7. BRAND PROOF: NIT-5 ORIGIN, 3 PILLARS & REVIEWS */}
       <div className="reveal" style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
         <BrandProofSection />
       </div>

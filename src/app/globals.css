@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --font-primary: var(--font-instrument-sans), "Instrument Sans", sans-serif;
-  --font-display: var(--font-primary);
+  --font-primary: var(--font-raleway), var(--font-instrument-sans), sans-serif;
+  --font-display: var(--font-playfair), serif;
+  --font-headline: var(--font-playfair), serif;
+  --font-title: var(--font-raleway), sans-serif;
+  --font-body: var(--font-raleway), sans-serif;
+  --font-label: var(--font-raleway), sans-serif;
+  --font-mono: var(--font-spline-mono), monospace;
   --font-sans: var(--font-primary);
   /* ==========================================================================
-     KAPDA MAFIA SEMANTIC DESIGN TOKENS
-     Controlled palette: Canvas, Surfaces, Hairlines, Warm White, Oxblood Accent
+     KAPDA MAFIA SEMANTIC DESIGN TOKENS (STITCH HARMONIZED)
+     Controlled palette: Canvas, Surfaces, Hairlines, Warm White, Crimson Accent
      ========================================================================== */
   --color-bg: #080808;
   --color-surface: #111111;
@@ -19,9 +24,9 @@
   --color-text-muted: #888888;
   --color-text-dim: #555555;
   
-  /* Utilitarian Deep Oxblood - used for controlled accents & indicators only */
-  --color-accent: #7D0A0A;
-  --color-accent-hover: #9E1010;
+  /* Utilitarian Stitch Crimson Accent */
+  --color-accent: #B6191A;
+  --color-accent-hover: #D9352F;
   
   /* Status tokens */
   --color-success: #1a8f7a;

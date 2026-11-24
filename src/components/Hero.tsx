@@ -19,13 +19,13 @@ interface SlideData {
 const SLIDES: SlideData[] = [
   {
     id: 1,
-    badge: 'DROP 001',
-    headline: 'AFTER DARK',
-    subheadline: '440 GSM heavyweight terry',
-    spec: 'Pre-shrunk boxy fit · reinforced collar',
-    image: '/media/hero/hero-slide-1.jpg',
+    badge: 'DROP 04 // CONCRETE & ASH',
+    headline: 'CONCRETE & ASH',
+    subheadline: 'Architectural outerwear & 480 GSM custom-milled jersey',
+    spec: 'Engineered cold-weather utility · Drop shoulder · Raw edge finish',
+    image: 'https://lh3.googleusercontent.com/aida/ALJJyrCuv2rxGPHg4UOsnMPvFKXLTUhBevCJHB65Gi8Hgav6Dh5Xsyt7iti3iHjHCunjdQ1hYNL_c_-1fv86PkZ-u3G0S1qP3xrAVF3Ot2BFaT2e6tYqx33rcCgaDuTsrwZmxjZyhFeGw3PtfbYn0lQn2R3Umn3lqCcxdG8Y0J_M1e-64ugJX_NkysJUAhJIJ58dIUPiJEmd2eDmKQMRdJ7Qw2dj0lwxn4KblL2YyPUohAEOjX3J6OfK',
     href: '/shop',
-    ctaText: 'SHOP DROP 001'
+    ctaText: 'SHOP DROP 04'
   },
   {
     id: 2,
@@ -131,35 +131,40 @@ export default function Hero() {
         <div className="max-w-3xl space-y-4 sm:space-y-6 pointer-events-auto">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#080808]/90 border border-[#1E1E1E] text-xs font-medium tracking-[0.08em] uppercase text-[#C8C3B8]">
-            <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
+            <span className="w-1.5 h-1.5 bg-[#B6191A]" />
             <span>{active.badge}</span>
           </div>
 
           {/* Headline */}
           <div>
-            <h1 className="text-4xl sm:text-7xl lg:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.95] text-[#F4F4F4] font-[var(--font-display)] drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-7xl lg:text-8xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-[#F4F4F4] font-[var(--font-headline)] drop-shadow-2xl">
               {active.headline}
             </h1>
-            <p className="text-xs sm:text-sm font-medium tracking-[0.08em] text-[#D0CCC3] uppercase mt-2">
+            <p className="text-xs sm:text-base font-normal tracking-[0.04em] text-[#D0CCC3] uppercase mt-2 font-[var(--font-body)]">
               {active.subheadline}
             </p>
           </div>
 
           {/* Spec */}
-          <div className="flex items-center gap-3 text-xs tracking-[0.05em] text-[#B9B5AC] uppercase">
+          <div className="flex items-center gap-3 text-xs tracking-[0.05em] text-[#B9B5AC] uppercase font-[var(--font-mono)]">
             <span>{active.spec}</span>
           </div>
 
-          {/* Single Clear CTA */}
-          <div className="pt-2">
+          {/* CTA Row with dual actions (Shop Drop 04 + View Lookbook) */}
+          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
               href={active.href}
-              className="w-full sm:w-72 h-14 bg-white hover:bg-[#F4F4F4] active:scale-[0.99] text-black font-bold text-xs tracking-[0.12em] uppercase flex items-center justify-center gap-3 shadow-2xl transition-all cursor-pointer"
+              className="w-full sm:w-64 h-14 bg-white hover:bg-[#F4F4F4] active:scale-[0.99] text-black font-bold text-xs tracking-[0.12em] uppercase flex items-center justify-center gap-3 shadow-2xl transition-all cursor-pointer"
             >
               <span>{active.ctaText}</span>
               <ArrowRight size={15} />
             </Link>
-
+            <Link
+              href="/lookbook"
+              className="w-full sm:w-56 h-14 bg-transparent hover:bg-white/5 active:scale-[0.99] text-[#F4F4F4] border border-[#333333] hover:border-white font-bold text-xs tracking-[0.12em] uppercase flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <span>View Lookbook</span>
+            </Link>
           </div>
         </div>
 

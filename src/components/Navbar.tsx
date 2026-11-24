@@ -25,14 +25,15 @@ export default function Navbar() {
           : 'border-[#1E1E1E] bg-[#080808]/95'
       }`}>
         
-        {/* Crisp Single Announcement Bar */}
+        {/* Crisp Single Announcement Bar (Stitch Token Harmonized) */}
         <div className="bg-[#0A0A0A] border-b border-[#1E1E1E] py-2 px-4 text-center text-xs font-medium tracking-[0.06em] text-[#A09D94] uppercase select-none">
           <div className="flex items-center justify-center gap-2">
-            <span className="text-[#F4F4F4] font-bold">FREE EXPRESS SHIPPING ON PREPAID ORDERS</span>
+            <span className="inline-block w-1.5 h-1.5 bg-[#B6191A] rounded-full" aria-hidden="true" />
+            <span className="text-[#F4F4F4] font-bold">DROP 04 — CONCRETE & ASH NOW LIVE</span>
             <span className="text-[#77746E]" aria-hidden="true">·</span>
-            <span className="text-amber-400 font-bold">₹300 OFF ON 2+ ITEMS · CODE: KM300</span>
+            <span className="text-white font-semibold">FREE EXPRESS SHIPPING ON PREPAID ORDERS</span>
             <span className="hidden md:inline text-[#77746E]" aria-hidden="true">·</span>
-            <span className="hidden md:inline text-white">7-DAY DOORSTEP EXCHANGES</span>
+            <span className="hidden md:inline text-amber-400 font-bold">₹300 OFF ON 2+ ITEMS (KM300)</span>
           </div>
         </div>
 

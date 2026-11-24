@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Instrument_Sans } from 'next/font/google';
+import { Instrument_Sans, Playfair_Display, Raleway, Spline_Sans_Mono } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
@@ -12,6 +12,21 @@ import { AppProviders } from '@/components/AppProviders';
 const instrumentSans = Instrument_Sans({
   subsets: ['latin'], 
   variable: '--font-instrument-sans'
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair'
+});
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  variable: '--font-raleway'
+});
+
+const splineSansMono = Spline_Sans_Mono({
+  subsets: ['latin'],
+  variable: '--font-spline-mono'
 });
 
 export const metadata: Metadata = {
@@ -44,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${instrumentSans.variable} bg-[#080808] text-[#F4F4F4] antialiased`}>
+      <body className={`${instrumentSans.variable} ${playfairDisplay.variable} ${raleway.variable} ${splineSansMono.variable} bg-[#080808] text-[#F4F4F4] antialiased`}>
         <AppProviders>
           {/* Premium Cinematic Physical Storefront Entrance */}
           <CinematicEntrance />
