@@ -59,7 +59,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
     }
     if (product.originalPrice && product.originalPrice > product.price) {
       const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-      return { text: `SAVE ${discount}%`, bg: isShoes ? 'bg-[#00695c] text-white' : 'bg-[#7D0A0A] text-white' };
+      return { text: `SAVE ${discount}%`, bg: isShoes ? 'bg-[#00695c] text-white' : 'bg-[#B6191A] text-white' };
     }
     if (product.badge?.toUpperCase().includes('BEST') || product.isFeatured) {
       return { text: 'BESTSELLER', bg: 'bg-white text-black font-bold' };
@@ -175,7 +175,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
                     : selectedSize === size
                     ? isShoes
                       ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
-                      : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
+                      : 'border-[#B6191A] bg-[#B6191A] text-white shadow-sm'
                     : 'border-[#222222] bg-[#111111] text-[#E5E5E5] hover:border-white hover:text-white'
                 }`}
                 aria-label={`Select size ${size}`}

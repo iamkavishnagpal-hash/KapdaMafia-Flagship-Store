@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Product } from '@/types/ecommerce';
 import ProductCard360 from '@/components/ProductCard360';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { playMechanicalClick, playSubBassThud } from '@/utils/soundEffects';
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -17,7 +19,6 @@ function ShopContent() {
   const [selectedFit, setSelectedFit] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<string>('featured');
 
-  // Read from the same owned/local catalog used by the storefront.
   useEffect(() => {
     async function fetchCatalog() {
       setLoading(true);
@@ -34,6 +35,7 @@ function ShopContent() {
           
           if (sortBy === 'price-low') items.sort((a, b) => a.price - b.price);
           if (sortBy === 'price-high') items.sort((a, b) => b.price - a.price);
+          if (sortBy === 'newest') items.reverse();
 
           setProducts(items);
         }
@@ -47,117 +49,150 @@ function ShopContent() {
     fetchCatalog();
   }, [activeCategory, selectedFit, sortBy]);
 
+  const categories = [
+    { id: 'ALL', label: 'All Pieces' },
+    { id: 'HOODIES', label: 'Hoodies & Fleece' },
+    { id: 'TEES', label: 'Tops & Heavy Tees' },
+    { id: 'BOTTOMWEAR', label: 'Bottoms & Cargos' },
+    { id: 'DENIM', label: 'Barrel Denim' },
+    { id: 'ACCESSORIES', label: 'Accessories' }
+  ];
+
   return (
-    <div className="py-12 bg-[#050505] min-h-screen text-[#EEEAE1] font-mono selection:bg-[#8F1118]">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
+    <div className="py-8 sm:py-14 bg-[#080808] min-h-screen text-[#F4F4F4] font-body selection:bg-[#B6191A] selection:text-white">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
         
-        {/* Brutalist Editorial Header */}
-        <div className="mb-10 pb-6 border-b border-[#1c1c1c]">
-          <div className="text-[10px] text-[#8F1118] uppercase tracking-[0.25em] font-semibold mb-2">
-            DROP 001 · MENSWEAR
-          </div>
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-            <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-[-0.04em] font-editorial">
-              STREET UNIFORMS
+        {/* Stitch Screen 04: Editorial Catalogue Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#1E1E1E] pb-6 mb-8">
+          <div>
+            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-[0.2em] text-[#888888]">
+              <span className="w-1.5 h-1.5 bg-[#B6191A] rounded-full inline-block" />
+              <span>Archive &amp; Drop 04 // Concrete &amp; Ash</span>
+            </div>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#F4F4F4] font-[var(--font-headline)]">
+              Shop All
             </h1>
-            <span className="text-xs text-[#77746E] tracking-widest uppercase">
-              {loading ? 'LOADING PRODUCTS...' : `${products.length} PRODUCTS`}
+            <p className="mt-2 text-xs sm:text-sm text-[#C8C3B8] font-light max-w-xl">
+              Architectural cuts, custom-milled 480 GSM terry fleece, and tailored utilitarian streetwear silhouettes.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 text-xs font-mono">
+            <span className="px-3 py-1.5 bg-[#111111] border border-[#222222] text-[#C8C3B8] tracking-widest tabular-nums uppercase">
+              {loading ? 'CALIBRATING...' : `${products.length} PIECES AVAILABLE`}
             </span>
+            <Link
+              href="/ai-fit"
+              onClick={() => playMechanicalClick()}
+              className="hidden sm:inline-flex items-center gap-1.5 text-[#B6191A] hover:text-white transition-colors uppercase tracking-widest text-[11px] font-semibold"
+            >
+              <Sparkles size={12} />
+              <span>Proportional Drape Lab</span>
+            </Link>
           </div>
         </div>
 
-        {/* Brutalist Filter Navigation */}
-        <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between pb-6 border-b border-[#1c1c1c] text-xs">
+        {/* Stitch Filter & Sort Bar */}
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 pb-6 border-b border-[#1E1E1E] mb-8">
           
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-3 sm:gap-5 text-[#888888] font-mono text-[11px]">
-            {[
-              { id: 'ALL', label: 'ALL RELEASES' },
-              { id: 'TOPWEAR', label: 'TOPWEAR' },
-              { id: 'BOTTOMWEAR', label: 'BOTTOMWEAR' },
-              { id: 'WINTERWEAR', label: 'WINTERWEAR' },
-              { id: 'COORD-SETS', label: 'CO-ORD SETS' },
-              { id: 'BASICS', label: 'BASICS' },
-              { id: 'TEES', label: 'TEES' },
-              { id: 'DENIM', label: 'DENIM' },
-              { id: 'CARGOS', label: 'CARGOS' }
-            ].map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setCategoryOverride(cat.id)}
-                className={`pb-1 transition-all uppercase tracking-wider font-bold ${
-                  activeCategory === cat.id 
-                    ? 'text-[#F4F4F4] border-b-2 border-[#7D0A0A]' 
-                    : 'hover:text-[#F4F4F4]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+          {/* Category Tabs (Clean Brutalist Pill Bar) */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" role="tablist" aria-label="Catalog Categories">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    playMechanicalClick();
+                    setCategoryOverride(cat.id);
+                  }}
+                  className={`px-4 py-2 text-xs uppercase font-label tracking-wider transition-all duration-150 rounded-none cursor-pointer whitespace-nowrap min-h-[44px] flex items-center justify-center ${
+                    isActive
+                      ? 'bg-white text-black font-bold shadow-sm'
+                      : 'bg-[#111111] text-[#A09D94] border border-[#222222] hover:text-white hover:border-[#444444]'
+                  }`}
+                  role="tab"
+                  aria-selected={isActive}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Fit & Sort Selectors */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-[#77746E]">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] tracking-wider">FIT:</span>
-              <select 
-                value={selectedFit} 
-                onChange={(e) => setSelectedFit(e.target.value)}
-                className="bg-[#0f0f0f] border border-[#262626] text-[#EEEAE1] px-2.5 py-1.5 rounded-none focus:outline-none focus:border-[#8F1118]"
+          {/* Silhouette & Sort Selectors */}
+          <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
+            <div className="flex items-center gap-2 bg-[#111111] border border-[#222222] px-3 py-1.5">
+              <SlidersHorizontal size={12} className="text-[#888888]" />
+              <label htmlFor="fit-selector" className="text-[#888888] uppercase text-[11px]">Fit:</label>
+              <select
+                id="fit-selector"
+                value={selectedFit}
+                onChange={(e) => {
+                  playMechanicalClick();
+                  setSelectedFit(e.target.value);
+                }}
+                className="bg-transparent text-[#F4F4F4] text-xs font-mono uppercase focus:outline-none cursor-pointer"
               >
-                <option value="ALL">ALL SILHOUETTES</option>
-                <option value="OVERSIZED">OVERSIZED</option>
-                <option value="BAGGY">BAGGY</option>
-                <option value="REGULAR">REGULAR</option>
+                <option value="ALL" className="bg-[#111111]">All Cuts</option>
+                <option value="OVERSIZED" className="bg-[#111111]">Oversized</option>
+                <option value="BAGGY" className="bg-[#111111]">Baggy</option>
+                <option value="REGULAR" className="bg-[#111111]">Regular Boxy</option>
               </select>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] tracking-wider">SORT:</span>
-              <select 
-                value={sortBy} 
-                onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#0f0f0f] border border-[#262626] text-[#EEEAE1] px-2.5 py-1.5 rounded-none focus:outline-none focus:border-[#8F1118]"
+            <div className="flex items-center gap-2 bg-[#111111] border border-[#222222] px-3 py-1.5">
+              <label htmlFor="sort-selector" className="text-[#888888] uppercase text-[11px]">Sort:</label>
+              <select
+                id="sort-selector"
+                value={sortBy}
+                onChange={(e) => {
+                  playMechanicalClick();
+                  setSortBy(e.target.value);
+                }}
+                className="bg-transparent text-[#F4F4F4] text-xs font-mono uppercase focus:outline-none cursor-pointer"
               >
-                <option value="featured">FEATURED DROPS</option>
-                <option value="price-low">PRICE: LOW TO HIGH</option>
-                <option value="price-high">PRICE: HIGH TO LOW</option>
+                <option value="featured" className="bg-[#111111]">Featured — Drop 04</option>
+                <option value="newest" className="bg-[#111111]">Newest Releases</option>
+                <option value="price-low" className="bg-[#111111]">Price: Low → High</option>
+                <option value="price-high" className="bg-[#111111]">Price: High → Low</option>
               </select>
             </div>
           </div>
-
         </div>
 
-        {/* Monolithic Edge-to-Edge Grid with 1px Hairline Dividers */}
+        {/* 4-Column High-Converting Commercial Product Grid */}
         {loading ? (
-          <div className="py-24 text-center space-y-4">
-            <RefreshCw size={24} className="mx-auto text-[#7D0A0A] animate-spin" />
-            <div className="text-xs font-mono text-[#666666] tracking-widest uppercase">
-              LOADING DROP 001...
+          <div className="py-28 text-center space-y-4">
+            <RefreshCw size={24} className="mx-auto text-[#B6191A] animate-spin" />
+            <div className="text-xs font-mono text-[#888888] tracking-widest uppercase">
+              Indexing Catalog Inventory...
             </div>
           </div>
         ) : products.length === 0 ? (
-          <div className="py-24 text-center space-y-3">
-            <div className="text-sm font-bold text-[#F4F4F4] uppercase font-mono">NO PIECES MATCH THIS FILTER SPECIFICATION</div>
-            <button 
-              onClick={() => { setCategoryOverride('ALL'); setSelectedFit('ALL'); }}
-              className="px-6 py-2.5 bg-[#111111] border border-[#1E1E1E] text-xs font-mono font-bold uppercase tracking-wider text-[#F4F4F4] hover:bg-[#7D0A0A] hover:border-[#7D0A0A] transition-colors"
+          <div className="py-24 text-center space-y-4 bg-[#111111] border border-[#1E1E1E] p-8">
+            <div className="text-sm font-bold text-[#F4F4F4] uppercase font-mono tracking-wider">
+              No pieces match this filter configuration
+            </div>
+            <p className="text-xs text-[#888888] max-w-sm mx-auto">
+              Try adjusting your category or silhouette filter to explore our current seasonal archive.
+            </p>
+            <button
+              onClick={() => {
+                playSubBassThud();
+                setCategoryOverride('ALL');
+                setSelectedFit('ALL');
+              }}
+              className="px-6 py-3 bg-white text-black text-xs font-mono font-bold uppercase tracking-widest hover:bg-[#F4F4F4] transition-colors cursor-pointer min-h-[44px]"
             >
-              RESET CATALOG FILTERS
+              Reset Catalog Filters
             </button>
           </div>
         ) : (
-          <div className="my-8">
-            {/* Spec ticker bar above grid */}
-            <div className="bg-[#111111] border border-[#1E1E1E] px-3 py-2 text-[10px] font-mono text-[#666666] flex items-center justify-between uppercase tracking-wider mb-[-1px] z-10 relative">
-              <span className="text-[#F4F4F4] font-bold">DROP 001 · AVAILABLE NOW</span>
-              <span>MENSWEAR</span>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#1E1E1E] border border-[#1E1E1E] overflow-hidden">
-              {products.map(product => (
-                <ProductCard360 key={product.id} product={product} />
-              ))}
-            </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+            {products.map((product) => (
+              <ProductCard360 key={product.id} product={product} />
+            ))}
           </div>
         )}
 
@@ -168,11 +203,13 @@ function ShopContent() {
 
 export default function ShopPage() {
   return (
-    <Suspense fallback={
-      <div className="py-24 text-center text-xs font-mono text-[#77746E]">
-        LOADING SHOP CATALOG...
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="py-28 text-center text-xs font-mono text-[#888888] tracking-widest">
+          LOADING DROP 04 CATALOGUE...
+        </div>
+      }
+    >
       <ShopContent />
     </Suspense>
   );
