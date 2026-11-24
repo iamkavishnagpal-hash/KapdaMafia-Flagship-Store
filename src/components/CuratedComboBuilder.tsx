@@ -134,13 +134,13 @@ export default function CuratedComboBuilder() {
           <div className="lg:col-span-7 space-y-6">
             
             {/* ITEM 1: TOPWEAR SELECTOR */}
-            <div className="bg-[#111111] border border-[#1E1E1E] p-5 sm:p-6 rounded-none font-mono">
+            <div className="bg-[#111111] border border-[#1E1E1E] p-5 sm:p-6 rounded-none">
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#1E1E1E]">
                 <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 bg-[#7D0A0A] text-white text-[10px] font-bold flex items-center justify-center">01</span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#F4F4F4]">SELECT YOUR TOPWEAR</span>
+                  <span className="w-5 h-5 bg-[#7D0A0A] text-white text-xs font-bold flex items-center justify-center">01</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#F4F4F4]">Select topwear</span>
                 </div>
-                <span className="text-[11px] text-[#888888]">REG. ₹{activeTop.price}</span>
+                <span className="text-xs text-[#888888]">Regular ₹{activeTop.price}</span>
               </div>
 
               {/* Garment Choice Radio Pills */}
@@ -155,7 +155,7 @@ export default function CuratedComboBuilder() {
                         playMechanicalClick();
                         setSelectedTopIndex(idx);
                       }}
-                      className={`flex items-center gap-3 p-2.5 text-left border transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 text-left border transition-all cursor-pointer min-h-[44px] ${
                         isSelected 
                           ? 'border-white bg-[#1A1A1A] text-white' 
                           : 'border-[#222222] bg-[#0E0E0E] text-[#888888] hover:border-[#444444]'
@@ -165,8 +165,8 @@ export default function CuratedComboBuilder() {
                         <Image src={top.image} alt={top.name} fill sizes="48px" className="object-cover object-top" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[11px] font-bold uppercase truncate text-[#F4F4F4]">{top.name}</div>
-                        <div className="text-[9px] text-[#888888] truncate">{top.tagline.split('·')[0]}</div>
+                        <div className="text-xs font-bold uppercase truncate text-[#F4F4F4]">{top.name}</div>
+                        <div className="text-xs text-[#888888] truncate mt-0.5">{top.tagline.split('·')[0]}</div>
                       </div>
                     </button>
                   );
@@ -175,9 +175,9 @@ export default function CuratedComboBuilder() {
 
               {/* Size Selector for Top */}
               <div>
-                <div className="text-[10px] text-[#888888] uppercase tracking-wider mb-2 flex items-center justify-between">
-                  <span>TOP SIZE: <strong className="text-white">{selectedTopSize}</strong></span>
-                  <span className="text-[9px] text-[#666666]">BOXY FIT</span>
+                <div className="text-xs text-[#888888] uppercase tracking-wider mb-2 flex items-center justify-between">
+                  <span>Top size: <strong className="text-white">{selectedTopSize}</strong></span>
+                  <span className="text-xs text-[#666666]">Boxy fit</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {activeTop.sizes.map((size) => (
@@ -202,13 +202,13 @@ export default function CuratedComboBuilder() {
             </div>
 
             {/* ITEM 2: BOTTOMWEAR SELECTOR */}
-            <div className="bg-[#111111] border border-[#1E1E1E] p-5 sm:p-6 rounded-none font-mono">
+            <div className="bg-[#111111] border border-[#1E1E1E] p-5 sm:p-6 rounded-none">
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#1E1E1E]">
                 <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 bg-[#7D0A0A] text-white text-[10px] font-bold flex items-center justify-center">02</span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#F4F4F4]">SELECT YOUR BOTTOMWEAR</span>
+                  <span className="w-5 h-5 bg-[#7D0A0A] text-white text-xs font-bold flex items-center justify-center">02</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#F4F4F4]">Select bottomwear</span>
                 </div>
-                <span className="text-[11px] text-[#888888]">REG. ₹{activeBottom.price}</span>
+                <span className="text-xs text-[#888888]">Regular ₹{activeBottom.price}</span>
               </div>
 
               {/* Garment Choice Radio Pills */}
@@ -223,7 +223,7 @@ export default function CuratedComboBuilder() {
                         playMechanicalClick();
                         setSelectedBottomIndex(idx);
                       }}
-                      className={`flex items-center gap-3 p-2.5 text-left border transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 text-left border transition-all cursor-pointer min-h-[44px] ${
                         isSelected 
                           ? 'border-white bg-[#1A1A1A] text-white' 
                           : 'border-[#222222] bg-[#0E0E0E] text-[#888888] hover:border-[#444444]'
@@ -233,8 +233,8 @@ export default function CuratedComboBuilder() {
                         <Image src={bottom.image} alt={bottom.name} fill sizes="48px" className="object-cover object-top" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[11px] font-bold uppercase truncate text-[#F4F4F4]">{bottom.name}</div>
-                        <div className="text-[9px] text-[#888888] truncate">{bottom.tagline.split('·')[0]}</div>
+                        <div className="text-xs font-bold uppercase truncate text-[#F4F4F4]">{bottom.name}</div>
+                        <div className="text-xs text-[#888888] truncate mt-0.5">{bottom.tagline.split('·')[0]}</div>
                       </div>
                     </button>
                   );
@@ -243,9 +243,9 @@ export default function CuratedComboBuilder() {
 
               {/* Size Selector for Bottom */}
               <div>
-                <div className="text-[10px] text-[#888888] uppercase tracking-wider mb-2 flex items-center justify-between">
-                  <span>BOTTOM SIZE: <strong className="text-white">{selectedBottomSize}</strong></span>
-                  <span className="text-[9px] text-[#666666]">BAGGY TAPER</span>
+                <div className="text-xs text-[#888888] uppercase tracking-wider mb-2 flex items-center justify-between">
+                  <span>Bottom size: <strong className="text-white">{selectedBottomSize}</strong></span>
+                  <span className="text-xs text-[#666666]">Baggy taper</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {activeBottom.sizes.map((size) => (

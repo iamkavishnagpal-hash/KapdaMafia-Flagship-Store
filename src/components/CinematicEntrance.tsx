@@ -190,10 +190,10 @@ export default function CinematicEntrance() {
 
           <button
             onClick={() => handleSkip('clothing')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono tracking-widest uppercase bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/40 text-[#D4CFC4] hover:text-white transition-all cursor-pointer rounded-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono tracking-wider uppercase bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/40 text-[#D4CFC4] hover:text-white transition-all cursor-pointer rounded-sm min-h-[44px]"
           >
-            <span>Skip To Store</span>
-            <FastForward size={12} />
+            <span>Skip to store</span>
+            <FastForward size={14} />
           </button>
         </header>
 
@@ -210,16 +210,16 @@ export default function CinematicEntrance() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="relative max-w-3xl text-center px-4"
             >
-              <div className="inline-block px-3 py-1 mb-5 border border-white/10 bg-white/5 text-[10px] font-mono tracking-[0.25em] text-[#C8C3B8] uppercase rounded-full">
-                FLAGSHIP STOREFRONT
+              <div className="inline-block px-3 py-1 mb-5 border border-white/10 bg-white/5 text-xs font-mono tracking-[0.15em] text-[#C8C3B8] uppercase rounded-full">
+                Flagship storefront
               </div>
 
               <h2 className="font-serif italic text-3xl sm:text-5xl lg:text-6xl text-[#F4F4F4] leading-[1.18] tracking-tight">
                 “Raw heavyweight textiles. Architectural footwear. Step inside the dual flagship.”
               </h2>
 
-              <p className="mt-5 text-xs font-mono tracking-widest text-[#888888] uppercase">
-                Faridabad NIT-5 Store · Worldwide Shipping
+              <p className="mt-5 text-xs font-mono tracking-wider text-[#888888] uppercase">
+                Faridabad NIT-5 Store · Pan-India Dispatch
               </p>
             </motion.div>
           )}

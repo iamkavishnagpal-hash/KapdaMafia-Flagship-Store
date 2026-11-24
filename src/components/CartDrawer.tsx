@@ -88,7 +88,7 @@ export default function CartDrawer() {
                 <span className="text-sm font-bold uppercase tracking-wider block text-white font-[var(--font-display)]">
                   {isShoes ? 'SHOES MAFIA BAG' : 'KAPDA MAFIA BAG'}
                 </span>
-                <span className="text-[10px] text-[#888888] tracking-widest uppercase">
+                <span className="text-xs text-[#888888] tracking-widest uppercase">
                   {activeCount} {activeCount === 1 ? 'ITEM' : 'ITEMS'} IN BAG
                 </span>
               </div>
@@ -102,7 +102,7 @@ export default function CartDrawer() {
                   closeCart();
                 }
               }} 
-              className="p-2 text-[#888888] hover:text-white transition-colors cursor-pointer"
+              className="p-2 text-[#888888] hover:text-white transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Close cart drawer"
             >
               <X size={20} />
@@ -116,13 +116,13 @@ export default function CartDrawer() {
                 setWorld('clothing');
                 setIsInstantCheckoutOpen(false);
               }}
-              className={`py-2 px-3 flex items-center justify-center gap-1.5 font-bold transition-all cursor-pointer ${
+              className={`py-2 px-3 flex items-center justify-center gap-1.5 font-bold transition-all cursor-pointer min-h-[44px] ${
                 !isShoes 
                   ? 'bg-[#7D0A0A] text-white shadow-md' 
-                  : 'text-[#666666] hover:text-white'
+                  : 'text-[#888888] hover:text-white'
               }`}
             >
-              <Shirt size={12} />
+              <Shirt size={14} />
               <span>APPAREL ({clothingCount})</span>
             </button>
 
@@ -131,29 +131,29 @@ export default function CartDrawer() {
                 setWorld('shoes');
                 setIsInstantCheckoutOpen(false);
               }}
-              className={`py-2 px-3 flex items-center justify-center gap-1.5 font-bold transition-all cursor-pointer ${
+              className={`py-2 px-3 flex items-center justify-center gap-1.5 font-bold transition-all cursor-pointer min-h-[44px] ${
                 isShoes 
                   ? 'bg-[#00695c] text-white shadow-md' 
-                  : 'text-[#666666] hover:text-white'
+                  : 'text-[#888888] hover:text-white'
               }`}
             >
-              <Footprints size={12} />
+              <Footprints size={14} />
               <span>FOOTWEAR ({shoeCount})</span>
             </button>
           </div>
 
           {/* Dynamic Offer & Shipping Progress Bar */}
-          <div className="bg-[#080808] px-5 py-3 border-b border-[#1E1E1E] text-[11px] space-y-1.5">
+          <div className="bg-[#080808] px-5 py-3 border-b border-[#1E1E1E] text-xs space-y-1.5">
             <div className="flex items-center justify-between font-bold">
               <div className="flex items-center gap-1.5">
-                <Tag size={12} className={isOfferUnlocked ? 'text-emerald-400' : 'text-[#888888]'} />
+                <Tag size={13} className={isOfferUnlocked ? 'text-emerald-400' : 'text-[#888888]'} />
                 {isOfferUnlocked ? (
                   <span className="text-emerald-400">₹300 OFF UNLOCKED (CODE: KM300)</span>
                 ) : (
                   <span className="text-[#888888]">ADD {2 - activeCount} MORE {2 - activeCount === 1 ? 'ITEM' : 'ITEMS'} FOR ₹300 OFF (KM300)</span>
                 )}
               </div>
-              <span className="text-[10px] text-[#666666]">
+              <span className="text-xs text-[#888888]">
                 {activeCount}/2 ITEMS
               </span>
             </div>
@@ -218,7 +218,7 @@ export default function CartDrawer() {
                         <Trash2 size={13} />
                       </button>
                     </div>
-                    <div className="text-[10px] text-[#888888] mt-1">
+                    <div className="text-xs text-[#888888] mt-1">
                       SIZE: <strong className="text-[#F4F4F4]">{item.size}</strong> • {item.category.toUpperCase()}
                     </div>
                   </div>
@@ -227,7 +227,7 @@ export default function CartDrawer() {
                     <div className="flex items-center border border-[#1E1E1E] bg-[#111111] px-2 py-0.5 text-xs text-[#F4F4F4]">
                       <button 
                         onClick={() => updateQuantity(item.id, -1)}
-                        className="px-1 text-[#666666] hover:text-white cursor-pointer"
+                        className="px-1 text-[#666666] hover:text-white cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
                         aria-label="Decrease quantity"
                       >
                         <Minus size={11} />
@@ -235,7 +235,7 @@ export default function CartDrawer() {
                       <span className="px-2 font-bold">{item.quantity}</span>
                       <button 
                         onClick={() => updateQuantity(item.id, 1)}
-                        className="px-1 text-[#666666] hover:text-white cursor-pointer"
+                        className="px-1 text-[#666666] hover:text-white cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
                         aria-label="Increase quantity"
                       >
                         <Plus size={11} />
@@ -282,7 +282,7 @@ export default function CartDrawer() {
               type="button"
               disabled={activeItems.length === 0}
               onClick={handleTriggerInstantUPI}
-              className={`w-full py-3.5 bg-white hover:bg-[#F4F4F4] active:scale-[0.99] text-black font-black text-xs tracking-[0.16em] uppercase flex flex-col items-center justify-center gap-0.5 transition-all shadow-xl cursor-pointer ${
+              className={`w-full py-3.5 bg-white hover:bg-[#F4F4F4] active:scale-[0.99] text-black font-black text-xs tracking-[0.16em] uppercase flex flex-col items-center justify-center gap-0.5 transition-all shadow-xl cursor-pointer min-h-[48px] ${
                 activeItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
@@ -290,7 +290,7 @@ export default function CartDrawer() {
                 <Zap size={14} className="fill-black" />
                 <span>1-TAP INSTANT UPI CHECKOUT</span>
               </div>
-              <span className="text-[9px] font-bold text-[#666666] tracking-widest font-mono">
+              <span className="text-xs font-bold text-[#666666] tracking-widest font-mono">
                 GPAY · PHONEPE · PAYTM · ZERO REDIRECT
               </span>
             </button>
@@ -298,7 +298,7 @@ export default function CartDrawer() {
             <Link 
               href={`/checkout?store=${isShoes ? 'shoes' : 'clothing'}`} 
               onClick={closeCart}
-              className={`w-full py-2.5 text-[#888888] hover:text-white font-mono font-bold text-[11px] tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-[#222222] hover:border-[#444444] bg-[#111111] ${
+              className={`w-full py-2.5 text-[#888888] hover:text-white font-mono font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-[#222222] hover:border-[#444444] bg-[#111111] min-h-[44px] ${
                 activeItems.length === 0 ? 'opacity-50 pointer-events-none' : ''
               }`}
             >
@@ -307,8 +307,8 @@ export default function CartDrawer() {
             </Link>
           </div>
 
-          <div className="flex items-center justify-center gap-2 text-[10px] text-[#666666]">
-            <ShieldCheck size={13} className={isShoes ? 'text-[#00695c]' : 'text-[#7D0A0A]'} />
+          <div className="flex items-center justify-center gap-2 text-xs text-[#888888]">
+            <ShieldCheck size={14} className={isShoes ? 'text-[#00695c]' : 'text-[#7D0A0A]'} />
             <span>256-BIT ENCRYPTED · PRE-SHRUNK · 7-DAY EXCHANGE</span>
           </div>
         </div>

@@ -57,7 +57,7 @@ export default function SeenInMotion() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-10 pb-4 border-b border-[#1E1E1E] gap-4">
           <div>
-            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#7D0A0A] uppercase tracking-[0.14em] font-bold mb-2">
+            <div className="flex items-center gap-2 text-xs text-[#7D0A0A] uppercase tracking-[0.14em] font-bold mb-2">
               <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
               <span>On the street</span>
             </div>
@@ -91,14 +91,14 @@ export default function SeenInMotion() {
               
               {/* Top Spec Tag */}
               <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                <span className="bg-black/80 backdrop-blur-sm border border-white/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#C8C3B8]">
+                <span className="bg-black/80 backdrop-blur-sm border border-white/10 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-[#C8C3B8]">
                   {card.spec}
                 </span>
               </div>
 
               {/* Bottom Details & Shop Fit CTA */}
               <div className="absolute bottom-3 left-3 right-3 text-[#F4F4F4]">
-                <div className="text-[10px] text-[#888888] uppercase tracking-wider mb-1">
+                <div className="text-xs text-[#AAAAAA] uppercase tracking-wider mb-1">
                   {card.title}
                 </div>
                 <div className="text-xs sm:text-sm font-bold leading-snug line-clamp-1 mb-3 text-white">
@@ -107,7 +107,7 @@ export default function SeenInMotion() {
 
                 <Link 
                   href={card.href} 
-                  className="w-full py-2.5 bg-white hover:bg-[#F4F4F4] text-black text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-md min-h-[38px]"
+                  className="w-full py-2.5 bg-white hover:bg-[#F4F4F4] text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-md min-h-[44px]"
                   aria-label={`Shop fit for ${card.subtitle}`}
                 >
                   <span>SHOP FIT</span>

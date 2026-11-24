@@ -26,7 +26,7 @@ export default function Navbar() {
       }`}>
         
         {/* Crisp Single Announcement Bar */}
-        <div className="bg-[#0A0A0A] border-b border-[#1E1E1E] py-2 px-4 text-center text-[10px] sm:text-[11px] font-medium tracking-[0.06em] text-[#A09D94] uppercase select-none">
+        <div className="bg-[#0A0A0A] border-b border-[#1E1E1E] py-2 px-4 text-center text-xs font-medium tracking-[0.06em] text-[#A09D94] uppercase select-none">
           <div className="flex items-center justify-center gap-2">
             <span className="text-[#F4F4F4] font-bold">FREE EXPRESS SHIPPING ON PREPAID ORDERS</span>
             <span className="text-[#77746E]" aria-hidden="true">·</span>
@@ -119,10 +119,10 @@ export default function Navbar() {
                 playSubBassThud();
                 if (openShowroom) openShowroom();
               }}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-[#222222] bg-[#111111] hover:border-white/30 text-[#AAAAAA] hover:text-white transition-colors text-[11px] uppercase tracking-wider cursor-pointer"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-[#222222] bg-[#111111] hover:border-white/30 text-[#AAAAAA] hover:text-white transition-colors text-xs uppercase tracking-wider cursor-pointer min-h-[44px]"
               title="Reopen physical entrance"
             >
-              <Store size={13} />
+              <Store size={14} />
               <span>Showroom</span>
             </button>
 

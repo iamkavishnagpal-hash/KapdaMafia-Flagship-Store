@@ -52,15 +52,15 @@ export default function BrandProofSection() {
             <div className="grid grid-cols-3 gap-px bg-[#1E1E1E] border border-[#1E1E1E] max-w-lg text-center">
               <div className="bg-[#111111] p-4">
                 <div className="text-xl sm:text-2xl font-bold text-white">NIT-5</div>
-                <div className="text-[9px] uppercase tracking-wider text-[#666666] mt-1">Store location</div>
+                <div className="text-xs uppercase tracking-wider text-[#888888] mt-1">Store location</div>
               </div>
               <div className="bg-[#111111] p-4">
                 <div className="text-xl sm:text-2xl font-bold text-white">440 GSM</div>
-                <div className="text-[9px] uppercase tracking-wider text-[#666666] mt-1">Fabric range</div>
+                <div className="text-xs uppercase tracking-wider text-[#888888] mt-1">Fabric range</div>
               </div>
               <div className="bg-[#111111] p-4">
                 <div className="text-xl sm:text-2xl font-bold text-white">7 DAYS</div>
-                <div className="text-[9px] uppercase tracking-wider text-[#666666] mt-1">Size exchange</div>
+                <div className="text-xs uppercase tracking-wider text-[#888888] mt-1">Size exchange</div>
               </div>
             </div>
 
@@ -103,10 +103,10 @@ export default function BrandProofSection() {
                   <div className="w-10 h-10 bg-white/5 border border-[#222222] flex items-center justify-center text-[#7D0A0A] mb-5">
                     <Icon size={18} />
                   </div>
-                  <h3 className="text-xs font-bold text-white tracking-wider uppercase mb-1">
+                  <h3 className="text-sm font-bold text-white tracking-wider uppercase mb-1">
                     {pillar.title}
                   </h3>
-                  <div className="text-[10px] text-[#7D0A0A] font-bold uppercase tracking-wider mb-2">
+                  <div className="text-xs text-[#7D0A0A] font-bold uppercase tracking-wider mb-2">
                     {pillar.subtitle}
                   </div>
                   <p className="text-xs text-[#888888] leading-relaxed">

@@ -120,7 +120,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         {/* Single Status Badge (Top-Left) */}
         {singleBadge && (
           <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
-            <span className={`text-[9px] tracking-[0.08em] uppercase px-2 py-0.5 rounded-sm shadow-md font-bold ${singleBadge.bg}`}>
+            <span className={`text-xs tracking-[0.08em] uppercase px-2 py-0.5 rounded-sm shadow-md font-bold ${singleBadge.bg}`}>
               {singleBadge.text}
             </span>
           </div>
@@ -132,7 +132,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
         
         <div className="space-y-1">
           {/* Subtle Fabric & Fit Subtitle */}
-          <div className="text-[10px] tracking-[0.06em] text-[#888888] uppercase">
+          <div className="text-xs tracking-[0.06em] text-[#888888] uppercase">
             {product.gsm ? `${product.gsm} GSM Cotton` : 'Heavyweight Cotton'} · {product.fit ? `${product.fit} Cut` : 'Boxy Cut'}
           </div>
 
@@ -149,7 +149,7 @@ export default function ProductCard360({ product, priority = false }: ProductCar
               ₹{product.price.toLocaleString('en-IN')}
             </span>
             {product.originalPrice && product.originalPrice > product.price && (
-              <span className="text-xs text-[#777777] line-through [font-variant-numeric:tabular-nums]">
+              <span className="text-xs text-[#888888] line-through [font-variant-numeric:tabular-nums]">
                 ₹{product.originalPrice.toLocaleString('en-IN')}
               </span>
             )}
@@ -158,8 +158,8 @@ export default function ProductCard360({ product, priority = false }: ProductCar
 
         {/* Clean Single-Row Size Selector Pills (1-Tap to Bag) */}
         <div className="pt-2.5 border-t border-[#1E1E1E]">
-          <div className="text-[9px] text-[#777777] tracking-[0.08em] uppercase mb-1.5">
-            PICK A SIZE TO ADD:
+          <div className="text-xs text-[#888888] tracking-[0.08em] uppercase mb-1.5">
+            Select size to bag:
           </div>
           
           <div className="flex flex-wrap gap-1.5">
@@ -169,14 +169,14 @@ export default function ProductCard360({ product, priority = false }: ProductCar
                 type="button"
                 disabled={!inStock}
                 onClick={(e) => handleSizeClick(e, size, inStock)}
-                className={`min-h-11 min-w-11 px-2 text-[11px] font-bold uppercase border transition-all cursor-pointer rounded-sm ${
+                className={`min-h-11 min-w-11 px-2 text-xs font-bold uppercase border transition-all cursor-pointer rounded-sm ${
                   !inStock
-                    ? 'border-[#1C1C1C] bg-[#0D0D0D] text-[#444444] line-through cursor-not-allowed opacity-40'
+                    ? 'border-[#1C1C1C] bg-[#0D0D0D] text-[#555555] line-through cursor-not-allowed opacity-40'
                     : selectedSize === size
                     ? isShoes
                       ? 'border-[#00695c] bg-[#00695c] text-white shadow-sm'
                       : 'border-[#7D0A0A] bg-[#7D0A0A] text-white shadow-sm'
-                    : 'border-[#222222] bg-[#111111] text-[#CCCCCC] hover:border-white hover:text-white'
+                    : 'border-[#222222] bg-[#111111] text-[#E5E5E5] hover:border-white hover:text-white'
                 }`}
                 aria-label={`Select size ${size}`}
               >

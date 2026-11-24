@@ -58,21 +58,21 @@ export default function StoryCategories() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="mb-4 flex items-center justify-between">
-          <span className="text-[10px] font-mono font-bold tracking-[0.18em] text-[#A09D94] uppercase">SHOP BY CATEGORY</span>
-          <span className="text-[10px] font-mono tracking-widest text-[#666666] uppercase">SWIPE TO EXPLORE</span>
+          <span className="text-xs font-mono font-bold tracking-[0.14em] text-[#C8C3B8] uppercase">Shop by category</span>
+          <span className="text-xs font-mono tracking-wider text-[#888888] uppercase">Swipe to explore</span>
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none scroll-smooth">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none scroll-smooth">
           {STORY_CATEGORIES.map((cat) => (
             <Link
               key={cat.id}
               href={cat.href}
               onClick={playMechanicalClick}
-              className="group relative h-24 w-32 shrink-0 overflow-hidden border border-[#1E1E1E] bg-[#111111] sm:h-28 sm:w-36"
+              className="group relative h-24 w-32 shrink-0 overflow-hidden border border-[#1E1E1E] bg-[#111111] sm:h-28 sm:w-36 min-h-[44px]"
             >
               <Image src={cat.image} alt="" fill sizes="(max-width: 640px) 128px, 144px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <span className="absolute inset-x-3 bottom-3 text-left text-[10px] font-mono font-bold tracking-wider text-white uppercase">{cat.name}</span>
+              <span className="absolute inset-x-3 bottom-3 text-left text-xs font-mono font-bold tracking-wider text-white uppercase">{cat.name}</span>
             </Link>
           ))}
         </div>

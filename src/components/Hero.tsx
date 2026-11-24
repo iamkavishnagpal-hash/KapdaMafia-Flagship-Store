@@ -130,7 +130,7 @@ export default function Hero() {
         
         <div className="max-w-3xl space-y-4 sm:space-y-6 pointer-events-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#080808]/90 border border-[#1E1E1E] text-[10px] sm:text-[11px] font-medium tracking-[0.08em] uppercase text-[#C8C3B8]">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#080808]/90 border border-[#1E1E1E] text-xs font-medium tracking-[0.08em] uppercase text-[#C8C3B8]">
             <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
             <span>{active.badge}</span>
           </div>
@@ -146,7 +146,7 @@ export default function Hero() {
           </div>
 
           {/* Spec */}
-          <div className="flex items-center gap-3 text-[10px] sm:text-[11px] tracking-[0.05em] text-[#B9B5AC] uppercase">
+          <div className="flex items-center gap-3 text-xs tracking-[0.05em] text-[#B9B5AC] uppercase">
             <span>{active.spec}</span>
           </div>
 

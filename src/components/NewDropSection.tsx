@@ -65,7 +65,7 @@ export default function NewDropSection({ products }: NewDropProps) {
         {/* Section title */}
         <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-8 pb-4 border-b border-[#1E1E1E] gap-4">
           <div>
-            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#7D0A0A] uppercase tracking-[0.1em] font-bold mb-2">
+            <div className="flex items-center gap-2 text-xs text-[#7D0A0A] uppercase tracking-[0.1em] font-bold mb-2">
               <span className="w-1.5 h-1.5 bg-[#7D0A0A]" />
               <span>New arrivals</span>
             </div>
@@ -74,13 +74,13 @@ export default function NewDropSection({ products }: NewDropProps) {
             </h2>
           </div>
           
-          <div className="flex items-center gap-4 text-[10px] sm:text-[11px] tracking-[0.08em]">
-            <span className="text-[#888888] uppercase hidden lg:inline">280–440 GSM FRENCH TERRY &amp; DENIM</span>
+          <div className="flex items-center gap-4 text-xs tracking-[0.08em]">
+            <span className="text-[#888888] uppercase hidden lg:inline">280–440 GSM French Terry &amp; Denim</span>
             <Link 
               href="/shop" 
               className="text-[#F4F4F4] hover:text-[#7D0A0A] transition-colors flex items-center gap-2 uppercase font-bold border-b border-[#1E1E1E] hover:border-[#7D0A0A] pb-0.5 min-h-[36px]"
             >
-              <span>VIEW FULL CATALOG ({products.length.toString().padStart(2, '0')})</span>
+              <span>View full catalog ({products.length.toString().padStart(2, '0')})</span>
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -100,14 +100,14 @@ export default function NewDropSection({ products }: NewDropProps) {
                     playMechanicalClick();
                     setActiveTab(tab.id);
                   }}
-                  className={`px-3.5 py-2 text-[11px] font-bold uppercase tracking-wider rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 min-h-[44px] ${
                     isActive
                       ? 'bg-white text-black shadow-md border border-white'
                       : 'bg-[#111111] text-[#888888] border border-[#1E1E1E] hover:border-[#444444] hover:text-white'
                   }`}
                 >
                   <span>{tab.label}</span>
-                  <span className={`text-[9px] px-1.5 py-0.2 rounded ${isActive ? 'bg-black text-white' : 'bg-[#1A1A1A] text-[#666666]'}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded ${isActive ? 'bg-black text-white' : 'bg-[#1A1A1A] text-[#888888]'}`}>
                     {tab.count}
                   </span>
                 </button>
@@ -117,12 +117,12 @@ export default function NewDropSection({ products }: NewDropProps) {
 
           {/* Sort Selector */}
           <div className="flex items-center gap-2 shrink-0 text-xs">
-            <SlidersHorizontal size={13} className="text-[#888888]" />
-            <span className="text-[10px] text-[#666666] uppercase tracking-widest hidden sm:inline">SORT BY:</span>
+            <SlidersHorizontal size={14} className="text-[#888888]" />
+            <span className="text-xs text-[#888888] uppercase tracking-wider hidden sm:inline">Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-[#111111] border border-[#222222] text-[#EAE6DF] text-[11px] px-3 py-1.5 rounded-sm focus:outline-none focus:border-white transition-colors cursor-pointer"
+              className="bg-[#111111] border border-[#222222] text-[#EAE6DF] text-xs px-3 py-2 rounded-sm focus:outline-none focus:border-white transition-colors cursor-pointer min-h-[44px]"
             >
               <option value="featured">FEATURED</option>
               <option value="price-low">PRICE: LOW TO HIGH</option>
